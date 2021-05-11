@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
 		width: "100%",
 		padding: 10,
 	},
+	centerChildren: {
+		justifyContent: "center",
+		alignItems: "center",
+	},
 });
 
 export default styles;

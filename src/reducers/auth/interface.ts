@@ -1,6 +1,6 @@
 import { User } from "../../declerations";
 
-export interface AuthState extends User {
+export interface State extends User {
 	isAuthCodeSubmissionLoading: boolean;
 	isAuthCodeRegenerationLoading: boolean;
 	isTutorialCompletedLoading: boolean;

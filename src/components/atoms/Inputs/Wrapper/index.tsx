@@ -7,7 +7,7 @@ const InputWrapper = ({ children, label, required }: IProps) => {
 	return (
 		<View style={styles.outer}>
 			<Text>
-				{label} <View>{required ? "*" : null}</View>
+				{label} {required ? "*" : null}
 			</Text>
 			{children}
 		</View>

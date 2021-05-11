@@ -1,7 +1,7 @@
-import { AuthState } from "./interface";
+import { State } from "./interface";
 import { Actions, ActionTypes } from "../../actions";
 
-export const initialState: AuthState = {
+export const initialState: State = {
 	username: "",
 	email: "",
 	type: "loading",
@@ -28,11 +28,13 @@ const reducer = (
 	state: AuthState = initialState,
 	action: Actions
 ): AuthState => {
-	switch (3) {
-		// case ActionTypes.logOutUser:
-		// 	return { ...initialState, type: "guest" };
-		// case ActionTypes.fetchUserFromToken:
-		// 	return { ...initialState, ...action.payload };
+	switch (action.type) {
+		case ActionTypes.logOutUser: {
+			return { ...initialState, type: "guest" };
+		}
+		case ActionTypes.fetchUserFromToken: {
+			return { ...initialState, ...action.payload };
+		}
 		// case ActionTypes.registerUser:
 		// 	return { ...initialState, ...action.payload };
 		// case ActionTypes.fetchScoreCard:

@@ -1,3 +1,9 @@
-export enum ActionTypes {}
+import * as AuthActions from "./auth";
+export enum ActionTypes {
+	fetchUserFromToken,
+	logOutUser,
+}
 
-export type Actions = never;
+export type Actions =
+	| AuthActions.FetchUserFromTokenAction
+	| AuthActions.LogOutUserAction;
