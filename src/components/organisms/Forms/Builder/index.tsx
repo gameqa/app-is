@@ -57,6 +57,7 @@ const FormBuilder = <T extends {}, K = {}>({
 				/>
 			))}
 			<Atoms.Buttons.Base
+				type="highlight"
 				label={isLoading ? "Hleð" : buttonLabel}
 				onPress={handleSubmit}
 			/>
