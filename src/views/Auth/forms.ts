@@ -8,7 +8,7 @@ export const Authenticate: FormRecipe = {
 		label: "Netfang",
 	},
 	password: {
-		type: InputElementTypes.text,
+		type: InputElementTypes.hidden,
 		value: "",
 		label: "Lykilorð",
 		placeholder: "Mitt lykilorð",

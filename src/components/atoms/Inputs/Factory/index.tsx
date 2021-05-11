@@ -14,11 +14,9 @@ const InputElementFactory = (props: IProps) => {
 		case InputElementTypes.text:
 			inputElement = <Inputs.Text {...inputField} onChange={onChange} />;
 			break;
-		// case InputElementTypes.hidden:
-		// 	inputElement = (
-		// 		<PasswordInput {...inputField} onChange={onChange} />
-		// 	);
-		// 	break;
+		case InputElementTypes.hidden:
+			inputElement = <Inputs.Password {...inputField} onChange={onChange} />;
+			break;
 		// case InputElementTypes.authCode:
 		// 	inputElement = (
 		// 		<AuthCodeInput {...inputField} onChange={onChange} />
