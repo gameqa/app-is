@@ -34,6 +34,7 @@ const FormBuilder = <T extends {}, K = {}>({
 		for (const key in formValues) formValues[key] = formObject[key].value;
 		try {
 			const res = await Api[HTTPmethod]<T>(url, formValues);
+			setErrorMessage("");
 			onSubmit(res.data);
 			setFormObject({ ...form });
 		} catch (error) {
@@ -55,7 +56,10 @@ const FormBuilder = <T extends {}, K = {}>({
 					onChange={(value) => onChange(key, value)}
 				/>
 			))}
-			<Atoms.Buttons.Base label={buttonLabel} />
+			<Atoms.Buttons.Base
+				label={isLoading ? "Hleð" : buttonLabel}
+				onPress={handleSubmit}
+			/>
 		</View>
 	);
 };
