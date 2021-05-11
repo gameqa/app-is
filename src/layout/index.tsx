@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, SafeAreaView, ActivityIndicator } from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
 import BottomNav from "./BottomNav";
@@ -23,13 +23,17 @@ const LayoutWrapper = ({ children }: IProps) => {
 		<View style={styles.centerChildren}>
 			<ActivityIndicator />
 		</View>
-	) : isAuth ? (
-		<View style={styles.outer}>
+	) : !isAuth ? (
+		<SafeAreaView style={styles.outer}>
 			<View style={styles.content}>{children}</View>
 			<BottomNav />
-		</View>
+		</SafeAreaView>
 	) : (
-		<Views.Auth />
+		<SafeAreaView style={styles.content}>
+			<View style={styles.content}>
+				<Views.Auth />
+			</View>
+		</SafeAreaView>
 	);
 };
 

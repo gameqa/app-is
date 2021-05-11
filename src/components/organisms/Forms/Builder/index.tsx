@@ -45,23 +45,27 @@ const FormBuilder = <T extends {}, K = {}>({
 	};
 
 	return (
-		<View style={styles.outer}>
+		<React.Fragment>
 			<Atoms.Alerts.Ribbon item={{ label: errorMessage, type: "danger" }} />
-			{Object.keys(formObject).map((key: any) => (
-				<Atoms.Inputs.Factory
-					key={key}
-					inputField={{
-						...form[key as keyof K],
-					}}
-					onChange={(value) => onChange(key, value)}
+			<View style={styles.outer}>
+				<View>
+					{Object.keys(formObject).map((key: any) => (
+						<Atoms.Inputs.Factory
+							key={key}
+							inputField={{
+								...form[key as keyof K],
+							}}
+							onChange={(value) => onChange(key, value)}
+						/>
+					))}
+				</View>
+				<Atoms.Buttons.Base
+					type="highlight"
+					label={isLoading ? "Hleð" : buttonLabel}
+					onPress={handleSubmit}
 				/>
-			))}
-			<Atoms.Buttons.Base
-				type="highlight"
-				label={isLoading ? "Hleð" : buttonLabel}
-				onPress={handleSubmit}
-			/>
-		</View>
+			</View>
+		</React.Fragment>
 	);
 };
 export default FormBuilder;
