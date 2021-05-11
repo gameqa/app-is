@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { IProps } from "./interface";
 import { Atoms } from "../../..";
-// import { Form } from "./styles";
 import { LOAD_TIMER_MS } from "./utils";
 import Api from "../../../../api";
-import { Inputs } from "../../../atoms";
 
-export const FormBuilder = <T extends {}, K = {}>({
+const FormBuilder = <T extends {}, K = {}>({
 	form,
 	onSubmit,
 	buttonLabel,
@@ -44,12 +42,12 @@ export const FormBuilder = <T extends {}, K = {}>({
 
 	return (
 		<View>
+			<Atoms.Alerts.Ribbon item={{ label: errorMessage, type: "danger" }} />
 			{Object.keys(formObject).map((key: any) => (
 				<Atoms.Inputs.Factory
 					key={key}
 					inputField={{
-						// @ts-ignore
-						...form[key],
+						...form[key as keyof K],
 					}}
 					onChange={(value) => onChange(key, value)}
 				/>

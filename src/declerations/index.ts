@@ -8,3 +8,5 @@ export * from "./Users";
 export * from "./InputTypes";
 export * from "./Games";
 export * from "./Questions";
+export * from "./Colors";
+export * from "./Alerts";
