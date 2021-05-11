@@ -9,3 +9,8 @@ export interface FetchUserFromTokenAction {
 export interface LogOutUserAction {
 	type: ActionTypes.logOutUser;
 }
+
+export interface RegisterUserAction {
+	type: ActionTypes.registerUser;
+	payload: User;
+}

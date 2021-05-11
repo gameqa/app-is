@@ -7,7 +7,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	form: {
-		// justifyContent: "space-between",
+		flex: 0.93,
+	},
+	changeForm: {
+		justifyContent: "center",
+		alignItems: "center",
+		flex: 0.07,
 	},
 });
 

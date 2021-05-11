@@ -24,10 +24,7 @@ export const initialState: State = {
 	invites: [],
 };
 
-const reducer = (
-	state: AuthState = initialState,
-	action: Actions
-): AuthState => {
+const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
 		case ActionTypes.logOutUser: {
 			return { ...initialState, type: "guest" };
@@ -35,8 +32,8 @@ const reducer = (
 		case ActionTypes.fetchUserFromToken: {
 			return { ...initialState, ...action.payload };
 		}
-		// case ActionTypes.registerUser:
-		// 	return { ...initialState, ...action.payload };
+		case ActionTypes.registerUser:
+			return { ...initialState, ...action.payload };
 		// case ActionTypes.fetchScoreCard:
 		// 	return {
 		// 		...state,

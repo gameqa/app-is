@@ -23,7 +23,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 		<View style={styles.centerChildren}>
 			<ActivityIndicator />
 		</View>
-	) : !isAuth ? (
+	) : isAuth ? (
 		<SafeAreaView style={styles.outer}>
 			<View style={styles.content}>{children}</View>
 			<BottomNav />
