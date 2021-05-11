@@ -1,12 +1,24 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Organisms } from "./src/components";
+import { InputElementTypes } from "./src/declerations";
 
 export default function App() {
 	return (
 		<View style={styles.container}>
-			<Text>Spurningar.is</Text>
-			<StatusBar style="auto" />
+			<Organisms.Forms.Builder
+				buttonLabel="Log-in"
+				form={{
+					test: {
+						type: InputElementTypes.text,
+						value: "asdf",
+						label: "asdff",
+					},
+				}}
+				url="/"
+				HTTPmethod="post"
+				onSubmit={() => null}
+			/>
 		</View>
 	);
 }

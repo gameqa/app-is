@@ -3,7 +3,7 @@ import { InputElementTypes } from "../../../../declerations";
 import { IProps } from "./interface";
 import * as Inputs from "../";
 
-export const InputElementFactory = (props: IProps) => {
+const InputElementFactory = (props: IProps) => {
 	const { onChange, inputField } = props;
 
 	let inputElement;
@@ -33,3 +33,5 @@ export const InputElementFactory = (props: IProps) => {
 		</Inputs.Wrapper>
 	);
 };
+
+export default InputElementFactory;
