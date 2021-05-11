@@ -7,6 +7,17 @@ const styles = StyleSheet.create({
 	fullWidth: {
 		width: "100%",
 	},
+	textOuter: {
+		width: "100%",
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	alignCenter: {
+		alignItems: "center",
+	},
+	nextLevel: {
+		marginLeft: 5,
+	},
 });
 
 export default styles;
