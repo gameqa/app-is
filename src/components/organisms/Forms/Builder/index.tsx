@@ -4,6 +4,7 @@ import { IProps } from "./interface";
 import { Atoms } from "../../..";
 import { LOAD_TIMER_MS } from "./utils";
 import Api from "../../../../api";
+import styles from "./styles";
 
 const FormBuilder = <T extends {}, K = {}>({
 	form,
@@ -16,6 +17,7 @@ const FormBuilder = <T extends {}, K = {}>({
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
+	// handle typing in input factory element
 	const onChange = (accessor: keyof K, newValue: any) => {
 		const element = formObject[accessor];
 		element.value = newValue;
@@ -24,6 +26,7 @@ const FormBuilder = <T extends {}, K = {}>({
 		setFormObject(updatedForm);
 	};
 
+	// handles submitting
 	const handleSubmit = async () => {
 		if (isLoading) return;
 		setIsLoading(true);
@@ -41,7 +44,7 @@ const FormBuilder = <T extends {}, K = {}>({
 	};
 
 	return (
-		<View>
+		<View style={styles.outer}>
 			<Atoms.Alerts.Ribbon item={{ label: errorMessage, type: "danger" }} />
 			{Object.keys(formObject).map((key: any) => (
 				<Atoms.Inputs.Factory

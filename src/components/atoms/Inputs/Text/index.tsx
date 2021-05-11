@@ -5,7 +5,7 @@ import InputStyles from "../styles";
 
 const CustomTextInput = (props: TextInputProps) => (
 	<TextInput
-		style={InputStyles.inputLineOuter}
+		style={InputStyles.outer}
 		{...props}
 		onChangeText={props.onChange}
 	/>
