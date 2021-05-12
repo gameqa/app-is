@@ -5,6 +5,7 @@ import { Atoms } from "../../..";
 import { LOAD_TIMER_MS } from "./utils";
 import Api from "../../../../api";
 import styles from "./styles";
+import { Alert } from "../../../../declerations";
 
 const FormBuilder = <T extends {}, K = {}>({
 	form,
@@ -16,7 +17,7 @@ const FormBuilder = <T extends {}, K = {}>({
 	children,
 }: IProps<T, K>) => {
 	const [formObject, setFormObject] = useState(form);
-	const [errorMessage, setErrorMessage] = useState("");
+	const [errorMessage, setErrorMessage] = useState<Aler | undefined>(undefined);
 	const [isLoading, setIsLoading] = useState(false);
 
 	// handle typing in input factory element
@@ -36,11 +37,14 @@ const FormBuilder = <T extends {}, K = {}>({
 		for (const key in formValues) formValues[key] = formObject[key].value;
 		try {
 			const res = await Api[HTTPmethod]<T>(url, formValues);
-			setErrorMessage("");
+			setErrorMessage(undefined);
 			onSubmit(res.data);
 			setFormObject({ ...form });
 		} catch (error) {
-			setErrorMessage(error.response?.data.message ?? "Unknown error");
+			setErrorMessage({
+				type: "danger",
+				label: error.response?.data.message ?? "Unknown error",
+			});
 		} finally {
 			setTimeout(() => setIsLoading(false), LOAD_TIMER_MS);
 		}
@@ -48,7 +52,7 @@ const FormBuilder = <T extends {}, K = {}>({
 
 	return (
 		<React.Fragment>
-			<Atoms.Alerts.Ribbon item={{ label: errorMessage, type: "danger" }} />
+			<Atoms.Alerts.Ribbon item={errorMessage} />
 			<View style={styles.outer}>
 				<View>
 					{Object.keys(formObject).map((key: any) => (
