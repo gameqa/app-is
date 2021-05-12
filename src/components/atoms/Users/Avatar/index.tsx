@@ -4,10 +4,13 @@ import styles from "./styles";
 import { IProps } from "./interface";
 import * as Services from "../../../../services";
 
-const UserAvatar = ({ level }: IProps) => {
+const UserAvatar = ({ level, color }: IProps) => {
 	return (
 		<Image
-			style={styles.outer}
+			style={{
+				...styles.outer,
+				borderColor: Services.Colors.MapToDark[color ?? "light-grey"],
+			}}
 			source={Services.UserLevels.mapLevelToIconURL(level)}
 		/>
 	);

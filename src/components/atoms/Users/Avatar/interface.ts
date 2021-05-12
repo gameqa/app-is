@@ -1,3 +1,5 @@
-import { User } from "../../../../declerations";
+import { ColorType, User } from "../../../../declerations";
 
-export interface IProps extends User {}
+export interface IProps extends User {
+	color?: ColorType;
+}

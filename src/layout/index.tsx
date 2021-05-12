@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
 import BottomNav from "./BottomNav";
@@ -25,7 +25,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 		</View>
 	) : isAuth ? (
 		<SafeAreaView style={styles.outer}>
-			<View style={styles.content}>{children}</View>
+			<ScrollView style={styles.content}>{children}</ScrollView>
 			<BottomNav />
 		</SafeAreaView>
 	) : (
