@@ -6,11 +6,11 @@ import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
 import { FontAwesome } from "@expo/vector-icons";
-
+import LayoutWrapper from "../../layout";
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	return (
-		<View>
+		<LayoutWrapper>
 			<View style={styles.row}>
 				<Atoms.Users.Avatar {...auth} />
 				<View style={[styles.fullWidth, styles.userLevelContainer]}>
@@ -53,7 +53,7 @@ const UserProgress = () => {
 				labels={["a", "", "", "b"]}
 				height={220}
 			/>
-		</View>
+		</LayoutWrapper>
 	);
 };
 

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { View, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
-import BottomNav from "./BottomNav";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../reducers";
 import { fetchUserFromToken } from "../actions/auth";
@@ -26,7 +25,6 @@ const LayoutWrapper = ({ children }: IProps) => {
 	) : isAuth ? (
 		<SafeAreaView style={styles.outer}>
 			<ScrollView style={styles.content}>{children}</ScrollView>
-			<BottomNav />
 		</SafeAreaView>
 	) : (
 		<SafeAreaView style={styles.content}>
