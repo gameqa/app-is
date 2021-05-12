@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { Atoms, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
@@ -14,7 +14,7 @@ const UserProgress = () => {
 			<View style={styles.row}>
 				<Atoms.Users.Avatar {...auth} />
 				<View style={[styles.fullWidth, styles.userLevelContainer]}>
-					<Text>{auth.username}</Text>
+					<Atoms.Text.Heading>{auth.username}</Atoms.Text.Heading>
 					<Text>
 						Lvl {auth.level} {Services.UserLevels.mapLevelToString(auth.level)}
 					</Text>
