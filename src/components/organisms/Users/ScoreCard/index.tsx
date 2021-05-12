@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { Atoms } from "../../..";
 import { User } from "../../../../declerations";
 import styles from "./styles";
+
 const UserScoreCard = ({ scoreCard: data }: User) => {
 	const calculateRatio = (count: number) =>
 		(2 * Math.atan(0.25 * (count ?? 0))) / Math.PI;
