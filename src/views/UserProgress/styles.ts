@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
 	nextLevel: {
 		marginLeft: 5,
 	},
+	userLevelContainer: {
+		justifyContent: "flex-end",
+		paddingLeft: 10,
+	},
 });
 
 export default styles;
