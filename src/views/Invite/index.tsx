@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { TouchableOpacity, Clipboard, Alert } from "react-native";
+import { TouchableOpacity, Clipboard, Alert, View } from "react-native";
 import { useSelector } from "react-redux";
 import { Atoms } from "../../components";
 import LayoutWrapper from "../../layout";
@@ -55,6 +55,15 @@ export default function index() {
 				þinn hlekk þá birtist hér mynd. Þegar þú hefur boðið 10 vinum þá getur þú unnið
 				vinninga fyrir að vera áhrifavaldur.
 			</Atoms.Text.Para>
+			<Atoms.Cards.Cards>
+				<View />
+			</Atoms.Cards.Cards>
+			<Atoms.Cards.Cards>
+				<View />
+			</Atoms.Cards.Cards>
+			<Atoms.Cards.Cards>
+				<View />
+			</Atoms.Cards.Cards>
 		</LayoutWrapper>
 	);
 }
