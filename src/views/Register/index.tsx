@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ const Register = () => {
 		};
 	}, []);
 
+	const navigation = useNavigation<any>();
 	const text = { title: "Búa til nýjan aðgang", switchButton: "Ég er með aðgang" };
 
 	const handleAuth = (user: User) => dispatch(registerUser(user));
@@ -36,7 +38,6 @@ const Register = () => {
 		<LayoutWrapper>
 			<Atoms.Text.Heading>{text.title}</Atoms.Text.Heading>
 			<View style={styles.form}>
-				(
 				<Organisms.Forms.Builder<User>
 					buttonLabel="Búa til aðgang"
 					form={forms.Register}
@@ -46,7 +47,7 @@ const Register = () => {
 				/>
 			</View>
 			<View style={styles.changeForm}>
-				<TouchableOpacity onPress={() => null}>
+				<TouchableOpacity onPress={() => navigation.navigate("log-in")}>
 					<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
 				</TouchableOpacity>
 			</View>

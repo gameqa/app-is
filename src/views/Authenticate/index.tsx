@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useDispatch } from "react-redux";
@@ -24,6 +25,8 @@ const Authenticate = () => {
 		};
 	}, []);
 
+	const navigation = useNavigation<any>();
+
 	const text = { title: "Velkomin/n aftur!", switchButton: "Mig vantar aðgang" };
 
 	const handleAuth = (user: User) => dispatch(registerUser(user));
@@ -45,8 +48,8 @@ const Authenticate = () => {
 				/>
 			</View>
 			<View style={styles.changeForm}>
-				<TouchableOpacity onPress={() => null}>
-					<Text>{text.switchButton}</Text>
+				<TouchableOpacity onPress={() => navigation.navigate("sign-up")}>
+					<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
 				</TouchableOpacity>
 			</View>
 		</LayoutWrapper>
