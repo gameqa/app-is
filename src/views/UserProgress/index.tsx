@@ -39,11 +39,20 @@ const UserProgress = () => {
 				</View>
 			</View>
 			<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
+			<View style={styles.row}>
+				<FontAwesome
+					size={30}
+					name="sort-numeric-desc"
+					color={Services.Colors.MapToDark["highlight"]}
+				/>
+				<Text>Númer #{auth.scoreCard.hiscoreRank} á stigatöflunni</Text>
+			</View>
 			<Text>
 				Samfélagið á spurningar.is er stanslaust að búa til spurningar og finna
 				svör. Því fleiri spurningar og svör sem þú skapar því betra sæti nærð þú
 				á stigatöflunni
 			</Text>
+			<Text>Þú hefur búið til</Text>
 		</View>
 	);
 };
