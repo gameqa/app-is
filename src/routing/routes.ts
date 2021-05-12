@@ -1,7 +1,7 @@
-import { Route } from "./declerations";
+import { StackRoutes, TabRoutes } from "./declerations";
 import * as Views from "../views";
 
-const routeList: Route[] = [
+export const tab: TabRoutes[] = [
 	{
 		id: "progress",
 		Component: Views.UserProgress,
@@ -20,4 +20,13 @@ const routeList: Route[] = [
 	},
 ];
 
-export default routeList;
+export const stack: StackRoutes[] = [
+	{
+		id: "log-in",
+		Component: Views.Authenticate,
+	},
+	{
+		id: "sign-up",
+		Component: Views.Register,
+	},
+];

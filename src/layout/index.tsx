@@ -15,22 +15,15 @@ const LayoutWrapper = ({ children }: IProps) => {
 		dispatch(fetchUserFromToken());
 	}, [auth.type]);
 
-	const isAuth = !["loading", "guest"].includes(auth.type);
 	const isLoading = auth.type === "loading";
 
 	return isLoading ? (
 		<View style={styles.centerChildren}>
 			<ActivityIndicator />
 		</View>
-	) : isAuth ? (
-		<SafeAreaView style={styles.outer}>
-			<ScrollView style={styles.content}>{children}</ScrollView>
-		</SafeAreaView>
 	) : (
-		<SafeAreaView style={styles.content}>
-			<View style={styles.content}>
-				<Views.Auth />
-			</View>
+		<SafeAreaView style={styles.outer}>
+			<View style={styles.inner}>{children}</View>
 		</SafeAreaView>
 	);
 };

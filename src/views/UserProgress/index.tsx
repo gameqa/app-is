@@ -1,27 +1,50 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { useSelector } from "react-redux";
+import { View, Alert, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
 import { FontAwesome } from "@expo/vector-icons";
 import LayoutWrapper from "../../layout";
+import { logOutUser } from "../../actions/auth";
+
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
+	const dispatch = useDispatch();
+
+	const alertSignOut = () =>
+		Alert.alert("Útskráning", "Viltu skrá þig út?", [
+			{
+				text: "Nei",
+				onPress: () => console.log("Cancel Pressed"),
+				style: "cancel",
+			},
+			{ text: "Já", onPress: () => dispatch(logOutUser()) },
+		]);
+
 	return (
 		<LayoutWrapper>
-			<View style={styles.row}>
-				<Atoms.Users.Avatar {...auth} />
-				<View style={[styles.fullWidth, styles.userLevelContainer]}>
-					<Atoms.Text.Heading>{auth.username}</Atoms.Text.Heading>
-					<Atoms.Text.Para>
-						Lvl {auth.level} {Services.UserLevels.mapLevelToString(auth.level)}
-					</Atoms.Text.Para>
-					<Atoms.Text.Para>
-						#{auth.scoreCard.hiscoreRank} á stigatöflunni
-					</Atoms.Text.Para>
+			<View style={[styles.row, styles.spaceBetween]}>
+				<View style={styles.row}>
+					<Atoms.Users.Avatar {...auth} />
+					<View style={[styles.fullWidth, styles.userLevelContainer]}>
+						<Atoms.Text.Heading>{auth.username}</Atoms.Text.Heading>
+						<Atoms.Text.Para>
+							Lvl {auth.level} {Services.UserLevels.mapLevelToString(auth.level)}
+						</Atoms.Text.Para>
+						<Atoms.Text.Para>
+							#{auth.scoreCard.hiscoreRank} á stigatöflunni
+						</Atoms.Text.Para>
+					</View>
 				</View>
+				<TouchableOpacity onPress={alertSignOut} style={styles.lock}>
+					<FontAwesome
+						name="lock"
+						size={20}
+						color={Services.Colors.MapToDark["grey"]}
+					/>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.textOuter}>
 				<Atoms.Text.Para>40% að Lvl {auth.level + 1}</Atoms.Text.Para>
