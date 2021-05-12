@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
-import { Atoms } from "../../components";
+import { Atoms, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
@@ -53,6 +53,7 @@ const UserProgress = () => {
 				á stigatöflunni
 			</Text>
 			<Text>Þú hefur búið til</Text>
+			<Organisms.Users.ScoreCard {...auth} />
 		</View>
 	);
 };
