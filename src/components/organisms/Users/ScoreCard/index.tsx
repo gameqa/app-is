@@ -2,15 +2,97 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Atoms } from "../../..";
 import { User } from "../../../../declerations";
+import styles from "./styles";
+const UserScoreCard = ({ scoreCard: data }: User) => {
+	const calculateRatio = (count: number) =>
+		(2 * Math.atan(0.25 * (count ?? 0))) / Math.PI;
 
-const UserScoreCard = ({ scoreCard }: User) => {
 	return (
 		<View>
-			<Atoms.Charts.ProgressBar ratio={0.7} label="" color="danger" />
-			<Atoms.Charts.ProgressBar ratio={0.7} label="" color="danger" />
-			<Atoms.Charts.ProgressBar ratio={0.7} label="" color="danger" />
-			<Atoms.Charts.ProgressBar ratio={0.7} label="" color="danger" />
-			<Atoms.Charts.ProgressBar ratio={0.7} label="" color="danger" />
+			{/* 
+			
+			Questions progress
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Spurningar</Text>
+				<Text>{data.questions}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.questions)}
+				label=""
+				color="warning"
+			/>
+			{/* 
+			
+			Answers progress 
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Svör</Text>
+				<Text>{data.answers}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.answers)}
+				label=""
+				color="danger"
+			/>
+			{/* 
+			
+			Invites progress
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Skráðir vinir (boð)</Text>
+				<Text>{data.invites}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.invites)}
+				label=""
+				color="highlight"
+			/>
+			{/* 
+			
+			question qa progress 
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Yfirfarnar spurningar</Text>
+				<Text>{data.questionVerifications}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.questionVerifications)}
+				label=""
+				color="successgi"
+			/>
+			{/* 
+			
+			Answer review progress 
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Yfirfarin svör</Text>
+				<Text>{data.answerVerifications}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.answerVerifications)}
+				label=""
+				color="danger"
+			/>
+			{/* 
+			
+			Articles found progress 
+			
+			*/}
+			<View style={styles.labelLine}>
+				<Text>Vefsíður með svörum</Text>
+				<Text>{data.articles}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.articles)}
+				label=""
+				color="highlight"
+			/>
 		</View>
 	);
 };
