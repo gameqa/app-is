@@ -55,15 +55,15 @@ export default function index() {
 				þinn hlekk þá birtist hér mynd. Þegar þú hefur boðið 10 vinum þá getur þú unnið
 				vinninga fyrir að vera áhrifavaldur.
 			</Atoms.Text.Para>
-			<Atoms.Cards.Cards>
+			<Atoms.Cards.User {...auth}>
 				<View />
-			</Atoms.Cards.Cards>
-			<Atoms.Cards.Cards>
+			</Atoms.Cards.User>
+			<Atoms.Cards.User {...auth}>
 				<View />
-			</Atoms.Cards.Cards>
-			<Atoms.Cards.Cards>
+			</Atoms.Cards.User>
+			<Atoms.Cards.User {...auth}>
 				<View />
-			</Atoms.Cards.Cards>
+			</Atoms.Cards.User>
 		</LayoutWrapper>
 	);
 }

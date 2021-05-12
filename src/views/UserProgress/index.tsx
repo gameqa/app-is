@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Alert, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { Atoms, Organisms } from "../../components";
+import { Atoms, Molecules, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
@@ -26,18 +26,7 @@ const UserProgress = () => {
 	return (
 		<LayoutWrapper>
 			<View style={[styles.topRow]}>
-				<View style={styles.row}>
-					<Atoms.Users.Avatar {...auth} />
-					<View style={[styles.fullWidth, styles.userLevelContainer]}>
-						<Atoms.Text.Heading>{auth.username}</Atoms.Text.Heading>
-						<Atoms.Text.Para>
-							Lvl {auth.level} {Services.UserLevels.mapLevelToString(auth.level)}
-						</Atoms.Text.Para>
-						<Atoms.Text.Para>
-							#{auth.scoreCard.hiscoreRank} á stigatöflunni
-						</Atoms.Text.Para>
-					</View>
-				</View>
+				<Molecules.Users.Info {...auth} />
 				<TouchableOpacity onPress={alertSignOut} style={styles.lock}>
 					<FontAwesome
 						name="lock"

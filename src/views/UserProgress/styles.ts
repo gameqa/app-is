@@ -9,9 +9,6 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		position: "relative",
 	},
-	fullWidth: {
-		width: "100%",
-	},
 	textOuter: {
 		width: "100%",
 		flexDirection: "row",
@@ -24,10 +21,6 @@ const styles = StyleSheet.create({
 	},
 	nextLevel: {
 		marginLeft: 5,
-	},
-	userLevelContainer: {
-		justifyContent: "flex-end",
-		paddingLeft: 10,
 	},
 	padTitleTop: {
 		paddingTop: 40,
