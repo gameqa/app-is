@@ -16,8 +16,8 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Text>Spurningar</Text>
-				<Text>{data.questions}</Text>
+				<Atoms.Text.Para>Spurningar</Atoms.Text.Para>
+				<Atoms.Text.Para>{data.questions}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
 				ratio={calculateRatio(data.questions)}
@@ -30,8 +30,8 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Text>Svör</Text>
-				<Text>{data.answers}</Text>
+				<Atoms.Text.Para>Svör</Atoms.Text.Para>
+				<Atoms.Text.Para>{data.answers}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
 				ratio={calculateRatio(data.answers)}
@@ -44,19 +44,34 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Text>Skráðir vinir (boð)</Text>
-				<Text>{data.invites}</Text>
+				<Atoms.Text.Para>Skráðir vinir (boð)</Atoms.Text.Para>
+				<Atoms.Text.Para>{data.invites}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
 				ratio={calculateRatio(data.invites)}
 				label=""
 				color="highlight"
 			/>
-			{/* 
+
+			{/* Articles found progress  */}
+
+			<View style={styles.labelLine}>
+				<Atoms.Text.Para>Vefsíður með svörum</Atoms.Text.Para>
+				<Atoms.Text.Para>{data.articles}</Atoms.Text.Para>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.articles)}
+				label=""
+				color="highlight"
+			/>
+		</View>
+	);
+};
+
+/**	{/* 
 			
 			question qa progress 
 			
-			*/}
 			<View style={styles.labelLine}>
 				<Text>Yfirfarnar spurningar</Text>
 				<Text>{data.questionVerifications}</Text>
@@ -66,11 +81,9 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 				label=""
 				color="success"
 			/>
-			{/* 
 			
 			Answer review progress 
 			
-			*/}
 			<View style={styles.labelLine}>
 				<Text>Yfirfarin svör</Text>
 				<Text>{data.answerVerifications}</Text>
@@ -84,7 +97,6 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			Articles found progress 
 			
-			*/}
 			<View style={styles.labelLine}>
 				<Text>Vefsíður með svörum</Text>
 				<Text>{data.articles}</Text>
@@ -93,9 +105,6 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 				ratio={calculateRatio(data.articles)}
 				label=""
 				color="highlight"
-			/>
-		</View>
-	);
-};
+			/> */
 
 export default UserScoreCard;

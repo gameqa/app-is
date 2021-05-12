@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
 		width: "100%",
 		flexDirection: "row",
 		justifyContent: "space-between",
+		marginTop: 10,
+		marginBottom: 5,
 	},
 	alignCenter: {
 		alignItems: "center",
@@ -21,6 +23,9 @@ const styles = StyleSheet.create({
 	userLevelContainer: {
 		justifyContent: "flex-end",
 		paddingLeft: 10,
+	},
+	padTitleTop: {
+		paddingTop: 40,
 	},
 });
 

@@ -15,16 +15,16 @@ const UserProgress = () => {
 				<Atoms.Users.Avatar {...auth} />
 				<View style={[styles.fullWidth, styles.userLevelContainer]}>
 					<Atoms.Text.Heading>{auth.username}</Atoms.Text.Heading>
-					<Text>
+					<Atoms.Text.Para>
 						Lvl {auth.level} {Services.UserLevels.mapLevelToString(auth.level)}
-					</Text>
-					<Text>
-						<Text> #{auth.scoreCard.hiscoreRank} á stigatöflunni</Text>
-					</Text>
+					</Atoms.Text.Para>
+					<Atoms.Text.Para>
+						#{auth.scoreCard.hiscoreRank} á stigatöflunni
+					</Atoms.Text.Para>
 				</View>
 			</View>
 			<View style={styles.textOuter}>
-				<Text>4/10 að Lvl {auth.level + 1}</Text>
+				<Atoms.Text.Para>40% að Lvl {auth.level + 1}</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome
 						size={12}
@@ -36,15 +36,18 @@ const UserProgress = () => {
 						name="chevron-right"
 						color={Services.Colors.MapToDark["warning"]}
 					/>
-					<Text style={styles.nextLevel}>
+					<Atoms.Text.Para style={styles.nextLevel}>
 						{Services.UserLevels.mapLevelToString(auth.level + 1)}
-					</Text>
+					</Atoms.Text.Para>
 				</View>
 			</View>
 			<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
 
-			<Text>Þú hefur búið til</Text>
+			<Atoms.Text.Heading style={styles.padTitleTop}>Minn árangur</Atoms.Text.Heading>
 			<Organisms.Users.ScoreCard {...auth} />
+			<Atoms.Text.Heading style={styles.padTitleTop}>
+				Leiðin að 100 þúsund
+			</Atoms.Text.Heading>
 			<Atoms.Charts.LineChart
 				datasets={[{ data: [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4] }]}
 				labels={["a", "", "", "b"]}
