@@ -63,7 +63,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			<Atoms.Charts.ProgressBar
 				ratio={calculateRatio(data.questionVerifications)}
 				label=""
-				color="successgi"
+				color="success"
 			/>
 			{/* 
 			
