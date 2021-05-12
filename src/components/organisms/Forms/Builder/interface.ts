@@ -1,4 +1,5 @@
-import { InputElementRecipe } from "../../../../declerations";
+import React from "react";
+import { ColorType, InputElementRecipe } from "../../../../declerations";
 
 export interface IProps<T extends {}, K extends {}> {
 	onSubmit: (data: T) => void;
@@ -6,4 +7,6 @@ export interface IProps<T extends {}, K extends {}> {
 	url: string;
 	form: { [key in keyof K]: InputElementRecipe };
 	HTTPmethod: "put" | "post" | "patch";
+	buttonColor?: ColorType;
+	children?: React.ReactNode;
 }

@@ -4,4 +4,5 @@ export type ColorType =
 	| "highlight"
 	| "warning"
 	| "light-grey"
-	| "grey";
+	| "grey"
+	| "white";

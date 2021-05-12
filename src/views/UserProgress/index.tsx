@@ -25,7 +25,7 @@ const UserProgress = () => {
 
 	return (
 		<LayoutWrapper>
-			<View style={[styles.row, styles.spaceBetween]}>
+			<View style={[styles.topRow]}>
 				<View style={styles.row}>
 					<Atoms.Users.Avatar {...auth} />
 					<View style={[styles.fullWidth, styles.userLevelContainer]}>

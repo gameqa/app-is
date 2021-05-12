@@ -1,12 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
 import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
+import { ICON_LVL_3, ICON_LVL_7 } from "../../static";
 import * as forms from "./forms";
+import * as Services from "../../services";
 import styles from "./styles";
 
 const Register = () => {
@@ -36,7 +38,6 @@ const Register = () => {
 		</View>
 	) : (
 		<LayoutWrapper>
-			<Atoms.Text.Heading>{text.title}</Atoms.Text.Heading>
 			<View style={styles.form}>
 				<Organisms.Forms.Builder<User>
 					buttonLabel="Búa til aðgang"
@@ -44,7 +45,18 @@ const Register = () => {
 					url="/api/auth/register"
 					HTTPmethod="post"
 					onSubmit={handleAuth}
-				/>
+					buttonColor="highlight"
+				>
+					<View style={styles.imageWrapper}>
+						<View style={styles.leftIconView}>
+							<Image style={styles.leftIcon} source={ICON_LVL_3} />
+						</View>
+
+						<View style={styles.rightIconView}>
+							<Image style={styles.rightIcon} source={ICON_LVL_7} />
+						</View>
+					</View>
+				</Organisms.Forms.Builder>
 			</View>
 			<View style={styles.changeForm}>
 				<TouchableOpacity onPress={() => navigation.navigate("log-in")}>

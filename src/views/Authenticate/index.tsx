@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
@@ -8,6 +8,8 @@ import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
 import * as forms from "./forms";
 import styles from "./styles";
+import * as Services from "../../services";
+import { ICON_LVL_1, ICON_LVL_5 } from "../../static";
 
 const Authenticate = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +39,6 @@ const Authenticate = () => {
 		</View>
 	) : (
 		<LayoutWrapper>
-			<Atoms.Text.Heading>{text.title}</Atoms.Text.Heading>
 			<View style={styles.form}>
 				<Organisms.Forms.Builder<User>
 					buttonLabel="Skrá inn"
@@ -45,7 +46,18 @@ const Authenticate = () => {
 					url="/api/auth/authenticate"
 					HTTPmethod="post"
 					onSubmit={handleAuth}
-				/>
+					buttonColor="highlight"
+				>
+					<View style={styles.imageWrapper}>
+						<View style={styles.leftIconView}>
+							<Image style={styles.leftIcon} source={ICON_LVL_1} />
+						</View>
+
+						<View style={styles.rightIconView}>
+							<Image style={styles.rightIcon} source={ICON_LVL_5} />
+						</View>
+					</View>
+				</Organisms.Forms.Builder>
 			</View>
 			<View style={styles.changeForm}>
 				<TouchableOpacity onPress={() => navigation.navigate("sign-up")}>

@@ -9,6 +9,7 @@ export const MapToDark: ColorMap = {
 	warning: "#ffa800",
 	"light-grey": "#e8e8e8",
 	grey: "#999",
+	white: "#fff",
 };
 export const MapToLight: ColorMap = {
 	success: "#c9f7f5",
@@ -17,4 +18,5 @@ export const MapToLight: ColorMap = {
 	warning: "#fff4de",
 	"light-grey": "#e8e8e8",
 	grey: "#999",
+	white: "#8950fc",
 };

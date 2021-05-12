@@ -12,6 +12,8 @@ const FormBuilder = <T extends {}, K = {}>({
 	buttonLabel,
 	url,
 	HTTPmethod,
+	buttonColor,
+	children,
 }: IProps<T, K>) => {
 	const [formObject, setFormObject] = useState(form);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -59,8 +61,9 @@ const FormBuilder = <T extends {}, K = {}>({
 						/>
 					))}
 				</View>
+				{children ?? null}
 				<Atoms.Buttons.Base
-					type="highlight"
+					type={buttonColor ?? "highlight"}
 					label={isLoading ? "Hleð" : buttonLabel}
 					onPress={handleSubmit}
 				/>

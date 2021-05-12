@@ -3,7 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
-		flex: 1,
+	},
+	topRow: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		position: "relative",
 	},
 	fullWidth: {
 		width: "100%",
@@ -32,7 +36,9 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 	},
 	lock: {
-		marginTop: 15,
+		top: 15,
+		position: "absolute",
+		right: 0,
 	},
 });
 

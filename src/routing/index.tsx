@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
@@ -45,6 +45,14 @@ export const TabNavigator = () => {
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
+};
+
+const MyTheme = {
+	...DefaultTheme,
+	colors: {
+		...DefaultTheme.colors,
+		background: Services.Colors.MapToDark["highlight"],
+	},
 };
 
 export const StackNavigator = () => {
