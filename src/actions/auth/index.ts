@@ -1,5 +1,9 @@
 import { ActionTypes } from "../types";
-import { FetchUserFromTokenAction, LogOutUserAction } from "./interface";
+import {
+	FetchInvitesAction,
+	FetchUserFromTokenAction,
+	LogOutUserAction,
+} from "./interface";
 import { ScoreCard, User } from "../../declerations";
 import { Dispatch } from "redux";
 import Api from "../../api";
@@ -37,6 +41,24 @@ export const registerUser = (user: User) => {
 	return {
 		type: ActionTypes.registerUser,
 		payload: user,
+	};
+};
+
+export const fetchInvites = () => {
+	return async function (dispatch: Dispatch) {
+		try {
+			dispatch<FetchInvitesAction>({
+				type: ActionTypes.fetchInvites,
+				payload: [],
+			});
+			const { data } = await Api.get<User[]>("/api/v1/users/current/invites");
+			dispatch<FetchInvitesAction>({
+				type: ActionTypes.fetchInvites,
+				payload: data,
+			});
+		} catch (error) {
+			//
+		}
 	};
 };
 

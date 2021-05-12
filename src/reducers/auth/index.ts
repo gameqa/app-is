@@ -68,12 +68,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		// 		hasCompletedTutorial: true,
 		// 	};
 		// }
-		// case ActionTypes.fetchInvites: {
-		// 	return {
-		// 		...state,
-		// 		invites: action.payload,
-		// 	};
-		// }
+		case ActionTypes.fetchInvites: {
+			return {
+				...state,
+				invites: action.payload,
+			};
+		}
 		default:
 			return state;
 	}

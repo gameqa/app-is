@@ -14,3 +14,8 @@ export interface RegisterUserAction {
 	type: ActionTypes.registerUser;
 	payload: User;
 }
+
+export interface FetchInvitesAction {
+	type: ActionTypes.fetchInvites;
+	payload: User[];
+}

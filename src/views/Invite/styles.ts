@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
 	link: {
 		marginLeft: 10,
 	},
+	paragraph: {
+		marginBottom: 15,
+	},
 });
 
 export default styles;
