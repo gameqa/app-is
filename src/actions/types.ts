@@ -1,13 +1,18 @@
-import * as AuthActions from "./auth";
+import * as Auth from "./auth";
+import * as Game from "./game";
 export enum ActionTypes {
 	fetchUserFromToken,
 	logOutUser,
 	registerUser,
 	fetchInvites,
+	startWriteQuestionRound, // create question taskk
+	setCurrentGameRound,
 }
 
 export type Actions =
-	| AuthActions.FetchUserFromTokenAction
-	| AuthActions.LogOutUserAction
-	| AuthActions.RegisterUserAction
-	| AuthActions.FetchInvitesAction;
+	| Auth.Actions.FetchUserFromTokenAction
+	| Auth.Actions.LogOutUserAction
+	| Auth.Actions.RegisterUserAction
+	| Auth.Actions.FetchInvitesAction
+	| Game.Actions.SetCurrentGameRoundAction
+	| Game.Actions.StartWriteQuestionRoundFromAPIAction;

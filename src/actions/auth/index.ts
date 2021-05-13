@@ -62,4 +62,4 @@ export const fetchInvites = () => {
 	};
 };
 
-export * from "./interface";
+export * as Actions from "./interface";

@@ -8,7 +8,7 @@ export enum GameTypes {
 	completed,
 }
 
-export interface MakeQuestionRoundFromAPI {
+export interface StartWriteQuestionRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
