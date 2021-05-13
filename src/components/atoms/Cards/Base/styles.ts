@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
 	outer: {
 		width: "100%",
 		padding: 10,
-		marginTop: 5,
-		marginBottom: 15,
+		marginTop: 10,
+		marginBottom: 10,
 		borderRadius: 5,
 		shadowColor: "#000",
 		shadowOffset: {

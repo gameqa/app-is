@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Clipboard, Alert, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Atoms } from "../../components";
+import { Atoms, Molecules } from "../../components";
 import LayoutWrapper from "../../layout";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
@@ -38,6 +38,7 @@ export default function index() {
 	const invites = auth.invites.filter((invite) => invite.type !== "not-verified");
 	return (
 		<LayoutWrapper>
+			<Molecules.Users.Info {...auth} />
 			<TouchableOpacity
 				onPress={handleCopy}
 				style={{

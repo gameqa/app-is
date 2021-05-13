@@ -28,7 +28,7 @@ export const PriceCategories: PrizeCategory[] = [
 	{
 		name: "Áhrifavaldar",
 		description: "",
-		prereqDescription: "fá 10 vini til þess að skrá sig á spurningar.is",
+		prereqDescription: "bjóða 10 vinum að spila",
 		name_tgf: "Áhrifavöldum",
 		name_tf: "Áhrifavalda",
 	},
