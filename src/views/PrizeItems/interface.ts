@@ -4,4 +4,7 @@ export interface IProps {
 	route: {
 		params: Prizes.PrizeCategory;
 	};
+	navigation: {
+		goBack: () => void;
+	};
 }

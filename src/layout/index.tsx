@@ -5,7 +5,6 @@ import styles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../reducers";
 import { fetchUserFromToken } from "../actions/auth";
-import * as Views from "../views";
 
 const LayoutWrapper = ({ children }: IProps) => {
 	const dispatch = useDispatch();
@@ -22,9 +21,11 @@ const LayoutWrapper = ({ children }: IProps) => {
 			<ActivityIndicator />
 		</View>
 	) : (
-		<SafeAreaView style={styles.outer}>
-			<View style={styles.inner}>{children}</View>
-		</SafeAreaView>
+		<ScrollView>
+			<SafeAreaView style={styles.outer}>
+				<View style={styles.inner}>{children}</View>
+			</SafeAreaView>
+		</ScrollView>
 	);
 };
 
