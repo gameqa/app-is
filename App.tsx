@@ -7,7 +7,7 @@ import * as Routing from "./src/routing";
 export default function App() {
 	return (
 		<Provider store={store}>
-			<Routing.StackNavigator />
+			<Routing.AuthStackNavigator />
 			<Routing.TabNavigator />
 		</Provider>
 	);

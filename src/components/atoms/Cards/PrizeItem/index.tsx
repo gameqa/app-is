@@ -7,7 +7,7 @@ import styles from "./styles";
 const PrizeCategoryCard = (item: Prizes.PrizeItem) => {
 	return (
 		<Atoms.Cards.Base style={styles.outer}>
-			<View />
+			<View>test</View>
 		</Atoms.Cards.Base>
 	);
 };

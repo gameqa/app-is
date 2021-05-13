@@ -5,7 +5,7 @@ import * as Services from "../../services";
 import { useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 
-const Prizes = () => {
+const PrizeCategories = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	return (
 		<LayoutWrapper>
@@ -17,4 +17,4 @@ const Prizes = () => {
 	);
 };
 
-export default Prizes;
+export default PrizeCategories;
