@@ -23,7 +23,7 @@ export const prizeStack: PrizeStackRoutes[] = [
 	},
 	{
 		id: "prize-items",
-		Component: Views.PrizeCategories,
+		Component: Views.PrizeItems,
 	},
 ];
 
