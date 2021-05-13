@@ -39,6 +39,11 @@ export default function index() {
 	return (
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />
+			<Atoms.Text.Para style={styles.paragraph}>
+				Smelltu á hlekkin til að afrita hann. Þegar notandi skráir sig eftir að smella á
+				þinn hlekk þá birtist hér mynd. Þegar þú hefur boðið 10 vinum þá getur þú unnið
+				vinninga fyrir að vera áhrifavaldur.
+			</Atoms.Text.Para>
 			<TouchableOpacity
 				onPress={handleCopy}
 				style={{
@@ -59,11 +64,6 @@ export default function index() {
 				/>
 				<Atoms.Text.Para style={styles.link}>{url.slice(0, 35)}...</Atoms.Text.Para>
 			</TouchableOpacity>
-			<Atoms.Text.Para style={styles.paragraph}>
-				Smelltu á hlekkin til að afrita hann. Þegar notandi skráir sig eftir að smella á
-				þinn hlekk þá birtist hér mynd. Þegar þú hefur boðið 10 vinum þá getur þú unnið
-				vinninga fyrir að vera áhrifavaldur.
-			</Atoms.Text.Para>
 			{invites.length === 0 ? (
 				<Atoms.Alerts.Ribbon
 					item={{ label: "Það hefur enginn skráð sig enn", type: "warning" }}

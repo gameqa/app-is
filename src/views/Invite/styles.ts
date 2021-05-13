@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 	},
 	paragraph: {
-		marginBottom: 15,
+		marginBottom: 10,
+		marginTop: 10,
 	},
 });
 
