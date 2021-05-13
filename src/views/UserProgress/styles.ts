@@ -29,9 +29,10 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 	},
 	lock: {
-		top: 15,
+		top: 0,
 		position: "absolute",
 		right: 0,
+		padding: 15,
 	},
 });
 

@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
+import {
+	View,
+	SafeAreaView,
+	ActivityIndicator,
+	ScrollView,
+	Dimensions,
+} from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
 import { useDispatch, useSelector } from "react-redux";

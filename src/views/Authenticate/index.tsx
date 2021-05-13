@@ -48,13 +48,15 @@ const Authenticate = () => {
 					onSubmit={handleAuth}
 					buttonColor="highlight"
 				>
-					<View style={styles.imageWrapper}>
-						<View style={styles.leftIconView}>
-							<Image style={styles.leftIcon} source={ICON_LVL_1} />
-						</View>
+					<View style={{ flex: 1 }}>
+						<View style={styles.imageWrapper}>
+							<View style={styles.leftIconView}>
+								<Image style={styles.leftIcon} source={ICON_LVL_1} />
+							</View>
 
-						<View style={styles.rightIconView}>
-							<Image style={styles.rightIcon} source={ICON_LVL_5} />
+							<View style={styles.rightIconView}>
+								<Image style={styles.rightIcon} source={ICON_LVL_5} />
+							</View>
 						</View>
 					</View>
 				</Organisms.Forms.Builder>
