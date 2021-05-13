@@ -19,7 +19,7 @@ export interface StartWriteQuestionRoundFromAPI {
 	};
 }
 
-export interface VerifyQuestionRoundFromAPI {
+export interface StartVerifyQuestionRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
@@ -31,7 +31,7 @@ export interface VerifyQuestionRoundFromAPI {
 	};
 }
 
-export interface FindArticleRoundFromAPI {
+export interface StartGoogleSearchRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
@@ -41,7 +41,7 @@ export interface FindArticleRoundFromAPI {
 		type: "find-article";
 	};
 }
-export interface LocateSpanRoundFromAPI {
+export interface StartSelectSpanRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
@@ -53,7 +53,7 @@ export interface LocateSpanRoundFromAPI {
 		questionId: string;
 	};
 }
-export interface VerifySpanRoundFromAPI {
+export interface StartVerifySpanRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
@@ -66,7 +66,7 @@ export interface VerifySpanRoundFromAPI {
 		lastWord: number;
 	};
 }
-export interface CompleteRoundFromAPI {
+export interface StartCompletedViewRoundFromAPI {
 	_id: string;
 	currentRound: number;
 	totalRounds: number;
@@ -76,12 +76,12 @@ export interface CompleteRoundFromAPI {
 }
 
 export type TaskFromBackend =
-	| MakeQuestionRoundFromAPI
-	| VerifyQuestionRoundFromAPI
-	| FindArticleRoundFromAPI
-	| LocateSpanRoundFromAPI
-	| VerifySpanRoundFromAPI
-	| CompleteRoundFromAPI;
+	| StartVerifyQuestionRoundFromAPI
+	| StartWriteQuestionRoundFromAPI
+	| StartGoogleSearchRoundFromAPI
+	| StartSelectSpanRoundFromAPI
+	| StartVerifySpanRoundFromAPI
+	| StartCompletedViewRoundFromAPI;
 
 export interface ArticlePreview {
 	source: Source;

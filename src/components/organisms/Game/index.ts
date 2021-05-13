@@ -1,1 +1,36 @@
-export {};
+import { GameTypes } from "../../../declerations";
+import WriteQuestion from "./WriteQuestion";
+import GoogleSearch from "./GoogleSearch";
+import ReviewAnswer from "./ReviewAnswer";
+import SelectSpan from "./SelectSpan";
+import ReviewQuestion from "./ReviewQuestion";
+
+interface GameRound {
+	Component: () => JSX.Element;
+	type: GameTypes;
+}
+
+const Rounds: GameRound[] = [
+	{
+		Component: WriteQuestion,
+		type: GameTypes.writeQuestion,
+	},
+	{
+		Component: ReviewQuestion,
+		type: GameTypes.questionQualityAssurance,
+	},
+	{
+		Component: GoogleSearch,
+		type: GameTypes.submitArticle,
+	},
+	{
+		Component: ReviewAnswer,
+		type: GameTypes.answerQualityAssurance,
+	},
+	{
+		Component: SelectSpan,
+		type: GameTypes.verifyAnswerLocation,
+	},
+];
+
+export default Rounds;

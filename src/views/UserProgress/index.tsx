@@ -8,6 +8,7 @@ import * as Services from "../../services";
 import { FontAwesome } from "@expo/vector-icons";
 import LayoutWrapper from "../../layout";
 import { logOutUser } from "../../actions/auth";
+import { ScrollView } from "react-native-gesture-handler";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -24,48 +25,50 @@ const UserProgress = () => {
 		]);
 
 	return (
-		<LayoutWrapper>
-			<View style={[styles.topRow]}>
-				<Molecules.Users.Info {...auth} />
-				<TouchableOpacity onPress={alertSignOut} style={styles.lock}>
-					<FontAwesome
-						name="lock"
-						size={20}
-						color={Services.Colors.MapToDark["grey"]}
-					/>
-				</TouchableOpacity>
-			</View>
-			<View style={styles.textOuter}>
-				<Atoms.Text.Para>40% að Lvl {auth.level + 1}</Atoms.Text.Para>
-				<View style={[styles.row, styles.alignCenter]}>
-					<FontAwesome
-						size={12}
-						name="chevron-right"
-						color={Services.Colors.MapToDark["warning"]}
-					/>
-					<FontAwesome
-						size={12}
-						name="chevron-right"
-						color={Services.Colors.MapToDark["warning"]}
-					/>
-					<Atoms.Text.Para style={styles.nextLevel}>
-						{Services.UserLevels.mapLevelToString(auth.level + 1)}
-					</Atoms.Text.Para>
+		<ScrollView>
+			<LayoutWrapper>
+				<View style={[styles.topRow]}>
+					<Molecules.Users.Info {...auth} />
+					<TouchableOpacity onPress={alertSignOut} style={styles.lock}>
+						<FontAwesome
+							name="lock"
+							size={20}
+							color={Services.Colors.MapToDark["grey"]}
+						/>
+					</TouchableOpacity>
 				</View>
-			</View>
-			<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
+				<View style={styles.textOuter}>
+					<Atoms.Text.Para>40% að Lvl {auth.level + 1}</Atoms.Text.Para>
+					<View style={[styles.row, styles.alignCenter]}>
+						<FontAwesome
+							size={12}
+							name="chevron-right"
+							color={Services.Colors.MapToDark["warning"]}
+						/>
+						<FontAwesome
+							size={12}
+							name="chevron-right"
+							color={Services.Colors.MapToDark["warning"]}
+						/>
+						<Atoms.Text.Para style={styles.nextLevel}>
+							{Services.UserLevels.mapLevelToString(auth.level + 1)}
+						</Atoms.Text.Para>
+					</View>
+				</View>
+				<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
 
-			<Atoms.Text.Heading style={styles.padTitleTop}>Minn árangur</Atoms.Text.Heading>
-			<Organisms.Users.ScoreCard {...auth} />
-			<Atoms.Text.Heading style={styles.padTitleTop}>
-				Leiðin að 100 þúsund
-			</Atoms.Text.Heading>
-			<Atoms.Charts.LineChart
-				datasets={[{ data: [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4] }]}
-				labels={["a", "", "", "b"]}
-				height={220}
-			/>
-		</LayoutWrapper>
+				<Atoms.Text.Heading style={styles.padTitleTop}>Minn árangur</Atoms.Text.Heading>
+				<Organisms.Users.ScoreCard {...auth} />
+				<Atoms.Text.Heading style={styles.padTitleTop}>
+					Leiðin að 100 þúsund
+				</Atoms.Text.Heading>
+				<Atoms.Charts.LineChart
+					datasets={[{ data: [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4] }]}
+					labels={["a", "", "", "b"]}
+					height={220}
+				/>
+			</LayoutWrapper>
+		</ScrollView>
 	);
 };
 

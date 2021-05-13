@@ -8,7 +8,7 @@ export const tab: TabRoutes[] = [
 	},
 	{
 		id: "game",
-		Component: Views.UserProgress,
+		Component: Views.Game,
 	},
 	{
 		id: "invite",

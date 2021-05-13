@@ -27,11 +27,9 @@ const LayoutWrapper = ({ children }: IProps) => {
 			<ActivityIndicator />
 		</View>
 	) : (
-		<ScrollView>
-			<SafeAreaView style={styles.outer}>
-				<View style={styles.inner}>{children}</View>
-			</SafeAreaView>
-		</ScrollView>
+		<SafeAreaView style={{ flex: 1 }}>
+			<View style={styles.inner}>{children}</View>
+		</SafeAreaView>
 	);
 };
 
