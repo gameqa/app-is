@@ -135,4 +135,18 @@ export const submitQuestion = (
 			isYesOrNo,
 		})
 	);
+
+export const submitVerifyQuestion = (
+	gameRoundId: string,
+	questionId: string,
+	isGood: boolean
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "verify-question",
+			questionId,
+			archive: !isGood,
+		})
+	);
+
 export * as Actions from "./interface";

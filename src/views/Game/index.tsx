@@ -27,7 +27,7 @@ const Game = () => {
 
 	return (
 		<View style={styles.outer}>
-			<ScrollView contentContainerStyle={styles.flex}>
+			<ScrollView>
 				<LayoutWrapper>
 					<Molecules.Users.Info {...auth} />
 					{Organisms.GameRounds.filter((item) => item.type === game.current).map(

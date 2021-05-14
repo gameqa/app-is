@@ -1,6 +1,6 @@
 import { CheckListItem } from "./interface";
 
-const items: CheckListItem[] = [
+const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 	{
 		title: "Lengd svars",
 		description: "Ég held að það sé hægt að svara þessari spurningu í 1-2 setningum",
@@ -24,11 +24,24 @@ const items: CheckListItem[] = [
 		value: false,
 	},
 	{
-		title: "Er þetta surning",
+		title: "Er þetta spurning",
 		description:
-			"Þetta er alveg greinilega spurning og ég skil hvað höfundur spurningarinnar á við.",
+			"Þetta er alveg greinilega spurning og ég skil hvað höfundur spurningarinnar á við",
 		value: false,
 	},
+	isYesOrNo
+		? {
+				title: "Þetta er já / nei spurning",
+				description:
+					"Það ætti að vera hægt að svara þessari spurningu með annaðhvort já eða nei",
+				value: false,
+		  }
+		: {
+				title: "Þetta er EKKI já / nei spurning",
+				description:
+					"Það er ekki hægt að svara þessari spurningu með annaðhvort já / nei",
+				value: false,
+		  },
 ];
 
-export default items;
+export default getQuestions;
