@@ -27,6 +27,7 @@ const ReviewQuestion = () => {
 	// returns true if all items are checked
 	const allItemsAreGood = () => items.every((item) => item.value);
 
+	// stores key as seen
 	const markKeyAsSeen = async (key: string) => {
 		try {
 			const SEEN_TOKEN = "OK";
@@ -36,6 +37,7 @@ const ReviewQuestion = () => {
 		}
 	};
 
+	// returns ture if key has been acknowledged by user before
 	const checkIfHasSeenKey = async (key: string): Promise<boolean> => {
 		try {
 			const value = await AsyncStorage.getItem(key);
@@ -45,6 +47,7 @@ const ReviewQuestion = () => {
 		}
 	};
 
+	// alerts the student for the first time he marks as good or bad
 	const handleAlert = async () => {
 		try {
 			const message = allItemsAreGood()
@@ -70,6 +73,8 @@ const ReviewQuestion = () => {
 		}
 	};
 
+	// handles completing step and dispatching action
+	// which will get next rounds info
 	const handleCompleteStep = async (key: string) => {
 		try {
 			await markKeyAsSeen(key);
@@ -81,10 +86,12 @@ const ReviewQuestion = () => {
 		}
 	};
 
+	// gets the storage key based on users id and
+	// if he is marking the question as good or bad
 	const getStorageKey = useCallback(() => {
 		// check if all are marked
 		return allItemsAreGood()
-			? `${auth}:verify-good-question-alert-seen`
+			? `${auth._id}:verify-good-question-alert-seen`
 			: `${auth}:verify-bad-question-alert-seen`;
 	}, [items]);
 
