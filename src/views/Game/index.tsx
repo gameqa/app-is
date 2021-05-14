@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
 import LayoutWrapper from "../../layout";
-import { Molecules, Atoms } from "../../components";
+import { Molecules } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Organisms } from "../../components";
 import { GameTypes } from "../../declerations";
+import styles from "./styles";
+import { ScrollView } from "react-native";
 
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -22,16 +23,19 @@ const Game = () => {
 	useEffect(() => {
 		const desired = GameTypes.writeQuestion;
 		if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
-	}, [game.current]);
+	}, [game.lastLoaded]);
+
 	return (
-		<LayoutWrapper>
-			<Molecules.Users.Info {...auth} />
-			{Organisms.GameRounds.filter((item) => item.type === game.current).map(
-				({ Component }) => (
-					<Component />
-				)
-			)}
-		</LayoutWrapper>
+		<ScrollView contentContainerStyle={styles.flex}>
+			<LayoutWrapper>
+				<Molecules.Users.Info {...auth} />
+				{Organisms.GameRounds.filter((item) => item.type === game.current).map(
+					({ Component }) => (
+						<Component />
+					)
+				)}
+			</LayoutWrapper>
+		</ScrollView>
 	);
 };
 

@@ -20,6 +20,7 @@ import {
 	StartCompletedViewRoundFromAPIAction,
 } from "./interface";
 import Api from "../../api";
+import { AxiosResponse } from "axios";
 
 const __handleUpdateTask = (data: TaskFromBackend) => {
 	switch (data.taskInfo.type) {
@@ -87,4 +88,51 @@ export const fetchCurrentGameRound = () => {
 	};
 };
 
+/**
+ * reusable function that uses generics
+ * and polymorphism to be able to call
+ * the advance logic in the backend from
+ * various game rounds and handles
+ * updating the game state based on the
+ * response which is not dependent on
+ * which round is being completed at each
+ * moment
+ * @param cb axios call
+ * @returns void
+ */
+export const gameActionWrapperFunc = (
+	cb: (d: Dispatch) => Promise<AxiosResponse<TaskFromBackend>>
+) => {
+	return async function (_dispatch: Dispatch) {
+		try {
+			_dispatch<SetGameLoadingStateAction>({
+				type: ActionTypes.setGameLoadingState,
+				payload: true,
+			});
+			const { data } = await cb(_dispatch);
+			__handleUpdateTask(data);
+		} catch (e) {
+			// do nothing on error
+		} finally {
+			// release loading in both cases
+			_dispatch<SetGameLoadingStateAction>({
+				type: ActionTypes.setGameLoadingState,
+				payload: false,
+			});
+		}
+	};
+};
+
+export const submitQuestion = (
+	gameRoundId: string,
+	questionText: string,
+	isYesOrNo: boolean
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "make-question",
+			text: questionText,
+			isYesOrNo,
+		})
+	);
 export * as Actions from "./interface";

@@ -1,3 +1,5 @@
+import { TextInputProps as RNTextInputProps } from "react-native";
+
 export enum InputElementTypes {
 	text,
 	hidden,
@@ -16,6 +18,7 @@ export interface InputBaseInterface {
 export interface TextInputBase extends InputBaseInterface {
 	value: string;
 	placeholder?: string;
+	props?: RNTextInputProps;
 }
 
 export interface TextInputProps extends TextInputBase {
@@ -34,6 +37,7 @@ export interface TextInputRecipe extends TextInputBase {
 export interface HiddenInputBase extends InputBaseInterface {
 	value: string;
 	placeholder?: string;
+	props?: RNTextInputProps;
 }
 
 export interface HiddenInputProps extends HiddenInputBase {
@@ -52,6 +56,7 @@ export interface HiddenInputRecipe extends HiddenInputBase {
 export interface AuthCodeInputBase extends InputBaseInterface {
 	value: string;
 	length: number;
+	props?: RNTextInputProps;
 }
 
 export interface AuthCodeInputProps extends AuthCodeInputBase {
@@ -66,10 +71,7 @@ export interface AuthCodeInputRecipe extends AuthCodeInputBase {
 /**
  * Putting it all together
  */
-export type InputElementProps =
-	| TextInputBase
-	| HiddenInputBase
-	| AuthCodeInputBase;
+export type InputElementProps = TextInputBase | HiddenInputBase | AuthCodeInputBase;
 
 export type InputElementRecipe =
 	| TextInputRecipe

@@ -7,6 +7,7 @@ export const initialState: State = {
 	totalRounds: 10,
 	_id: "",
 	isLoading: false,
+	lastLoaded: new Date().getTime(),
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -15,6 +16,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
 			return {
 				...state,
 				currentRound: action.payload,
+				lastLoaded: new Date().getTime(),
 			};
 		case ActionTypes.startWriteQuestionRound:
 			return {

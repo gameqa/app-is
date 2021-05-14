@@ -1,12 +1,13 @@
 import React from "react";
-import { TextInput } from "react-native";
+import { Keyboard, TextInput } from "react-native";
 import { TextInputProps } from "../../../../declerations";
 import InputStyles from "../styles";
 
 const CustomTextInput = (props: TextInputProps) => (
 	<TextInput
-		style={InputStyles.outer}
 		{...props}
+		{...(props.props ?? {})}
+		style={{ ...InputStyles.outer, ...((props.props?.style as {}) ?? {}) }}
 		onChangeText={props.onChange}
 	/>
 );
