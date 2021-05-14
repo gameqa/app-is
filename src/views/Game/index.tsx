@@ -7,7 +7,7 @@ import * as Actions from "../../actions";
 import { Organisms } from "../../components";
 import { GameTypes } from "../../declerations";
 import styles from "./styles";
-import { ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -26,16 +26,23 @@ const Game = () => {
 	}, [game.lastLoaded]);
 
 	return (
-		<ScrollView contentContainerStyle={styles.flex}>
-			<LayoutWrapper>
-				<Molecules.Users.Info {...auth} />
-				{Organisms.GameRounds.filter((item) => item.type === game.current).map(
-					({ Component }) => (
-						<Component />
-					)
-				)}
-			</LayoutWrapper>
-		</ScrollView>
+		<View style={styles.outer}>
+			<ScrollView contentContainerStyle={styles.flex}>
+				<LayoutWrapper>
+					<Molecules.Users.Info {...auth} />
+					{Organisms.GameRounds.filter((item) => item.type === game.current).map(
+						({ Component }) => (
+							<Component />
+						)
+					)}
+				</LayoutWrapper>
+			</ScrollView>
+			{game.isLoading ? (
+				<View style={styles.loading}>
+					<ActivityIndicator />
+				</View>
+			) : null}
+		</View>
 	);
 };
 
