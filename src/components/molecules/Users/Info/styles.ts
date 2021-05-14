@@ -11,6 +11,22 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-end",
 		paddingLeft: 10,
 	},
+	textOuter: {
+		width: "100%",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginTop: 10,
+		marginBottom: 5,
+	},
+	alignCenter: {
+		alignItems: "center",
+	},
+	nextLevel: {
+		marginLeft: 5,
+	},
+	outer: {
+		paddingBottom: 10,
+	},
 });
 
 export default styles;

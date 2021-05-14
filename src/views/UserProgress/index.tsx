@@ -37,25 +37,6 @@ const UserProgress = () => {
 						/>
 					</TouchableOpacity>
 				</View>
-				<View style={styles.textOuter}>
-					<Atoms.Text.Para>40% að Lvl {auth.level + 1}</Atoms.Text.Para>
-					<View style={[styles.row, styles.alignCenter]}>
-						<FontAwesome
-							size={12}
-							name="chevron-right"
-							color={Services.Colors.MapToDark["warning"]}
-						/>
-						<FontAwesome
-							size={12}
-							name="chevron-right"
-							color={Services.Colors.MapToDark["warning"]}
-						/>
-						<Atoms.Text.Para style={styles.nextLevel}>
-							{Services.UserLevels.mapLevelToString(auth.level + 1)}
-						</Atoms.Text.Para>
-					</View>
-				</View>
-				<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
 
 				<Atoms.Text.Heading style={styles.padTitleTop}>Minn árangur</Atoms.Text.Heading>
 				<Organisms.Users.ScoreCard {...auth} />

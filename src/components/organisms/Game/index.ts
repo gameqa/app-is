@@ -4,6 +4,7 @@ import GoogleSearch from "./GoogleSearch";
 import ReviewAnswer from "./ReviewAnswer";
 import SelectSpan from "./SelectSpan";
 import ReviewQuestion from "./ReviewQuestion";
+export * as Utils from "./Utils";
 
 interface GameRound {
 	Component: () => JSX.Element;
