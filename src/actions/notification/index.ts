@@ -12,6 +12,11 @@ export const setPriorityNotificationItem = (payload: HookSignedNotification) => 
 	payload,
 });
 
+export const clearNotificationsByHookId = (payload: string) => ({
+	type: ActionTypes.clearNotificationsByHookId,
+	payload,
+});
+
 export const clearNotificationsById = (payload: string) => ({
 	type: ActionTypes.clearNotificationItemsById,
 	payload,

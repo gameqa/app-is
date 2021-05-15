@@ -7,5 +7,6 @@ export interface Notification {
 }
 
 export interface HookSignedNotification extends Notification {
+	hookId: string;
 	id: string;
 }

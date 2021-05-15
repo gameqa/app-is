@@ -23,6 +23,7 @@ export enum ActionTypes {
 	clearIndexRangeInParagraph,
 	addNotificationItem,
 	addPriorityNotificationItem,
+	clearNotificationsByHookId,
 	clearNotificationItemsById,
 }
 
@@ -45,4 +46,5 @@ export type Actions =
 	| SelectSpan.Actions.SelectSecondWordIndexInParagraphAction
 	| Notifications.Actions.AddNotificationItemAction
 	| Notifications.Actions.AddPriorityNotificationItemAction
-	| Notifications.Actions.ClearNotificationItemsByIdAction;
+	| Notifications.Actions.ClearNotificationItemsByIdAction
+	| Notifications.Actions.ClearNotificationsByHookIdAction;

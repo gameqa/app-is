@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { View, Text } from "react-native";
 import styles from "./styles";
 import { IProps, SelectionStates } from "./interface";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../../../../services";
 import { Atoms, Organisms } from "../../../..";
-
+import * as utils from "./utils";
 const SpanSelector = ({
 	firstWord,
 	lastWord,
@@ -37,10 +37,40 @@ const SpanSelector = ({
 
 	const { addPriority } = Organisms.Notifications.Hooks.useAddItems();
 
+	useEffect(() => {
+		if (immutable) return;
+		switch (selectionState) {
+			case "select-first":
+				addPriority({
+					title: "Fyrsta orðið",
+					description: "Smelltu á fyrsta orðið sem myndar svarið.",
+					type: "standard",
+				});
+				break;
+			case "select-last":
+				addPriority({
+					title: "Síðasta orðið",
+					description:
+						"Smelltu á síðasta orðið sem myndar svarið. Ef svarið er bara eitt orð, smelltu þá á sama arðið.",
+					type: "standard",
+				});
+				break;
+			case "clear-selection":
+				addPriority({
+					title: "Búin/n?",
+					description:
+						"Ef valið er rétt, þá getur þú staðfest valið. Til þess að velja aftur þá getur þú hreinsað valið með því að smella hvar sem er á textann.",
+					type: "standard",
+				});
+		}
+	}, [selectionState, immutable]);
+
+	const wordArray = useMemo(() => paragraph.split(" "), [paragraph]);
+
 	return (
 		<View>
 			<View style={styles.para}>
-				{paragraph.split(" ").map((word, i) => (
+				{wordArray.map((word, i) => (
 					<TouchableOpacity onPress={() => action?.(i)} activeOpacity={1}>
 						<Text
 							style={{
@@ -53,8 +83,12 @@ const SpanSelector = ({
 					</TouchableOpacity>
 				))}
 			</View>
-			{selectionState === "clear-selection" && !immutable ? (
-				<Atoms.Buttons.Base label="Staðfesta" type="highlight" />
+			{!immutable ? (
+				<Atoms.Buttons.Base
+					label="Staðfesta"
+					type="highlight"
+					inactive={selectionState !== "clear-selection"}
+				/>
 			) : null}
 		</View>
 	);

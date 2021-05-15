@@ -11,6 +11,11 @@ export interface AddPriorityNotificationItemAction {
 	payload: Organisms.Notifications.HookSignedNotification;
 }
 
+export interface ClearNotificationsByHookIdAction {
+	type: ActionTypes.clearNotificationsByHookId;
+	payload: string;
+}
+
 export interface ClearNotificationItemsByIdAction {
 	type: ActionTypes.clearNotificationItemsById;
 	payload: string;

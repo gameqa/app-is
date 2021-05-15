@@ -1,5 +1,7 @@
 import { useEffect, useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Notification } from "../interface";
+import * as Actions from "../../../../actions";
 
 const useAddItems = () => {
 	const [id, setId] = useState("");
@@ -8,6 +10,8 @@ const useAddItems = () => {
 		setId(genUUID());
 		return () => {};
 	}, []);
+
+	const dispatch = useDispatch();
 
 	/**
 	 * function that generates a UUID v4 written by
@@ -22,12 +26,39 @@ const useAddItems = () => {
 		});
 	};
 
-	const addStandard = useCallback((item: Notification) => null, [id]);
-	const addPriority = useCallback((item: Notification) => null, [id]);
+	const addStandard = useCallback(
+		(item: Notification) =>
+			dispatch(
+				Actions.Notifications.addNotificationItem({
+					...item,
+					hookId: id,
+					id: genUUID(),
+				})
+			),
+		[id]
+	);
+
+	const addPriority = useCallback(
+		(item: Notification) =>
+			dispatch(
+				Actions.Notifications.setPriorityNotificationItem({
+					...item,
+					hookId: id,
+					id: genUUID(),
+				})
+			),
+		[id]
+	);
+
+	const clearAll = useCallback(
+		() => dispatch(Actions.Notifications.clearNotificationsByHookId(id)),
+		[id]
+	);
 
 	return {
 		addStandard,
 		addPriority,
+		clearAll,
 	};
 };
 

@@ -24,6 +24,13 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				priority: action.payload === state.priority?.id ? undefined : state.priority,
 				list: state.list.filter((item) => item.id !== action.payload),
 			};
+		case ActionTypes.clearNotificationsByHookId:
+			return {
+				...state,
+				priority:
+					action.payload === state.priority?.hookId ? undefined : state.priority,
+				list: state.list.filter((item) => item.hookId !== action.payload),
+			};
 		default:
 			return state;
 	}
