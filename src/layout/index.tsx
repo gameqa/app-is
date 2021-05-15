@@ -28,7 +28,28 @@ const LayoutWrapper = ({ children }: IProps) => {
 		</View>
 	) : (
 		<SafeAreaView style={{ flex: 1 }}>
-			<View style={styles.inner}>{children}</View>
+			<View style={styles.inner}>
+				<View style={{ position: "relative", zIndex: 10, height: 0 }}>
+					<View
+						style={{
+							position: "absolute",
+							width: "100%",
+							height: 40,
+							backgroundColor: "white",
+							borderRadius: 4,
+							shadowColor: "#000",
+							shadowOffset: {
+								width: 0,
+								height: 0,
+							},
+							shadowOpacity: 0.12,
+							shadowRadius: 3.22,
+							elevation: 3,
+						}}
+					></View>
+				</View>
+				{children}
+			</View>
 		</SafeAreaView>
 	);
 };

@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
 		lineHeight: 30,
 	},
 	para: { flexDirection: "row", flexWrap: "wrap", marginTop: 10 },
+	bottomHelp: {
+		width: "100%",
+	},
 });
 
 export default styles;
