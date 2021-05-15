@@ -1,6 +1,7 @@
 import * as Auth from "./auth";
 import * as Game from "./game";
 import * as WriteQestion from "./writeQuestion";
+import * as SelectSpan from "./selectSpan";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -16,6 +17,9 @@ export enum ActionTypes {
 	setCurrentGameRound,
 	setGameLoadingState,
 	writeQuestion,
+	selectFirstWordIndexInParagraph,
+	selectSecondWordIndexInParagraph,
+	clearIndexRangeInParagraph,
 }
 
 export type Actions =
@@ -31,4 +35,7 @@ export type Actions =
 	| Game.Actions.StartGoogleSearchRoundFromAPIAction
 	| Game.Actions.StartCompletedViewRoundFromAPIAction
 	| Game.Actions.SetGameLoadingStateAction
-	| WriteQestion.Actions.WriteQuestionAction;
+	| WriteQestion.Actions.WriteQuestionAction
+	| SelectSpan.ClearIndexRangeInParagraph
+	| SelectSpan.SelectFirstWordIndexInParagraphAction
+	| SelectSpan.SelectSecondWordIndexInParagraphAction;

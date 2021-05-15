@@ -21,7 +21,7 @@ const Game = () => {
 
 	// comment out in production
 	useEffect(() => {
-		const desired = GameTypes.questionQualityAssurance;
+		const desired = GameTypes.verifyAnswerLocation;
 		if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
 	}, [game.lastLoaded]);
 
