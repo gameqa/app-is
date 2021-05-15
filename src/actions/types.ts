@@ -2,6 +2,7 @@ import * as Auth from "./auth";
 import * as Game from "./game";
 import * as WriteQestion from "./writeQuestion";
 import * as SelectSpan from "./selectSpan";
+import * as Notifications from "./notification";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -20,6 +21,9 @@ export enum ActionTypes {
 	selectFirstWordIndexInParagraph,
 	selectSecondWordIndexInParagraph,
 	clearIndexRangeInParagraph,
+	addNotificationItem,
+	addPriorityNotificationItem,
+	clearNotificationItemsById,
 }
 
 export type Actions =
@@ -36,6 +40,9 @@ export type Actions =
 	| Game.Actions.StartCompletedViewRoundFromAPIAction
 	| Game.Actions.SetGameLoadingStateAction
 	| WriteQestion.Actions.WriteQuestionAction
-	| SelectSpan.ClearIndexRangeInParagraph
-	| SelectSpan.SelectFirstWordIndexInParagraphAction
-	| SelectSpan.SelectSecondWordIndexInParagraphAction;
+	| SelectSpan.Actions.ClearIndexRangeInParagraph
+	| SelectSpan.Actions.SelectFirstWordIndexInParagraphAction
+	| SelectSpan.Actions.SelectSecondWordIndexInParagraphAction
+	| Notifications.Actions.AddNotificationItemAction
+	| Notifications.Actions.AddPriorityNotificationItemAction
+	| Notifications.Actions.ClearNotificationItemsByIdAction;

@@ -25,4 +25,4 @@ export const clearRange = (): ClearIndexRangeInParagraph => {
 	};
 };
 
-export * from "./interface";
+export * as Actions from "./interface";

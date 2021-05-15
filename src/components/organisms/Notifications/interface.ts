@@ -5,3 +5,7 @@ export interface Notification {
 	readonly title: string;
 	description: string;
 }
+
+export interface HookSignedNotification extends Notification {
+	id: string;
+}

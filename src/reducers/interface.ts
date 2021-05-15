@@ -2,7 +2,8 @@ import * as Auth from "./auth";
 import * as Game from "./game";
 import * as WriteQuestion from "./writeQuestion";
 import * as VerifyQuestion from "./verifyQuestion";
-import * as SelectSpan from "./SelectSpan";
+import * as SelectSpan from "./selectSpan";
+import * as Notification from "./notification";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -10,4 +11,5 @@ export interface StoreState {
 	writeQuestion: WriteQuestion.State;
 	verifyQuestion: VerifyQuestion.State;
 	selectSpan: SelectSpan.State;
+	notification: Notification.State;
 }
