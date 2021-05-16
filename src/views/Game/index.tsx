@@ -14,17 +14,6 @@ const Game = () => {
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
 
-	// comment out in dev
-	// useEffect(() => {
-	// 	dispatch(Actions.Game.fetchCurrentGameRound());
-	// }, []);
-
-	// comment out in production
-	useEffect(() => {
-		const desired = GameTypes.verifyAnswerLocation;
-		if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
-	}, [game.lastLoaded]);
-
 	return (
 		<View style={styles.outer}>
 			<ScrollView>

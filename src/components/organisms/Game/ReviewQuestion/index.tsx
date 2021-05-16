@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Alert, View } from "react-native";
 import { Atoms } from "../../..";
 import styles from "./styles";
@@ -8,6 +8,7 @@ import { StoreState } from "../../../../reducers";
 import getQuestions from "./questions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Actions from "../../../../actions";
+import { CheckListItem } from "./interface";
 
 const ReviewQuestion = () => {
 	const state = useSelector((state: StoreState) => state.verifyQuestion);
@@ -15,7 +16,11 @@ const ReviewQuestion = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const dispatch = useDispatch();
 
-	const [items, setItems] = useState(getQuestions(state.isYesOrNo));
+	const [items, setItems] = useState<CheckListItem[]>([]);
+
+	useEffect(() => {
+		setItems(getQuestions(state.isYesOrNo));
+	}, [game.lastLoaded]);
 
 	// toggle true false for item at index i
 	const markItem = (i: number) => {

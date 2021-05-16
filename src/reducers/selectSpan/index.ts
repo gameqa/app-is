@@ -41,11 +41,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				firstWord: undefined,
 				lastWord: undefined,
 			};
-		// case ActionTypes.verifySpanInAnswer:
-		// 	return {
-		// 		...state,
-		// 		...action.payload.taskInfo,
-		// 	};
+		case ActionTypes.startVerifySpanRound:
+			return {
+				...state,
+				...action.payload.taskInfo,
+			};
 		default:
 			return state;
 	}

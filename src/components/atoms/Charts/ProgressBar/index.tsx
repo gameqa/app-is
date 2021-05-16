@@ -4,7 +4,7 @@ import * as Services from "../../../../services";
 import { IProps } from "./interface";
 import styles from "./styles";
 
-const ProgressBar = ({ ratio, color, count }: IProps) => {
+const ProgressBar = ({ ratio, color }: IProps) => {
 	return (
 		<View style={styles.outer}>
 			<View style={styles.barOuter}>

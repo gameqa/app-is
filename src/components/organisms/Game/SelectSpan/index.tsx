@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { Alert, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
@@ -16,6 +16,10 @@ const SelectSpan = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setIsSelectingSpan(false);
+	}, [game.lastLoaded]);
 
 	const archiveKey = useMemo(
 		() => `GAME:SELECTSPAN:ARCHIVEWARNING:${auth._id}`,

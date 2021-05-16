@@ -79,6 +79,7 @@ export const fetchCurrentGameRound = () => {
 			__handleUpdateTask(data);
 		} catch (error) {
 			console.log(error);
+			console.log(error.responses);
 		} finally {
 			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
@@ -169,6 +170,40 @@ export const submitSpan = (
 			answerId,
 			firstWord,
 			lastWord,
+		})
+	);
+
+export const verifyAnswerSpan = (
+	gameRoundId: string,
+	answerId: string,
+	canBeShortened?: boolean
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "verify-span",
+			_id: answerId,
+			canBeShortened,
+		})
+	);
+
+export const markQuestionAsImpossible = (gameRoundId: string, questionId: string) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "mark-question-impossible",
+			questionId,
+		})
+	);
+
+export const verifyYesNoQuestion = (
+	gameRoundId: string,
+	answerId: string,
+	answer: boolean
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "verify-yes-no-answer-paragraph",
+			answerId,
+			answer,
 		})
 	);
 

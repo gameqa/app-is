@@ -26,7 +26,7 @@ const Rounds: GameRound[] = [
 	},
 	{
 		Component: ReviewAnswer,
-		type: GameTypes.answerQualityAssurance,
+		type: GameTypes.verifyAnswerSpan,
 	},
 	{
 		Component: SelectSpan,

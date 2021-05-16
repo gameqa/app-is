@@ -1,12 +1,21 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
+import { useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { User } from "../../../../declerations";
+import { StoreState } from "../../../../reducers";
 import * as Services from "../../../../services";
 import styles from "./styles";
 
 const UsersInfo = (user: User) => {
+	const game = useSelector((state: StoreState) => state.game);
+
+	console.log(game);
+	const ratio = (game.currentRound - 1) / game.totalRounds;
+	console.log(ratio);
+	const BASE_RATIO = 0.015;
+
 	return (
 		<View style={styles.outer}>
 			{/* The avatar and level info */}
@@ -24,7 +33,9 @@ const UsersInfo = (user: User) => {
 			</View>
 			{/* Level progress info */}
 			<View style={styles.textOuter}>
-				<Atoms.Text.Para>40% að Lvl {user.level + 1}</Atoms.Text.Para>
+				<Atoms.Text.Para>
+					{ratio < 0 ? 0 : Math.round(100 * ratio)}% að Lvl {user.level + 1}
+				</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome
 						size={12}
@@ -41,7 +52,11 @@ const UsersInfo = (user: User) => {
 					</Atoms.Text.Para>
 				</View>
 			</View>
-			<Atoms.Charts.ProgressBar ratio={0.4} label="bla" color="success" />
+			<Atoms.Charts.ProgressBar
+				ratio={ratio <= 0 ? BASE_RATIO : ratio}
+				label="bla"
+				color="success"
+			/>
 		</View>
 	);
 };
