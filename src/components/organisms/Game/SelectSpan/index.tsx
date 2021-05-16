@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useCallback, useMemo } from "react";
+import { Alert, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
 import { Atoms } from "../../..";
@@ -11,13 +12,73 @@ const SelectSpan = () => {
 	const [isSelectingSpan, setIsSelectingSpan] = useState(false);
 
 	const state = useSelector((state: StoreState) => state.selectSpan);
+	const game = useSelector((state: StoreState) => state.game);
+	const auth = useSelector((state: StoreState) => state.auth);
+
 	const dispatch = useDispatch();
 
-	const handleArchive = () => {
-		// TODO: implement and add ALERT logic
-	};
+	const archiveKey = useMemo(
+		() => `GAME:SELECTSPAN:ARCHIVEWARNING:${auth._id}`,
+		[auth._id]
+	);
+
+	// returns ture if key has been acknowledged by user before
+	const checkIfHasSeenKey = useCallback(async (): Promise<boolean> => {
+		try {
+			const value = await AsyncStorage.getItem(archiveKey);
+			return value !== null;
+		} catch (error) {
+			return false;
+		}
+	}, [archiveKey]);
+
+	// stores key as seen
+	const markKeyAsSeen = useCallback(async () => {
+		try {
+			const SEEN_TOKEN = "OK";
+			AsyncStorage.setItem(archiveKey, SEEN_TOKEN);
+		} catch (error) {
+			//
+		}
+	}, [archiveKey]);
+
+	const handleCompleteStep = useCallback(async () => {
+		try {
+			dispatch(Actions.Game.archiveAnswer(game._id, state._id));
+			await markKeyAsSeen();
+		} catch (error) {
+			//
+		}
+	}, [game._id, state._id, state.firstWord, state.lastWord]);
+
+	const handleArchive = useCallback(async () => {
+		const hasSeenKey = await checkIfHasSeenKey();
+		if (hasSeenKey) dispatch(Actions.Game.archiveAnswer(game._id, state._id));
+		Alert.alert(
+			"Ekkert svar",
+			"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
+			[
+				{
+					text: "Hætta við",
+					onPress: () => markKeyAsSeen(),
+				},
+				{
+					text: "Já",
+					onPress: () => handleCompleteStep(),
+				},
+			]
+		);
+	}, [game._id, state._id, markKeyAsSeen, handleCompleteStep]);
 
 	const toogleSelectionState = () => setIsSelectingSpan((v) => !v);
+
+	const handleSubmit = useCallback(
+		(start?: number, end?: number) =>
+			dispatch(
+				Actions.Game.submitSpan(game._id, state._id, state.firstWord, state.lastWord)
+			),
+		[game._id, state._id, state.firstWord, state.lastWord]
+	);
 
 	return (
 		<View>
@@ -35,6 +96,7 @@ const SelectSpan = () => {
 				firstWord={state.firstWord}
 				lastWord={state.lastWord}
 				immutable={!isSelectingSpan}
+				onComplete={handleSubmit}
 			/>
 			{!isSelectingSpan ? (
 				<React.Fragment>

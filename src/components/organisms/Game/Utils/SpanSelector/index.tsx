@@ -14,6 +14,7 @@ const SpanSelector = ({
 	onSelectFirstWord,
 	onClearSelection,
 	onSelectLastWord,
+	onComplete,
 }: IProps) => {
 	let selectionState: SelectionStates;
 
@@ -44,7 +45,7 @@ const SpanSelector = ({
 				addPriority({
 					title: "Fyrsta orðið",
 					description: "Smelltu á fyrsta orðið sem myndar svarið.",
-					type: "standard",
+					type: "idea",
 				});
 				break;
 			case "select-last":
@@ -52,7 +53,7 @@ const SpanSelector = ({
 					title: "Síðasta orðið",
 					description:
 						"Smelltu á síðasta orðið sem myndar svarið. Ef svarið er bara eitt orð, smelltu þá á sama arðið.",
-					type: "standard",
+					type: "idea",
 				});
 				break;
 			case "clear-selection":
@@ -60,7 +61,7 @@ const SpanSelector = ({
 					title: "Búin/n?",
 					description:
 						"Ef valið er rétt, þá getur þú staðfest valið. Til þess að velja aftur þá getur þú hreinsað valið með því að smella hvar sem er á textann.",
-					type: "standard",
+					type: "idea",
 				});
 		}
 	}, [selectionState, immutable]);
@@ -76,6 +77,8 @@ const SpanSelector = ({
 							style={{
 								...styles.word,
 								color: shouldHighlight(i) ? Colors.MapToDark.highlight : "#666",
+
+								textDecorationLine: shouldHighlight(i) ? "underline" : "none",
 							}}
 						>
 							{word}
@@ -87,7 +90,8 @@ const SpanSelector = ({
 				<Atoms.Buttons.Base
 					label="Staðfesta"
 					type="highlight"
-					inactive={selectionState !== "clear-selection"}
+					inactive={firstWord === undefined && lastWord === undefined}
+					onPress={onComplete}
 				/>
 			) : null}
 		</View>

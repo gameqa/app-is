@@ -149,4 +149,27 @@ export const submitVerifyQuestion = (
 		})
 	);
 
+export const archiveAnswer = (gameRoundId: string, answerId: string) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "archive-answer",
+			answerId,
+		})
+	);
+
+export const submitSpan = (
+	gameRoundId: string,
+	answerId: string,
+	firstWord?: number,
+	lastWord?: number
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "locate-span",
+			answerId,
+			firstWord,
+			lastWord,
+		})
+	);
+
 export * as Actions from "./interface";

@@ -1,4 +1,6 @@
-type NotiType = "important" | "standard";
+import { ColorType } from "../../../declerations";
+
+export type NotiType = "idea" | "error" | "warning" | "success";
 
 export interface Notification {
 	type: NotiType;

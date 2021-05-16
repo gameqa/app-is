@@ -5,13 +5,15 @@ import * as Actions from "../../../../actions";
 
 const useAddItems = () => {
 	const [id, setId] = useState("");
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setId(genUUID());
-		return () => {};
+		const gen = genUUID();
+		setId(gen);
+		return () => {
+			dispatch(Actions.Notifications.clearNotificationsByHookId(gen));
+		};
 	}, []);
-
-	const dispatch = useDispatch();
 
 	/**
 	 * function that generates a UUID v4 written by

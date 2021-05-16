@@ -6,6 +6,7 @@ export interface IProps {
 	onSelectLastWord?: (lastWord: number) => void;
 	onSelectFirstWord?: (firstWord: number) => void;
 	onClearSelection?: () => void;
+	onComplete?: () => void;
 }
 
 export type SelectionStates = "select-first" | "select-last" | "clear-selection";

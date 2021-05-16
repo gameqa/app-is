@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
 	word: {
-		marginRight: 10,
+		paddingRight: 10,
 		fontSize: 20,
 		fontWeight: "400",
 		lineHeight: 30,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { StoreState } from "../../../../reducers";
@@ -35,6 +35,11 @@ const WriteQuestion = () => {
 
 	return (
 		<View style={styles.flex}>
+			{isYesNoQuestion ? (
+				<Atoms.Alerts.Ribbon
+					item={{ type: "highlight", label: "Skrifaðu já / nei spurningu" }}
+				/>
+			) : null}
 			<Atoms.Text.Para style={styles.marginTop}>
 				Skrifaðu spurningu sem aðrir notendur geta fundið svarið við. Reyndu að velja
 				spurningu sem er ekki háð tilfinningum fólks eða hvaða dag vikunnar er spurt.
