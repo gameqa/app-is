@@ -4,6 +4,7 @@ import * as WriteQuestion from "./writeQuestion";
 import * as VerifyQuestion from "./verifyQuestion";
 import * as SelectSpan from "./selectSpan";
 import * as Notification from "./notification";
+import * as GoogleSearch from "./googleSearch";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -12,4 +13,5 @@ export interface StoreState {
 	verifyQuestion: VerifyQuestion.State;
 	selectSpan: SelectSpan.State;
 	notification: Notification.State;
+	googleSearch: GoogleSearch.State;
 }

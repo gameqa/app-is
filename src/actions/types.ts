@@ -3,6 +3,7 @@ import * as Game from "./game";
 import * as WriteQestion from "./writeQuestion";
 import * as SelectSpan from "./selectSpan";
 import * as Notifications from "./notification";
+import * as GoogleSearch from "./GoogleSearch";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -25,6 +26,7 @@ export enum ActionTypes {
 	addPriorityNotificationItem,
 	clearNotificationsByHookId,
 	clearNotificationItemsById,
+	writeGoogleQuery,
 }
 
 export type Actions =
@@ -47,4 +49,5 @@ export type Actions =
 	| Notifications.Actions.AddNotificationItemAction
 	| Notifications.Actions.AddPriorityNotificationItemAction
 	| Notifications.Actions.ClearNotificationItemsByIdAction
-	| Notifications.Actions.ClearNotificationsByHookIdAction;
+	| Notifications.Actions.ClearNotificationsByHookIdAction
+	| GoogleSearch.Actions.WriteGoogleQueryAction;

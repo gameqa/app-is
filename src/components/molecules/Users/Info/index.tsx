@@ -54,7 +54,7 @@ const UsersInfo = (user: User) => {
 			</View>
 			<Atoms.Charts.ProgressBar
 				ratio={ratio <= 0 ? BASE_RATIO : ratio}
-				label="bla"
+				label=""
 				color="success"
 			/>
 		</View>

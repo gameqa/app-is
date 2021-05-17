@@ -27,7 +27,7 @@ const UserProgress = () => {
 	return (
 		<ScrollView>
 			<LayoutWrapper>
-				<View style={[styles.topRow]}>
+				<View>
 					<Molecules.Users.Info {...auth} />
 					<TouchableOpacity onPress={alertSignOut} style={styles.lock}>
 						<FontAwesome

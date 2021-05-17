@@ -4,11 +4,6 @@ const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 	},
-	topRow: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		position: "relative",
-	},
 	padTitleTop: {
 		paddingTop: 40,
 	},

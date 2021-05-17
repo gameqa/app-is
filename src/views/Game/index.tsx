@@ -14,6 +14,12 @@ const Game = () => {
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
 
+	// comment out in production
+	useEffect(() => {
+		const desired = GameTypes.submitArticle;
+		if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
+	}, [game.lastLoaded]);
+
 	return (
 		<View style={styles.outer}>
 			<ScrollView>
