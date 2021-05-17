@@ -1,11 +1,17 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { IProps } from "./interface";
+import { useNavigation } from "@react-navigation/native";
 
 const PagePreview = (props: IProps) => {
+	const navigation = useNavigation<any>();
 	return (
-		<View style={styles.outer}>
+		<TouchableOpacity
+			style={styles.outer}
+			onPress={() => navigation.navigate("article-reader", props)}
+			activeOpacity={1}
+		>
 			<View style={styles.topLine}>
 				<View style={styles.pageIcon}>
 					<Image
@@ -19,7 +25,7 @@ const PagePreview = (props: IProps) => {
 			</View>
 			<Text style={styles.title}>{props.title}</Text>
 			<Text style={styles.extract}>{props.snippet}</Text>
-		</View>
+		</TouchableOpacity>
 	);
 };
 

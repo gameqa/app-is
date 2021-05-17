@@ -1,12 +1,10 @@
 import React, { useMemo } from "react";
-import { TouchableOpacity } from "react-native";
 import { IProps } from "./interface";
 import * as Services from "../../services";
 import LayoutWrapper from "../../layout";
 import { Atoms } from "../../components";
-import styles from "./styles";
-import { FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
+import { Utils } from "../";
 
 const PrizeItems = ({
 	route: { params: category },
@@ -18,15 +16,8 @@ const PrizeItems = ({
 	);
 	return (
 		<ScrollView>
+			<Utils.NavigateBack goBackHandler={goBack} />
 			<LayoutWrapper>
-				<TouchableOpacity style={styles.backButton} onPress={goBack}>
-					<FontAwesome
-						name="arrow-left"
-						size={15}
-						color={Services.Colors.MapToDark["grey"]}
-					/>
-					<Atoms.Text.Para style={styles.backText}>Til Baka</Atoms.Text.Para>
-				</TouchableOpacity>
 				{items.map((item) => (
 					<Atoms.Cards.PrizeItem {...item} />
 				))}
