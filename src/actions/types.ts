@@ -27,6 +27,8 @@ export enum ActionTypes {
 	clearNotificationsByHookId,
 	clearNotificationItemsById,
 	writeGoogleQuery,
+	fetchArticlesQuery,
+	setGoogleSearchError,
 }
 
 export type Actions =
@@ -50,4 +52,6 @@ export type Actions =
 	| Notifications.Actions.AddPriorityNotificationItemAction
 	| Notifications.Actions.ClearNotificationItemsByIdAction
 	| Notifications.Actions.ClearNotificationsByHookIdAction
-	| GoogleSearch.Actions.WriteGoogleQueryAction;
+	| GoogleSearch.Actions.WriteGoogleQueryAction
+	| GoogleSearch.Actions.SetSearchErrorAction
+	| GoogleSearch.Actions.FetchArticlesQueryAction;

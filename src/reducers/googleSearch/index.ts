@@ -13,6 +13,21 @@ const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
 		case ActionTypes.writeGoogleQuery:
 			return { ...state, query: action.payload };
+
+		case ActionTypes.fetchArticlesQuery: {
+			return {
+				...state,
+				articles: action.payload,
+				searchError: false,
+				noResults: action.payload.length === 0,
+			};
+		}
+		case ActionTypes.setGoogleSearchError:
+			return {
+				...state,
+				searchError: true,
+				articles: [],
+			};
 		default:
 			return state;
 	}
