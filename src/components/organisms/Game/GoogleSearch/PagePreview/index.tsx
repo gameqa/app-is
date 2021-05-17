@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import styles from "./styles";
+import { IProps } from "./interface";
 
-const PagePreview = () => {
+const PagePreview = (props: IProps) => {
 	return (
 		<View style={styles.outer}>
 			<View style={styles.topLine}>
@@ -10,17 +11,14 @@ const PagePreview = () => {
 					<Image
 						style={styles.icon}
 						source={{
-							uri: "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png",
+							uri: props.source.logo,
 						}}
 					/>
 				</View>
-				<Text style={styles.url}>https://is.m.wikipeda.org</Text>
+				<Text style={styles.url}>{props.source.hostname}</Text>
 			</View>
-			<Text style={styles.title}>Good Mythical Morning</Text>
-			<Text>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-				Ipsum has been the industry's standard dummy text ever since the 1500s book.
-			</Text>
+			<Text style={styles.title}>{props.title}</Text>
+			<Text style={styles.extract}>{props.snippet}</Text>
 		</View>
 	);
 };

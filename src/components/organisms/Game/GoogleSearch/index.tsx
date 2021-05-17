@@ -22,12 +22,11 @@ const GoogleSearch = () => {
 			<Atoms.Inputs.Google
 				onChange={(val) => dispatch(Actions.GoogleSearch.writeGoogleQuery(val))}
 				value={state.query}
+				onSubmit={() => dispatch(Actions.GoogleSearch.fetchArticlesQuery())}
 			/>
-			<PagePreview />
-			<PagePreview />
-			<PagePreview />
-			<PagePreview />
-			<PagePreview />
+			{state.articles.map((item) => (
+				<PagePreview {...item} />
+			))}
 		</View>
 	);
 };

@@ -94,7 +94,7 @@ export interface ArticlePreview {
 interface Source {
 	logo: string;
 	name: string;
-	baseUrl: string;
+	hostname: string;
 	identifier: string;
 }
 

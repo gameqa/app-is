@@ -1,4 +1,9 @@
-import { AuthStackRoutes, PrizeStackRoutes, TabRoutes } from "./declerations";
+import {
+	AuthStackRoutes,
+	PrizeStackRoutes,
+	TabRoutes,
+	GameStackRoutes,
+} from "./declerations";
 import * as Views from "../views";
 
 export const tab: TabRoutes[] = [
@@ -7,12 +12,19 @@ export const tab: TabRoutes[] = [
 		Component: Views.UserProgress,
 	},
 	{
+		id: "invite",
+		Component: Views.Invite,
+	},
+];
+
+export const gameStack: GameStackRoutes[] = [
+	{
 		id: "game",
 		Component: Views.Game,
 	},
 	{
-		id: "invite",
-		Component: Views.Invite,
+		id: "article-reader",
+		Component: Views.ArticleReader,
 	},
 ];
 

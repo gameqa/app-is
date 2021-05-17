@@ -5,3 +5,4 @@ export { default as Invite } from "./Invite";
 export { default as PrizeCategories } from "./PrizeCategories";
 export { default as PrizeItems } from "./PrizeItems";
 export { default as Game } from "./Game";
+export { default as ArticleReader } from "./ArticleReader";

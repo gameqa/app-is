@@ -1,11 +1,11 @@
 import React from "react";
 import { Image, TextInput, View, TouchableOpacity, Text } from "react-native";
-import { TextInputProps } from "../../../../declerations";
 import styles from "./styles";
 import Svg, { Path } from "react-native-svg";
 import { GOOGLE_LOGO } from "../../../../static";
+import { IProps } from "./interface";
 
-const GoogleTextInput = (props: TextInputProps) => (
+const GoogleTextInput = (props: IProps) => (
 	<View>
 		<View style={styles.imageContainer}>
 			<Image source={GOOGLE_LOGO} style={styles.image} resizeMode="contain" />
@@ -24,27 +24,9 @@ const GoogleTextInput = (props: TextInputProps) => (
 				style={styles.input}
 				onChangeText={props.onChange}
 				value={props.value}
+				onSubmitEditing={props.onSubmit}
 			/>
 		</View>
-		{/* <TouchableOpacity
-			style={{
-				backgroundColor: "#f8f9fa",
-				borderColor: "#f8f9fa",
-				borderWidth: 1,
-				height: 36,
-				alignItems: "center",
-				justifyContent: "center",
-				paddingLeft: 16,
-				paddingRight: 16,
-				borderRadius: 4,
-				marginTop: 22,
-				marginBottom: 22,
-				marginRight: 4,
-				marginLeft: 4,
-			}}
-		>
-			<Text style={{ fontSize: 14, color: "#3c4043" }}>Google leit</Text>
-		</TouchableOpacity> */}
 	</View>
 );
 

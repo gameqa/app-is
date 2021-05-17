@@ -13,20 +13,31 @@ import { StoreState } from "../reducers";
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
 const PrizeStack = createStackNavigator();
+const GameStack = createStackNavigator();
 
-const PrizeStackNavigator = () => {
-	return (
-		<PrizeStack.Navigator
-			screenOptions={{
-				headerShown: false,
-			}}
-		>
-			{routes.prizeStack.map((route) => (
-				<PrizeStack.Screen name={route.id} component={route.Component} />
-			))}
-		</PrizeStack.Navigator>
-	);
-};
+const PrizeStackNavigator = () => (
+	<PrizeStack.Navigator
+		screenOptions={{
+			headerShown: false,
+		}}
+	>
+		{routes.prizeStack.map((route) => (
+			<PrizeStack.Screen name={route.id} component={route.Component} />
+		))}
+	</PrizeStack.Navigator>
+);
+
+export const GameStackNavigator = () => (
+	<GameStack.Navigator
+		screenOptions={{
+			headerShown: false,
+		}}
+	>
+		{routes.gameStack.map((route) => (
+			<GameStack.Screen name={route.id} component={route.Component} />
+		))}
+	</GameStack.Navigator>
+);
 
 export const TabNavigator = () => {
 	const activeColor = Services.Colors.MapToDark["highlight"];
@@ -55,6 +66,7 @@ export const TabNavigator = () => {
 					<Tab.Screen name={route.id} component={route.Component} />
 				))}
 				<Tab.Screen name="prizes" component={PrizeStackNavigator} />
+				<Tab.Screen name="game" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
