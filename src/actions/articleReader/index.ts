@@ -20,7 +20,10 @@ export const previewArticleToSubmit = (
 				payload: [],
 			});
 			const { data } = await Api.get<Article>(
-				`/api/v1/article_sources/${sourceIdentifier}/article/${articleKey}`
+				`/api/v1/article_sources/${sourceIdentifier}/article/${articleKey.replace(
+					/\//g,
+					"%2F"
+				)}`
 			);
 			dispatch<FetchArticleParagraphsAction>({
 				type: ActionTypes.fetchArticleParagraphs,

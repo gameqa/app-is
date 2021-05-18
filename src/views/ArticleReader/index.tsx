@@ -6,6 +6,7 @@ import {
 	View,
 	TouchableOpacity,
 	Alert,
+	ScrollView,
 } from "react-native";
 import LayoutWrapper from "../../layout";
 import { IProps } from "./interface";
@@ -16,7 +17,6 @@ import styles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
-import { ScrollView } from "react-native-gesture-handler";
 
 const ArticleReaderView = ({
 	route: { params: article },

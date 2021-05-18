@@ -22,10 +22,11 @@ const Game = () => {
 
 	// backup
 	useEffect(() => {
+		const INTERVAL = 1000;
 		if (game.current === undefined) {
 			const interval = setInterval(
 				() => dispatch(Actions.Game.fetchCurrentGameRound()),
-				1000
+				INTERVAL
 			);
 			return () => {
 				clearInterval(interval);

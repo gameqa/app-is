@@ -3,6 +3,7 @@ import WriteQuestion from "./WriteQuestion";
 import GoogleSearch from "./GoogleSearch";
 import ReviewAnswer from "./ReviewAnswer";
 import SelectSpan from "./SelectSpan";
+import EndOfRound from "./EndOfRound";
 import ReviewQuestion from "./ReviewQuestion";
 export * as Utils from "./Utils";
 
@@ -31,6 +32,10 @@ const Rounds: GameRound[] = [
 	{
 		Component: SelectSpan,
 		type: GameTypes.verifyAnswerLocation,
+	},
+	{
+		Component: EndOfRound,
+		type: GameTypes.completed,
 	},
 ];
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, TouchableOpacity, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
 import { Atoms } from "../../../";
@@ -7,12 +7,28 @@ import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
 import PagePreview from "./PagePreview";
 import styles from "./styles";
+import { FontAwesome } from "@expo/vector-icons";
+import { Colors } from "../../../../services";
 
 const GoogleSearch = () => {
-	const [isFocusing, setIsfocusing] = useState(false);
-
 	const state = useSelector((state: StoreState) => state.googleSearch);
+	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
+
+	const handleMarkImposible = useCallback(() => {
+		Alert.alert("Ertu viss?", "Það gerist af og til að ekkert svar finnist.", [
+			{
+				text: "Nei",
+				onPress: () => null,
+			},
+			{
+				text: "Já",
+				onPress: () =>
+					dispatch(Actions.Game.markQuestionAsImpossible(game._id, state._id)),
+			},
+		]);
+	}, []);
+
 	return (
 		<View>
 			<Utils.QuestionIs question={state.text} />
@@ -44,6 +60,14 @@ const GoogleSearch = () => {
 					/>
 				) : null}
 			</View>
+			{state.articles.length > 0 ? (
+				<TouchableOpacity style={styles.cantFindOuter} onPress={handleMarkImposible}>
+					<View style={styles.times}>
+						<FontAwesome name="times" color={Colors.MapToDark.grey} />
+					</View>
+					<Atoms.Text.Para>Ég finn ekki svarið</Atoms.Text.Para>
+				</TouchableOpacity>
+			) : null}
 			{state.articles.map((item) => (
 				// articleKey as key is reserved in react
 				<PagePreview {...item} articleKey={item.key} />
