@@ -7,6 +7,7 @@ import verifyQuestion from "./verifyQuestion";
 import selectSpan from "./selectSpan";
 import notification from "./notification";
 import googleSearch from "./googleSearch";
+import articleReader from "./articleReader";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -16,6 +17,7 @@ export default combineReducers<StoreState>({
 	selectSpan,
 	notification,
 	googleSearch,
+	articleReader,
 });
 
 export * from "./interface";

@@ -207,4 +207,21 @@ export const verifyYesNoQuestion = (
 		})
 	);
 
+export const submitArticleAndParagraph = (
+	gameRoundId: string,
+	identifier: string,
+	key: string,
+	questionId: string,
+	paragraphIndex: number
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
+			type: "find-article",
+			identifier,
+			questionId,
+			key,
+			paragraphIndex,
+		})
+	);
+
 export * as Actions from "./interface";

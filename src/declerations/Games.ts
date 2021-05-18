@@ -89,6 +89,7 @@ export interface ArticlePreview {
 	_id: string;
 	title: string;
 	key: string;
+	articleKey: string;
 }
 
 interface Source {

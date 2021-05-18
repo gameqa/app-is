@@ -4,6 +4,7 @@ import * as WriteQestion from "./writeQuestion";
 import * as SelectSpan from "./selectSpan";
 import * as Notifications from "./notification";
 import * as GoogleSearch from "./GoogleSearch";
+import * as ArticleReader from "./articleReader";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -29,6 +30,8 @@ export enum ActionTypes {
 	writeGoogleQuery,
 	fetchArticlesQuery,
 	setGoogleSearchError,
+	fetchArticleParagraphs,
+	setArticleReaderError,
 }
 
 export type Actions =
@@ -54,4 +57,6 @@ export type Actions =
 	| Notifications.Actions.ClearNotificationsByHookIdAction
 	| GoogleSearch.Actions.WriteGoogleQueryAction
 	| GoogleSearch.Actions.SetSearchErrorAction
-	| GoogleSearch.Actions.FetchArticlesQueryAction;
+	| GoogleSearch.Actions.FetchArticlesQueryAction
+	| ArticleReader.Actions.FetchArticleParagraphsAction
+	| ArticleReader.Actions.SetArticleReaderErrorAction;

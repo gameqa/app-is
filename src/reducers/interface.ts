@@ -5,6 +5,7 @@ import * as VerifyQuestion from "./verifyQuestion";
 import * as SelectSpan from "./selectSpan";
 import * as Notification from "./notification";
 import * as GoogleSearch from "./googleSearch";
+import * as ArticleReader from "./articleReader";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -14,4 +15,5 @@ export interface StoreState {
 	selectSpan: SelectSpan.State;
 	notification: Notification.State;
 	googleSearch: GoogleSearch.State;
+	articleReader: ArticleReader.State;
 }

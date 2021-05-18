@@ -7,7 +7,7 @@ export const initialState: State = {
 	totalRounds: 10,
 	_id: "",
 	isLoading: false,
-	lastLoaded: new Date().getTime(),
+	lastLoaded: 0,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {

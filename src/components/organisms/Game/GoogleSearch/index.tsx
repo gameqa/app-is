@@ -25,7 +25,8 @@ const GoogleSearch = () => {
 				onSubmit={() => dispatch(Actions.GoogleSearch.fetchArticlesQuery())}
 			/>
 			{state.articles.map((item) => (
-				<PagePreview {...item} />
+				// articleKey as key is reserved in react
+				<PagePreview {...item} articleKey={item.key} />
 			))}
 		</View>
 	);

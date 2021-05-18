@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
 	para: {
 		marginBottom: 10,
 	},
+	textParagraph: {
+		marginTop: 10,
+	},
 });
 
 export default styles;

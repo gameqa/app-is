@@ -3326,6 +3326,11 @@ expo-asset@~8.3.1:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
+expo-blur@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/expo-blur/-/expo-blur-9.0.3.tgz#5095b5bd04d000f73b351d0e4736767b86b49bbd"
+  integrity sha512-7jMqzo53eg5t9Uc1Tg+yGu9lKL9the4CWAQO0kC6YMhrsDiB13mwOUesC+IScHDTSUKNMGcHI8kN+OmvEWfPig==
+
 expo-chart-kit@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/expo-chart-kit/-/expo-chart-kit-1.2.4.tgz#a1b3c4a1382c3500f995e8778e8a55889203d537"

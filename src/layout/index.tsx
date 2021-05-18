@@ -14,7 +14,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 		dispatch(Actions.Auth.fetchUserFromToken());
 		if (!["loading", "guest"].includes(auth.type))
 			dispatch(Actions.Game.fetchCurrentGameRound());
-	}, [auth.type]);
+	}, [auth._id]);
 
 	const isLoading = auth.type === "loading";
 
