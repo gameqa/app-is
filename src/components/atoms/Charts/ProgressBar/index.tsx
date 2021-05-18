@@ -5,7 +5,6 @@ import { IProps } from "./interface";
 import styles from "./styles";
 
 const ProgressBar = ({ ratio, color }: IProps) => {
-	console.log(`ratio`, ratio);
 	return (
 		<View style={styles.outer}>
 			<View style={styles.barOuter}>

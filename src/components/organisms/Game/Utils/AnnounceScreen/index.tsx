@@ -81,7 +81,7 @@ const AnnounceScreen = () => {
 		<AnimatedBlurView tint="default" intensity={outerIntensity} style={styles.outer}>
 			<Animated.View style={{ ...styles.middle, opacity: innerOpacity }}>
 				<Text style={styles.percentage}>{Math.round(current * 100)}%</Text>
-				<Text style={styles.toLevel}>- að lvl {auth.level} -</Text>
+				<Text style={styles.toLevel}>- að lvl {auth.level + 1} -</Text>
 			</Animated.View>
 		</AnimatedBlurView>
 	);

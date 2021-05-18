@@ -18,7 +18,7 @@ const UserProgress = () => {
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [
 			{
 				text: "Nei",
-				onPress: () => console.log("Cancel Pressed"),
+				onPress: () => null,
 				style: "cancel",
 			},
 			{ text: "Já", onPress: () => dispatch(logOutUser()) },

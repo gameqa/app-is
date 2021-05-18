@@ -20,6 +20,19 @@ const Game = () => {
 	// 	if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
 	// }, [game.lastLoaded]);
 
+	// backup
+	useEffect(() => {
+		if (game.current === undefined) {
+			const interval = setInterval(
+				() => dispatch(Actions.Game.fetchCurrentGameRound()),
+				1000
+			);
+			return () => {
+				clearInterval(interval);
+			};
+		}
+	}, [game.current]);
+
 	return (
 		<View style={styles.outer}>
 			<ScrollView>

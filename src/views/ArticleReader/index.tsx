@@ -37,31 +37,44 @@ const ArticleReaderView = ({
 		);
 	}, [article._id]);
 
-	const handleSubmitParagraph = useCallback(() => {
-		Alert.alert("Ertu viss", "Inniheldur þessi efnsgrein svarið við spurningunni?", [
-			{
-				text: "Nei",
-				onPress: () => null,
-			},
-			{
-				text: "Já",
-				onPress: () => null,
-			},
-		]);
-		// dispatch(
-		// 	Actions.Game.submitArticleAndParagraph(
-		// 		game._id,
-		// 		article.source.identifier,
-		// 		article.articleKey,
-		// 	)
-		// );
-	}, []);
+	const handleSubmitParagraph = useCallback(
+		(paragraphIndex: number) => {
+			Alert.alert("Ertu viss", "Inniheldur þessi efnsgrein svarið við spurningunni?", [
+				{
+					text: "Nei",
+					onPress: () => null,
+				},
+				{
+					text: "Já",
+					onPress: () => {
+						dispatch(
+							Actions.Game.submitArticleAndParagraph(
+								game._id, // game round id
+								article.source.identifier,
+								article.articleKey,
+								googleSearch._id, // questionId
+								paragraphIndex
+							)
+						);
+						goBack();
+					},
+				},
+			]);
+		},
+		[
+			game._id,
+			game.currentRound,
+			article.source.identifier,
+			article.articleKey,
+			googleSearch._id,
+		]
+	);
 
 	return (
 		<ScrollView>
 			<LayoutWrapper>
 				<NavigateBack goBackHandler={goBack} />
-				<Utils.QuestionIs question="Is this a placeholder?" />
+				<Utils.QuestionIs question={googleSearch.text} />
 				<Atoms.Text.Para style={styles.para}>
 					Við sóttum textann sem fylgir vefsíðunni. Lestu yfir textann og athugaðu hvort
 					þú sjáir svarið við spurningunni. Smelltu á efnisgreinina sem inniheldur
@@ -79,8 +92,8 @@ const ArticleReaderView = ({
 				) : game.isLoading ? (
 					<ActivityIndicator />
 				) : (
-					state.paragraphs.map((text) => (
-						<TouchableOpacity onPress={handleSubmitParagraph}>
+					state.paragraphs.map((text, i) => (
+						<TouchableOpacity onPress={() => handleSubmitParagraph(i)}>
 							<Atoms.Text.Para style={styles.textParagraph}>{text}</Atoms.Text.Para>
 						</TouchableOpacity>
 					))

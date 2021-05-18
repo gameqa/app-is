@@ -7,10 +7,21 @@ export const initialState: State = {
 	searchError: false,
 	noResults: false,
 	isLoading: false,
+	_id: "",
+	text: "",
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
+		case ActionTypes.startGoogleSearchRound:
+			return {
+				...state,
+				...action.payload.taskInfo,
+				query: "",
+				articles: [],
+				searchError: false,
+				noResults: false,
+			};
 		case ActionTypes.writeGoogleQuery:
 			return { ...state, query: action.payload };
 

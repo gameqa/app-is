@@ -23,6 +23,7 @@ import Api from "../../api";
 import { AxiosResponse } from "axios";
 
 const __handleUpdateTask = (data: TaskFromBackend) => {
+	console.log(`__handleUpdateTask data`, data);
 	switch (data.taskInfo.type) {
 		case "make-question":
 			store.dispatch<StartWriteQuestionRoundFromAPIAction>({
@@ -68,8 +69,8 @@ const __handleUpdateTask = (data: TaskFromBackend) => {
 	});
 };
 
-export const fetchCurrentGameRound = () => {
-	return async function (dispatch: Dispatch) {
+export const fetchCurrentGameRound = () =>
+	async function (dispatch: Dispatch) {
 		try {
 			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
@@ -78,8 +79,6 @@ export const fetchCurrentGameRound = () => {
 			const { data } = await Api.get<TaskFromBackend>("/api/v1/game_rounds/current");
 			__handleUpdateTask(data);
 		} catch (error) {
-			console.log(error);
-			console.log(error.responses);
 		} finally {
 			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
@@ -87,7 +86,6 @@ export const fetchCurrentGameRound = () => {
 			});
 		}
 	};
-};
 
 /**
  * reusable function that uses generics
@@ -186,14 +184,14 @@ export const verifyAnswerSpan = (
 		})
 	);
 
-export const markQuestionAsImpossible = (gameRoundId: string, questionId: string) =>
-	gameActionWrapperFunc((_dispatch: Dispatch) =>
+export const markQuestionAsImpossible = (gameRoundId: string, questionId: string) => {
+	return gameActionWrapperFunc((_dispatch: Dispatch) =>
 		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
 			type: "mark-question-impossible",
 			questionId,
 		})
 	);
-
+};
 export const verifyYesNoQuestion = (
 	gameRoundId: string,
 	answerId: string,

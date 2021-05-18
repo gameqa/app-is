@@ -11,9 +11,7 @@ import styles from "./styles";
 const UsersInfo = (user: User) => {
 	const game = useSelector((state: StoreState) => state.game);
 
-	console.log(game);
 	const ratio = (game.currentRound - 1) / game.totalRounds;
-	console.log(ratio);
 	const BASE_RATIO = 0.015;
 
 	return (
