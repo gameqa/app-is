@@ -34,8 +34,9 @@ const GoogleSearch = () => {
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para>
 				Við þurfum að finna svarið við þessari spurningu. Notaðu Google leitarvélina hér
-				fyrir neðan til að finna svarið á vefnum. Hún leitar aðeins á íslensku
-				Wikipediu, Vísindavefnum, vísir.is og mbl.is
+				fyrir neðan til að finna svarið á vefnum með leitarstreng sem þér þykir líklegur
+				til árangurs. Hún leitar aðeins á íslensku Wikipediu, Vísindavefnum, vísir.is og
+				mbl.is
 			</Atoms.Text.Para>
 			<Atoms.Inputs.Google
 				onChange={(val) => dispatch(Actions.GoogleSearch.writeGoogleQuery(val))}
@@ -61,12 +62,18 @@ const GoogleSearch = () => {
 				) : null}
 			</View>
 			{state.articles.length > 0 ? (
-				<TouchableOpacity style={styles.cantFindOuter} onPress={handleMarkImposible}>
-					<View style={styles.times}>
-						<FontAwesome name="times" color={Colors.MapToDark.grey} />
-					</View>
-					<Atoms.Text.Para>Ég finn ekki svarið</Atoms.Text.Para>
-				</TouchableOpacity>
+				<React.Fragment>
+					<Atoms.Text.Para>
+						Þú getur opnað síðurnar sem þér þykir líklegar. Þú þarft þar að velja
+						efnisgreinina sem inniheldur svarið.
+					</Atoms.Text.Para>
+					<TouchableOpacity style={styles.cantFindOuter} onPress={handleMarkImposible}>
+						<View style={styles.times}>
+							<FontAwesome name="times" color={Colors.MapToDark.grey} />
+						</View>
+						<Atoms.Text.Para>Ég finn ekki svarið</Atoms.Text.Para>
+					</TouchableOpacity>
+				</React.Fragment>
 			) : null}
 			{state.articles.map((item) => (
 				// articleKey as key is reserved in react

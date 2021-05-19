@@ -37,7 +37,7 @@ const WriteQuestion = () => {
 		<View style={styles.flex}>
 			{isYesNoQuestion ? (
 				<Atoms.Alerts.Ribbon
-					item={{ type: "highlight", label: "Skrifaðu já / nei spurningu" }}
+					item={{ type: "warning", label: "Skrifaðu já / nei spurningu" }}
 				/>
 			) : null}
 			<Atoms.Text.Para style={styles.marginTop}>

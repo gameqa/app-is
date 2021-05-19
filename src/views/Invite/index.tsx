@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, Clipboard, Alert, View } from "react-native";
+import { TouchableOpacity, Clipboard, Alert, View, Share } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms, Molecules } from "../../components";
 import LayoutWrapper from "../../layout";
@@ -25,6 +25,20 @@ export default function index() {
 			},
 		]);
 
+	const handleShare = () =>
+		Share.share(
+			{
+				message:
+					"Spurningaleikur þar sem þú getur unnið alvöru vinninga og stutt við íslensku í nútímanum",
+				url: url,
+				title: "Spurningar.is",
+			},
+			{
+				// Android only:
+				dialogTitle: "Spurningar.is",
+			}
+		);
+
 	const handleCopy = () => {
 		Clipboard?.setString(url);
 		alertCopy();
@@ -40,7 +54,7 @@ export default function index() {
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />
 			<Atoms.Text.Para style={styles.paragraph}>
-				Hlekkinn hér fyrir neðan getur þú notað til þess að bjóða vinum að sækja appið.
+				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða vinum að sækja appið.
 				Þegar notandi býr til aðgang eftir að þú býður honum þá birtist nafnið hans hér.
 				Þegar þú hefur boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
 				áhrifavaldur. Smelltu á hlekkinn til að afrita hann.
@@ -51,20 +65,43 @@ export default function index() {
 					...styles.linkOuter,
 					borderColor: hasCopied
 						? Services.Colors.MapToDark.success
-						: Services.Colors.MapToDark["grey"],
+						: Services.Colors.MapToDark.highlight,
 				}}
 			>
-				<FontAwesome
-					name="copy"
-					size={17}
-					color={
-						hasCopied
+				<View
+					style={{
+						...styles.copyIcon,
+						backgroundColor: hasCopied
 							? Services.Colors.MapToDark.success
-							: Services.Colors.MapToDark["grey"]
-					}
-				/>
+							: Services.Colors.MapToDark.highlight,
+					}}
+				>
+					<FontAwesome
+						name="copy"
+						size={17}
+						color={Services.Colors.MapToDark["light-grey"]}
+					/>
+				</View>
 				<Atoms.Text.Para style={styles.link}>{url.slice(0, 35)}...</Atoms.Text.Para>
 			</TouchableOpacity>
+
+			<TouchableOpacity style={styles.shareOuter} onPress={handleShare}>
+				<FontAwesome
+					name="share"
+					size={14}
+					color={Services.Colors.MapToDark["light-grey"]}
+				/>
+				<Atoms.Text.Para style={styles.shareText}>Deila</Atoms.Text.Para>
+			</TouchableOpacity>
+			<View
+				style={{
+					marginBottom: 20,
+					marginTop: 10,
+					borderBottomWidth: 1,
+					borderColor: "#ccc",
+				}}
+			/>
+			<Atoms.Text.Heading style={{ marginBottom: 10 }}>Vinir mínir</Atoms.Text.Heading>
 			{invites.length === 0 ? (
 				<Atoms.Alerts.Ribbon
 					item={{ label: "Það hefur enginn skráð sig enn", type: "warning" }}
