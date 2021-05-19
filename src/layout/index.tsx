@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../reducers";
+import { Atoms } from "../components";
 
 const LayoutWrapper = ({ children }: IProps) => {
 	const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 
 	return isLoading ? (
 		<View style={styles.centerChildren}>
-			<ActivityIndicator />
+			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
 		<SafeAreaView style={{ flex: 1 }}>

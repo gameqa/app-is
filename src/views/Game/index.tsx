@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import LayoutWrapper from "../../layout";
-import { Molecules } from "../../components";
+import { Atoms, Molecules } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Organisms } from "../../components";
 import { GameTypes } from "../../declerations";
 import styles from "./styles";
-import { ActivityIndicator, Animated, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -40,6 +40,7 @@ const Game = () => {
 		<View style={styles.outer}>
 			<ScrollView>
 				<LayoutWrapper>
+					<Atoms.Loaders.CenterBox />
 					<Molecules.Users.Info {...auth} />
 					{Organisms.GameRounds.filter((item) => item.type === game.current).map(
 						({ Component }) => (
@@ -48,11 +49,8 @@ const Game = () => {
 					)}
 				</LayoutWrapper>
 			</ScrollView>
-			{game.isLoading ? (
-				<View style={styles.loading}>
-					<ActivityIndicator />
-				</View>
-			) : null}
+
+			<Atoms.Loaders.CenterBox isLoading={game.isLoading} />
 		</View>
 	);
 };

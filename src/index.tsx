@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Routing from "./routing";
-import { Organisms } from "./components";
+import { Organisms, Atoms } from "./components";
 import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
@@ -35,7 +35,7 @@ const Authenticate = () => {
 
 	return isLoading ? (
 		<View style={styles.loadingWrap}>
-			<ActivityIndicator size={40} />
+			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
 		<LayoutWrapper>

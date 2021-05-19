@@ -1,12 +1,5 @@
 import React, { useCallback, useRef, useEffect } from "react";
-import {
-	ActivityIndicator,
-	SafeAreaView,
-	Text,
-	View,
-	TouchableOpacity,
-	Keyboard,
-} from "react-native";
+import { SafeAreaView, Text, View, TouchableOpacity, Keyboard } from "react-native";
 import SmoothPinCodeInput from "react-native-smooth-pincode-input";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
@@ -88,11 +81,8 @@ const AuthCode = () => {
 				<TouchableOpacity style={styles.touchable} onPress={handleLogOut}>
 					<Atoms.Text.Para style={styles.greyText}>Útskrá</Atoms.Text.Para>
 				</TouchableOpacity>
-				{state.isLoading ? (
-					<View style={styles.loadingView}>
-						<ActivityIndicator />
-					</View>
-				) : null}
+
+				<Atoms.Loaders.CenterBox isLoading={state.isLoading} />
 			</SafeAreaView>
 		</TouchableOpacity>
 	);

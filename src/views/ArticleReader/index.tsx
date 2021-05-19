@@ -1,13 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import {
-	ActivityIndicator,
-	Image,
-	Text,
-	View,
-	TouchableOpacity,
-	Alert,
-	ScrollView,
-} from "react-native";
+import { Image, Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import LayoutWrapper from "../../layout";
 import { IProps } from "./interface";
 import { NavigateBack } from "../utils";
@@ -89,8 +81,6 @@ const ArticleReaderView = ({
 					<Atoms.Alerts.Ribbon
 						item={{ type: "danger", label: "Ekki tókst að sækja grein" }}
 					/>
-				) : game.isLoading ? (
-					<ActivityIndicator />
 				) : (
 					state.paragraphs.map((text, i) => (
 						<TouchableOpacity onPress={() => handleSubmitParagraph(i)}>
