@@ -16,10 +16,6 @@ export const initialState: State = {
 		invites: 0,
 	},
 	level: 1,
-	isAuthCodeRegenerationLoading: false,
-	isAuthCodeSubmissionLoading: false,
-	isTutorialCompletedLoading: false,
-	authCodeErrorMessage: "",
 	hasCompletedTutorial: false,
 	invites: [],
 };

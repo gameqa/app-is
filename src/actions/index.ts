@@ -6,3 +6,4 @@ export * as SelectSpan from "./selectSpan";
 export * as Notifications from "./notification";
 export * as GoogleSearch from "./googleSearch";
 export * as ArticleReader from "./articleReader";
+export * as AuthCode from "./authCode";

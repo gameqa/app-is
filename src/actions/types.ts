@@ -5,6 +5,7 @@ import * as SelectSpan from "./selectSpan";
 import * as Notifications from "./notification";
 import * as GoogleSearch from "./GoogleSearch";
 import * as ArticleReader from "./articleReader";
+import * as AuthCode from "./authCode";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -32,6 +33,9 @@ export enum ActionTypes {
 	setGoogleSearchError,
 	fetchArticleParagraphs,
 	setArticleReaderError,
+	writeAuthCode,
+	setAuthCodeErrorMessage,
+	setAuthCodeLoading,
 }
 
 export type Actions =
@@ -59,4 +63,7 @@ export type Actions =
 	| GoogleSearch.Actions.SetSearchErrorAction
 	| GoogleSearch.Actions.FetchArticlesQueryAction
 	| ArticleReader.Actions.FetchArticleParagraphsAction
-	| ArticleReader.Actions.SetArticleReaderErrorAction;
+	| ArticleReader.Actions.SetArticleReaderErrorAction
+	| AuthCode.Actions.WriteAuthCodeAction
+	| AuthCode.Actions.SetAuthCodeErrorMessageAction
+	| AuthCode.Actions.SetAuthCodeLoadingAction;

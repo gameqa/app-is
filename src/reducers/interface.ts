@@ -6,6 +6,7 @@ import * as SelectSpan from "./selectSpan";
 import * as Notification from "./notification";
 import * as GoogleSearch from "./googleSearch";
 import * as ArticleReader from "./articleReader";
+import * as AuthCode from "./authCode";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -16,4 +17,5 @@ export interface StoreState {
 	notification: Notification.State;
 	googleSearch: GoogleSearch.State;
 	articleReader: ArticleReader.State;
+	authCode: AuthCode.State;
 }
