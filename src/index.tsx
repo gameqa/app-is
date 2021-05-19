@@ -16,6 +16,10 @@ export default function App() {
 			dispatch(Actions.Game.fetchCurrentGameRound());
 	}, [auth._id]);
 
+	React.useEffect(() => {
+		dispatch(Actions.ChartData.fetchAnswersPerDay());
+	}, []);
+
 	if (auth.type === "not-verified") return <Views.AuthCode />;
 	return (
 		<React.Fragment>

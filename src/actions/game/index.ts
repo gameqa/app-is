@@ -24,7 +24,6 @@ import Api from "../../api";
 import { AxiosResponse } from "axios";
 
 const __handleUpdateTask = (data: TaskFromBackend) => {
-	console.log(`__handleUpdateTask data`, data);
 	switch (data.taskInfo.type) {
 		case "make-question":
 			store.dispatch<StartWriteQuestionRoundFromAPIAction>({

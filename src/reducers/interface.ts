@@ -7,6 +7,7 @@ import * as Notification from "./notification";
 import * as GoogleSearch from "./googleSearch";
 import * as ArticleReader from "./articleReader";
 import * as AuthCode from "./authCode";
+import * as ChartData from "./chartData";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -18,4 +19,5 @@ export interface StoreState {
 	googleSearch: GoogleSearch.State;
 	articleReader: ArticleReader.State;
 	authCode: AuthCode.State;
+	chartData: ChartData.State;
 }

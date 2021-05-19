@@ -2,7 +2,7 @@
  * To use this module it is best to
  * import * as Declerations
  * where required. Each decleration can
- * be accessed directly from said input
+ * be accessed directly from said import
  */
 export * from "./Users";
 export * from "./InputTypes";
@@ -10,3 +10,4 @@ export * from "./Games";
 export * from "./Questions";
 export * from "./Colors";
 export * from "./Alerts";
+export * from "./Charts";

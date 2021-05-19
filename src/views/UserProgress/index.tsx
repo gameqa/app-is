@@ -9,9 +9,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import LayoutWrapper from "../../layout";
 import { logOutUser } from "../../actions/auth";
 import { ScrollView } from "react-native-gesture-handler";
+import moment from "moment";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
+	const chartData = useSelector((state: StoreState) => state.chartData);
+
 	const dispatch = useDispatch();
 
 	const alertSignOut = () =>
@@ -44,8 +47,21 @@ const UserProgress = () => {
 					Leiðin að 100 þúsund
 				</Atoms.Text.Heading>
 				<Atoms.Charts.LineChart
-					datasets={[{ data: [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4] }]}
-					labels={["a", "", "", "b"]}
+					datasets={[
+						{
+							data: chartData.answersPerDay.reduce<number[]>((prev, curr) => {
+								if (prev.length === 0) return [curr.count];
+								const last = prev[prev.length - 1];
+								prev.push(curr.count + last);
+								return prev;
+							}, []),
+						},
+					]}
+					labels={chartData.answersPerDay.map((item, i) => {
+						if (i === 0) return moment(item.date).format("DD MM");
+						else if (i === chartData.answersPerDay.length - 1) return "í dag      ";
+						return "";
+					})}
 					height={220}
 				/>
 			</LayoutWrapper>

@@ -6,6 +6,7 @@ import * as Notifications from "./notification";
 import * as GoogleSearch from "./GoogleSearch";
 import * as ArticleReader from "./articleReader";
 import * as AuthCode from "./authCode";
+import * as ChartData from "./chartData";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -36,6 +37,7 @@ export enum ActionTypes {
 	writeAuthCode,
 	setAuthCodeErrorMessage,
 	setAuthCodeLoading,
+	fetchAnswersPerDay,
 }
 
 export type Actions =
@@ -66,4 +68,5 @@ export type Actions =
 	| ArticleReader.Actions.SetArticleReaderErrorAction
 	| AuthCode.Actions.WriteAuthCodeAction
 	| AuthCode.Actions.SetAuthCodeErrorMessageAction
-	| AuthCode.Actions.SetAuthCodeLoadingAction;
+	| AuthCode.Actions.SetAuthCodeLoadingAction
+	| ChartData.Actions.FetchAnswersPerDayAction;
