@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import store from "../../../store";
 import {
+	StartCompletedViewRoundFromAPI,
 	StartGoogleSearchRoundFromAPI,
 	StartSelectSpanRoundFromAPI,
 	StartVerifyQuestionRoundFromAPI,
@@ -30,11 +31,21 @@ const __handleUpdateTask = (data: TaskFromBackend) => {
 				type: ActionTypes.startWriteQuestionRound,
 				payload: data as StartWriteQuestionRoundFromAPI,
 			});
+
+			store.dispatch<SetCurrentGameRoundAction>({
+				type: ActionTypes.setCurrentGameRound,
+				payload: data.currentRound,
+			});
 			break;
 		case "verify-question":
 			store.dispatch<StartVerifyQuestionRoundFromAPIAction>({
 				type: ActionTypes.startVerifyQuestionRound,
 				payload: data as StartVerifyQuestionRoundFromAPI,
+			});
+
+			store.dispatch<SetCurrentGameRoundAction>({
+				type: ActionTypes.setCurrentGameRound,
+				payload: data.currentRound,
 			});
 			break;
 		case "find-article":
@@ -42,11 +53,21 @@ const __handleUpdateTask = (data: TaskFromBackend) => {
 				type: ActionTypes.startGoogleSearchRound,
 				payload: data as StartGoogleSearchRoundFromAPI,
 			});
+
+			store.dispatch<SetCurrentGameRoundAction>({
+				type: ActionTypes.setCurrentGameRound,
+				payload: data.currentRound,
+			});
 			break;
 		case "locate-span":
 			store.dispatch<StartSelectSpanRoundFromAPIAction>({
 				type: ActionTypes.startSelectSpanRound,
 				payload: data as StartSelectSpanRoundFromAPI,
+			});
+
+			store.dispatch<SetCurrentGameRoundAction>({
+				type: ActionTypes.setCurrentGameRound,
+				payload: data.currentRound,
 			});
 			break;
 		case "verify-span":
@@ -54,19 +75,21 @@ const __handleUpdateTask = (data: TaskFromBackend) => {
 				type: ActionTypes.startVerifySpanRound,
 				payload: data as StartVerifySpanRoundFromAPI,
 			});
+
+			store.dispatch<SetCurrentGameRoundAction>({
+				type: ActionTypes.setCurrentGameRound,
+				payload: data.currentRound,
+			});
 			break;
 		case "completed":
 			store.dispatch<StartCompletedViewRoundFromAPIAction>({
 				type: ActionTypes.startCompletedViewRound,
+				payload: data as StartCompletedViewRoundFromAPI,
 			});
 			break;
 		default:
 			throw new Error("Unreachable statement in __handleUpdateTask");
 	}
-	store.dispatch<SetCurrentGameRoundAction>({
-		type: ActionTypes.setCurrentGameRound,
-		payload: data.currentRound,
-	});
 };
 
 export const fetchCurrentGameRound = () =>

@@ -32,6 +32,8 @@ const Game = () => {
 				clearInterval(interval);
 			};
 		}
+		if (game.current !== GameTypes.completed)
+			dispatch(Actions.Auth.fetchUserFromToken());
 	}, [game.current]);
 
 	return (

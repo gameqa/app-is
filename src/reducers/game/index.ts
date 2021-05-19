@@ -11,13 +11,8 @@ export const initialState: State = {
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
+	console.log(`action`, action);
 	switch (action.type) {
-		case ActionTypes.setCurrentGameRound:
-			return {
-				...state,
-				currentRound: action.payload,
-				lastLoaded: new Date().getTime(),
-			};
 		case ActionTypes.startWriteQuestionRound:
 			return {
 				...state,
@@ -51,8 +46,10 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		case ActionTypes.startCompletedViewRound: {
 			return {
 				...state,
-				currentRound: state.totalRounds,
+				...action.payload,
+				currentRound: action.payload.currentRound + 1,
 				current: GameTypes.completed,
+				lastLoaded: new Date().getTime(),
 			};
 		}
 		case ActionTypes.setGameLoadingState: {
@@ -61,6 +58,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				isLoading: action.payload,
 			};
 		}
+		case ActionTypes.setCurrentGameRound:
+			return {
+				...state,
+				currentRound: action.payload,
+				lastLoaded: new Date().getTime(),
+			};
 		default:
 			return state;
 	}

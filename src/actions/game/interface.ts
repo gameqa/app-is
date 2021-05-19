@@ -33,6 +33,7 @@ export interface StartVerifySpanRoundFromAPIAction {
 }
 export interface StartCompletedViewRoundFromAPIAction {
 	type: ActionTypes.startCompletedViewRound;
+	payload: StartCompletedViewRoundFromAPI;
 }
 
 /**
