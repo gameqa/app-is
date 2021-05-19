@@ -16,8 +16,8 @@ const PrizeItems = ({
 	);
 	return (
 		<ScrollView>
-			<Utils.NavigateBack goBackHandler={goBack} />
 			<LayoutWrapper>
+				<Utils.NavigateBack goBackHandler={goBack} />
 				{items.map((item) => (
 					<Atoms.Cards.PrizeItem {...item} />
 				))}

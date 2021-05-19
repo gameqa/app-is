@@ -39,7 +39,7 @@ const ArticleReaderView = ({
 
 	const handleSubmitParagraph = useCallback(
 		(paragraphIndex: number) => {
-			Alert.alert("Ertu viss", "Inniheldur þessi efnsgrein svarið við spurningunni?", [
+			Alert.alert("Ertu viss?", "Inniheldur þessi efnsgrein svarið við spurningunni?", [
 				{
 					text: "Nei",
 					onPress: () => null,
@@ -78,7 +78,7 @@ const ArticleReaderView = ({
 				<Atoms.Text.Para style={styles.para}>
 					Við sóttum textann sem fylgir vefsíðunni. Lestu yfir textann og athugaðu hvort
 					þú sjáir svarið við spurningunni. Smelltu á efnisgreinina sem inniheldur
-					svarið við spurningunni.
+					svarið.
 				</Atoms.Text.Para>
 				<View style={styles.topLine}>
 					<Image source={{ uri: article.source.logo }} style={styles.logo} />

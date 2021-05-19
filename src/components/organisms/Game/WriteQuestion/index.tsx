@@ -43,11 +43,10 @@ const WriteQuestion = () => {
 			<Atoms.Text.Para style={styles.marginTop}>
 				Skrifaðu spurningu sem aðrir notendur geta fundið svarið við. Reyndu að velja
 				spurningu sem er ekki háð tilfinningum fólks eða hvaða dag vikunnar er spurt.
-				Einnig er best að spurningarnar séu spurðar á óformlegu, svipað og þú myndir
-				sjálf/ur spyrja í upphátt.
+				Einnig er best að spurningarnar séu settar fram á óformlegu máli.
 			</Atoms.Text.Para>
 			<Atoms.Text.Para style={styles.marginTop}>
-				Handhófskenndar hugmyndir að spurningum: {state.ideaWords.join(", ")}
+				Handhófskenndar hugmyndir sem þú getur spurt útí: {state.ideaWords.join(", ")}
 			</Atoms.Text.Para>
 			<View style={styles.marginTop}>
 				<Atoms.Inputs.Text

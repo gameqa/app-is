@@ -40,9 +40,10 @@ export default function index() {
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />
 			<Atoms.Text.Para style={styles.paragraph}>
-				Smelltu á hlekkin til að afrita hann. Þegar notandi skráir sig eftir að smella á
-				þinn hlekk þá birtist hér mynd. Þegar þú hefur boðið 10 vinum þá getur þú unnið
-				vinninga fyrir að vera áhrifavaldur.
+				Hlekkinn hér fyrir neðan getur þú notað til þess að bjóða vinum að sækja appið.
+				Þegar notandi býr til aðgang eftir að þú býður honum þá birtist nafnið hans hér.
+				Þegar þú hefur boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
+				áhrifavaldur. Smelltu á hlekkinn til að afrita hann.
 			</Atoms.Text.Para>
 			<TouchableOpacity
 				onPress={handleCopy}

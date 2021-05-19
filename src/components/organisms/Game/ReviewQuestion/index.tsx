@@ -56,13 +56,13 @@ const ReviewQuestion = () => {
 	const handleAlert = async () => {
 		try {
 			const message = allItemsAreGood()
-				? "Þú hakaðir í alla reiti, það þýðir að þú telur spurninguna vera góða"
-				: "Þú slepptir sumum reitum, það þýðir að spurningin er slæm og við munum eyða henni.";
+				? "Þú hakaðir í alla reiti sem þýðir að þú telur spurninguna vera góða."
+				: "Þú slepptir sumum reitum sem þýðir að spurningin er slæm og við munum eyða henni.";
 			const key = getStorageKey();
 			const hasSeen = await checkIfHasSeenKey(key);
 			if (hasSeen) handleCompleteStep(key);
 			else
-				Alert.alert("Ertu viss", message, [
+				Alert.alert("Ertu viss?", message, [
 					{
 						text: "Hætta við",
 						onPress: () => markKeyAsSeen(key),
@@ -104,9 +104,9 @@ const ReviewQuestion = () => {
 		<View>
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para style={styles.para}>
-				Áður en við höldum af stað og finnum svarið við þessari spurningu, þá viljum við
-				vera viss um að þetta sé góð spurning. Farðu yfir tékklistann hér fyrir neðan og
-				hakaðu við þau atriði sem þú ert sammála
+				Áður en við reynum að finna svarið við þessari spurningu, þá viljum við vera
+				viss um að þetta sé góð spurning. Farðu yfir tékklistann hér fyrir neðan og
+				hakaðu við þau atriði sem þú ert sammála.
 			</Atoms.Text.Para>
 			{items.map((item, i) => (
 				<Atoms.Cards.CheckListItem {...item} onPress={() => markItem(i)} />

@@ -35,10 +35,15 @@ const ReviewAnswer = () => {
 		<View>
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para>
-				Annar notandi hefur merkt svarið við spurningunni í efnisgreinina hér fyrir
-				neðan. Nú þurfum við að athuga hvort svarið sé ekki rétt merkt.
+				Annar notandi hefur merkt svarið við spurningunni í efnisgreininni hér fyrir
+				neðan. Nú þurfum við að athuga hvort svarið sé rétt merkt.
 			</Atoms.Text.Para>
-			<Utils.SpanSelector immutable={true} {...state} />
+			<Utils.SpanSelector
+				immutable={true}
+				{...state}
+				firstWord={state.isYesOrNo ? -1 : state.firstWord}
+				lastWord={state.isYesOrNo ? -1 : state.lastWord}
+			/>
 			{stage === "verify-answer" ? (
 				state.isYesOrNo ? (
 					<React.Fragment>

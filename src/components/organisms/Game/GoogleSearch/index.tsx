@@ -16,7 +16,7 @@ const GoogleSearch = () => {
 	const dispatch = useDispatch();
 
 	const handleMarkImposible = useCallback(() => {
-		Alert.alert("Ertu viss?", "Það gerist af og til að ekkert svar finnist.", [
+		Alert.alert("Ertu viss?", "Það gerist af og til að ekkert svar finnst.", [
 			{
 				text: "Nei",
 				onPress: () => null,
@@ -34,8 +34,8 @@ const GoogleSearch = () => {
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para>
 				Við þurfum að finna svarið við þessari spurningu. Notaðu Google leitarvélina hér
-				fyrir neðan til að finna svarið á vefnum. Hún leitar bara inn á íslensku
-				Wikipediu, Vísindavefnum, Vísir og MBL.
+				fyrir neðan til að finna svarið á vefnum. Hún leitar aðeins á íslensku
+				Wikipediu, Vísindavefnum, vísir.is og mbl.is
 			</Atoms.Text.Para>
 			<Atoms.Inputs.Google
 				onChange={(val) => dispatch(Actions.GoogleSearch.writeGoogleQuery(val))}

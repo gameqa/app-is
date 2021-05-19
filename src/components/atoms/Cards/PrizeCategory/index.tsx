@@ -35,9 +35,9 @@ const PrizeCategoryCard = (category: Prizes.PrizeCategory) => {
 						)}
 					</View>
 					{isAvailable ? (
-						<Atoms.Text.Para>Þú hefur aflæst {category.name_tf}</Atoms.Text.Para>
+						<Atoms.Text.Para>Þú ert komin/n í pottinn.</Atoms.Text.Para>
 					) : (
-						<Atoms.Text.Para>Þú þarft að {category.prereqDescription}</Atoms.Text.Para>
+						<Atoms.Text.Para>Þú þarft að {category.prereqDescription}.</Atoms.Text.Para>
 					)}
 					<Atoms.Text.Para>{itemCount} vinningar í þessum flokki</Atoms.Text.Para>
 				</View>
