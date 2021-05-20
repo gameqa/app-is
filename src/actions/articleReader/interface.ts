@@ -8,3 +8,7 @@ export interface FetchArticleParagraphsAction {
 export interface SetArticleReaderErrorAction {
 	type: ActionTypes.setArticleReaderError;
 }
+
+export interface SetArticleReaderErrorAction {
+	type: ActionTypes.setArticleReaderError;
+}

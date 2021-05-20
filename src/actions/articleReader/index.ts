@@ -34,10 +34,12 @@ export const previewArticleToSubmit = (
 				type: ActionTypes.setArticleReaderError,
 			});
 		} finally {
-			dispatch<SetGameLoadingStateAction>({
-				type: ActionTypes.setGameLoadingState,
-				payload: false,
-			});
+			setTimeout(() => {
+				dispatch<SetGameLoadingStateAction>({
+					type: ActionTypes.setGameLoadingState,
+					payload: false,
+				});
+			}, 1750);
 		}
 	};
 };

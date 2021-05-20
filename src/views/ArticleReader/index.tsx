@@ -1,5 +1,13 @@
 import React, { useEffect, useCallback } from "react";
-import { Image, Text, View, TouchableOpacity, Alert, ScrollView } from "react-native";
+import {
+	Image,
+	Text,
+	View,
+	TouchableOpacity,
+	Alert,
+	ScrollView,
+	RefreshControl,
+} from "react-native";
 import LayoutWrapper from "../../layout";
 import { IProps } from "./interface";
 import { NavigateBack } from "../utils";
@@ -20,13 +28,18 @@ const ArticleReaderView = ({
 
 	const dispatch = useDispatch();
 
+	const handleFetchArticle = useCallback(
+		() =>
+			dispatch(
+				Actions.ArticleReader.previewArticleToSubmit(
+					article.source.identifier,
+					article.articleKey
+				)
+			),
+		[article.source?.identifier, article.articleKey]
+	);
 	useEffect(() => {
-		dispatch(
-			Actions.ArticleReader.previewArticleToSubmit(
-				article.source.identifier,
-				article.articleKey
-			)
-		);
+		handleFetchArticle();
 	}, [article._id]);
 
 	const handleSubmitParagraph = useCallback(
@@ -63,8 +76,12 @@ const ArticleReaderView = ({
 	);
 
 	return (
-		<ScrollView>
-			<LayoutWrapper>
+		<LayoutWrapper>
+			<ScrollView
+				refreshControl={
+					<RefreshControl onRefresh={handleFetchArticle} refreshing={game.isLoading} />
+				}
+			>
 				<NavigateBack goBackHandler={goBack} />
 				<Utils.QuestionIs question={googleSearch.text} />
 				<Atoms.Text.Para style={styles.para}>
@@ -88,8 +105,8 @@ const ArticleReaderView = ({
 						</TouchableOpacity>
 					))
 				)}
-			</LayoutWrapper>
-		</ScrollView>
+			</ScrollView>
+		</LayoutWrapper>
 	);
 };
 
