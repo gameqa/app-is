@@ -11,7 +11,6 @@ export const initialState: State = {
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
-	console.log(`action`, action);
 	switch (action.type) {
 		case ActionTypes.startWriteQuestionRound:
 			return {

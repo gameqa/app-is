@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef } from "react";
 import LayoutWrapper from "../../layout";
 import { Atoms, Molecules } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +8,13 @@ import { Organisms } from "../../components";
 import { GameTypes } from "../../declerations";
 import styles from "./styles";
 import { ScrollView, View } from "react-native";
+import { ScrollRefType } from "./types";
 
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
+	const scrollRef = useRef<ScrollRefType>(null);
 
 	// // comment out in production
 	// useEffect(() => {
@@ -22,6 +24,7 @@ const Game = () => {
 
 	// backup
 	useEffect(() => {
+		// refresh (backup) if no round set as current
 		const INTERVAL = 1000;
 		if (game.current === undefined) {
 			const interval = setInterval(
@@ -32,13 +35,17 @@ const Game = () => {
 				clearInterval(interval);
 			};
 		}
+		// do not fetch user info if we have not progressed to next level
 		if (game.current !== GameTypes.completed)
 			dispatch(Actions.Auth.fetchUserFromToken());
+
+		// scroll to top when game changes
+		scrollRef.current?.scrollTo({ y: 0 });
 	}, [game.current]);
 
 	return (
 		<View style={styles.outer}>
-			<ScrollView>
+			<ScrollView ref={scrollRef}>
 				<LayoutWrapper>
 					<Atoms.Loaders.CenterBox />
 					<Molecules.Users.Info {...auth} />

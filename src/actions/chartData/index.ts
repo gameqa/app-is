@@ -10,7 +10,6 @@ export const fetchAnswersPerDay = () => {
 			const { data } = await Api.get<CountPerStringifiedDate[]>(
 				"/api/charts/answers_per_day"
 			);
-			console.log(data);
 			dispatch<FetchAnswersPerDayAction>({
 				type: ActionTypes.fetchAnswersPerDay,
 				payload: data.map((item) => ({
@@ -19,7 +18,7 @@ export const fetchAnswersPerDay = () => {
 				})),
 			});
 		} catch (error) {
-			console.log(error);
+			//
 		}
 	};
 };

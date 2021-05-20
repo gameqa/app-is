@@ -101,6 +101,7 @@ export const fetchCurrentGameRound = () =>
 			const { data } = await Api.get<TaskFromBackend>("/api/v1/game_rounds/current");
 			__handleUpdateTask(data);
 		} catch (error) {
+			//
 		} finally {
 			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
@@ -133,7 +134,7 @@ export const gameActionWrapperFunc = (
 			const { data } = await cb(_dispatch);
 			__handleUpdateTask(data);
 		} catch (e) {
-			// do nothing on error
+			//
 		} finally {
 			// release loading in both cases
 			_dispatch<SetGameLoadingStateAction>({

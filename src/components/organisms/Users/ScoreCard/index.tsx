@@ -64,6 +64,28 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 				label=""
 				color="highlight"
 			/>
+
+			{/* question qa progress */}
+			<View style={styles.labelLine}>
+				<Text>Yfirfarnar spurningar</Text>
+				<Text>{data.questionVerifications}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.questionVerifications)}
+				label=""
+				color="success"
+			/>
+
+			{/* Answer review progress */}
+			<View style={styles.labelLine}>
+				<Text>Yfirfarin svör</Text>
+				<Text>{data.answerVerifications}</Text>
+			</View>
+			<Atoms.Charts.ProgressBar
+				ratio={calculateRatio(data.answerVerifications)}
+				label=""
+				color="danger"
+			/>
 		</View>
 	);
 };

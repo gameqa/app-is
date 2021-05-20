@@ -76,7 +76,8 @@ const AnnounceScreen = () => {
 		}
 	}, [target, current]);
 
-	if (shouldHide) return null;
+	if (shouldHide || ["guest", "not-verified", "loading"].includes(auth.type))
+		return null;
 	return (
 		<AnimatedBlurView tint="default" intensity={outerIntensity} style={styles.outer}>
 			<Animated.View style={{ ...styles.middle, opacity: innerOpacity }}>
