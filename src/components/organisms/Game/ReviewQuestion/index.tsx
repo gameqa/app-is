@@ -60,13 +60,12 @@ const ReviewQuestion = () => {
 				: "Þú slepptir sumum reitum sem þýðir að spurningin er slæm og við munum eyða henni.";
 			const key = getStorageKey();
 			const hasSeen = await checkIfHasSeenKey(key);
-			if (hasSeen) handleCompleteStep(key);
+			if (hasSeen && allItemsAreGood()) handleCompleteStep(key);
 			else
 				Alert.alert("Ertu viss?", message, [
 					{
 						text: "Hætta við",
 						onPress: () => markKeyAsSeen(key),
-						style: "cancel",
 					},
 					{
 						text: "Já",

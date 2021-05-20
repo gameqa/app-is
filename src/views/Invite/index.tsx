@@ -21,7 +21,6 @@ export default function index() {
 			{
 				text: "OK",
 				onPress: () => null,
-				style: "cancel",
 			},
 		]);
 

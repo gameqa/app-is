@@ -41,13 +41,13 @@ export const GameStackNavigator = () => (
 
 export const TabNavigator = () => {
 	const activeColor = Services.Colors.MapToDark["highlight"];
-	const inActiveColor = Services.Colors.MapToDark["light-grey"];
+	const inActiveColor = Services.Colors.MapToDark["grey"];
 	const auth = useSelector((state: StoreState) => state.auth);
 	if (auth.type === "guest") return null;
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
-				screenOptions={({ route }) => ({
+				screenOptions={({ route, navigation }) => ({
 					tabBarIcon: ({ focused }) => (
 						<FontAwesome
 							size={17}
