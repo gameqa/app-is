@@ -1,5 +1,9 @@
 import * as React from "react";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import {
+	DefaultTheme,
+	NavigationContainer,
+	NavigationContainerRef,
+} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
@@ -9,6 +13,7 @@ import { Tabs } from "./declerations";
 import * as Services from "../services";
 import { useSelector } from "react-redux";
 import { StoreState } from "../reducers";
+import * as Hooks from "../hooks";
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
@@ -40,12 +45,31 @@ export const GameStackNavigator = () => (
 );
 
 export const TabNavigator = () => {
+	const navigatorRef = React.useRef<NavigationContainerRef>(null);
+
 	const activeColor = Services.Colors.MapToDark["highlight"];
 	const inActiveColor = Services.Colors.MapToDark["grey"];
+
 	const auth = useSelector((state: StoreState) => state.auth);
 	if (auth.type === "guest") return null;
+
+	// Hook to check if user interacts with notification
+	Hooks.Notifications.useResponseListener((response) => {
+		// Read data sent in notification
+		const data = response.notification.request.content.data;
+		const route = data.route;
+
+		if (route && typeof route === "string") {
+			try {
+				navigatorRef.current?.navigate(route);
+			} catch {
+				console.log(`${route} does not exist in TabNavigator`);
+			}
+		}
+	});
+
 	return (
-		<NavigationContainer>
+		<NavigationContainer ref={navigatorRef}>
 			<Tab.Navigator
 				screenOptions={({ route, navigation }) => ({
 					tabBarIcon: ({ focused }) => (
