@@ -17,14 +17,13 @@ const InputElementFactory = (props: IProps) => {
 		case InputElementTypes.hidden:
 			inputElement = <Inputs.Password {...inputField} onChange={onChange} />;
 			break;
-		// case InputElementTypes.authCode:
-		// 	inputElement = (
-		// 		<AuthCodeInput {...inputField} onChange={onChange} />
-		// 	);
-		// 	break;
+		case InputElementTypes.checkBox:
+			inputElement = <Inputs.CheckBox {...inputField} onChange={onChange} />;
+			break;
 		default:
 			inputElement = <Inputs.Text {...inputField} onChange={onChange} />;
 	}
+
 	return (
 		<Inputs.Wrapper label={inputField.label} required={inputField.required}>
 			{inputElement}

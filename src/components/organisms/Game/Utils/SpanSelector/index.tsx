@@ -16,6 +16,8 @@ const SpanSelector = ({
 	onSelectLastWord,
 	onComplete,
 }: IProps) => {
+	const [canContinue, setCanContinue] = useState(false);
+
 	let selectionState: SelectionStates;
 
 	let action: ((v: number) => any) | undefined;
@@ -63,6 +65,7 @@ const SpanSelector = ({
 						"Ef valið er rétt, þá getur þú staðfest valið. Til þess að velja aftur þá getur þú hreinsað valið með því að smella hvar sem er á textann.",
 					type: "idea",
 				});
+				setCanContinue(selectionState === "clear-selection");
 		}
 	}, [selectionState, immutable]);
 
@@ -86,11 +89,11 @@ const SpanSelector = ({
 					</TouchableOpacity>
 				))}
 			</View>
-			{!immutable ? (
+			{canContinue && !immutable ? (
 				<Atoms.Buttons.Base
 					label="Staðfesta"
 					type="highlight"
-					inactive={firstWord === undefined && lastWord === undefined}
+					inactive={!canContinue}
 					onPress={onComplete}
 				/>
 			) : null}

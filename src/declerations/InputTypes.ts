@@ -1,9 +1,13 @@
-import { TextInputProps as RNTextInputProps } from "react-native";
+import {
+	TextInputProps as RNTextInputProps,
+	CheckBoxProps as RNCheckBoxProps,
+} from "react-native";
 
 export enum InputElementTypes {
 	text,
 	hidden,
 	authCode,
+	checkBox,
 }
 
 export interface InputBaseInterface {
@@ -56,7 +60,6 @@ export interface HiddenInputRecipe extends HiddenInputBase {
 export interface AuthCodeInputBase extends InputBaseInterface {
 	value: string;
 	length: number;
-	props?: RNTextInputProps;
 }
 
 export interface AuthCodeInputProps extends AuthCodeInputBase {
@@ -69,13 +72,36 @@ export interface AuthCodeInputRecipe extends AuthCodeInputBase {
 }
 
 /**
+ * CHECKBOX INPUTS
+ */
+
+export interface CheckBoxInputBase extends InputBaseInterface {
+	value: boolean;
+	props?: RNCheckBoxProps;
+}
+
+export interface CheckBoxInputProps extends CheckBoxInputBase {
+	onChange: (v: boolean) => void;
+}
+
+export interface CheckBoxInputRecipe extends CheckBoxInputBase {
+	type: InputElementTypes.checkBox;
+	label: string;
+}
+
+/**
  * Putting it all together
  */
-export type InputElementProps = TextInputBase | HiddenInputBase | AuthCodeInputBase;
+export type InputElementProps =
+	| TextInputBase
+	| HiddenInputBase
+	| AuthCodeInputBase
+	| CheckBoxInputBase;
 
 export type InputElementRecipe =
 	| TextInputRecipe
 	| HiddenInputRecipe
-	| AuthCodeInputRecipe;
+	| AuthCodeInputRecipe
+	| CheckBoxInputRecipe;
 
 export type FormRecipe = { [key: string]: InputElementRecipe };

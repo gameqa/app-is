@@ -10,6 +10,7 @@ import googleSearch from "./googleSearch";
 import articleReader from "./articleReader";
 import authCode from "./authCode";
 import chartData from "./chartData";
+import pushNotification from "./pushNotification";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -22,6 +23,7 @@ export default combineReducers<StoreState>({
 	articleReader,
 	authCode,
 	chartData,
+	pushNotification,
 });
 
 export * from "./interface";

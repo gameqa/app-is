@@ -25,4 +25,9 @@ export const Register: FormRecipe = {
 		label: "Lykilorð (aftur)",
 		placeholder: "Mitt lykilorð",
 	},
+	allowEmail: {
+		type: InputElementTypes.checkBox,
+		value: false,
+		label: "Ég vil fá upplýsingar um vinninga og minn árangur í tölvupósti",
+	},
 };

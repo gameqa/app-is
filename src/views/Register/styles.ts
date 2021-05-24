@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 		flex: 0.07,
 	},
 	imageWrapper: {
-		flexDirection: "row",
+		height: 300,
 		flex: 1,
 		justifyContent: "space-around",
 	},

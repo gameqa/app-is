@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
@@ -37,33 +37,35 @@ const Register = () => {
 			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
-		<LayoutWrapper>
-			<View style={styles.form}>
-				<Organisms.Forms.Builder<User>
-					buttonLabel="Búa til aðgang"
-					form={forms.Register}
-					url="/api/auth/register"
-					HTTPmethod="post"
-					onSubmit={handleAuth}
-					buttonColor="highlight"
-				>
-					<View style={styles.imageWrapper}>
-						<View style={styles.leftIconView}>
-							<Image style={styles.leftIcon} source={ICON_LVL_3} />
-						</View>
+		<ScrollView>
+			<LayoutWrapper>
+				<View style={styles.form}>
+					<Organisms.Forms.Builder<User>
+						buttonLabel="Búa til aðgang"
+						form={forms.Register}
+						url="/api/auth/register"
+						HTTPmethod="post"
+						onSubmit={handleAuth}
+						buttonColor="highlight"
+					>
+						<View style={styles.imageWrapper}>
+							<View style={styles.leftIconView}>
+								<Image style={styles.leftIcon} source={ICON_LVL_3} />
+							</View>
 
-						<View style={styles.rightIconView}>
-							<Image style={styles.rightIcon} source={ICON_LVL_7} />
+							<View style={styles.rightIconView}>
+								<Image style={styles.rightIcon} source={ICON_LVL_7} />
+							</View>
 						</View>
-					</View>
-				</Organisms.Forms.Builder>
-			</View>
-			<View style={styles.changeForm}>
-				<TouchableOpacity onPress={() => navigation.navigate("log-in")}>
-					<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
-				</TouchableOpacity>
-			</View>
-		</LayoutWrapper>
+					</Organisms.Forms.Builder>
+				</View>
+				<View style={styles.changeForm}>
+					<TouchableOpacity onPress={() => navigation.navigate("log-in")}>
+						<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
+					</TouchableOpacity>
+				</View>
+			</LayoutWrapper>
+		</ScrollView>
 	);
 };
 
