@@ -7,6 +7,11 @@ export const initialState: State = {
 
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
+		case ActionTypes.sendPushNotificationToken:
+			return {
+				...state,
+				hasPermission: true,
+			};
 		default:
 			return state;
 	}

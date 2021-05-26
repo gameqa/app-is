@@ -55,6 +55,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
 			return {
 				...state,
 				isLoading: action.payload,
+				axiosCancelTokenSource: action.request?.cancelToken,
 			};
 		}
 		case ActionTypes.setCurrentGameRound:

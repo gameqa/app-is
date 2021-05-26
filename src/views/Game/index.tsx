@@ -57,7 +57,14 @@ const Game = () => {
 				</LayoutWrapper>
 			</ScrollView>
 
-			<Atoms.Loaders.CenterBox isLoading={game.isLoading} />
+			<Atoms.Loaders.CenterBox
+				isLoading={game.isLoading}
+				onCancel={
+					game.axiosCancelTokenSource
+						? () => game.axiosCancelTokenSource?.cancel()
+						: undefined
+				}
+			/>
 		</View>
 	);
 };

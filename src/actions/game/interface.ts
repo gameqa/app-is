@@ -1,3 +1,4 @@
+import { CancelTokenSource } from "axios";
 import { ActionTypes } from "..";
 import {
 	StartWriteQuestionRoundFromAPI,
@@ -48,4 +49,5 @@ export interface SetCurrentGameRoundAction {
 export interface SetGameLoadingStateAction {
 	type: ActionTypes.setGameLoadingState;
 	payload: boolean;
+	request?: { cancelToken: CancelTokenSource };
 }

@@ -1,3 +1,4 @@
+import axios, { CancelTokenSource } from "axios";
 import { GameTypes } from "../../declerations";
 
 export interface State {
@@ -6,5 +7,6 @@ export interface State {
 	totalRounds: number;
 	_id: string;
 	isLoading: boolean;
+	axiosCancelTokenSource?: CancelTokenSource;
 	lastLoaded: number; // date when last round was loaded
 }

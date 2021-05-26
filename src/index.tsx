@@ -41,7 +41,7 @@ export default function App() {
 
 	// handle get permission
 	Hooks.Notifications.useRequestPermission((token) => {
-		console.log("RECEIVED TOKEN FOR NOTIFICATIONS:", token);
+		dispatch(Actions.PushNotification.sendPushNotificationToken(token));
 	});
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;

@@ -9,6 +9,7 @@ import Api from "../../api";
 import { Game } from "../";
 import store from "../../../store";
 import { ArticlePreview } from "../../declerations";
+import axios from "axios";
 
 export const writeGoogleQuery = (user: string): WriteGoogleQueryAction => {
 	return {
@@ -20,12 +21,17 @@ export const writeGoogleQuery = (user: string): WriteGoogleQueryAction => {
 export const fetchArticlesQuery = () => {
 	return async function (dispatch: Dispatch) {
 		try {
+			const cancelToken = axios.CancelToken.source();
 			dispatch<Game.Actions.SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
 				payload: true,
+				request: { cancelToken: cancelToken },
 			});
 			const { data } = await Api.get<ArticlePreview[]>(
-				`/api/v1/articles?query=${store.getState().googleSearch.query}`
+				`/api/v1/articles?query=${store.getState().googleSearch.query}`,
+				{
+					cancelToken: cancelToken.token,
+				}
 			);
 
 			dispatch<FetchArticlesQueryAction>({

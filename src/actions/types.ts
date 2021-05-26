@@ -7,6 +7,7 @@ import * as GoogleSearch from "./GoogleSearch";
 import * as ArticleReader from "./articleReader";
 import * as AuthCode from "./authCode";
 import * as ChartData from "./chartData";
+import * as PushNotification from "./pushNotification";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -38,6 +39,7 @@ export enum ActionTypes {
 	setAuthCodeErrorMessage,
 	setAuthCodeLoading,
 	fetchAnswersPerDay,
+	sendPushNotificationToken,
 }
 
 export type Actions =
@@ -69,4 +71,5 @@ export type Actions =
 	| AuthCode.Actions.WriteAuthCodeAction
 	| AuthCode.Actions.SetAuthCodeErrorMessageAction
 	| AuthCode.Actions.SetAuthCodeLoadingAction
-	| ChartData.Actions.FetchAnswersPerDayAction;
+	| ChartData.Actions.FetchAnswersPerDayAction
+	| PushNotification.Actions.SendPushNotificationTokenAction;

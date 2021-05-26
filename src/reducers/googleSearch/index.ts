@@ -39,6 +39,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				searchError: true,
 				articles: [],
 			};
+		case ActionTypes.setGameLoadingState:
+			if (action.payload === false) return state;
+			return {
+				...state,
+				searchError: false,
+			};
 		default:
 			return state;
 	}

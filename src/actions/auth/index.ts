@@ -4,7 +4,7 @@ import {
 	FetchUserFromTokenAction,
 	LogOutUserAction,
 } from "./interface";
-import { ScoreCard, User } from "../../declerations";
+import { User } from "../../declerations";
 import { Dispatch } from "redux";
 import Api from "../../api";
 
