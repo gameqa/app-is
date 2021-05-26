@@ -1,14 +1,14 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import * as Analytics from "expo-firebase-analytics";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
 import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
 import { ICON_LVL_3, ICON_LVL_7 } from "../../static";
 import * as forms from "./forms";
-import * as Services from "../../services";
 import styles from "./styles";
 
 const Register = () => {
@@ -28,9 +28,16 @@ const Register = () => {
 	}, []);
 
 	const navigation = useNavigation<any>();
-	const text = { title: "Búa til nýjan aðgang", switchButton: "Ég er með aðgang" };
+	const text = {
+		title: "Búa til nýjan aðgang",
+		switchButton: "Ég er með aðgang",
+	};
 
-	const handleAuth = (user: User) => dispatch(registerUser(user));
+	const handleAuth = (user: User) => {
+		dispatch(registerUser(user));
+
+		Analytics.logEvent("register");
+	};
 
 	return isLoading ? (
 		<View style={styles.loadingWrap}>
@@ -50,18 +57,28 @@ const Register = () => {
 					>
 						<View style={styles.imageWrapper}>
 							<View style={styles.leftIconView}>
-								<Image style={styles.leftIcon} source={ICON_LVL_3} />
+								<Image
+									style={styles.leftIcon}
+									source={ICON_LVL_3}
+								/>
 							</View>
 
 							<View style={styles.rightIconView}>
-								<Image style={styles.rightIcon} source={ICON_LVL_7} />
+								<Image
+									style={styles.rightIcon}
+									source={ICON_LVL_7}
+								/>
 							</View>
 						</View>
 					</Organisms.Forms.Builder>
 				</View>
 				<View style={styles.changeForm}>
-					<TouchableOpacity onPress={() => navigation.navigate("log-in")}>
-						<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("log-in")}
+					>
+						<Atoms.Text.Para>
+							{text.switchButton}
+						</Atoms.Text.Para>
 					</TouchableOpacity>
 				</View>
 			</LayoutWrapper>

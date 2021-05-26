@@ -1,6 +1,12 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, Clipboard, Alert, View, Share } from "react-native";
+import {
+	TouchableOpacity,
+	Clipboard,
+	Alert,
+	View,
+	Share,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms, Molecules } from "../../components";
 import LayoutWrapper from "../../layout";
@@ -8,6 +14,7 @@ import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
 import { fetchInvites } from "../../actions/auth";
+import * as Analytics from "expo-firebase-analytics";
 
 export default function index() {
 	const [hasCopied, setHasCopied] = useState(false);
@@ -42,20 +49,27 @@ export default function index() {
 		Clipboard?.setString(url);
 		alertCopy();
 		setHasCopied(true);
+
+		Analytics.logEvent("copy_invite", {
+			link: url,
+		});
 	};
 
 	useEffect(() => {
 		dispatch(fetchInvites());
 	}, []);
 
-	const invites = auth.invites.filter((invite) => invite.type !== "not-verified");
+	const invites = auth.invites.filter(
+		(invite) => invite.type !== "not-verified"
+	);
 	return (
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />
 			<Atoms.Text.Para style={styles.paragraph}>
-				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða vinum að sækja appið.
-				Þegar notandi býr til aðgang eftir að þú býður honum þá birtist nafnið hans hér.
-				Þegar þú hefur boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
+				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða
+				vinum að sækja appið. Þegar notandi býr til aðgang eftir að
+				þú býður honum þá birtist nafnið hans hér. Þegar þú hefur
+				boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
 				áhrifavaldur. Smelltu á hlekkinn til að afrita hann.
 			</Atoms.Text.Para>
 			<TouchableOpacity
@@ -81,16 +95,23 @@ export default function index() {
 						color={Services.Colors.MapToDark["light-grey"]}
 					/>
 				</View>
-				<Atoms.Text.Para style={styles.link}>{url.slice(0, 35)}...</Atoms.Text.Para>
+				<Atoms.Text.Para style={styles.link}>
+					{url.slice(0, 35)}...
+				</Atoms.Text.Para>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.shareOuter} onPress={handleShare}>
+			<TouchableOpacity
+				style={styles.shareOuter}
+				onPress={handleShare}
+			>
 				<FontAwesome
 					name="share"
 					size={14}
 					color={Services.Colors.MapToDark["light-grey"]}
 				/>
-				<Atoms.Text.Para style={styles.shareText}>Deila</Atoms.Text.Para>
+				<Atoms.Text.Para style={styles.shareText}>
+					Deila
+				</Atoms.Text.Para>
 			</TouchableOpacity>
 			<View
 				style={{
@@ -100,10 +121,15 @@ export default function index() {
 					borderColor: "#ccc",
 				}}
 			/>
-			<Atoms.Text.Heading style={{ marginBottom: 10 }}>Vinir mínir</Atoms.Text.Heading>
+			<Atoms.Text.Heading style={{ marginBottom: 10 }}>
+				Vinir mínir
+			</Atoms.Text.Heading>
 			{invites.length === 0 ? (
 				<Atoms.Alerts.Ribbon
-					item={{ label: "Það hefur enginn skráð sig enn", type: "warning" }}
+					item={{
+						label: "Það hefur enginn skráð sig enn",
+						type: "warning",
+					}}
 				/>
 			) : (
 				invites.map((invite) => <Atoms.Cards.User {...invite} />)

@@ -10,6 +10,7 @@ import * as forms from "./forms";
 import styles from "./styles";
 import * as Services from "../../services";
 import { ICON_LVL_1, ICON_LVL_5 } from "../../static";
+import * as Analytics from "expo-firebase-analytics";
 
 const Authenticate = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -29,9 +30,16 @@ const Authenticate = () => {
 
 	const navigation = useNavigation<any>();
 
-	const text = { title: "Velkomin/n aftur!", switchButton: "Mig vantar aðgang" };
+	const text = {
+		title: "Velkomin/n aftur!",
+		switchButton: "Mig vantar aðgang",
+	};
 
-	const handleAuth = (user: User) => dispatch(registerUser(user));
+	const handleAuth = (user: User) => {
+		dispatch(registerUser(user));
+
+		Analytics.logEvent("login");
+	};
 
 	return isLoading ? (
 		<View style={styles.loadingWrap}>
@@ -51,18 +59,26 @@ const Authenticate = () => {
 					<View style={{ flex: 1 }}>
 						<View style={styles.imageWrapper}>
 							<View style={styles.leftIconView}>
-								<Image style={styles.leftIcon} source={ICON_LVL_1} />
+								<Image
+									style={styles.leftIcon}
+									source={ICON_LVL_1}
+								/>
 							</View>
 
 							<View style={styles.rightIconView}>
-								<Image style={styles.rightIcon} source={ICON_LVL_5} />
+								<Image
+									style={styles.rightIcon}
+									source={ICON_LVL_5}
+								/>
 							</View>
 						</View>
 					</View>
 				</Organisms.Forms.Builder>
 			</View>
 			<View style={styles.changeForm}>
-				<TouchableOpacity onPress={() => navigation.navigate("sign-up")}>
+				<TouchableOpacity
+					onPress={() => navigation.navigate("sign-up")}
+				>
 					<Atoms.Text.Para>{text.switchButton}</Atoms.Text.Para>
 				</TouchableOpacity>
 			</View>
