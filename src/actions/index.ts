@@ -9,3 +9,4 @@ export * as ArticleReader from "./articleReader";
 export * as AuthCode from "./authCode";
 export * as ChartData from "./chartData";
 export * as PushNotification from "./pushNotification";
+export * as PrizeCategory from "./prize";

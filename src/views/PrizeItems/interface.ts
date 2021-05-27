@@ -1,8 +1,8 @@
-import { Prizes } from "../../services";
+import { Prize } from "../../declerations";
 
 export interface IProps {
 	route: {
-		params: Prizes.PrizeCategory;
+		params: Prize[];
 	};
 	navigation: {
 		goBack: () => void;

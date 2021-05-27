@@ -11,6 +11,7 @@ import articleReader from "./articleReader";
 import authCode from "./authCode";
 import chartData from "./chartData";
 import pushNotification from "./pushNotification";
+import prize from "./prize";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -24,6 +25,7 @@ export default combineReducers<StoreState>({
 	authCode,
 	chartData,
 	pushNotification,
+	prize,
 });
 
 export * from "./interface";
