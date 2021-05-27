@@ -57,7 +57,10 @@ const SelectSpan = () => {
 
 	const handleArchive = useCallback(async () => {
 		const hasSeenKey = await checkIfHasSeenKey();
-		if (hasSeenKey) dispatch(Actions.Game.archiveAnswer(game._id, state._id));
+		if (hasSeenKey) {
+			dispatch(Actions.Game.archiveAnswer(game._id, state._id));
+			return;
+		}
 		Alert.alert(
 			"Ekkert svar",
 			"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
@@ -79,7 +82,12 @@ const SelectSpan = () => {
 	const handleSubmit = useCallback(
 		(start?: number, end?: number) =>
 			dispatch(
-				Actions.Game.submitSpan(game._id, state._id, state.firstWord, state.lastWord)
+				Actions.Game.submitSpan(
+					game._id,
+					state._id,
+					state.firstWord,
+					state.lastWord
+				)
 			),
 		[game._id, state._id, state.firstWord, state.lastWord]
 	);
@@ -88,15 +96,22 @@ const SelectSpan = () => {
 		<View>
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para>
-				Þessi efnisgrein var valin af öðrum notanda sem telur að svarið sé hér að finna.
-				Nú þurfum við að vita hvort hluti af textanum svari spurningunni. Ef svo er, þá
-				þurfum við að velja réttu orðin sem mynda svarið.
+				Þessi efnisgrein var valin af öðrum notanda sem telur að
+				svarið sé hér að finna. Nú þurfum við að vita hvort hluti
+				af textanum svari spurningunni. Ef svo er, þá þurfum við að
+				velja réttu orðin sem mynda svarið.
 			</Atoms.Text.Para>
 			<Utils.SpanSelector
 				paragraph={state.paragraph}
-				onSelectFirstWord={(i) => dispatch(Actions.SelectSpan.setFirstWord(i))}
-				onSelectLastWord={(i) => dispatch(Actions.SelectSpan.setLastWord(i))}
-				onClearSelection={() => dispatch(Actions.SelectSpan.clearRange())}
+				onSelectFirstWord={(i) =>
+					dispatch(Actions.SelectSpan.setFirstWord(i))
+				}
+				onSelectLastWord={(i) =>
+					dispatch(Actions.SelectSpan.setLastWord(i))
+				}
+				onClearSelection={() =>
+					dispatch(Actions.SelectSpan.clearRange())
+				}
 				firstWord={state.firstWord}
 				lastWord={state.lastWord}
 				immutable={!isSelectingSpan}
