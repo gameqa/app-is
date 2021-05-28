@@ -35,7 +35,6 @@ const Register = () => {
 
 	const handleAuth = (user: User) => {
 		dispatch(registerUser(user));
-
 		Analytics.logEvent("register");
 	};
 
@@ -54,23 +53,7 @@ const Register = () => {
 						HTTPmethod="post"
 						onSubmit={handleAuth}
 						buttonColor="highlight"
-					>
-						<View style={styles.imageWrapper}>
-							<View style={styles.leftIconView}>
-								<Image
-									style={styles.leftIcon}
-									source={ICON_LVL_3}
-								/>
-							</View>
-
-							<View style={styles.rightIconView}>
-								<Image
-									style={styles.rightIcon}
-									source={ICON_LVL_7}
-								/>
-							</View>
-						</View>
-					</Organisms.Forms.Builder>
+					></Organisms.Forms.Builder>
 				</View>
 				<View style={styles.changeForm}>
 					<TouchableOpacity

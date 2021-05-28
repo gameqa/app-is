@@ -10,7 +10,6 @@ export const fetchPrizeCategories = () => {
 			const { data } = await Api.get<PrizeCategory[]>(
 				"/api/v1/prizes"
 			);
-
 			dispatch<FetchPrizeCategoriesAction>({
 				type: ActionTypes.fetchPrizeCategories,
 				payload: data,

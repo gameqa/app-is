@@ -5,7 +5,7 @@ import { IProps, SelectionStates } from "./interface";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../../../../services";
 import { Atoms, Organisms } from "../../../..";
-import * as utils from "./utils";
+
 const SpanSelector = ({
 	firstWord,
 	lastWord,
@@ -36,7 +36,8 @@ const SpanSelector = ({
 
 	if (immutable) action = () => null;
 
-	const shouldHighlight = (i: number) => i >= firstWord! && i <= lastWord!;
+	const shouldHighlight = (i: number) =>
+		i >= firstWord! && i <= lastWord!;
 
 	const { addPriority } = Organisms.Notifications.Hooks.useAddItems();
 
@@ -46,7 +47,8 @@ const SpanSelector = ({
 			case "select-first":
 				addPriority({
 					title: "Fyrsta orðið",
-					description: "Smelltu á fyrsta orðið sem myndar svarið.",
+					description:
+						"Smelltu á fyrsta orðið sem myndar svarið.",
 					type: "idea",
 				});
 				break;
@@ -75,13 +77,20 @@ const SpanSelector = ({
 		<View>
 			<View style={styles.para}>
 				{wordArray.map((word, i) => (
-					<TouchableOpacity onPress={() => action?.(i)} activeOpacity={1}>
+					<TouchableOpacity
+						onPress={() => action?.(i)}
+						activeOpacity={1}
+					>
 						<Text
 							style={{
 								...styles.word,
-								color: shouldHighlight(i) ? Colors.MapToDark.highlight : "#666",
+								color: shouldHighlight(i)
+									? Colors.MapToDark.highlight
+									: "#666",
 
-								textDecorationLine: shouldHighlight(i) ? "underline" : "none",
+								textDecorationLine: shouldHighlight(i)
+									? "underline"
+									: "none",
 							}}
 						>
 							{word}

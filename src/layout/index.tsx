@@ -7,7 +7,6 @@ import { StoreState } from "../reducers";
 import { Atoms } from "../components";
 
 const LayoutWrapper = ({ children }: IProps) => {
-	const dispatch = useDispatch();
 	const auth = useSelector((state: StoreState) => state.auth);
 
 	const isLoading = auth.type === "loading";

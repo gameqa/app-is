@@ -27,7 +27,10 @@ const PrizeStackNavigator = () => (
 		}}
 	>
 		{routes.prizeStack.map((route) => (
-			<PrizeStack.Screen name={route.id} component={route.Component} />
+			<PrizeStack.Screen
+				name={route.id}
+				component={route.Component}
+			/>
 		))}
 	</PrizeStack.Navigator>
 );
@@ -39,7 +42,10 @@ export const GameStackNavigator = () => (
 		}}
 	>
 		{routes.gameStack.map((route) => (
-			<GameStack.Screen name={route.id} component={route.Component} />
+			<GameStack.Screen
+				name={route.id}
+				component={route.Component}
+			/>
 		))}
 	</GameStack.Navigator>
 );
@@ -51,7 +57,6 @@ export const TabNavigator = () => {
 	const inActiveColor = Services.Colors.MapToDark["grey"];
 
 	const auth = useSelector((state: StoreState) => state.auth);
-	if (auth.type === "guest") return null;
 
 	// Hook to check if user interacts with notification
 	Hooks.Notifications.useResponseListener((response) => {
@@ -67,6 +72,7 @@ export const TabNavigator = () => {
 			}
 		}
 	});
+	if (auth.type === "guest") return null;
 
 	return (
 		<NavigationContainer ref={navigatorRef}>
@@ -87,9 +93,15 @@ export const TabNavigator = () => {
 				}}
 			>
 				{routes.tab.map((route) => (
-					<Tab.Screen name={route.id} component={route.Component} />
+					<Tab.Screen
+						name={route.id}
+						component={route.Component}
+					/>
 				))}
-				<Tab.Screen name="prizes" component={PrizeStackNavigator} />
+				<Tab.Screen
+					name="prizes"
+					component={PrizeStackNavigator}
+				/>
 				<Tab.Screen name="game" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>
@@ -107,7 +119,10 @@ export const AuthStackNavigator = () => {
 				}}
 			>
 				{routes.authStack.map((route) => (
-					<AuthStack.Screen name={route.id} component={route.Component} />
+					<AuthStack.Screen
+						name={route.id}
+						component={route.Component}
+					/>
 				))}
 			</AuthStack.Navigator>
 		</NavigationContainer>

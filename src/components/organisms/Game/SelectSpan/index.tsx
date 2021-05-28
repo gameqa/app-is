@@ -59,22 +59,22 @@ const SelectSpan = () => {
 		const hasSeenKey = await checkIfHasSeenKey();
 		if (hasSeenKey) {
 			dispatch(Actions.Game.archiveAnswer(game._id, state._id));
-			return;
+		} else {
+			Alert.alert(
+				"Ekkert svar",
+				"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
+				[
+					{
+						text: "Hætta við",
+						onPress: () => markKeyAsSeen(),
+					},
+					{
+						text: "Já",
+						onPress: () => handleCompleteStep(),
+					},
+				]
+			);
 		}
-		Alert.alert(
-			"Ekkert svar",
-			"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
-			[
-				{
-					text: "Hætta við",
-					onPress: () => markKeyAsSeen(),
-				},
-				{
-					text: "Já",
-					onPress: () => handleCompleteStep(),
-				},
-			]
-		);
 	}, [game._id, state._id, markKeyAsSeen, handleCompleteStep]);
 
 	const toogleSelectionState = () => setIsSelectingSpan((v) => !v);

@@ -12,12 +12,13 @@ const styles = StyleSheet.create({
 	changeForm: {
 		justifyContent: "center",
 		alignItems: "center",
-		flex: 0.07,
+		padding: 15,
 	},
 	imageWrapper: {
-		height: 300,
+		height: 500,
 		flex: 1,
 		justifyContent: "space-around",
+		flexDirection: "row",
 	},
 	leftIconView: {
 		flexDirection: "row",
