@@ -8,6 +8,7 @@ import * as ArticleReader from "./articleReader";
 import * as AuthCode from "./authCode";
 import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
+import * as PrizeCategory from "./prize";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -40,6 +41,7 @@ export enum ActionTypes {
 	setAuthCodeLoading,
 	fetchAnswersPerDay,
 	sendPushNotificationToken,
+	fetchPrizeCategories,
 }
 
 export type Actions =
@@ -72,4 +74,5 @@ export type Actions =
 	| AuthCode.Actions.SetAuthCodeErrorMessageAction
 	| AuthCode.Actions.SetAuthCodeLoadingAction
 	| ChartData.Actions.FetchAnswersPerDayAction
-	| PushNotification.Actions.SendPushNotificationTokenAction;
+	| PushNotification.Actions.SendPushNotificationTokenAction
+	| PrizeCategory.FetchPrizeCategoriesAction;

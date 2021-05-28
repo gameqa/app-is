@@ -7,19 +7,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Utils } from "../";
 
 const PrizeItems = ({
-	route: { params: category },
+	route: { params: prizes },
 	navigation: { goBack },
 }: IProps) => {
-	const items = useMemo(
-		() => Services.Prizes.PrizeItems.filter((item) => item.category === category.name),
-		[]
-	);
 	return (
 		<ScrollView>
 			<LayoutWrapper>
 				<Utils.NavigateBack goBackHandler={goBack} />
-				{items.map((item) => (
-					<Atoms.Cards.PrizeItem {...item} />
+				{prizes.map((prize) => (
+					<Atoms.Cards.PrizeItem {...prize} />
 				))}
 			</LayoutWrapper>
 		</ScrollView>

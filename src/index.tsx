@@ -10,7 +10,9 @@ import * as Hooks from "./hooks";
 export default function App() {
 	const dispatch = useDispatch();
 	const auth = useSelector((state: StoreState) => state.auth);
-	const pushNotifications = useSelector((state: StoreState) => state.pushNotification);
+	const pushNotifications = useSelector(
+		(state: StoreState) => state.pushNotification
+	);
 
 	// fetch user from cookie
 	React.useEffect(() => {
@@ -41,7 +43,9 @@ export default function App() {
 
 	// handle get permission
 	Hooks.Notifications.useRequestPermission((token) => {
-		dispatch(Actions.PushNotification.sendPushNotificationToken(token));
+		dispatch(
+			Actions.PushNotification.sendPushNotificationToken(token)
+		);
 	});
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;

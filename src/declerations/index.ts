@@ -11,3 +11,4 @@ export * from "./Questions";
 export * from "./Colors";
 export * from "./Alerts";
 export * from "./Charts";
+export * from "./Prizes";

@@ -9,6 +9,7 @@ import * as ArticleReader from "./articleReader";
 import * as AuthCode from "./authCode";
 import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
+import * as Prize from "./prize";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -22,4 +23,5 @@ export interface StoreState {
 	authCode: AuthCode.State;
 	chartData: ChartData.State;
 	pushNotification: PushNotification.State;
+	prize: Prize.State;
 }
