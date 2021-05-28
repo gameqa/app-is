@@ -5,7 +5,6 @@ import LayoutWrapper from "../../layout";
 import { Atoms } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { Utils } from "../";
-import { View, Text } from "react-native";
 
 const PrizeItems = ({
 	route: { params },

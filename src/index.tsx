@@ -5,7 +5,6 @@ import { Organisms } from "./components";
 import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
-import * as Hooks from "./hooks";
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -30,23 +29,6 @@ export default function App() {
 	React.useEffect(() => {
 		dispatch(Actions.ChartData.fetchAnswersPerDay());
 	}, []);
-
-	// fired when notification is received while app is open
-	Hooks.Notifications.useNotificationListener((item) => {
-		console.log("NEW NOTIFICATION:", item);
-	});
-
-	// fired when notification response is received
-	Hooks.Notifications.useResponseListener((response) => {
-		console.log("NEW NOTIFICATION RESPONSE:", response);
-	});
-
-	// handle get permission
-	Hooks.Notifications.useRequestPermission((token) => {
-		dispatch(
-			Actions.PushNotification.sendPushNotificationToken(token)
-		);
-	});
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;
 	return (
