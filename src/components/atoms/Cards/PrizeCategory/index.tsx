@@ -12,7 +12,6 @@ import styles from "./styles";
 
 const PrizeCategoryCard = (category: PrizeCategory) => {
 	const navigation = useNavigation();
-
 	const handleGoToItemsView = () =>
 		navigation.navigate("prize-items", category);
 

@@ -2,7 +2,9 @@ import { Prize } from "../../declerations";
 
 export interface IProps {
 	route: {
-		params: Prize[];
+		params: {
+			prizes: Prize[];
+		};
 	};
 	navigation: {
 		goBack: () => void;

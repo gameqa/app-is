@@ -5,16 +5,17 @@ import LayoutWrapper from "../../layout";
 import { Atoms } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { Utils } from "../";
+import { View, Text } from "react-native";
 
 const PrizeItems = ({
-	route: { params: prizes },
+	route: { params },
 	navigation: { goBack },
 }: IProps) => {
 	return (
 		<ScrollView>
 			<LayoutWrapper>
 				<Utils.NavigateBack goBackHandler={goBack} />
-				{prizes.map((prize) => (
+				{params?.prizes.map((prize) => (
 					<Atoms.Cards.PrizeItem {...prize} />
 				))}
 			</LayoutWrapper>
