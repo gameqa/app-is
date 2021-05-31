@@ -7,10 +7,13 @@ import styles from "./styles";
 import * as Actions from "../../../../actions";
 import { submitQuestion } from "../../../../actions/game";
 import { Alert } from "../../../../declerations";
+import { Utils } from "../";
 
 const WriteQuestion = () => {
 	const state = useSelector((state: StoreState) => state.writeQuestion);
-	const { _id: gameRoundId } = useSelector((state: StoreState) => state.game);
+	const { _id: gameRoundId } = useSelector(
+		(state: StoreState) => state.game
+	);
 
 	const [error, setError] = useState<Alert>();
 	const dispatch = useDispatch();
@@ -28,9 +31,13 @@ const WriteQuestion = () => {
 			if (question.length < MIN_QUESTION_LENGTH)
 				throw new Error(`Spurningin er ekki nógu löng`);
 			if (question.slice(-1) !== "?")
-				throw new Error(`Spurningin verður að enda á spurningarmerki`);
+				throw new Error(
+					`Spurningin verður að enda á spurningarmerki`
+				);
 			setError(undefined);
-			dispatch(submitQuestion(gameRoundId, question, isYesNoQuestion));
+			dispatch(
+				submitQuestion(gameRoundId, question, isYesNoQuestion)
+			);
 		} catch (e) {
 			const ALERT_TYPE = "danger";
 			setError({ label: e.message, type: ALERT_TYPE });
@@ -39,19 +46,29 @@ const WriteQuestion = () => {
 
 	return (
 		<View style={styles.flex}>
-			{isYesNoQuestion ? (
-				<Atoms.Alerts.Ribbon
-					item={{ type: "warning", label: "Skrifaðu já / nei spurningu" }}
-				/>
-			) : null}
+			<Atoms.Alerts.Ribbon
+				item={
+					isYesNoQuestion
+						? {
+								type: "success",
+								label: "Skrifaðu já / nei spurningu",
+						  }
+						: {
+								type: "warning",
+								label: "Ekki skrifa já / nei spurningu",
+						  }
+				}
+			/>
 			<Atoms.Alerts.Ribbon item={error} />
+			<Utils.Explain>
+				Skrifaðu spurningu sem aðrir notendur geta fundið svarið
+				við. Reyndu að velja spurningu sem er ekki háð tilfinningum
+				fólks eða hvaða dag vikunnar er spurt. Einnig er best að
+				spurningarnar séu settar fram á óformlegu máli.
+			</Utils.Explain>
 			<Atoms.Text.Para style={styles.marginTop}>
-				Skrifaðu spurningu sem aðrir notendur geta fundið svarið við. Reyndu að velja
-				spurningu sem er ekki háð tilfinningum fólks eða hvaða dag vikunnar er spurt.
-				Einnig er best að spurningarnar séu settar fram á óformlegu máli.
-			</Atoms.Text.Para>
-			<Atoms.Text.Para style={styles.marginTop}>
-				Handhófskenndar hugmyndir sem þú getur spurt útí: {state.ideaWords.join(", ")}
+				Handhófskenndar hugmyndir sem þú getur spurt útí:{" "}
+				{state.ideaWords.join(", ")}
 			</Atoms.Text.Para>
 			<View style={styles.marginTop}>
 				<Atoms.Inputs.Text
@@ -68,11 +85,13 @@ const WriteQuestion = () => {
 				/>
 			</View>
 
-			{/* 
-				TODO: evaluate if button should be present on screen
 			<View style={[styles.flex, styles.justEnd]}>
-				<Atoms.Buttons.Base label="Senda" onPress={handleSubmit} type="highlight" />
-			</View> */}
+				<Atoms.Buttons.Base
+					label="Senda"
+					onPress={handleSubmit}
+					type="highlight"
+				/>
+			</View>
 		</View>
 	);
 };

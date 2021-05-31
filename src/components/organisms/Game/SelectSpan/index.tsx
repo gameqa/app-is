@@ -95,12 +95,12 @@ const SelectSpan = () => {
 	return (
 		<View>
 			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para>
+			<Utils.Explain>
 				Þessi efnisgrein var valin af öðrum notanda sem telur að
 				svarið sé hér að finna. Nú þurfum við að vita hvort hluti
 				af textanum svari spurningunni. Ef svo er, þá þurfum við að
 				velja réttu orðin sem mynda svarið.
-			</Atoms.Text.Para>
+			</Utils.Explain>
 			<Utils.SpanSelector
 				paragraph={state.paragraph}
 				onSelectFirstWord={(i) =>

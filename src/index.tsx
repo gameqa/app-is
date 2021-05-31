@@ -5,6 +5,7 @@ import { Organisms } from "./components";
 import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
+import { StatusBar } from "react-native";
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function App() {
 	// fetch chart data on load
 	React.useEffect(() => {
 		dispatch(Actions.ChartData.fetchAnswersPerDay());
+		StatusBar.setHidden(true);
 	}, []);
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;

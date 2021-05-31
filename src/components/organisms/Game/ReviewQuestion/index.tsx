@@ -83,7 +83,11 @@ const ReviewQuestion = () => {
 		try {
 			await markKeyAsSeen(key);
 			dispatch(
-				Actions.Game.submitVerifyQuestion(game._id, state._id, allItemsAreGood())
+				Actions.Game.submitVerifyQuestion(
+					game._id,
+					state._id,
+					allItemsAreGood()
+				)
 			);
 		} catch (error) {
 			//
@@ -102,15 +106,23 @@ const ReviewQuestion = () => {
 	return (
 		<View>
 			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para style={styles.para}>
-				Áður en við reynum að finna svarið við þessari spurningu, þá viljum við vera
-				viss um að þetta sé góð spurning. Farðu yfir tékklistann hér fyrir neðan og
-				hakaðu við þau atriði sem þú ert sammála.
-			</Atoms.Text.Para>
+			<Utils.Explain>
+				Áður en við reynum að finna svarið við þessari spurningu,
+				þá viljum við vera viss um að þetta sé góð spurning. Farðu
+				yfir tékklistann hér fyrir neðan og hakaðu við þau atriði
+				sem þú ert sammála.
+			</Utils.Explain>
 			{items.map((item, i) => (
-				<Atoms.Cards.CheckListItem {...item} onPress={() => markItem(i)} />
+				<Atoms.Cards.CheckListItem
+					{...item}
+					onPress={() => markItem(i)}
+				/>
 			))}
-			<Atoms.Buttons.Base onPress={handleAlert} label="Staðfesta" type="highlight" />
+			<Atoms.Buttons.Base
+				onPress={handleAlert}
+				label="Staðfesta"
+				type="highlight"
+			/>
 		</View>
 	);
 };

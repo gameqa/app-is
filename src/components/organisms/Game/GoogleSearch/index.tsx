@@ -41,13 +41,13 @@ const GoogleSearch = () => {
 	return (
 		<View>
 			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para>
+			<Utils.Explain>
 				Við þurfum að finna svarið við þessari spurningu. Notaðu
 				Google leitarvélina hér fyrir neðan til að finna svarið á
 				vefnum með leitarstreng sem þér þykir líklegur til
 				árangurs. Hún leitar aðeins á íslensku Wikipediu,
 				Vísindavefnum, vísir.is og mbl.is
-			</Atoms.Text.Para>
+			</Utils.Explain>
 			<Atoms.Inputs.Google
 				onChange={(val) =>
 					dispatch(Actions.GoogleSearch.writeGoogleQuery(val))
