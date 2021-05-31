@@ -8,18 +8,18 @@ import * as Views from "../views";
 
 export const tab: TabRoutes[] = [
 	{
-		id: "progress",
+		id: "Ég",
 		Component: Views.UserProgress,
 	},
 	{
-		id: "invite",
+		id: "Bjóða",
 		Component: Views.Invite,
 	},
 ];
 
 export const gameStack: GameStackRoutes[] = [
 	{
-		id: "game",
+		id: "Spila",
 		Component: Views.Game,
 	},
 	{

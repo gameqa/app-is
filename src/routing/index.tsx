@@ -99,10 +99,10 @@ export const TabNavigator = () => {
 					/>
 				))}
 				<Tab.Screen
-					name="prizes"
+					name="Vinningar"
 					component={PrizeStackNavigator}
 				/>
-				<Tab.Screen name="game" component={GameStackNavigator} />
+				<Tab.Screen name="Spila" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
