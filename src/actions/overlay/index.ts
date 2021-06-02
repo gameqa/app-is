@@ -1,7 +1,6 @@
-import { HookSignedNotification } from "../../components/organisms/Notifications";
-import { OverlayItem, OverlayType } from "../../declerations";
+import { OverlayType } from "../../declerations";
 import { ActionTypes } from "../types";
-import { EnqueOverlayAction, DequeOverlayAction } from "./interface";
+import { EnqueOverlayAction } from "./interface";
 
 export const enqueOverlay = (
 	payload: OverlayType[]

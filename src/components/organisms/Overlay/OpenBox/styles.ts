@@ -28,6 +28,10 @@ const style = StyleSheet.create({
 		alignItems: "center",
 		paddingTop: 20,
 	},
+	image: {
+		height: "80%",
+		width: "80%",
+	},
 });
 
 export default style;

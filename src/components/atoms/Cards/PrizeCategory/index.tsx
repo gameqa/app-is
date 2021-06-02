@@ -19,33 +19,44 @@ const PrizeCategoryCard = (category: PrizeCategory) => {
 		<TouchableOpacity onPress={handleGoToItemsView}>
 			<Atoms.Cards.Base>
 				<View style={styles.outer}>
+					<View style={styles.imageOuter}>
+						<Image
+							style={styles.image}
+							source={{
+								uri: "https://lh3.googleusercontent.com/proxy/GvuKlGCk0DsM-U_IIXE4pDzEn1xbHK3ijvpZZIZK3IXyKsZfrCRKEjZO1KcS90-XsXYm10XGdbkygLfernFlZl96Kizsvoe0p0ElLRZjv8PuQSggOWlfPF1EmFrJ9sAfvApVQH4kp3w",
+							}}
+							resizeMode="contain"
+						/>
+						<View style={styles.icon}>
+							{category.isAvailable ? (
+								<FontAwesome
+									name="check"
+									size={50}
+									color={Colors.MapToDark.success}
+								/>
+							) : (
+								<FontAwesome
+									name="lock"
+									size={50}
+									color={Colors.MapToDark.danger}
+								/>
+							)}
+						</View>
+					</View>
+					<Atoms.Text.Heading>
+						{category.name}
+					</Atoms.Text.Heading>
 					<View style={styles.topLine}>
-						<Atoms.Text.Heading>
-							{category.name}
-						</Atoms.Text.Heading>
 						{category.isAvailable ? (
-							<FontAwesome
-								name="check"
-								size={15}
-								color={Colors.MapToDark.success}
-							/>
+							<Atoms.Text.Para>
+								Þú ert komin/n í pottinn.
+							</Atoms.Text.Para>
 						) : (
-							<FontAwesome
-								name="lock"
-								size={15}
-								color={Colors.MapToDark.danger}
-							/>
+							<Atoms.Text.Para style={styles.para}>
+								Þú þarft að {category.prereqDescription}.
+							</Atoms.Text.Para>
 						)}
 					</View>
-					{category.isAvailable ? (
-						<Atoms.Text.Para>
-							Þú ert komin/n í pottinn.
-						</Atoms.Text.Para>
-					) : (
-						<Atoms.Text.Para>
-							Þú þarft að {category.prereqDescription}.
-						</Atoms.Text.Para>
-					)}
 					<Atoms.Text.Para>
 						{category.prizes.length} vinningar í þessum flokki
 					</Atoms.Text.Para>

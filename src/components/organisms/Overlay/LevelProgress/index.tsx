@@ -21,10 +21,11 @@ const AnnounceScreen = () => {
 	React.useEffect(() => {
 		if (current !== target) {
 			const TIMEOUT = 75;
+			const diff = Math.max((target - current) / 13, 0.015);
 			const t = setTimeout(
 				() =>
 					setCurrent((cur) =>
-						Math.max(0, Math.min(cur + 0.015, target))
+						Math.max(0, Math.min(cur + diff, target))
 					),
 				TIMEOUT
 			);
@@ -32,7 +33,7 @@ const AnnounceScreen = () => {
 				clearTimeout(t);
 			};
 		} else {
-			const TIMEOUT = 500;
+			const TIMEOUT = 1500;
 			const t = setTimeout(
 				() => dispatch(Actions.Overlay.dequeOverlay()),
 				TIMEOUT
