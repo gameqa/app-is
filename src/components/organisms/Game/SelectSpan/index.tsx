@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { Alert, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
 import { Atoms } from "../../..";
@@ -80,7 +81,7 @@ const SelectSpan = () => {
 	const toogleSelectionState = () => setIsSelectingSpan((v) => !v);
 
 	const handleSubmit = useCallback(
-		(start?: number, end?: number) =>
+		() =>
 			dispatch(
 				Actions.Game.submitSpan(
 					game._id,
@@ -93,52 +94,69 @@ const SelectSpan = () => {
 	);
 
 	return (
-		<View>
-			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para>
-				Þessi efnisgrein var valin af öðrum notanda sem telur að
-				svarið sé hér að finna. Nú þurfum við að vita hvort hluti
-				af textanum svari spurningunni. Ef svo er, þá þurfum við að
-				velja réttu orðin sem mynda svarið.
-			</Atoms.Text.Para>
-			<Utils.SpanSelector
-				paragraph={state.paragraph}
-				onSelectFirstWord={(i) =>
-					dispatch(Actions.SelectSpan.setFirstWord(i))
-				}
-				onSelectLastWord={(i) =>
-					dispatch(Actions.SelectSpan.setLastWord(i))
-				}
-				onClearSelection={() =>
-					dispatch(Actions.SelectSpan.clearRange())
-				}
-				firstWord={state.firstWord}
-				lastWord={state.lastWord}
-				immutable={!isSelectingSpan}
-				onComplete={handleSubmit}
-			/>
-			{!isSelectingSpan ? (
-				<React.Fragment>
-					<Atoms.Buttons.Base
-						label="Ég sé svarið"
-						type="success"
-						onPress={toogleSelectionState}
-					/>
-					<Atoms.Buttons.Base
-						label="Ég sé ekki svarið"
-						type="danger"
-						onPress={handleArchive}
-					/>
-				</React.Fragment>
-			) : (
-				<React.Fragment>
-					<Atoms.Buttons.Base
-						label="Til baka"
-						type="danger"
-						onPress={toogleSelectionState}
-					/>
-				</React.Fragment>
-			)}
+		<View
+			style={{
+				flex: 1,
+			}}
+		>
+			<ScrollView>
+				<Utils.QuestionIs question={state.text} />
+				<Atoms.Text.Para>
+					Þessi efnisgrein var valin af öðrum notanda sem telur
+					að svarið sé hér að finna. Nú þurfum við að vita hvort
+					hluti af textanum svari spurningunni. Ef svo er, þá
+					þurfum við að velja réttu orðin sem mynda svarið.
+				</Atoms.Text.Para>
+				<Utils.SpanSelector
+					paragraph={state.paragraph}
+					onSelectFirstWord={(i) =>
+						dispatch(Actions.SelectSpan.setFirstWord(i))
+					}
+					onSelectLastWord={(i) =>
+						dispatch(Actions.SelectSpan.setLastWord(i))
+					}
+					onClearSelection={() =>
+						dispatch(Actions.SelectSpan.clearRange())
+					}
+					firstWord={state.firstWord}
+					lastWord={state.lastWord}
+					immutable={!isSelectingSpan}
+				/>
+			</ScrollView>
+			<View>
+				{!isSelectingSpan ? (
+					<React.Fragment>
+						<Atoms.Buttons.Base
+							label="Ég sé svarið"
+							type="success"
+							onPress={toogleSelectionState}
+						/>
+						<Atoms.Buttons.Base
+							label="Ég sé ekki svarið"
+							type="danger"
+							onPress={handleArchive}
+						/>
+					</React.Fragment>
+				) : (
+					<>
+						{state.firstWord && state.lastWord && (
+							<Atoms.Buttons.Base
+								label="Staðfesta"
+								type="highlight"
+								inactive={false}
+								onPress={() => handleSubmit()}
+							/>
+						)}
+						<React.Fragment>
+							<Atoms.Buttons.Base
+								label="Til baka"
+								type="danger"
+								onPress={toogleSelectionState}
+							/>
+						</React.Fragment>
+					</>
+				)}
+			</View>
 		</View>
 	);
 };

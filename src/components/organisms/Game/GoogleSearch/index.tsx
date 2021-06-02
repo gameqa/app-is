@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, TouchableOpacity, Alert } from "react-native";
+import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
 import { Atoms } from "../../../";
@@ -39,7 +39,7 @@ const GoogleSearch = () => {
 	}, []);
 
 	return (
-		<View>
+		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
 			<Atoms.Text.Para>
 				Við þurfum að finna svarið við þessari spurningu. Notaðu
@@ -100,7 +100,7 @@ const GoogleSearch = () => {
 				// articleKey as key is reserved in react
 				<PagePreview {...item} articleKey={item.key} />
 			))}
-		</View>
+		</ScrollView>
 	);
 };
 

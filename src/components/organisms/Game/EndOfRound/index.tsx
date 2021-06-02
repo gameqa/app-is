@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../../";
 import { StoreState } from "../../../../reducers";
@@ -15,7 +15,7 @@ const EndOfRound = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<View>
+		<ScrollView>
 			<Atoms.Text.Heading>Vel gert!</Atoms.Text.Heading>
 			<Atoms.Text.Para style={styles.para}>
 				Þú ert komin/n í Lvl {auth.level + 1} og ert númer{" "}
@@ -38,7 +38,7 @@ const EndOfRound = () => {
 					dispatch(Actions.Game.fetchCurrentGameRound())
 				}
 			/>
-		</View>
+		</ScrollView>
 	);
 };
 
