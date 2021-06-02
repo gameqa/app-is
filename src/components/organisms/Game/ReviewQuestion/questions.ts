@@ -3,7 +3,8 @@ import { CheckListItem } from "./interface";
 const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 	{
 		title: "Lengd svars",
-		description: "Ég held að það sé hægt að svara þessari spurningu í 1-2 setningum.",
+		description:
+			"Ég held að það sé hægt að svara þessari spurningu í 1-2 setningum.",
 		value: false,
 	},
 	// {
@@ -14,7 +15,7 @@ const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 	{
 		title: "Eitt mögulegt svar",
 		description:
-			"Ég held að svarið sé eins, sama hvern maður spyr eða hvaða dag vikunnar er spurt.",
+			"Ég held að svarið sé svipað, sama hvern maður spyr eða hvaða dag vikunnar er spurt.",
 		value: false,
 	},
 	{
@@ -38,7 +39,7 @@ const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 		: {
 				title: "Þetta er EKKI já/nei spurning",
 				description:
-					"Það er ekki hægt að svara þessari spurningu með annaðhvort já eða nei",
+					"Það er hvorki hægt að svara þessari spurningu með já eða nei",
 				value: false,
 		  },
 ];

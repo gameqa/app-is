@@ -98,7 +98,9 @@ export const fetchCurrentGameRound = () =>
 				type: ActionTypes.setGameLoadingState,
 				payload: true,
 			});
-			const { data } = await Api.get<TaskFromBackend>("/api/v1/game_rounds/current");
+			const { data } = await Api.get<TaskFromBackend>(
+				"/api/v1/game_rounds/current"
+			);
 			__handleUpdateTask(data);
 		} catch (error) {
 			//
@@ -132,9 +134,10 @@ export const gameActionWrapperFunc = (
 				payload: true,
 			});
 			const { data } = await cb(_dispatch);
+			console.log(`data`, data);
 			__handleUpdateTask(data);
 		} catch (e) {
-			//
+			console.log(`e`, e);
 		} finally {
 			// release loading in both cases
 			_dispatch<SetGameLoadingStateAction>({
@@ -151,11 +154,14 @@ export const submitQuestion = (
 	isYesOrNo: boolean
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "make-question",
-			text: questionText,
-			isYesOrNo,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "make-question",
+				text: questionText,
+				isYesOrNo,
+			}
+		)
 	);
 
 export const submitVerifyQuestion = (
@@ -164,19 +170,25 @@ export const submitVerifyQuestion = (
 	isGood: boolean
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "verify-question",
-			questionId,
-			archive: !isGood,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "verify-question",
+				questionId,
+				archive: !isGood,
+			}
+		)
 	);
 
 export const archiveAnswer = (gameRoundId: string, answerId: string) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "archive-answer",
-			answerId,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "archive-answer",
+				answerId,
+			}
+		)
 	);
 
 export const submitSpan = (
@@ -186,12 +198,15 @@ export const submitSpan = (
 	lastWord?: number
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "locate-span",
-			answerId,
-			firstWord,
-			lastWord,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "locate-span",
+				answerId,
+				firstWord,
+				lastWord,
+			}
+		)
 	);
 
 export const verifyAnswerSpan = (
@@ -200,19 +215,28 @@ export const verifyAnswerSpan = (
 	canBeShortened?: boolean
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "verify-span",
-			_id: answerId,
-			canBeShortened,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "verify-span",
+				_id: answerId,
+				canBeShortened,
+			}
+		)
 	);
 
-export const markQuestionAsImpossible = (gameRoundId: string, questionId: string) => {
+export const markQuestionAsImpossible = (
+	gameRoundId: string,
+	questionId: string
+) => {
 	return gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "mark-question-impossible",
-			questionId,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "mark-question-impossible",
+				questionId,
+			}
+		)
 	);
 };
 export const verifyYesNoQuestion = (
@@ -221,11 +245,14 @@ export const verifyYesNoQuestion = (
 	answer: boolean
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "verify-yes-no-answer-paragraph",
-			answerId,
-			answer,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "verify-yes-no-answer-paragraph",
+				answerId,
+				answer,
+			}
+		)
 	);
 
 export const submitArticleAndParagraph = (
@@ -236,13 +263,16 @@ export const submitArticleAndParagraph = (
 	paragraphIndex: number
 ) =>
 	gameActionWrapperFunc((_dispatch: Dispatch) =>
-		Api.post<TaskFromBackend>(`/api/v1/game_rounds/${gameRoundId}/advance`, {
-			type: "find-article",
-			identifier,
-			questionId,
-			key,
-			paragraphIndex,
-		})
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "find-article",
+				identifier,
+				questionId,
+				key,
+				paragraphIndex,
+			}
+		)
 	);
 
 export * as Actions from "./interface";

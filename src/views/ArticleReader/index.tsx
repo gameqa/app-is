@@ -24,7 +24,9 @@ const ArticleReaderView = ({
 }: IProps) => {
 	const state = useSelector((state: StoreState) => state.articleReader);
 	const game = useSelector((state: StoreState) => state.game);
-	const googleSearch = useSelector((state: StoreState) => state.googleSearch);
+	const googleSearch = useSelector(
+		(state: StoreState) => state.googleSearch
+	);
 
 	const dispatch = useDispatch();
 
@@ -44,27 +46,31 @@ const ArticleReaderView = ({
 
 	const handleSubmitParagraph = useCallback(
 		(paragraphIndex: number) => {
-			Alert.alert("Ertu viss?", "Inniheldur þessi efnsgrein svarið við spurningunni?", [
-				{
-					text: "Nei",
-					onPress: () => null,
-				},
-				{
-					text: "Já",
-					onPress: () => {
-						dispatch(
-							Actions.Game.submitArticleAndParagraph(
-								game._id, // game round id
-								article.source.identifier,
-								article.articleKey,
-								googleSearch._id, // questionId
-								paragraphIndex
-							)
-						);
-						goBack();
+			Alert.alert(
+				"Ertu viss?",
+				"Inniheldur þessi efnsgrein svarið við spurningunni?",
+				[
+					{
+						text: "Nei",
+						onPress: () => null,
 					},
-				},
-			]);
+					{
+						text: "Já",
+						onPress: () => {
+							dispatch(
+								Actions.Game.submitArticleAndParagraph(
+									game._id, // game round id
+									article.source.identifier,
+									article.articleKey,
+									googleSearch._id, // questionId
+									paragraphIndex
+								)
+							);
+							goBack();
+						},
+					},
+				]
+			);
 		},
 		[
 			game._id,
@@ -79,29 +85,43 @@ const ArticleReaderView = ({
 		<LayoutWrapper>
 			<ScrollView
 				refreshControl={
-					<RefreshControl onRefresh={handleFetchArticle} refreshing={game.isLoading} />
+					<RefreshControl
+						onRefresh={handleFetchArticle}
+						refreshing={game.isLoading}
+					/>
 				}
 			>
 				<NavigateBack goBackHandler={goBack} />
 				<Utils.QuestionIs question={googleSearch.text} />
-				<Atoms.Text.Para style={styles.para}>
-					Við sóttum textann sem fylgir vefsíðunni. Lestu yfir textann og athugaðu hvort
-					þú sjáir svarið við spurningunni. Smelltu á efnisgreinina sem inniheldur
+				<Utils.Explain>
+					Við sóttum textann sem fylgir vefsíðunni. Lestu yfir
+					textann og athugaðu hvort þú sjáir svarið við
+					spurningunni. Smelltu á efnisgreinina sem inniheldur
 					svarið.
-				</Atoms.Text.Para>
+				</Utils.Explain>
 				<View style={styles.topLine}>
-					<Image source={{ uri: article.source.logo }} style={styles.logo} />
+					<Image
+						source={{ uri: article.source.logo }}
+						style={styles.logo}
+					/>
 					<Text>{article.title}</Text>
 				</View>
 
 				{state.error ? (
 					<Atoms.Alerts.Ribbon
-						item={{ type: "danger", label: "Ekki tókst að sækja grein" }}
+						item={{
+							type: "danger",
+							label: "Ekki tókst að sækja grein",
+						}}
 					/>
 				) : (
 					state.paragraphs.map((text, i) => (
-						<TouchableOpacity onPress={() => handleSubmitParagraph(i)}>
-							<Atoms.Text.Para style={styles.textParagraph}>{text}</Atoms.Text.Para>
+						<TouchableOpacity
+							onPress={() => handleSubmitParagraph(i)}
+						>
+							<Atoms.Text.Para style={styles.textParagraph}>
+								{text}
+							</Atoms.Text.Para>
 						</TouchableOpacity>
 					))
 				)}

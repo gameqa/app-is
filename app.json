@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spurningar",
     "slug": "Spurningar",
-    "version": "1.0.3",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,7 +27,9 @@
         "backgroundColor": "#FFA800"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.spurningaris.Spurningar"
+      "package": "com.spurningaris.Spurningar",
+      "permissions": [],
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png",
