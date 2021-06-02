@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, SafeAreaView } from "react-native";
 import { IProps } from "./interface";
 import styles from "./styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { StoreState } from "../reducers";
 import { Atoms } from "../components";
 

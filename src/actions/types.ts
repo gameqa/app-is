@@ -9,6 +9,7 @@ import * as AuthCode from "./authCode";
 import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
 import * as PrizeCategory from "./prize";
+import * as Overlay from "./overlay";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -42,6 +43,8 @@ export enum ActionTypes {
 	fetchAnswersPerDay,
 	sendPushNotificationToken,
 	fetchPrizeCategories,
+	enqueOverlay,
+	dequeOverlay,
 }
 
 export type Actions =
@@ -75,4 +78,6 @@ export type Actions =
 	| AuthCode.Actions.SetAuthCodeLoadingAction
 	| ChartData.Actions.FetchAnswersPerDayAction
 	| PushNotification.Actions.SendPushNotificationTokenAction
-	| PrizeCategory.FetchPrizeCategoriesAction;
+	| PrizeCategory.FetchPrizeCategoriesAction
+	| Overlay.Actions.DequeOverlayAction
+	| Overlay.Actions.EnqueOverlayAction;

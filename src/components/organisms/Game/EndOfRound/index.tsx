@@ -3,7 +3,6 @@ import { View, Text, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../../";
 import { StoreState } from "../../../../reducers";
-import * as Services from "../../../../services";
 import * as Actions from "../../../../actions";
 import styles from "./styles";
 
@@ -14,8 +13,13 @@ const EndOfRound = () => {
 	);
 	const dispatch = useDispatch();
 
+	// fetch prize categories from API
+	useEffect(() => {
+		dispatch(Actions.PrizeCategory.fetchPrizeCategories());
+	}, [dispatch]);
+
 	return (
-		<ScrollView>
+		<View style={styles.outer}>
 			<Atoms.Text.Heading>Vel gert!</Atoms.Text.Heading>
 			<Atoms.Text.Para style={styles.para}>
 				Þú ert komin/n í Lvl {auth.level + 1} og ert númer{" "}

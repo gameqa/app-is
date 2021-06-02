@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Organisms } from "../../components";
-import { GameTypes } from "../../declerations";
+import { GameTypes, OverlayType } from "../../declerations";
 import styles from "./styles";
 import { ScrollView, View } from "react-native";
 import { ScrollRefType } from "./types";
@@ -39,6 +39,23 @@ const Game = () => {
 			dispatch(Actions.Auth.fetchUserFromToken());
 	}, [game.current]);
 
+	useEffect(() => {
+		if (game.current === undefined) return;
+		if (game.current !== GameTypes.completed) {
+			dispatch(
+				Actions.Overlay.enqueOverlay([OverlayType.levelProgress])
+			);
+		} else {
+			dispatch(
+				Actions.Overlay.enqueOverlay([
+					OverlayType.levelProgress,
+					OverlayType.confetti,
+					OverlayType.newPrize,
+				])
+			);
+		}
+	}, [game.current]);
+
 	return (
 		<View style={styles.outer}>
 			<LayoutWrapper>
@@ -49,7 +66,6 @@ const Game = () => {
 						(item) => item.type === game.current
 					).map(({ Component }) => <Component />)}
 			</LayoutWrapper>
-
 			<Atoms.Loaders.CenterBox
 				isLoading={game.isLoading}
 				onCancel={
