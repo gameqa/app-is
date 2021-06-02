@@ -49,11 +49,11 @@ const Game = () => {
 				<LayoutWrapper>
 					<Atoms.Loaders.CenterBox />
 					<Molecules.Users.Info {...auth} />
-					{Organisms.GameRounds.filter((item) => item.type === game.current).map(
-						({ Component }) => (
-							<Component />
-						)
-					)}
+					{Organisms.GameRounds.filter(
+						(item) => item.type === game.current
+					).map(({ Component }) => (
+						<Component />
+					))}
 				</LayoutWrapper>
 			</ScrollView>
 

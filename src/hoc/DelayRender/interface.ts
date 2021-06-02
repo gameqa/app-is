@@ -1,5 +1,6 @@
 import React from "react";
 
-export interface IProps {
+export interface Props {
 	children: React.ReactNode;
+	delayMS?: number;
 }
