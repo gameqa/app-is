@@ -25,7 +25,10 @@ const styles = StyleSheet.create({
 		marginLeft: 5,
 	},
 	outer: {
-		paddingBottom: 10,
+		paddingBottom: 25,
+		borderBottomColor: "#e8e8e8",
+		borderBottomWidth: 4,
+		marginBottom: 25,
 	},
 });
 
