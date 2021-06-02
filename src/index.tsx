@@ -38,7 +38,7 @@ export default function App() {
 			<Organisms.Notifications.Items />
 			<Routing.AuthStackNavigator />
 			<Routing.TabNavigator />
-			<Organisms.Game.Utils.AnnounceScreen />
+			<Organisms.Overlay />
 		</React.Fragment>
 	);
 }

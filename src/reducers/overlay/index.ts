@@ -1,8 +1,9 @@
 import { State } from "./interface";
 import { Actions, ActionTypes } from "../../actions";
+import { OverlayType } from "../../declerations";
 
 export const initialState: State = {
-	queue: [],
+	queue: [OverlayType.confetti],
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
