@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Utils } from "../";
 import { Atoms } from "../../..";
@@ -43,13 +43,13 @@ const ReviewAnswer = () => {
 	};
 
 	return (
-		<View>
+		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
-			<Utils.Explain>
+			<Atoms.Text.Para>
 				Annar notandi hefur merkt svarið við spurningunni í
 				efnisgreininni hér fyrir neðan. Nú þurfum við að athuga
 				hvort svarið sé rétt merkt.
-			</Utils.Explain>
+			</Atoms.Text.Para>
 			<Utils.SpanSelector
 				immutable={true}
 				{...state}
@@ -123,7 +123,7 @@ const ReviewAnswer = () => {
 					/>
 				</React.Fragment>
 			) : null}
-		</View>
+		</ScrollView>
 	);
 };
 

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View } from "react-native";
+import React from "react";
+import { View, Text, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../../";
 import { StoreState } from "../../../../reducers";
@@ -42,7 +42,7 @@ const EndOfRound = () => {
 					dispatch(Actions.Game.fetchCurrentGameRound())
 				}
 			/>
-		</View>
+		</ScrollView>
 	);
 };
 

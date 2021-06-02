@@ -14,7 +14,6 @@ const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
-	const scrollRef = useRef<ScrollRefType>(null);
 
 	// // comment out in production
 	// useEffect(() => {
@@ -38,9 +37,6 @@ const Game = () => {
 		// do not fetch user info if we have not progressed to next level
 		if (game.current !== GameTypes.completed)
 			dispatch(Actions.Auth.fetchUserFromToken());
-
-		// scroll to top when game changes
-		scrollRef.current?.scrollTo({ y: 0 });
 	}, [game.current]);
 
 	useEffect(() => {
@@ -62,18 +58,14 @@ const Game = () => {
 
 	return (
 		<View style={styles.outer}>
-			<ScrollView ref={scrollRef}>
-				<LayoutWrapper>
-					<Atoms.Loaders.CenterBox />
-					<Molecules.Users.Info {...auth} />
-					{Organisms.GameRounds.filter(
+			<LayoutWrapper>
+				<Atoms.Loaders.CenterBox />
+				<Molecules.Users.Info {...auth} />
+				{!game.isLoading &&
+					Organisms.GameRounds.filter(
 						(item) => item.type === game.current
-					).map(({ Component }) => (
-						<Component />
-					))}
-				</LayoutWrapper>
-			</ScrollView>
-
+					).map(({ Component }) => <Component />)}
+			</LayoutWrapper>
 			<Atoms.Loaders.CenterBox
 				isLoading={game.isLoading}
 				onCancel={

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Alert, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { Atoms } from "../../..";
 import styles from "./styles";
 import { Utils } from "../";
@@ -104,14 +104,14 @@ const ReviewQuestion = () => {
 	}, [items]);
 
 	return (
-		<View>
+		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
-			<Utils.Explain>
+			<Atoms.Text.Para style={styles.para}>
 				Áður en við reynum að finna svarið við þessari spurningu,
 				þá viljum við vera viss um að þetta sé góð spurning. Farðu
 				yfir tékklistann hér fyrir neðan og hakaðu við þau atriði
 				sem þú ert sammála.
-			</Utils.Explain>
+			</Atoms.Text.Para>
 			{items.map((item, i) => (
 				<Atoms.Cards.CheckListItem
 					{...item}
@@ -123,7 +123,7 @@ const ReviewQuestion = () => {
 				label="Staðfesta"
 				type="highlight"
 			/>
-		</View>
+		</ScrollView>
 	);
 };
 

@@ -5,6 +5,10 @@ import { IProps, SelectionStates } from "./interface";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../../../../services";
 import { Atoms, Organisms } from "../../../..";
+import {
+	setFirstWord,
+	setLastWord,
+} from "../../../../../actions/selectSpan";
 
 const SpanSelector = ({
 	firstWord,
@@ -14,10 +18,7 @@ const SpanSelector = ({
 	onSelectFirstWord,
 	onClearSelection,
 	onSelectLastWord,
-	onComplete,
 }: IProps) => {
-	const [canContinue, setCanContinue] = useState(false);
-
 	let selectionState: SelectionStates;
 
 	let action: ((v: number) => any) | undefined;
@@ -67,7 +68,6 @@ const SpanSelector = ({
 						"Ef valið er rétt, þá getur þú staðfest valið. Til þess að velja aftur þá getur þú hreinsað valið með því að smella hvar sem er á textann.",
 					type: "idea",
 				});
-				setCanContinue(selectionState === "clear-selection");
 		}
 	}, [selectionState, immutable]);
 
@@ -98,14 +98,6 @@ const SpanSelector = ({
 					</TouchableOpacity>
 				))}
 			</View>
-			{canContinue && !immutable ? (
-				<Atoms.Buttons.Base
-					label="Staðfesta"
-					type="highlight"
-					inactive={!canContinue}
-					onPress={onComplete}
-				/>
-			) : null}
 		</View>
 	);
 };
