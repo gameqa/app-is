@@ -3,10 +3,10 @@ import { ActionTypes } from "../types";
 
 export interface EnqueOverlayAction {
 	type: ActionTypes.enqueOverlay;
-	payload: OverlayType;
+	payload: OverlayType[];
 }
 
 export interface DequeOverlayAction {
-	type: ActionTypes.enqueOverlay;
+	type: ActionTypes.dequeOverlay;
 	payload: OverlayType;
 }

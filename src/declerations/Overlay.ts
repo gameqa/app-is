@@ -5,6 +5,6 @@ export enum OverlayType {
 }
 
 export interface OverlayItem {
-	type: OverlayItem;
+	type: OverlayType;
 	handlesHide?: boolean;
 }

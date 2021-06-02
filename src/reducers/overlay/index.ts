@@ -3,11 +3,22 @@ import { Actions, ActionTypes } from "../../actions";
 import { OverlayType } from "../../declerations";
 
 export const initialState: State = {
-	queue: [OverlayType.confetti],
+	queue: [],
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
+		case ActionTypes.dequeOverlay:
+			return {
+				...state,
+				queue: state.queue.splice(1),
+			};
+		case ActionTypes.enqueOverlay: {
+			return {
+				...state,
+				queue: [...state.queue, ...action.payload],
+			};
+		}
 		default:
 			return state;
 	}

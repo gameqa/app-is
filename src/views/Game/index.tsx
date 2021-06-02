@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Organisms } from "../../components";
-import { GameTypes } from "../../declerations";
+import { GameTypes, OverlayType } from "../../declerations";
 import styles from "./styles";
 import { ScrollView, View } from "react-native";
 import { ScrollRefType } from "./types";
@@ -41,6 +41,25 @@ const Game = () => {
 
 		// scroll to top when game changes
 		scrollRef.current?.scrollTo({ y: 0 });
+	}, [game.current]);
+
+	useEffect(() => {
+		if (game.current === undefined) return;
+		if (game.current !== GameTypes.completed) {
+			dispatch(
+				Actions.Overlay.enqueOverlay([
+					OverlayType.levelProgress,
+					OverlayType.confetti,
+				])
+			);
+		} else {
+			dispatch(
+				Actions.Overlay.enqueOverlay([
+					OverlayType.levelProgress,
+					OverlayType.confetti,
+				])
+			);
+		}
 	}, [game.current]);
 
 	return (
