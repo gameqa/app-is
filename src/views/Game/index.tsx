@@ -47,16 +47,13 @@ const Game = () => {
 		if (game.current === undefined) return;
 		if (game.current !== GameTypes.completed) {
 			dispatch(
-				Actions.Overlay.enqueOverlay([
-					OverlayType.levelProgress,
-					OverlayType.confetti,
-				])
+				Actions.Overlay.enqueOverlay([OverlayType.levelProgress])
 			);
 		} else {
 			dispatch(
 				Actions.Overlay.enqueOverlay([
 					OverlayType.levelProgress,
-					OverlayType.confetti,
+					OverlayType.newPrize,
 				])
 			);
 		}

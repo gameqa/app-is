@@ -1,13 +1,9 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
 import React, { useState, useEffect } from "react";
-import { Animated } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { View } from "react-native";
+import { useSelector } from "react-redux";
 import { StoreState } from "../../../reducers";
 import styles from "./styles";
 import ScreenItems, * as Screens from "./items";
-
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const Screen = () => {
 	const state = useSelector((state: StoreState) => state.overlay);
@@ -22,13 +18,9 @@ const Screen = () => {
 	}, [state.queue.length]);
 
 	return Screen ? (
-		<AnimatedBlurView
-			tint="default"
-			intensity={0}
-			style={styles.outer}
-		>
+		<View style={styles.outer}>
 			<Screen.Component />
-		</AnimatedBlurView>
+		</View>
 	) : null;
 };
 

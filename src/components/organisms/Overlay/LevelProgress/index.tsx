@@ -14,8 +14,8 @@ const AnnounceScreen = () => {
 	const [current, setCurrent] = useState(0);
 
 	React.useEffect(() => {
-		setTarget(game.currentRound / game.totalRounds);
-		setCurrent(Math.max(0, game.currentRound - 1) / game.totalRounds);
+		setTarget((game.currentRound - 1) / game.totalRounds);
+		setCurrent(Math.max(0, game.currentRound - 2) / game.totalRounds);
 	}, []);
 
 	React.useEffect(() => {

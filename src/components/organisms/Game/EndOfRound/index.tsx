@@ -1,11 +1,10 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Atoms, Organisms } from "../../../";
+import { Atoms } from "../../../";
 import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
 import styles from "./styles";
-import * as HOC from "../../../../hoc";
 
 const EndOfRound = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -13,6 +12,11 @@ const EndOfRound = () => {
 		(state: StoreState) => state.prize.prizeCategories
 	);
 	const dispatch = useDispatch();
+
+	// fetch prize categories from API
+	useEffect(() => {
+		dispatch(Actions.PrizeCategory.fetchPrizeCategories());
+	}, [dispatch]);
 
 	return (
 		<View style={styles.outer}>
