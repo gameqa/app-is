@@ -157,6 +157,7 @@ const SelectSpan = () => {
 					</>
 				)}
 			</View>
+		</View>
 	);
 };
 
