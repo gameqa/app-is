@@ -122,12 +122,12 @@ export default function index() {
 				}}
 			/>
 			<Atoms.Text.Heading style={{ marginBottom: 10 }}>
-				Vinir mínir
+				Samþykkt boð
 			</Atoms.Text.Heading>
 			{invites.length === 0 ? (
 				<Atoms.Alerts.Ribbon
 					item={{
-						label: "Það hefur enginn skráð sig enn",
+						label: "Þú hefur ekki boðið neinum ennþá",
 						type: "warning",
 					}}
 				/>

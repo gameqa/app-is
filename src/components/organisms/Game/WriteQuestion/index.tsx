@@ -61,10 +61,10 @@ const WriteQuestion = () => {
 			/>
 			<Atoms.Alerts.Ribbon item={error} />
 			<Utils.Explain>
-				Skrifaðu spurningu sem aðrir notendur geta fundið svarið
-				við. Reyndu að velja spurningu sem er ekki háð tilfinningum
-				fólks eða hvaða dag vikunnar er spurt. Einnig er best að
-				spurningarnar séu settar fram á óformlegu máli.
+				Skrifaðu spurningu sem aðrir notendur geta googlað svarið
+				við á íslensku. Reyndu að velja spurningu sem er ekki háð
+				tilfinningum fólks eða hvaða dag vikunnar er spurt. Einnig
+				er best að spurningarnar séu settar fram á óformlegu máli.
 			</Utils.Explain>
 			<Atoms.Text.Para style={styles.marginTop}>
 				Handhófskenndar hugmyndir sem þú getur spurt útí:{" "}
