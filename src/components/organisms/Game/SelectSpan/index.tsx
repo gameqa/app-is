@@ -70,7 +70,7 @@ const SelectSpan = () => {
 						onPress: () => markKeyAsSeen(),
 					},
 					{
-						text: "Já",
+						text: "Áfram",
 						onPress: () => handleCompleteStep(),
 					},
 				]
@@ -105,7 +105,7 @@ const SelectSpan = () => {
 					Þessi efnisgrein var valin af öðrum notanda sem telur
 					að svarið sé hér að finna. Nú þurfum við að vita hvort
 					hluti af textanum svari spurningunni. Ef svo er, þá
-					þurfum við að velja réttu orðin sem mynda svarið.
+					þarft þú að velja réttu orðin sem mynda svarið.
 				</Atoms.Text.Para>
 				<Utils.SpanSelector
 					paragraph={state.paragraph}
