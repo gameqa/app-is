@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import store from "../../../store";
 import {
+	OverlayType,
 	StartCompletedViewRoundFromAPI,
 	StartGoogleSearchRoundFromAPI,
 	StartSelectSpanRoundFromAPI,
@@ -98,6 +99,7 @@ export const fetchCurrentGameRound = () =>
 				type: ActionTypes.setGameLoadingState,
 				payload: true,
 			});
+
 			const { data } = await Api.get<TaskFromBackend>(
 				"/api/v1/game_rounds/current"
 			);
@@ -126,14 +128,15 @@ export const fetchCurrentGameRound = () =>
  */
 export const gameActionWrapperFunc = (
 	cb: (d: Dispatch) => Promise<AxiosResponse<TaskFromBackend>>
-) => {
-	return async function (_dispatch: Dispatch) {
+) =>
+	async function (dispatch: Dispatch) {
 		try {
-			_dispatch<SetGameLoadingStateAction>({
+			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
 				payload: true,
 			});
-			const { data } = await cb(_dispatch);
+
+			const { data } = await cb(dispatch);
 			console.log(`data`, data);
 			__handleUpdateTask(data);
 		} catch (e) {
@@ -141,13 +144,12 @@ export const gameActionWrapperFunc = (
 			store.dispatch(fetchCurrentGameRound() as any);
 		} finally {
 			// release loading in both cases
-			_dispatch<SetGameLoadingStateAction>({
+			dispatch<SetGameLoadingStateAction>({
 				type: ActionTypes.setGameLoadingState,
 				payload: false,
 			});
 		}
 	};
-};
 
 export const submitQuestion = (
 	gameRoundId: string,
