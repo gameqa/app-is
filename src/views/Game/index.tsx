@@ -43,7 +43,7 @@ const Game = () => {
 		if (game.current === undefined) return;
 		if (game.current !== GameTypes.completed) {
 			dispatch(
-				Actions.Overlay.enqueOverlay([OverlayType.levelProgress])
+				Actions.Overlay.enqueOverlay([OverlayType.announceGame])
 			);
 		} else {
 			dispatch(
