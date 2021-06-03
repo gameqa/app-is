@@ -67,10 +67,10 @@ export default function index() {
 			<Molecules.Users.Info {...auth} />
 			<Atoms.Text.Para style={styles.paragraph}>
 				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða
-				vinum að sækja appið. Þegar notandi býr til aðgang eftir að
-				þú býður honum þá birtist nafnið hans hér. Þegar þú hefur
+				vinum að sækja appið. Þegar notandi samþykkir boðið þá 
+				birtist nafnið hans hér. Þegar þú hefur
 				boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
-				áhrifavaldur. Smelltu á hlekkinn til að afrita hann.
+				áhrifavaldur.
 			</Atoms.Text.Para>
 			<TouchableOpacity
 				onPress={handleCopy}
