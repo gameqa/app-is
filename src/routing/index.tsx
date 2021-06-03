@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-	DefaultTheme,
 	NavigationContainer,
 	NavigationContainerRef,
 } from "@react-navigation/native";
@@ -14,6 +13,7 @@ import * as Services from "../services";
 import { useSelector } from "react-redux";
 import { StoreState } from "../reducers";
 import * as Hooks from "../hooks";
+import { TouchableOpacity } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
@@ -79,12 +79,19 @@ export const TabNavigator = () => {
 			<Tab.Navigator
 				screenOptions={({ route, navigation }) => ({
 					tabBarIcon: ({ focused }) => (
-						<FontAwesome
-							size={17}
-							name={icons.mapTabToIcon[route.name as Tabs]}
-							onPress={() => null}
-							color={focused ? activeColor : inActiveColor}
-						/>
+						<TouchableOpacity
+							onPress={() => navigation.navigate(route.name)}
+						>
+							<FontAwesome
+								size={17}
+								name={
+									icons.mapTabToIcon[route.name as Tabs]
+								}
+								color={
+									focused ? activeColor : inActiveColor
+								}
+							/>
+						</TouchableOpacity>
 					),
 				})}
 				tabBarOptions={{
