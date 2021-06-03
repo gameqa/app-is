@@ -19,7 +19,7 @@ const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 		value: false,
 	},
 	{
-		title: "Hvernig er málfarið?",
+		title: "Hvernig er málfar spurningarinnar?",
 		description:
 			"Mér finnst málfarið vera í lagi. Það er hvorki lélegt né of formlegt.",
 		value: false,
