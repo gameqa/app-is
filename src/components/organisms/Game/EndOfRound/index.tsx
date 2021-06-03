@@ -19,7 +19,7 @@ const EndOfRound = () => {
 	}, [dispatch]);
 
 	return (
-		<View style={styles.outer}>
+		<ScrollView style={styles.outer}>
 			<Atoms.Text.Heading>Vel gert!</Atoms.Text.Heading>
 			<Atoms.Text.Para style={styles.para}>
 				Þú ert komin/n í Lvl {auth.level + 1} og ert númer{" "}

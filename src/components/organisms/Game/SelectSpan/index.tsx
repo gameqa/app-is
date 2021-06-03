@@ -138,15 +138,16 @@ const SelectSpan = () => {
 						/>
 					</React.Fragment>
 				) : (
-					<>
-						{state.firstWord && state.lastWord && (
+					<React.Fragment>
+						{state.firstWord !== undefined &&
+						state.lastWord !== undefined ? (
 							<Atoms.Buttons.Base
 								label="Staðfesta"
 								type="highlight"
 								inactive={false}
 								onPress={() => handleSubmit()}
 							/>
-						)}
+						) : null}
 						<React.Fragment>
 							<Atoms.Buttons.Base
 								label="Til baka"
@@ -154,7 +155,7 @@ const SelectSpan = () => {
 								onPress={toogleSelectionState}
 							/>
 						</React.Fragment>
-					</>
+					</React.Fragment>
 				)}
 			</View>
 		</View>

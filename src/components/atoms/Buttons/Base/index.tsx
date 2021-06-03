@@ -19,7 +19,9 @@ const BaseButton = (props: IProps) => {
 			activeOpacity={0.15}
 			onPress={cb}
 		>
-			<Text style={{ color: Services.Colors.MapToLight[type] }}>{label}</Text>
+			<Text style={{ color: Services.Colors.MapToLight[type] }}>
+				{label}
+			</Text>
 		</TouchableOpacity>
 	);
 };

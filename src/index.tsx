@@ -8,6 +8,8 @@ import * as Views from "./views";
 import { StatusBar } from "react-native";
 import { OverlayType } from "./declerations";
 
+console.disableYellowBox = true;
+
 export default function App() {
 	const dispatch = useDispatch();
 	const auth = useSelector((state: StoreState) => state.auth);

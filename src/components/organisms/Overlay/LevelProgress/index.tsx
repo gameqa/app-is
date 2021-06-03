@@ -45,7 +45,7 @@ const AnnounceScreen = () => {
 	}, [target, current]);
 
 	return (
-		<View style={styles.outer}>
+		<View style={styles.outer} pointerEvents="box-none">
 			<View style={styles.middle}>
 				<Text style={styles.percentage}>
 					{Math.round(current * 100)}%

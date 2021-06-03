@@ -18,7 +18,7 @@ const Screen = () => {
 	}, [state.queue.length]);
 
 	return Screen ? (
-		<View style={styles.outer}>
+		<View style={styles.outer} pointerEvents="box-none">
 			<Screen.Component />
 		</View>
 	) : null;

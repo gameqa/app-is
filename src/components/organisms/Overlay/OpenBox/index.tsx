@@ -66,7 +66,7 @@ const OpenBox = () => {
 				<View style={styles.chestContainer}>
 					<Image
 						source={{
-							uri: "https://lh3.googleusercontent.com/proxy/GvuKlGCk0DsM-U_IIXE4pDzEn1xbHK3ijvpZZIZK3IXyKsZfrCRKEjZO1KcS90-XsXYm10XGdbkygLfernFlZl96Kizsvoe0p0ElLRZjv8PuQSggOWlfPF1EmFrJ9sAfvApVQH4kp3w",
+							uri: "https://dunb17ur4ymx4.cloudfront.net/wysiwyg/550688/7d2d3a13aa181518d8ac81fd78b0febeafa8c7e1.png",
 						}}
 						style={styles.image}
 						resizeMode="contain"
