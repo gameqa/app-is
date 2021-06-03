@@ -1,5 +1,11 @@
 import React, { useCallback, useRef, useEffect } from "react";
-import { SafeAreaView, Text, View, TouchableOpacity, Keyboard } from "react-native";
+import {
+	SafeAreaView,
+	Text,
+	View,
+	TouchableOpacity,
+	Keyboard,
+} from "react-native";
 import SmoothPinCodeInput from "react-native-smooth-pincode-input";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
@@ -28,7 +34,10 @@ const AuthCode = () => {
 		[]
 	);
 
-	const clearError = useCallback(() => dispatch(Actions.AuthCode.clearError()), []);
+	const clearError = useCallback(
+		() => dispatch(Actions.AuthCode.clearError()),
+		[]
+	);
 
 	const inputRef = useRef(null);
 
@@ -37,6 +46,10 @@ const AuthCode = () => {
 		inputRef?.current?.shake();
 		clearError();
 	}, [inputRef, state.errorMessage, clearError]);
+
+	useEffect(() => {
+		dispatch(Actions.AuthCode.writeAuthCode(""));
+	}, [auth._id]);
 
 	return (
 		<TouchableOpacity
@@ -48,7 +61,8 @@ const AuthCode = () => {
 				<View style={styles.topBox}>
 					<Text style={styles.title}>Staðfestingarkóði</Text>
 					<Atoms.Text.Para style={styles.para}>
-						Staðfestingakóði hefur verið sendur á netfangið {auth.email}
+						Staðfestingakóði hefur verið sendur á netfangið{" "}
+						{auth.email}
 					</Atoms.Text.Para>
 				</View>
 				{/* Do not remove empty view, its for flex box styling */}
@@ -78,8 +92,13 @@ const AuthCode = () => {
 						onFulfill={handleSendVerificationCode}
 					/>
 				</View>
-				<TouchableOpacity style={styles.touchable} onPress={handleLogOut}>
-					<Atoms.Text.Para style={styles.greyText}>Útskrá</Atoms.Text.Para>
+				<TouchableOpacity
+					style={styles.touchable}
+					onPress={handleLogOut}
+				>
+					<Atoms.Text.Para style={styles.greyText}>
+						Útskrá
+					</Atoms.Text.Para>
 				</TouchableOpacity>
 
 				<Atoms.Loaders.CenterBox isLoading={state.isLoading} />
