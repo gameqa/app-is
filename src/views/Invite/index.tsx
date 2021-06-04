@@ -65,13 +65,13 @@ export default function index() {
 	return (
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />
-			<Atoms.Text.Para style={styles.paragraph}>
+			<Atoms.Text.Collapsable style={styles.paragraph}>
 				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða
 				vinum að sækja appið. Þegar notandi samþykkir boðið þá 
 				birtist nafnið hans hér. Þegar þú hefur
 				boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
 				áhrifavaldur.
-			</Atoms.Text.Para>
+			</Atoms.Text.Collapsable>
 			<TouchableOpacity
 				onPress={handleCopy}
 				style={{
