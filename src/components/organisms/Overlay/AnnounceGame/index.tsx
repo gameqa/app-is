@@ -42,10 +42,7 @@ const AnnounceGame = () => {
 	}, []);
 
 	return (
-		<Animated.View
-			style={{ ...styles.outer, opacity: opacityValue }}
-			pointerEvents="box-none"
-		>
+		<Animated.View style={{ ...styles.outer, opacity: opacityValue }}>
 			<Image
 				source={{
 					uri: "https://i.imgur.com/CZVDHd9.png",
