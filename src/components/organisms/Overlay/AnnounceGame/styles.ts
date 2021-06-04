@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Colors } from "../../../../services";
 
 export const styles = StyleSheet.create({
 	outer: {
@@ -9,12 +10,10 @@ export const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0,
+		backgroundColor: Colors.MapToDark.danger,
 	},
-	text: {
-		color: "#8950fc",
-		fontWeight: "900",
-		fontSize: 30,
-		textShadowColor: "black",
-		textShadowRadius: 3,
+	image: {
+		width: "95%",
+		height: 400,
 	},
 });

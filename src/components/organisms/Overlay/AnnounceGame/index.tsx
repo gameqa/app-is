@@ -1,32 +1,58 @@
 import React, { useEffect, useRef } from "react";
-import { Text, Animated } from "react-native";
+import { Animated, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../../../actions";
 import { StoreState } from "../../../../reducers";
 import { styles } from "./styles";
-import { getGameName } from "./utils";
 
 const AnnounceGame = () => {
 	const dispatch = useDispatch();
-	const game = useSelector((state: StoreState) => state.game.current);
+
+	const opacityValue = useRef(new Animated.Value(0)).current;
+	// const game = useSelector((state: StoreState) => state.game.current);
 
 	useEffect(() => {
-		const DELAY = 3000;
+		const DISSAPEAR_DELAY = 2750;
+		const ANIM_DURATION = 350;
+		const OPACITY_TARGET = 1;
+		const BUFFER = 100;
 
-		const t = setTimeout(() => {
+		Animated.timing(opacityValue, {
+			toValue: OPACITY_TARGET,
+			duration: ANIM_DURATION,
+			useNativeDriver: false,
+		}).start();
+
+		const t1 = setTimeout(() => {
+			Animated.timing(opacityValue, {
+				toValue: 0,
+				duration: ANIM_DURATION,
+				useNativeDriver: false,
+			}).start();
+		}, DISSAPEAR_DELAY - ANIM_DURATION - BUFFER);
+
+		const t2 = setTimeout(() => {
 			dispatch(Actions.Overlay.dequeOverlay());
-		}, DELAY);
+		}, DISSAPEAR_DELAY);
 
 		return () => {
-			clearTimeout(t);
+			clearTimeout(t1);
+			clearTimeout(t2);
 		};
 	}, []);
 
-	if (!game) return <></>;
-
 	return (
-		<Animated.View style={styles.outer} pointerEvents="box-none">
-			<Text style={styles.text}>{getGameName(game)}</Text>
+		<Animated.View
+			style={{ ...styles.outer, opacity: opacityValue }}
+			pointerEvents="box-none"
+		>
+			<Image
+				source={{
+					uri: "https://i.imgur.com/CZVDHd9.png",
+				}}
+				style={styles.image}
+				resizeMode="contain"
+			/>
 		</Animated.View>
 	);
 };

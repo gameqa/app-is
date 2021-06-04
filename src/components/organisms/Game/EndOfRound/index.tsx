@@ -42,7 +42,7 @@ const EndOfRound = () => {
 					dispatch(Actions.Game.fetchCurrentGameRound())
 				}
 			/>
-		</View>
+		</ScrollView>
 	);
 };
 

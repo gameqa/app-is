@@ -20,7 +20,6 @@ const OpenBox = () => {
 
 	// check for new prizes
 	useEffect(() => {
-		console.log(prize.prizeCategories);
 		const catNameToKey = (name: string) => `${auth._id}:${name}`;
 
 		const hasSeen = async (name: string) => {
@@ -60,6 +59,7 @@ const OpenBox = () => {
 	const category = newCategories[0];
 
 	if (!category) return <React.Fragment />;
+
 	return (
 		<View style={styles.outer}>
 			<View style={styles.inner}>
