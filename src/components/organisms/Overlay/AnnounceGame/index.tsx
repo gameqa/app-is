@@ -2,14 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { Animated, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../../../actions";
-import { StoreState } from "../../../../reducers";
+import * as Services from "../../../../services";
+import * as utils from "./utils";
 import { styles } from "./styles";
+import { StoreState } from "../../../../reducers";
 
 const AnnounceGame = () => {
 	const dispatch = useDispatch();
 
 	const opacityValue = useRef(new Animated.Value(0)).current;
-	// const game = useSelector((state: StoreState) => state.game.current);
+	const game = useSelector((state: StoreState) => state.game.current);
 
 	useEffect(() => {
 		const DISSAPEAR_DELAY = 2750;
@@ -22,6 +24,14 @@ const AnnounceGame = () => {
 			duration: ANIM_DURATION,
 			useNativeDriver: false,
 		}).start();
+
+		Services.Sounds.play("new-task")
+			.then(() => {
+				console.log(`4`, 4);
+			})
+			.catch((e) => {
+				console.log(`e`, e);
+			});
 
 		const t1 = setTimeout(() => {
 			Animated.timing(opacityValue, {
@@ -43,13 +53,15 @@ const AnnounceGame = () => {
 
 	return (
 		<Animated.View
-			style={{ ...styles.outer, opacity: opacityValue }}
+			style={{
+				...styles.outer,
+				opacity: opacityValue,
+				backgroundColor: utils.mapToColor(game),
+			}}
 			pointerEvents="box-none"
 		>
 			<Image
-				source={{
-					uri: "https://i.imgur.com/CZVDHd9.png",
-				}}
+				source={utils.mapToImage(game)}
 				style={styles.image}
 				resizeMode="contain"
 			/>

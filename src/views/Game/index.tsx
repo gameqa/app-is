@@ -49,12 +49,13 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([
 					OverlayType.levelProgress,
+					OverlayType.announceGame,
 					OverlayType.confetti,
 					OverlayType.newPrize,
 				])
 			);
 		}
-	}, [game.current]);
+	}, [game.lastLoaded]);
 
 	return (
 		<View style={styles.outer}>
