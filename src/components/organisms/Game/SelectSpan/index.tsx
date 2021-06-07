@@ -99,7 +99,7 @@ const SelectSpan = () => {
 				flex: 1,
 			}}
 		>
-			<View>
+			<ScrollView>
 				<Utils.QuestionIs question={state.text} />
 				<Atoms.Text.Para>
 					Þessi efnisgrein var valin af öðrum notanda sem telur
@@ -122,7 +122,7 @@ const SelectSpan = () => {
 					lastWord={state.lastWord}
 					immutable={!isSelectingSpan}
 				/>
-			</View>
+			</ScrollView>
 			<View>
 				{!isSelectingSpan ? (
 					<React.Fragment>
