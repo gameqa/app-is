@@ -51,12 +51,12 @@ const Game = () => {
 				Actions.Overlay.enqueOverlay([
 					OverlayType.announceGame,
 					OverlayType.levelProgress,
-					OverlayType.confetti,
+					OverlayType.announceGame,
 					OverlayType.newPrize,
 				])
 			);
 		}
-	}, [game.current]);
+	}, [game.lastLoaded]);
 
 	return (
 		<View style={styles.outer}>

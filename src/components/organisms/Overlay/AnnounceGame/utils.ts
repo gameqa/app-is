@@ -1,20 +1,41 @@
 import { GameTypes } from "../../../../declerations";
+import { Colors } from "../../../../services";
+import * as Statics from "../../../../static";
 
-export const getGameName = (type: GameTypes) => {
+export const mapToImage = (type?: GameTypes) => {
 	switch (type) {
 		case GameTypes.writeQuestion:
-			return "BÚA TIL SPURNINGU";
+			return Statics.GameRounds.WriteQuestion;
 		case GameTypes.questionQualityAssurance:
-			return "FARA YFIR SPURNINGU";
+			return Statics.GameRounds.VerifyQuestion;
 		case GameTypes.submitArticle:
-			return "FINNA SPURNINGU";
+			return Statics.GameRounds.GoogleSearch;
 		case GameTypes.verifyAnswerLocation:
-			return "FINNA SVAR";
+			return Statics.GameRounds.SelectSpan;
 		case GameTypes.verifyAnswerSpan:
-			return "STAÐFESTA SVAR";
-		case GameTypes.answerQualityAssurance:
-			return "STAÐFESTA SVAR";
+			return Statics.GameRounds.ReviewSpan;
+		case GameTypes.completed:
+			return Statics.GameRounds.EndOfRound;
 		default:
-			return "";
+			return Statics.GameRounds.WriteQuestion;
+	}
+};
+
+export const mapToColor = (type?: GameTypes) => {
+	switch (type) {
+		case GameTypes.writeQuestion:
+			return Colors.MapToDark.success;
+		case GameTypes.questionQualityAssurance:
+			return Colors.MapToDark.danger;
+		case GameTypes.submitArticle:
+			return Colors.MapToDark.highlight;
+		case GameTypes.verifyAnswerLocation:
+			return Colors.MapToDark.warning;
+		case GameTypes.verifyAnswerSpan:
+			return "#549cec";
+		case GameTypes.completed:
+			return "#b2f448";
+		default:
+			return Colors.MapToDark.danger;
 	}
 };

@@ -8,6 +8,7 @@ import * as Actions from "../../../../actions";
 import styles from "./styles";
 import Confetti from "../Confetti";
 import { Atoms } from "../../..";
+import { Sounds } from "../../../../services";
 
 const OpenBox = () => {
 	// categories the user has not seen yeat
@@ -55,6 +56,10 @@ const OpenBox = () => {
 				// do nothing on errror
 			});
 	}, [auth.level, prize.prizeCategories, auth._id]);
+
+	useEffect(() => {
+		if (newCategories.length > 0) Sounds.play("open-chest");
+	}, [newCategories]);
 
 	const category = newCategories[0];
 
