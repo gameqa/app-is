@@ -31,6 +31,8 @@ const SpanSelector = ({
 
 	const handleClick = useCallback(
 		(i) => {
+			if (immutable) return;
+
 			if (firstWord === undefined) {
 				onSelectFirstWord(i);
 				firstWord = lastWord = -1;
@@ -44,7 +46,7 @@ const SpanSelector = ({
 				setSelectionState("select-first");
 			}
 		},
-		[firstWord, lastWord]
+		[firstWord, lastWord, immutable]
 	);
 
 	if (immutable) action = () => null;

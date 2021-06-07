@@ -35,9 +35,8 @@ const Game = () => {
 				clearInterval(interval);
 			};
 		}
-		// do not fetch user info if we have not progressed to next level
-		if (game.current !== GameTypes.completed)
-			dispatch(Actions.Auth.fetchUserFromToken());
+
+		dispatch(Actions.Auth.fetchUserFromToken());
 	}, [game.current]);
 
 	useEffect(() => {
