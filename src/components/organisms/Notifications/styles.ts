@@ -3,11 +3,10 @@ import { StyleSheet } from "react-native";
 const style = StyleSheet.create({
 	outer: {
 		position: "absolute",
-		marginHorizontal: 10,
-		marginVertical: 10,
-		top: 0,
-		right: 0,
+		zIndex: 20,
 		left: 0,
+		right: 0,
+		marginHorizontal: 10,
 	},
 });
 

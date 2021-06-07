@@ -1,6 +1,5 @@
-import { HookSignedNotification } from "../../components/organisms/Notifications/interface";
+import { Notification } from "../../declerations";
 
 export interface State {
-	priority?: HookSignedNotification;
-	list: HookSignedNotification[];
+	notifications: Notification[];
 }

@@ -29,9 +29,7 @@ export enum ActionTypes {
 	selectSecondWordIndexInParagraph,
 	clearIndexRangeInParagraph,
 	addNotificationItem,
-	addPriorityNotificationItem,
-	clearNotificationsByHookId,
-	clearNotificationItemsById,
+	clearNotifications,
 	writeGoogleQuery,
 	fetchArticlesQuery,
 	setGoogleSearchError,
@@ -65,9 +63,7 @@ export type Actions =
 	| SelectSpan.Actions.SelectFirstWordIndexInParagraphAction
 	| SelectSpan.Actions.SelectSecondWordIndexInParagraphAction
 	| Notifications.Actions.AddNotificationItemAction
-	| Notifications.Actions.AddPriorityNotificationItemAction
-	| Notifications.Actions.ClearNotificationItemsByIdAction
-	| Notifications.Actions.ClearNotificationsByHookIdAction
+	| Notifications.Actions.ClearNotifications
 	| GoogleSearch.Actions.WriteGoogleQueryAction
 	| GoogleSearch.Actions.SetSearchErrorAction
 	| GoogleSearch.Actions.FetchArticlesQueryAction

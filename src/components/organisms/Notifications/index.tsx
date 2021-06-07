@@ -6,16 +6,17 @@ import { useSelector } from "react-redux";
 import { StoreState } from "../../../reducers";
 
 export const Items = () => {
-	const state = useSelector((state: StoreState) => state.notification);
+	const notifications = useSelector(
+		(state: StoreState) => state.notification.notifications
+	);
+
 	return (
 		<SafeAreaView style={styles.outer}>
-			{state.priority ? <NotiCard {...state.priority} /> : null}
-			{state.list.map((item) => (
-				<NotiCard {...item} />
-			))}
+			{notifications.length > 0 ? (
+				<NotiCard {...notifications[0]} />
+			) : undefined}
 		</SafeAreaView>
 	);
 };
 
-export * as Hooks from "./Hooks";
 export * from "./interface";

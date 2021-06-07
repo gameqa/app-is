@@ -1,5 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { Atoms } from "../../..";
@@ -14,15 +14,24 @@ const UsersInfo = (user: User) => {
 	const ratio = (game.currentRound - 1) / game.totalRounds;
 	const BASE_RATIO = 0.015;
 
+	useEffect(() => {
+		console.log(user.level);
+	}, [user.level]);
+
 	return (
 		<View style={styles.outer}>
 			{/* The avatar and level info */}
 			<View style={styles.row}>
 				<Atoms.Users.Avatar {...user} />
-				<View style={[styles.fullWidth, styles.userLevelContainer]}>
-					<Atoms.Text.Heading>{user.username}</Atoms.Text.Heading>
+				<View
+					style={[styles.fullWidth, styles.userLevelContainer]}
+				>
+					<Atoms.Text.Heading>
+						{user.username}
+					</Atoms.Text.Heading>
 					<Atoms.Text.Para>
-						Lvl {user.level} {Services.UserLevels.mapLevelToString(user.level)}
+						Lvl {user.level}{" "}
+						{Services.UserLevels.mapLevelToString(user.level)}
 					</Atoms.Text.Para>
 					<Atoms.Text.Para>
 						#{user.scoreCard.hiscoreRank} á stigatöflunni
@@ -32,7 +41,8 @@ const UsersInfo = (user: User) => {
 			{/* Level progress info */}
 			<View style={styles.textOuter}>
 				<Atoms.Text.Para>
-					{ratio < 0 ? 0 : Math.round(100 * ratio)}% að Lvl {user.level + 1}
+					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}
+					% að Lvl {user.level + 1}
 				</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome
@@ -46,12 +56,14 @@ const UsersInfo = (user: User) => {
 						color={Services.Colors.MapToDark["warning"]}
 					/>
 					<Atoms.Text.Para style={styles.nextLevel}>
-						{Services.UserLevels.mapLevelToString(user.level + 1)}
+						{Services.UserLevels.mapLevelToString(
+							user.level + 1
+						)}
 					</Atoms.Text.Para>
 				</View>
 			</View>
 			<Atoms.Charts.ProgressBar
-				ratio={ratio <= 0 ? BASE_RATIO : ratio}
+				ratio={ratio <= 0 || ratio == 1 ? BASE_RATIO : ratio}
 				label=""
 				color="success"
 			/>

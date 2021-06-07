@@ -3,9 +3,9 @@ export interface IProps {
 	lastWord?: number;
 	immutable?: boolean;
 	paragraph: string;
-	onSelectLastWord?: (lastWord: number) => void;
-	onSelectFirstWord?: (firstWord: number) => void;
-	onClearSelection?: () => void;
+	onSelectLastWord: (lastWord: number) => void;
+	onSelectFirstWord: (firstWord: number) => void;
+	onClearSelection: () => void;
 }
 
 export type SelectionStates =

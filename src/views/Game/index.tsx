@@ -17,7 +17,7 @@ const Game = () => {
 
 	// // comment out in production
 	// useEffect(() => {
-	// 	const desired = GameTypes.questionQualityAssurance;
+	// 	const desired = GameTypes.verifyAnswerSpan;
 	// 	if (desired !== game.current)
 	// 		dispatch(Actions.Game.fetchCurrentGameRound());
 	// }, [game.lastLoaded]);
@@ -35,9 +35,8 @@ const Game = () => {
 				clearInterval(interval);
 			};
 		}
-		// do not fetch user info if we have not progressed to next level
-		if (game.current !== GameTypes.completed)
-			dispatch(Actions.Auth.fetchUserFromToken());
+
+		dispatch(Actions.Auth.fetchUserFromToken());
 	}, [game.current]);
 
 	useEffect(() => {
@@ -55,6 +54,7 @@ const Game = () => {
 		} else {
 			dispatch(
 				Actions.Overlay.enqueOverlay([
+					OverlayType.announceGame,
 					OverlayType.levelProgress,
 					OverlayType.announceGame,
 					OverlayType.newPrize,

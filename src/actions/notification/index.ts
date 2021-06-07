@@ -1,25 +1,14 @@
-import { HookSignedNotification } from "../../components/organisms/Notifications";
+import { Notification } from "../../declerations";
 import { ActionTypes } from "../types";
 import {} from "./interface";
 
-export const addNotificationItem = (payload: HookSignedNotification) => ({
+export const addNotificationItem = (payload: Notification) => ({
 	type: ActionTypes.addNotificationItem,
 	payload,
 });
 
-export const setPriorityNotificationItem = (payload: HookSignedNotification) => ({
-	type: ActionTypes.addPriorityNotificationItem,
-	payload,
-});
-
-export const clearNotificationsByHookId = (payload: string) => ({
-	type: ActionTypes.clearNotificationsByHookId,
-	payload,
-});
-
-export const clearNotificationsById = (payload: string) => ({
-	type: ActionTypes.clearNotificationItemsById,
-	payload,
+export const clearNotifications = () => ({
+	type: ActionTypes.clearNotifications,
 });
 
 export * as Actions from "./interface";
