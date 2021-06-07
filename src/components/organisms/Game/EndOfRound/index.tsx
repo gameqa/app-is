@@ -20,7 +20,7 @@ const EndOfRound = () => {
 
 	return (
 		<ScrollView style={styles.outer}>
-			<Atoms.Text.Heading>Vel gert!</Atoms.Text.Heading>
+			<Atoms.Text.Heading>Vel gert! 👏</Atoms.Text.Heading>
 			<Atoms.Text.Para style={styles.para}>
 				Þú ert komin/n í Lvl {auth.level + 1} og ert númer{" "}
 				{auth.scoreCard.hiscoreRank} á stigatöflunni. Því meira sem
@@ -30,7 +30,7 @@ const EndOfRound = () => {
 			<Atoms.Text.Para style={styles.para}>
 				Allar spurningarnar og svörin sem þú býrð til nýtast til
 				þess að kenna gervigreind að finna svör við spurningum á
-				íslensku.
+				íslensku.🤖🇮🇸
 			</Atoms.Text.Para>
 			{prizeCategories.map((item) => (
 				<Atoms.Cards.PrizeCategory {...item} />

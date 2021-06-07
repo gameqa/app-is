@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
@@ -6,7 +6,7 @@ import { StoreState } from "../../../../reducers";
 import styles from "./styles";
 import * as Actions from "../../../../actions";
 import { submitQuestion } from "../../../../actions/game";
-import { Alert } from "../../../../declerations";
+import { Alert, OverlayType } from "../../../../declerations";
 import { Utils } from "../";
 
 const WriteQuestion = () => {
@@ -61,15 +61,9 @@ const WriteQuestion = () => {
 			/>
 			<Atoms.Alerts.Ribbon item={error} />
 			<Utils.Explain>
-				Skrifaðu spurningu sem aðrir notendur geta googlað svarið
-				við á íslensku. Reyndu að velja spurningu sem er ekki háð
-				tilfinningum fólks eða hvaða dag vikunnar er spurt. Einnig
-				er best að spurningarnar séu settar fram á óformlegu máli.
+				Sendu inn spurningu sem aðrir notendur geta googlað svarið
+				við á íslensku. 🧑🔎🇮🇸
 			</Utils.Explain>
-			<Atoms.Text.Para style={styles.marginTop}>
-				Handhófskenndar hugmyndir sem þú getur spurt útí:{" "}
-				{state.ideaWords.join(", ")}
-			</Atoms.Text.Para>
 			<View style={styles.marginTop}>
 				<Atoms.Inputs.Text
 					value={state.question}
@@ -78,18 +72,19 @@ const WriteQuestion = () => {
 					props={{
 						multiline: true,
 						numberOfLines: 3,
-						style: { height: 75 },
+						style: { height: 110 },
 						returnKeyType: "send",
 						onSubmitEditing: handleSubmit,
 					}}
 				/>
 			</View>
 
-			<View style={[styles.flex, styles.justEnd]}>
-				<Atoms.Buttons.Base
-					label="Senda"
+			<View style={[styles.flex, styles.alignEnd]}>
+				<Atoms.Buttons.Emoji
+					emoji="🚀"
 					onPress={handleSubmit}
 					type="highlight"
+					size={70}
 				/>
 			</View>
 		</View>

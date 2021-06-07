@@ -12,11 +12,9 @@ const CenterBoxLoader = ({ isLoading, onCancel }: IProps) => {
 		<View style={styles.outer}>
 			{onCancel !== undefined ? (
 				<TouchableOpacity onPress={onCancel} style={styles.cancel}>
-					<FontAwesome
-						name="times"
-						color={Colors.MapToLight.warning}
-					/>
-					<Text style={styles.cancelText}>Hætta við leit</Text>
+					<Text style={styles.cancelText}>
+						Hætta við leit 🙅‍♀️
+					</Text>
 				</TouchableOpacity>
 			) : null}
 			<View style={styles.inner}>

@@ -44,53 +44,24 @@ const ReviewAnswer = () => {
 	};
 
 	return (
-		<View style={styles.outer}>
+		<View styles={styles.outer}>
 			<ScrollView>
-				<Utils.QuestionIs question={state.text} />
-				<Atoms.Text.Para>
-					Annar notandi hefur merkt svarið við spurningunni í
-					efnisgreininni hér fyrir neðan. Nú þurfum við að athuga
-					hvort svarið sé rétt merkt.
-				</Atoms.Text.Para>
-				<Utils.SpanSelector
-					immutable={true}
-					{...state}
-					firstWord={state.isYesOrNo ? -1 : state.firstWord}
-					lastWord={state.isYesOrNo ? -1 : state.lastWord}
-				/>
-			</ScrollView>
+        <Utils.QuestionIs question={state.text} />
+			<Utils.Explain>
+				Annar notandi hefur merkt svarið inn. Nú þurfum við að
+				athuga hvort svarið sé rétt merkt. 🖊️🤔
+			</Utils.Explain>
+			<Utils.SpanSelector
+				immutable={true}
+				{...state}
+				firstWord={state.isYesOrNo ? -1 : state.firstWord}
+				lastWord={state.isYesOrNo ? -1 : state.lastWord}
+			/>
+      </ScrollView>
 			<View>
-				{stage === "verify-answer" ? (
-					state.isYesOrNo ? (
-						<React.Fragment>
-							<Atoms.Buttons.Base
-								label="Svarið er hér"
-								onPress={() =>
-									setStage("verify-yes-no-answer")
-								}
-								type="success"
-							/>
-							<Atoms.Buttons.Base
-								label="Svarið er ekki hér"
-								onPress={handleArchive}
-								type="danger"
-							/>
-						</React.Fragment>
-					) : (
-						<React.Fragment>
-							<Atoms.Buttons.Base
-								label="Ég held að svarið sé rétt"
-								onPress={() => setStage("verify-length")}
-								type="success"
-							/>
-							<Atoms.Buttons.Base
-								label="Ég held að svarið sé rangt"
-								onPress={handleArchive}
-								type="danger"
-							/>
-						</React.Fragment>
-					)
-				) : stage === "verify-length" ? (
+        
+        {stage === "verify-answer" ? (
+				state.isYesOrNo ? (
 					<React.Fragment>
 						<Atoms.Buttons.Base
 							label="Svarið er hnitmiðað"

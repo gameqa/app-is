@@ -5,44 +5,23 @@ const styles = StyleSheet.create({
 	flex: {
 		flex: 1,
 	},
-	center: {
-		alignItems: "center",
+	middle: {
 		flex: 1,
 		justifyContent: "center",
 	},
 	buttons: {
-		width: "100%",
 		flexDirection: "row",
 		justifyContent: "space-around",
-		paddingTop: 25,
-		paddingBottom: 65,
+		width: "100%",
 	},
-	emojiButton: {
-		borderRadius: 45,
-		width: 90,
-		height: 90,
-	},
-	emojiButtonThumpsUp: {
-		backgroundColor: Colors.MapToDark.success,
-	},
-	emojiButtonThumpsDown: {
-		backgroundColor: Colors.MapToDark.danger,
-	},
-	emojiText: {
-		fontSize: 45,
-		position: "absolute",
-	},
-	emojiTextThumpsUp: {
-		top: 12,
-		left: 20,
-	},
-	emojiTextThumpsDown: {
-		top: 23,
-		left: 21,
+	center: {
+		alignItems: "center",
+		width: 300,
+		marginLeft: "auto",
+		marginRight: "auto",
+		marginTop: -50,
 	},
 	para: {
-		textAlign: "center",
-		width: 250,
 		lineHeight: 20,
 		marginBottom: 20,
 		fontWeight: "300",

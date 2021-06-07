@@ -42,11 +42,8 @@ const GoogleSearch = () => {
 		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
 			<Utils.Explain>
-				Við þurfum að finna svarið við þessari spurningu. Notaðu
-				Google leitarvélina hér fyrir neðan til að finna svarið á
-				vefnum með leitarstreng sem þér þykir líklegur til
-				árangurs. Hún leitar aðeins á íslensku Wikipediu,
-				Vísindavefnum, vísir.is og mbl.is
+				Hér getur þú notað Google til að finna svarið á íslensku
+				Wikipediu, Vísindavefnum, vísir.is og mbl.is 📚🔬📰
 			</Utils.Explain>
 			<Atoms.Inputs.Google
 				onChange={(val) =>
@@ -71,13 +68,7 @@ const GoogleSearch = () => {
 				style={styles.cantFindOuter}
 				onPress={handleMarkImposible}
 			>
-				<View style={styles.times}>
-					<FontAwesome
-						name="times"
-						color={Colors.MapToDark.grey}
-					/>
-				</View>
-				<Atoms.Text.Para>Ég finn ekki svarið</Atoms.Text.Para>
+				<Atoms.Text.Para>😩 Ég finn ekki svarið</Atoms.Text.Para>
 			</TouchableOpacity>
 			<View style={styles.ribbon}>
 				{state.searchError ? (

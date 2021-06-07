@@ -1,11 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
-import {
-	Alert,
-	ScrollView,
-	TouchableOpacity,
-	View,
-	Text,
-} from "react-native";
+import { Alert, TouchableOpacity, View, Text } from "react-native";
 import { Atoms } from "../../..";
 import styles from "./styles";
 import { Utils } from "../";
@@ -92,46 +86,30 @@ const ReviewQuestion = () => {
 					onPress={() => markItem(i)}
 				/>
 			))} */}
-			{item ? (
-				<View style={styles.center}>
-					<Utils.QuestionIs question={state.text} />
-					<Atoms.Text.Para style={styles.para}>
-						{item.description}
-					</Atoms.Text.Para>
 
-					<View style={styles.buttons}>
-						<TouchableOpacity
-							style={[
-								styles.emojiButton,
-								styles.emojiButtonThumpsUp,
-							]}
-							onPress={() => advance(true)}
-						>
-							<Text
-								style={[
-									styles.emojiText,
-									styles.emojiTextThumpsUp,
-								]}
-							>
-								👍
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							style={[
-								styles.emojiButton,
-								styles.emojiButtonThumpsDown,
-							]}
-							onPress={() => advance(false)}
-						>
-							<Text
-								style={[
-									styles.emojiText,
-									styles.emojiTextThumpsDown,
-								]}
-							>
-								👎
-							</Text>
-						</TouchableOpacity>
+			<Utils.QuestionIs question={state.text} />
+
+			{item ? (
+				<View style={styles.middle}>
+					<View style={styles.center}>
+						<Atoms.Text.Heading>
+							{item?.title}
+						</Atoms.Text.Heading>
+						<Atoms.Text.Para style={styles.para}>
+							{item?.description}
+						</Atoms.Text.Para>
+						<View style={styles.buttons}>
+							<Atoms.Buttons.Emoji
+								emoji="👍"
+								onPress={() => advance(true)}
+								type="success"
+							/>
+							<Atoms.Buttons.Emoji
+								emoji="👎"
+								onPress={() => advance(false)}
+								type="danger"
+							/>
+						</View>
 					</View>
 				</View>
 			) : null}
