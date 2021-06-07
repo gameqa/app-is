@@ -17,28 +17,28 @@ const Game = () => {
 
 	// // comment out in production
 	// useEffect(() => {
-	// 	const desired = GameTypes.submitArticle;
+	// 	const desired = GameTypes.verifyAnswerSpan;
 	// 	if (desired !== game.current)
 	// 		dispatch(Actions.Game.fetchCurrentGameRound());
 	// }, [game.lastLoaded]);
 
 	// backup
-	// useEffect(() => {
-	// 	// refresh (backup) if no round set as current
-	// 	const INTERVAL = 1000;
-	// 	if (game.current === undefined) {
-	// 		const interval = setInterval(
-	// 			() => dispatch(Actions.Game.fetchCurrentGameRound()),
-	// 			INTERVAL
-	// 		);
-	// 		return () => {
-	// 			clearInterval(interval);
-	// 		};
-	// 	}
-	// 	// do not fetch user info if we have not progressed to next level
-	// 	if (game.current !== GameTypes.completed)
-	// 		dispatch(Actions.Auth.fetchUserFromToken());
-	// }, [game.current]);
+	useEffect(() => {
+		// refresh (backup) if no round set as current
+		const INTERVAL = 1000;
+		if (game.current === undefined) {
+			const interval = setInterval(
+				() => dispatch(Actions.Game.fetchCurrentGameRound()),
+				INTERVAL
+			);
+			return () => {
+				clearInterval(interval);
+			};
+		}
+		// do not fetch user info if we have not progressed to next level
+		if (game.current !== GameTypes.completed)
+			dispatch(Actions.Auth.fetchUserFromToken());
+	}, [game.current]);
 
 	useEffect(() => {
 		if (game.current === undefined) return;

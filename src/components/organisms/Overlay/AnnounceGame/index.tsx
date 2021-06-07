@@ -58,9 +58,6 @@ const AnnounceGame = () => {
 	const Y_origin = 0;
 
 	return (
-<<<<<<< HEAD
-		<Animated.View style={{ ...styles.outer, opacity: opacityValue }}>
-=======
 		<Animated.View
 			style={{
 				...styles.outer,
@@ -69,7 +66,6 @@ const AnnounceGame = () => {
 			}}
 			pointerEvents="box-none"
 		>
->>>>>>> f6a772fb43da606b8256c3f45d8f88f9caef4f30
 			<Image
 				source={utils.mapToImage(game)}
 				style={styles.image}
