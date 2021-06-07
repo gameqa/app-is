@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { View, Text } from "react-native";
 import styles from "./styles";
 import { IProps, SelectionStates } from "./interface";
@@ -29,20 +29,23 @@ const SpanSelector = ({
 
 	let action: ((v: number) => any) | undefined;
 
-	useEffect(() => {
-		if (firstWord === undefined) {
-			action = onSelectFirstWord;
-			firstWord = lastWord = -1;
-			setSelectionState("select-first");
-		} else if (lastWord === undefined) {
-			action = onSelectLastWord;
-			lastWord = firstWord;
-			setSelectionState("select-last");
-		} else {
-			action = onClearSelection;
-			setSelectionState("clear-selection");
-		}
-	}, [firstWord, lastWord]);
+	const handleClick = useCallback(
+		(i) => {
+			if (firstWord === undefined) {
+				onSelectFirstWord(i);
+				firstWord = lastWord = -1;
+				setSelectionState("select-first");
+			} else if (lastWord === undefined) {
+				onSelectLastWord(i);
+				lastWord = firstWord;
+				setSelectionState("select-last");
+			} else {
+				onClearSelection();
+				setSelectionState("clear-selection");
+			}
+		},
+		[firstWord, lastWord]
+	);
 
 	if (immutable) action = () => null;
 
@@ -84,21 +87,7 @@ const SpanSelector = ({
 			<View style={styles.para}>
 				{wordArray.map((word, i) => (
 					<TouchableOpacity
-						onPress={() => {
-							if (
-								firstWord == undefined &&
-								onSelectFirstWord
-							) {
-								dispatch(onSelectFirstWord(i));
-							} else if (
-								lastWord == undefined &&
-								onSelectLastWord
-							) {
-								dispatch(onSelectLastWord(i));
-							} else if (onClearSelection) {
-								dispatch(onClearSelection());
-							}
-						}}
+						onPress={() => handleClick(i)}
 						activeOpacity={1}
 					>
 						<Text
