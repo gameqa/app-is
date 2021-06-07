@@ -9,6 +9,11 @@ import {
 	setFirstWord,
 	setLastWord,
 } from "../../../../../actions/selectSpan";
+import { useDispatch } from "react-redux";
+import {
+	addNotificationItem,
+	clearNotifications,
+} from "../../../../../actions/notification";
 
 const SpanSelector = ({
 	firstWord,
@@ -19,66 +24,81 @@ const SpanSelector = ({
 	onClearSelection,
 	onSelectLastWord,
 }: IProps) => {
-	let selectionState: SelectionStates;
+	const [selectionState, setSelectionState] =
+		useState<SelectionStates>();
 
 	let action: ((v: number) => any) | undefined;
-	if (firstWord === undefined) {
-		action = onSelectFirstWord;
-		lastWord = firstWord = -1; // this is a side effect
-		selectionState = "select-first";
-	} else if (lastWord === undefined) {
-		action = onSelectLastWord;
-		lastWord = firstWord; // this is a side effect
-		selectionState = "select-last";
-	} else {
-		action = onClearSelection;
-		selectionState = "clear-selection";
-	}
+
+	useEffect(() => {
+		if (firstWord === undefined) {
+			action = onSelectFirstWord;
+			firstWord = lastWord = -1;
+			setSelectionState("select-first");
+		} else if (lastWord === undefined) {
+			action = onSelectLastWord;
+			lastWord = firstWord;
+			setSelectionState("select-last");
+		} else {
+			action = onClearSelection;
+			setSelectionState("clear-selection");
+		}
+	}, [firstWord, lastWord]);
 
 	if (immutable) action = () => null;
 
 	const shouldHighlight = (i: number) =>
-		i >= firstWord! && i <= lastWord!;
-
-	const { addPriority } = Organisms.Notifications.Hooks.useAddItems();
-
-	useEffect(() => {
-		if (immutable) return;
-		switch (selectionState) {
-			case "select-first":
-				addPriority({
-					title: "Fyrsta orðið",
-					description:
-						"Smelltu á fyrsta orðið sem myndar svarið.",
-					type: "idea",
-				});
-				break;
-			case "select-last":
-				addPriority({
-					title: "Síðasta orðið",
-					description:
-						"Smelltu á síðasta orðið sem myndar svarið. Ef svarið er bara eitt orð, smelltu þá á sama arðið.",
-					type: "idea",
-				});
-				break;
-			case "clear-selection":
-				addPriority({
-					title: "Búin/n?",
-					description:
-						"Ef valið er rétt, þá getur þú staðfest valið. Til þess að velja aftur þá getur þú hreinsað valið með því að smella hvar sem er á textann.",
-					type: "idea",
-				});
-		}
-	}, [selectionState, immutable]);
+		i == firstWord || (i >= firstWord! && i <= lastWord!);
 
 	const wordArray = useMemo(() => paragraph.split(" "), [paragraph]);
+
+	const dispatch = useDispatch();
+
+	/**
+	 * Show notification to user
+	 */
+	useEffect(() => {
+		dispatch(clearNotifications());
+
+		if (immutable) return;
+
+		switch (selectionState) {
+			case "select-first":
+				dispatch(
+					addNotificationItem({
+						title: "Veldu fyrsta staf",
+						text: "Smelltu á fyrsta stafinn sem þú heldur að svarið er",
+					})
+				);
+			case "select-last":
+				dispatch(
+					addNotificationItem({
+						title: "Veldu seinasta staf",
+						text: "Smelltu á seinsta stafinn sem þú heldur að svarið er",
+					})
+				);
+		}
+	}, [selectionState, immutable]);
 
 	return (
 		<View>
 			<View style={styles.para}>
 				{wordArray.map((word, i) => (
 					<TouchableOpacity
-						onPress={() => action?.(i)}
+						onPress={() => {
+							if (
+								firstWord == undefined &&
+								onSelectFirstWord
+							) {
+								dispatch(onSelectFirstWord(i));
+							} else if (
+								lastWord == undefined &&
+								onSelectLastWord
+							) {
+								dispatch(onSelectLastWord(i));
+							} else if (onClearSelection) {
+								dispatch(onClearSelection());
+							}
+						}}
 						activeOpacity={1}
 					>
 						<Text

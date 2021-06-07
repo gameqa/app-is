@@ -4,29 +4,32 @@ import { View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { Atoms } from "../../..";
 import { Colors } from "../../../../services";
-import { HookSignedNotification } from "../interface";
+import { Notification } from "../../../../declerations";
 import styles from "./styles";
 import * as Actions from "../../../../actions";
-import * as utils from "./utils";
 
-const NotiCard = ({ title, description, id, type }: HookSignedNotification) => {
+const NotiCard = ({ title, text }: Notification) => {
 	const dispatch = useDispatch();
 
-	const handleClose = () => dispatch(Actions.Notifications.clearNotificationsById(id));
+	const handleClose = () =>
+		dispatch(Actions.Notifications.clearNotifications());
 
 	return (
 		<View style={styles.outer}>
 			<View style={styles.left}>
 				<FontAwesome
-					name={utils.mapToIcon[type].icon}
+					name={"lightbulb-o"}
 					size={25}
-					color={Colors.MapToDark[utils.mapToIcon[type].color]}
+					color={Colors.MapToDark["warning"]}
 				/>
 			</View>
 			<View style={styles.right}>
 				<View style={styles.top}>
 					<Atoms.Text.Heading>{title}</Atoms.Text.Heading>
-					<TouchableOpacity style={styles.times} onPress={handleClose}>
+					<TouchableOpacity
+						style={styles.times}
+						onPress={handleClose}
+					>
 						<FontAwesome
 							name="times"
 							size={15}
@@ -34,7 +37,7 @@ const NotiCard = ({ title, description, id, type }: HookSignedNotification) => {
 						/>
 					</TouchableOpacity>
 				</View>
-				<Atoms.Text.Para>{description}</Atoms.Text.Para>
+				<Atoms.Text.Para>{text}</Atoms.Text.Para>
 			</View>
 		</View>
 	);
