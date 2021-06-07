@@ -45,11 +45,10 @@ const ReviewAnswer = () => {
 	return (
 		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para>
-				Annar notandi hefur merkt svarið við spurningunni í
-				efnisgreininni hér fyrir neðan. Nú þurfum við að athuga
-				hvort svarið sé rétt merkt.
-			</Atoms.Text.Para>
+			<Utils.Explain>
+				Annar notandi hefur merkt svarið inn. Nú þurfum við að
+				athuga hvort svarið sé rétt merkt. 🖊️🤔
+			</Utils.Explain>
 			<Utils.SpanSelector
 				immutable={true}
 				{...state}

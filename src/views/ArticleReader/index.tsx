@@ -94,10 +94,7 @@ const ArticleReaderView = ({
 				<NavigateBack goBackHandler={goBack} />
 				<Utils.QuestionIs question={googleSearch.text} />
 				<Utils.Explain>
-					Við sóttum textann sem fylgir vefsíðunni. Lestu yfir
-					textann og athugaðu hvort þú sjáir svarið við
-					spurningunni. Smelltu á efnisgreinina sem inniheldur
-					svarið.
+					Smelltu á efnisgreinina sem inniheldur svarið 🙋👆
 				</Utils.Explain>
 				<View style={styles.topLine}>
 					<Image

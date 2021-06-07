@@ -15,15 +15,14 @@ const AskAboutImage = () => {
 	const dispatch = useDispatch();
 
 	const handleHide = useCallback(() => {
-		if (hasLoaded && count > 0)
-			dispatch(Actions.Overlay.dequeOverlay());
+		if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
 	}, [count]);
 
 	useEffect(() => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
-
+		console.log(`count`, count);
 		if (count === 0) handleHide();
 		else {
 			const interval = setInterval(() => {
@@ -49,7 +48,7 @@ const AskAboutImage = () => {
 					source={{
 						uri: "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F04%2F20%2Fqueen-elizabeth-ii-2000.jpg",
 					}}
-					style={{ height: "100%", width: "100%" }}
+					style={styles.image}
 					resizeMode="cover"
 				/>
 			</TouchableOpacity>

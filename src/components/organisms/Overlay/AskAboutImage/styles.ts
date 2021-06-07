@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 		color: Colors.MapToDark.success,
 	},
+	image: { height: "100%", width: "100%" },
 });
 
 export default styles;
