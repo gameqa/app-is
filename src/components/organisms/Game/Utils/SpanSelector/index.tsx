@@ -25,7 +25,7 @@ const SpanSelector = ({
 	onSelectLastWord,
 }: IProps) => {
 	const [selectionState, setSelectionState] =
-		useState<SelectionStates>();
+		useState<SelectionStates>("select-first");
 
 	let action: ((v: number) => any) | undefined;
 
@@ -34,14 +34,14 @@ const SpanSelector = ({
 			if (firstWord === undefined) {
 				onSelectFirstWord(i);
 				firstWord = lastWord = -1;
-				setSelectionState("select-first");
+				setSelectionState("select-last");
 			} else if (lastWord === undefined) {
 				onSelectLastWord(i);
 				lastWord = firstWord;
-				setSelectionState("select-last");
+				setSelectionState("clear-selection");
 			} else {
 				onClearSelection();
-				setSelectionState("clear-selection");
+				setSelectionState("select-first");
 			}
 		},
 		[firstWord, lastWord]
