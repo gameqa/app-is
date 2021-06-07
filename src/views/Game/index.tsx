@@ -17,8 +17,9 @@ const Game = () => {
 
 	// // comment out in production
 	// useEffect(() => {
-	// 	const desired = GameTypes.submitArticle;
-	// 	if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
+	// 	const desired = GameTypes.questionQualityAssurance;
+	// 	if (desired !== game.current)
+	// 		dispatch(Actions.Game.fetchCurrentGameRound());
 	// }, [game.lastLoaded]);
 
 	// backup
