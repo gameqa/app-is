@@ -46,6 +46,12 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([OverlayType.announceGame])
 			);
+			if (game.current === GameTypes.writeQuestion)
+				dispatch(
+					Actions.Overlay.enqueOverlay([
+						OverlayType.askAboutImage,
+					])
+				);
 		} else {
 			dispatch(
 				Actions.Overlay.enqueOverlay([

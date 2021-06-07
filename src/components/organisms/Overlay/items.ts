@@ -3,6 +3,7 @@ import Confetti from "./Confetti";
 import LevelProgress from "./LevelProgress";
 import OpenBox from "./OpenBox";
 import AnnounceGame from "./AnnounceGame";
+import AskAboutImage from "./AskAboutImage";
 
 export interface OverlayScreen extends OverlayItem {
 	Component: () => JSX.Element;
@@ -27,6 +28,10 @@ const items: OverlayScreen[] = [
 	{
 		type: OverlayType.announceGame,
 		Component: AnnounceGame,
+	},
+	{
+		type: OverlayType.askAboutImage,
+		Component: AskAboutImage,
 	},
 ];
 

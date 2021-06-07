@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
@@ -6,7 +6,7 @@ import { StoreState } from "../../../../reducers";
 import styles from "./styles";
 import * as Actions from "../../../../actions";
 import { submitQuestion } from "../../../../actions/game";
-import { Alert } from "../../../../declerations";
+import { Alert, OverlayType } from "../../../../declerations";
 import { Utils } from "../";
 
 const WriteQuestion = () => {

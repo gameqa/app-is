@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import * as Actions from "../../../../actions";
 import * as Interface from "./interface";
 
-const Confetti = ({ persist }: Interface.Props) => {
+const Confetti = () => {
 	const COUNT = 200;
 	const X_origin = -10;
 	const Y_origin = 0;
@@ -12,15 +12,13 @@ const Confetti = ({ persist }: Interface.Props) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!persist) {
-			const DELAY = 3750;
-			const t = setTimeout(() => {
-				dispatch(Actions.Overlay.dequeOverlay());
-			}, DELAY);
-			return () => {
-				clearTimeout(t);
-			};
-		}
+		const DELAY = 3750;
+		const t = setTimeout(() => {
+			dispatch(Actions.Overlay.dequeOverlay());
+		}, DELAY);
+		return () => {
+			clearTimeout(t);
+		};
 	}, []);
 
 	return (

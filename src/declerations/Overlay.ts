@@ -3,6 +3,7 @@ export enum OverlayType {
 	confetti,
 	levelProgress,
 	announceGame,
+	askAboutImage,
 }
 
 export interface OverlayItem {
