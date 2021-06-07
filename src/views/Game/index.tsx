@@ -50,7 +50,6 @@ const Game = () => {
 				Actions.Overlay.enqueOverlay([
 					OverlayType.levelProgress,
 					OverlayType.announceGame,
-					OverlayType.confetti,
 					OverlayType.newPrize,
 				])
 			);

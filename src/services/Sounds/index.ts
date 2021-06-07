@@ -24,7 +24,7 @@ const mapNamesToSounds = (soundName: SoundNames) => {
 
 export const play = async (soundName: SoundNames) => {
 	const { sound } = await Audio.Sound.createAsync(
-		require("./clips/newTask.mp3")
+		mapNamesToSounds(soundName)
 	);
 	const a = await sound.playAsync();
 	// console.log(`a`, a.isLoaded);

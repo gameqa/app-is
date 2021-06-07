@@ -6,6 +6,8 @@ import * as Services from "../../../../services";
 import * as utils from "./utils";
 import { styles } from "./styles";
 import { StoreState } from "../../../../reducers";
+import { GameTypes } from "../../../../declerations";
+import ConfettiCannon from "react-native-confetti-cannon";
 
 const AnnounceGame = () => {
 	const dispatch = useDispatch();
@@ -51,6 +53,10 @@ const AnnounceGame = () => {
 		};
 	}, []);
 
+	const COUNT = 200;
+	const X_origin = -10;
+	const Y_origin = 0;
+
 	return (
 		<Animated.View
 			style={{
@@ -65,6 +71,12 @@ const AnnounceGame = () => {
 				style={styles.image}
 				resizeMode="contain"
 			/>
+			{game === GameTypes.completed ? (
+				<ConfettiCannon
+					count={COUNT}
+					origin={{ x: X_origin, y: Y_origin }}
+				/>
+			) : null}
 		</Animated.View>
 	);
 };
