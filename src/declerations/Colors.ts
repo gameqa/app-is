@@ -5,4 +5,5 @@ export type ColorType =
 	| "warning"
 	| "light-grey"
 	| "grey"
-	| "white";
+	| "white"
+	| "green";

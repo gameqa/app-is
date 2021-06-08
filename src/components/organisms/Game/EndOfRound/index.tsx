@@ -16,7 +16,7 @@ const EndOfRound = () => {
 	// fetch prize categories from API
 	useEffect(() => {
 		dispatch(Actions.PrizeCategory.fetchPrizeCategories());
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<ScrollView style={styles.outer}>

@@ -49,8 +49,8 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([
 					OverlayType.levelProgress,
-					OverlayType.announceGame,
 					OverlayType.newPrize,
+					OverlayType.announceGame,
 				])
 			);
 		}

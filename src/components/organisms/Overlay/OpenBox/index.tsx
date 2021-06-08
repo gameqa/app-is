@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, Image, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../../../reducers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -10,6 +10,8 @@ import Confetti from "../Confetti";
 import { Atoms } from "../../..";
 import { Sounds } from "../../../../services";
 
+import { Chests } from "../../../../services";
+
 const OpenBox = () => {
 	// categories the user has not seen yeat
 	const [newCategories, setNewCategories] = useState<CategoryType[]>([]);
@@ -19,6 +21,8 @@ const OpenBox = () => {
 	const prize = useSelector((state: StoreState) => state.prize);
 	const auth = useSelector((state: StoreState) => state.auth);
 
+	const opacityValue = useRef(new Animated.Value(0)).current;
+	
 	// check for new prizes
 	useEffect(() => {
 		const catNameToKey = (name: string) => `${auth._id}:${name}`;
@@ -58,7 +62,34 @@ const OpenBox = () => {
 	}, [auth.level, prize.prizeCategories, auth._id]);
 
 	useEffect(() => {
-		if (newCategories.length > 0) Sounds.play("open-chest");
+		if (newCategories.length > 0) {
+			Sounds.play("open-chest");
+			const DISSAPEAR_DELAY = 2750;
+			const ANIM_DURATION = 350;
+			const OPACITY_TARGET = 1;
+			const BUFFER = 100;
+			Animated.timing(opacityValue, {
+				toValue: OPACITY_TARGET,
+				duration: ANIM_DURATION,
+				useNativeDriver: false,
+			}).start();
+			const t1 = setTimeout(() => {
+				Animated.timing(opacityValue, {
+					toValue: 0,
+					duration: ANIM_DURATION,
+					useNativeDriver: false,
+				}).start();
+			}, DISSAPEAR_DELAY - ANIM_DURATION - BUFFER);
+	
+			const t2 = setTimeout(() => {
+				dispatch(Actions.Overlay.dequeOverlay());
+			}, DISSAPEAR_DELAY);
+	
+			return () => {
+				clearTimeout(t1);
+				clearTimeout(t2);
+			};
+		}
 	}, [newCategories]);
 
 	const category = newCategories[0];
@@ -66,36 +97,27 @@ const OpenBox = () => {
 	if (!category) return <React.Fragment />;
 
 	return (
-		<View style={styles.outer}>
-			<View style={styles.inner}>
-				<View style={styles.chestContainer}>
+		<Animated.View 
+			style={{
+				...styles.outer,
+				backgroundColor: Chests.mapToColor(category.name)
+			}}
+			pointerEvents="box-none"
+				>
 					<Image
-						source={{
-							uri: "https://dunb17ur4ymx4.cloudfront.net/wysiwyg/550688/7d2d3a13aa181518d8ac81fd78b0febeafa8c7e1.png",
-						}}
-						style={styles.image}
+						source={Chests.mapToPrize(category.name)}						
 						resizeMode="contain"
 					/>
-				</View>
-				<Atoms.Text.Heading>
-					Nýr flokkur aflæstur!
+					<Atoms.Text.Heading style={{...styles.chestUnlockHeader,...styles.chestUnlockPara}}>
+						{category.name} {"\n"}
+					</Atoms.Text.Heading>				
+				<Atoms.Text.Heading style={styles.chestUnlockPara}>
+					
+					Þú ert kominn í pottinn! {/* setja inn catergory name hér inn */}
 				</Atoms.Text.Heading>
-				<Atoms.Text.Para>
-					{category.name} er vinningaflokkur sem inniheldur{" "}
-					{category.prizes.length} mismunandi vinninga. Með því
-					að spila leikinn og/eða bjóða vinum að spila aflæsir þú
-					fleiri flokka!
-				</Atoms.Text.Para>
-				<Atoms.Buttons.Base
-					label="Áfram"
-					type="success"
-					onPress={() =>
-						dispatch(Actions.Overlay.dequeOverlay())
-					}
-				/>
-			</View>
-			<Confetti persist />
-		</View>
+				
+		<Confetti persist />
+		</Animated.View>
 	);
 };
 
