@@ -10,38 +10,35 @@ import { StoreState } from "../../../../reducers";
 import { Colors } from "../../../../services";
 import styles from "./styles";
 
+import { Chests } from "./../../../../services";
+
 const PrizeCategoryCard = (category: PrizeCategory) => {
 	const navigation = useNavigation();
 	const handleGoToItemsView = () =>
 		navigation.navigate("prize-items", category);
+	
+	console.log("PrizeCategoryCArd",category)
 
 	return (
 		<TouchableOpacity onPress={handleGoToItemsView}>
 			<Atoms.Cards.Base>
 				<View style={styles.outer}>
 					<View style={styles.imageOuter}>
+						{category.isAvailable 
+						?
 						<Image
 							style={styles.image}
-							source={{
-								uri: "https://dunb17ur4ymx4.cloudfront.net/wysiwyg/550688/7d2d3a13aa181518d8ac81fd78b0febeafa8c7e1.png",
-							}}
+							source={Chests.mapToPrize(category.name)}
 							resizeMode="contain"
 						/>
-						<View style={styles.icon}>
-							{category.isAvailable ? (
-								<FontAwesome
-									name="check"
-									size={50}
-									color={Colors.MapToDark.success}
-								/>
-							) : (
-								<FontAwesome
-									name="lock"
-									size={50}
-									color={Colors.MapToDark.danger}
-								/>
-							)}
-						</View>
+						:
+						<Image
+							style={styles.image}
+							source={Chests.mapToNoPrize(category.name)}
+							resizeMode="contain"
+						/> 
+						}
+						
 					</View>
 					<Atoms.Text.Heading>
 						{category.name}
