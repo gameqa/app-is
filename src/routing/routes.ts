@@ -26,6 +26,10 @@ export const gameStack: GameStackRoutes[] = [
 		id: "article-reader",
 		Component: Views.ArticleReader,
 	},
+	{
+		id: "prize-items",
+		Component: Views.PrizeItems,
+	},
 ];
 
 export const prizeStack: PrizeStackRoutes[] = [

@@ -65,23 +65,20 @@ const ReviewAnswer = () => {
         
 				{stage === "verify-answer" ? (
 					state.isYesOrNo ? (
-						<React.Fragment>
-							<Atoms.Buttons.Base
-								label="Svarið er hnitmiðað"
-								onPress={() => handleVerifyDispatch(false)}
-								type="success"
-							/>
-							<Atoms.Buttons.Base
-								label="Svarið gæti verið styttra"
-								onPress={() => handleVerifyDispatch(true)}
-								type="danger"
-							/>
-							<Atoms.Buttons.Base
-								label="Til baka"
-								onPress={() => setStage("verify-answer")}
-								type="highlight"
-							/>
-						</React.Fragment>
+					<React.Fragment>
+						<Atoms.Buttons.Base
+							label="Svarið er hér"
+							onPress={() =>
+								setStage("verify-yes-no-answer")
+							}
+							type="success"
+						/>
+						<Atoms.Buttons.Base
+							label="Svarið er ekki hér"
+							onPress={handleArchive}
+							type="danger"
+						/>
+					</React.Fragment>
 					) : (
 						<React.Fragment>
 							<Atoms.Buttons.Base
