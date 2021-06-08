@@ -10,3 +10,9 @@ export interface DequeOverlayAction {
 	type: ActionTypes.dequeOverlay;
 	payload: OverlayType;
 }
+
+
+export interface PushOverlayAction {
+	type: ActionTypes.pushOverlay;
+	payload: [OverlayType];
+}

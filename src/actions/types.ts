@@ -43,6 +43,7 @@ export enum ActionTypes {
 	fetchPrizeCategories,
 	enqueOverlay,
 	dequeOverlay,
+	pushOverlay
 }
 
 export type Actions =
@@ -76,4 +77,5 @@ export type Actions =
 	| PushNotification.Actions.SendPushNotificationTokenAction
 	| PrizeCategory.FetchPrizeCategoriesAction
 	| Overlay.Actions.DequeOverlayAction
-	| Overlay.Actions.EnqueOverlayAction;
+	| Overlay.Actions.EnqueOverlayAction
+	| Overlay.Actions.PushOverlayAction;
