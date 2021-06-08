@@ -1,3 +1,10 @@
+export enum PrizeTypes {
+	participationPrize,
+	gangPrize,
+	theChosenOnesPrize,
+	influencerPrize
+}
+
 export interface PrizeCategory {
 	_id: string;
 	name: string;

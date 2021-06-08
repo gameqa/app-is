@@ -32,6 +32,15 @@ const style = StyleSheet.create({
 		height: "80%",
 		width: "80%",
 	},
+	chestUnlockHeader:{
+		fontSize: 20
+	},
+	chestUnlockPara: {
+		color:"white", 
+		position: "relative", 
+		textAlign:"center",
+	},
+	
 });
 
 export default style;
