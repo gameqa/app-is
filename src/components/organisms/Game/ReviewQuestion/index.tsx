@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Alert, ScrollView, View } from "react-native";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
+import { Alert, TouchableOpacity, View, Text } from "react-native";
 import { Atoms } from "../../..";
 import styles from "./styles";
 import { Utils } from "../";
@@ -9,6 +9,7 @@ import getQuestions from "./questions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Actions from "../../../../actions";
 import { CheckListItem } from "./interface";
+import style from "../../Notifications/styles";
 
 const ReviewQuestion = () => {
 	const state = useSelector((state: StoreState) => state.verifyQuestion);
@@ -17,113 +18,108 @@ const ReviewQuestion = () => {
 	const dispatch = useDispatch();
 
 	const [items, setItems] = useState<CheckListItem[]>([]);
+	const [current, setCurrent] = useState(0);
 
 	useEffect(() => {
 		setItems(getQuestions(state.isYesOrNo));
+		setCurrent(0);
 	}, [game.lastLoaded]);
 
+	const item = useMemo<CheckListItem | undefined>(
+		() => items[current],
+		[items, current]
+	);
+
 	// toggle true false for item at index i
-	const markItem = (i: number) => {
-		const copy = [...items];
-		copy[i].value = !copy[i].value;
-		setItems([...copy]);
-	};
+	const advance = useCallback(
+		(isGood: boolean) => {
+			if (isGood) {
+				const copy = [...items];
+				copy[current].value = isGood;
+				setItems([...copy]);
+				setCurrent((c) => c + 1);
+			} else handleArchive();
+		},
+		[items, current]
+	);
 
-	// returns true if all items are checked
-	const allItemsAreGood = () => items.every((item) => item.value);
+	useEffect(() => {
+		if (items.length > 0 && items.length === current)
+			handleCompleteStep(true);
+	}, [current, items]);
 
-	// stores key as seen
-	const markKeyAsSeen = async (key: string) => {
-		try {
-			const SEEN_TOKEN = "OK";
-			AsyncStorage.setItem(key, SEEN_TOKEN);
-		} catch (error) {
-			//
-		}
-	};
-
-	// returns ture if key has been acknowledged by user before
-	const checkIfHasSeenKey = async (key: string): Promise<boolean> => {
-		try {
-			const value = await AsyncStorage.getItem(key);
-			return value !== null;
-		} catch (error) {
-			return false;
-		}
-	};
-
-	// alerts the student for the first time he marks as good or bad
-	const handleAlert = async () => {
-		try {
-			const message = allItemsAreGood()
-				? "Þú hakaðir í alla reiti sem þýðir að þú telur spurninguna vera góða."
-				: "Þú slepptir sumum reitum sem þýðir að spurningin er slæm og við munum eyða henni.";
-			const key = getStorageKey();
-			const hasSeen = await checkIfHasSeenKey(key);
-			if (hasSeen && allItemsAreGood()) handleCompleteStep(key);
-			else
-				Alert.alert("Ertu viss?", message, [
-					{
-						text: "Hætta við",
-						onPress: () => markKeyAsSeen(key),
-					},
-					{
-						text: "Já",
-						onPress: () => handleCompleteStep(key),
-					},
-				]);
-		} catch (error) {
-			//
-		}
-	};
+	// handles archive
+	const handleArchive = async () =>
+		Alert.alert(
+			"Ertu viss?",
+			`${item?.badQuestionPrompt} Ef svo er þá munum við eyða henni.`,
+			[
+				{
+					text: "Hætta við",
+					onPress: () => null,
+				},
+				{
+					text: "Já",
+					onPress: () => handleCompleteStep(false),
+				},
+			]
+		);
 
 	// handles completing step and dispatching action
 	// which will get next rounds info
-	const handleCompleteStep = async (key: string) => {
-		try {
-			await markKeyAsSeen(key);
-			dispatch(
-				Actions.Game.submitVerifyQuestion(
-					game._id,
-					state._id,
-					allItemsAreGood()
-				)
-			);
-		} catch (error) {
-			//
-		}
-	};
-
-	// gets the storage key based on users id and
-	// if he is marking the question as good or bad
-	const getStorageKey = useCallback(() => {
-		// check if all are marked
-		return allItemsAreGood()
-			? `${auth._id}:verify-good-question-alert-seen`
-			: `${auth}:verify-bad-question-alert-seen`;
-	}, [items]);
+	const handleCompleteStep = async (isGood: boolean) =>
+		dispatch(
+			Actions.Game.submitVerifyQuestion(game._id, state._id, isGood)
+		);
 
 	return (
-		<ScrollView>
-			<Utils.QuestionIs question={state.text} />
-			<Atoms.Text.Para style={styles.para}>
+		<View style={styles.flex}>
+			{/* <Atoms.Text.Para style={styles.para}>
 				Áður en við reynum að finna svarið við þessari spurningu,
 				þá viljum við vera viss um að þetta sé góð spurning. Farðu
 				yfir tékklistann hér fyrir neðan og hakaðu við þau atriði
 				sem þú ert sammála.
-			</Atoms.Text.Para>
-			{items.map((item, i) => (
+			</Atoms.Text.Para> */}
+			{/* {items.map((item, i) => (
 				<Atoms.Cards.CheckListItem
 					{...item}
 					onPress={() => markItem(i)}
 				/>
-			))}
+			))} */}
+
+			<Utils.QuestionIs question={state.text} />
+
+			{item ? (
+				<View style={styles.middle}>
+					<View style={styles.center}>
+						<Atoms.Text.Heading>
+							{item?.title}
+						</Atoms.Text.Heading>
+						<Atoms.Text.Para style={styles.para}>
+							{item?.description}
+						</Atoms.Text.Para>
+						<View style={styles.buttons}>
+							<Atoms.Buttons.Emoji
+								emoji="👍"
+								onPress={() => advance(true)}
+								type="success"
+							/>
+							<Atoms.Buttons.Emoji
+								emoji="👎"
+								onPress={() => advance(false)}
+								type="danger"
+							/>
+						</View>
+					</View>
+				</View>
+			) : null}
+			{/* 
 			<Atoms.Buttons.Base
 				onPress={handleAlert}
 				label="Staðfesta"
 				type="highlight"
-			/>
-		</ScrollView>
+			/> */}
+		</View>
 	);
 };
 

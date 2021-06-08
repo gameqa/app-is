@@ -67,10 +67,9 @@ export default function index() {
 			<Molecules.Users.Info {...auth} />
 			<Atoms.Text.Collapsable style={styles.paragraph}>
 				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða
-				vinum að sækja appið. Þegar notandi samþykkir boðið þá 
-				birtist nafnið hans hér. Þegar þú hefur
-				boðið 10 vinum þá getur þú unnið vinninga fyrir að vera
-				áhrifavaldur.
+				vinum að sækja appið. Þegar notandi samþykkir boðið þá
+				birtist nafnið hans hér. Þegar þú hefur boðið 10 vinum þá
+				getur þú unnið vinninga fyrir að vera áhrifavaldur.👫🤝
 			</Atoms.Text.Collapsable>
 			<TouchableOpacity
 				onPress={handleCopy}

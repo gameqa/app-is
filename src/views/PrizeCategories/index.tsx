@@ -33,7 +33,7 @@ const PrizeCategories = () => {
 				<Atoms.Text.Para style={styles.paragraph}>
 					Hér sérðu lista yfir þá verðlaunaflokka sem eru í boði.
 					Þú getur smellt á hvern flokk fyrir sig til þess að sjá
-					yfirlit yfir vinninga.
+					yfirlit yfir vinninga. 🏆🎁
 				</Atoms.Text.Para>
 				{prizeCategories.map((item) => (
 					<Atoms.Cards.PrizeCategory {...item} />

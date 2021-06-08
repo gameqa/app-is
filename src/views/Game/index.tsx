@@ -17,8 +17,9 @@ const Game = () => {
 
 	// // comment out in production
 	// useEffect(() => {
-	// 	const desired = GameTypes.submitArticle;
-	// 	if (desired !== game.current) dispatch(Actions.Game.fetchCurrentGameRound());
+	// 	const desired = GameTypes.verifyAnswerSpan;
+	// 	if (desired !== game.current)
+	// 		dispatch(Actions.Game.fetchCurrentGameRound());
 	// }, [game.lastLoaded]);
 
 	// backup
@@ -34,9 +35,8 @@ const Game = () => {
 				clearInterval(interval);
 			};
 		}
-		// do not fetch user info if we have not progressed to next level
-		if (game.current !== GameTypes.completed)
-			dispatch(Actions.Auth.fetchUserFromToken());
+
+		dispatch(Actions.Auth.fetchUserFromToken());
 	}, [game.current]);
 
 	useEffect(() => {
@@ -45,9 +45,16 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([OverlayType.announceGame])
 			);
+			if (game.current === GameTypes.writeQuestion)
+				dispatch(
+					Actions.Overlay.enqueOverlay([
+						OverlayType.askAboutImage,
+					])
+				);
 		} else {
 			dispatch(
 				Actions.Overlay.enqueOverlay([
+					OverlayType.announceGame,
 					OverlayType.levelProgress,
 					OverlayType.newPrize,
 					OverlayType.announceGame,

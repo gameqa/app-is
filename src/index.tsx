@@ -6,7 +6,6 @@ import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
 import { StatusBar } from "react-native";
-import { OverlayType } from "./declerations";
 
 console.disableYellowBox = true;
 

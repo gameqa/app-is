@@ -13,3 +13,4 @@ export * from "./Alerts";
 export * from "./Charts";
 export * from "./Prizes";
 export * from "./Overlay";
+export * from "./Notifications";

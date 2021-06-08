@@ -2,9 +2,14 @@ import React from "react";
 import { Atoms } from "../../../..";
 import { IProps } from "./interface";
 import styles from "./styles";
-const QuestionIs = ({ question }: IProps) => {
+const QuestionIs = ({ question, center }: IProps) => {
 	return (
-		<Atoms.Text.Heading style={styles.heading}>
+		<Atoms.Text.Heading
+			style={{
+				...styles.heading,
+				...(center ? { textAlign: "center" } : {}),
+			}}
+		>
 			Spurningin er „{question}“
 		</Atoms.Text.Heading>
 	);

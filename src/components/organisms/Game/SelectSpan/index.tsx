@@ -7,6 +7,7 @@ import { Utils } from "../";
 import { Atoms } from "../../..";
 import * as Actions from "../../../../actions";
 import { StoreState } from "../../../../reducers";
+import { styles } from "./style";
 
 const SelectSpan = () => {
 	// if it is true then user can locate answer span
@@ -94,11 +95,7 @@ const SelectSpan = () => {
 	);
 
 	return (
-		<View
-			style={{
-				flex: 1,
-			}}
-		>
+		<View style={styles.outer}>
 			<ScrollView>
 				<Utils.QuestionIs question={state.text} />
 				<Atoms.Text.Para>

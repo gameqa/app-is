@@ -9,19 +9,7 @@ import styles from "./styles";
 const Explain = ({ children }: IProps) => {
 	return (
 		<View style={styles.outer}>
-			<Atoms.Text.Para>
-				<FontAwesome
-					name="info"
-					color={Colors.MapToDark.warning}
-					size={20}
-				/>
-				{
-					// do not remove spacing before children
-					// it serves as padding
-
-					`   ${children}`
-				}
-			</Atoms.Text.Para>
+			<Atoms.Text.Para>{children}</Atoms.Text.Para>
 		</View>
 	);
 };
