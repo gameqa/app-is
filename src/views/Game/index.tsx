@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import LayoutWrapper from "../../layout";
 import { Atoms, Molecules } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +40,15 @@ const Game = () => {
 	}, [game.current]);
 
 	useEffect(() => {
+		console.log("game useEffect")
+		dispatch(Actions.Overlay.enqueOverlay([
+			OverlayType.advertisePrize,
+			])
+			);
+	}, []);
+
+
+	useEffect(() => {
 		if (game.current === undefined) return;
 		if (game.current !== GameTypes.completed) {
 			dispatch(
@@ -62,6 +71,7 @@ const Game = () => {
 			);
 		}
 	}, [game.lastLoaded]);
+
 
 	return (
 		<View style={styles.outer}>
