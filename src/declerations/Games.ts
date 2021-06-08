@@ -17,6 +17,11 @@ export interface StartWriteQuestionRoundFromAPI {
 		type: "make-question";
 		questionType: string;
 	};
+
+	image: {
+		subject_tf: string;
+		url: string;
+	};
 }
 
 export interface StartVerifyQuestionRoundFromAPI {

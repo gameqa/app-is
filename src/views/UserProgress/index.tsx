@@ -70,7 +70,7 @@ const UserProgress = () => {
 				<Atoms.Text.Heading style={styles.padTitleTop}>
 					Leiðin að 100 þúsund
 				</Atoms.Text.Heading>
-				<Atoms.Charts.LineChart
+				{/* <Atoms.Charts.LineChart
 					datasets={[
 						{
 							// data: [1, 2, 5, 10, 15, 22, 23, 33],
@@ -95,7 +95,7 @@ const UserProgress = () => {
 					})}
 					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
 					height={220}
-				/>
+				/> */}
 			</LayoutWrapper>
 		</ScrollView>
 	);

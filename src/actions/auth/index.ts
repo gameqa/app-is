@@ -16,6 +16,7 @@ export const fetchUserFromToken = () => {
 				type: ActionTypes.fetchUserFromToken,
 				payload: res.data,
 			});
+			console.log(`res`, res.data)
 		} catch (error) {
 			dispatch<LogOutUserAction>({
 				type: ActionTypes.logOutUser,

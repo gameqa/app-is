@@ -44,7 +44,7 @@ const ReviewAnswer = () => {
 	};
 
 	return (
-		<View styles={styles.outer}>
+		<View style={styles.outer}>
 			<ScrollView>
         <Utils.QuestionIs question={state.text} />
 			<Utils.Explain>
@@ -56,12 +56,47 @@ const ReviewAnswer = () => {
 				{...state}
 				firstWord={state.isYesOrNo ? -1 : state.firstWord}
 				lastWord={state.isYesOrNo ? -1 : state.lastWord}
+				onSelectFirstWord={(word) => dispatch(Actions.SelectSpan.setFirstWord(word))}
+				onSelectLastWord={(word) => dispatch(Actions.SelectSpan.setLastWord(word))}
+				onClearSelection={() => dispatch(Actions.SelectSpan.clearRange())}
 			/>
       </ScrollView>
 			<View>
         
-        {stage === "verify-answer" ? (
-				state.isYesOrNo ? (
+				{stage === "verify-answer" ? (
+					state.isYesOrNo ? (
+						<React.Fragment>
+							<Atoms.Buttons.Base
+								label="Svarið er hnitmiðað"
+								onPress={() => handleVerifyDispatch(false)}
+								type="success"
+							/>
+							<Atoms.Buttons.Base
+								label="Svarið gæti verið styttra"
+								onPress={() => handleVerifyDispatch(true)}
+								type="danger"
+							/>
+							<Atoms.Buttons.Base
+								label="Til baka"
+								onPress={() => setStage("verify-answer")}
+								type="highlight"
+							/>
+						</React.Fragment>
+					) : (
+						<React.Fragment>
+							<Atoms.Buttons.Base
+								label="Ég held að svarið sé rétt"
+								onPress={() => setStage("verify-length")}
+								type="success"
+							/>
+							<Atoms.Buttons.Base
+								label="Ég held að svarið sé rangt"
+								onPress={handleArchive}
+								type="danger"
+							/>
+						</React.Fragment>
+					)
+				) : stage === "verify-length" ? (
 					<React.Fragment>
 						<Atoms.Buttons.Base
 							label="Svarið er hnitmiðað"
@@ -81,22 +116,22 @@ const ReviewAnswer = () => {
 					</React.Fragment>
 				) : stage === "verify-yes-no-answer" ? (
 					<React.Fragment>
-						<Atoms.Buttons.Base
-							label="Svarið er já samkvæmt greininni"
-							onPress={() => handleVerifyYesOrNo(true)}
-							type="success"
-						/>
-						<Atoms.Buttons.Base
-							label="Svarið er nei samkvæmt greininni"
-							onPress={() => handleVerifyYesOrNo(false)}
-							type="danger"
-						/>
-						<Atoms.Buttons.Base
-							label="Til baka"
-							onPress={() => setStage("verify-answer")}
-							type="highlight"
-						/>
-					</React.Fragment>
+					<Atoms.Buttons.Base
+						label="Svarið er já samkvæmt greininni"
+						onPress={() => handleVerifyYesOrNo(true)}
+						type="success"
+					/>
+					<Atoms.Buttons.Base
+						label="Svarið er nei samkvæmt greininni"
+						onPress={() => handleVerifyYesOrNo(false)}
+						type="danger"
+					/>
+					<Atoms.Buttons.Base
+						label="Til baka"
+						onPress={() => setStage("verify-answer")}
+						type="highlight"
+					/>
+				</React.Fragment>
 				) : null}
 			</View>
 		</View>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Image, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import * as Actions from "../../../../actions";
+import { StoreState } from "../../../../reducers";
 import styles from "./styles";
 
 const COUNT_DOWN_FROM = 7;
@@ -13,6 +14,8 @@ const AskAboutImage = () => {
 	const [hasLoaded, setHasLoaded] = useState(false);
 
 	const dispatch = useDispatch();
+
+	const state = useSelector((state: StoreState) => state.writeQuestion);
 
 	const handleHide = useCallback(() => {
 		if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
@@ -46,7 +49,7 @@ const AskAboutImage = () => {
 				<Image
 					onLoad={() => setHasLoaded(true)}
 					source={{
-						uri: "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F04%2F20%2Fqueen-elizabeth-ii-2000.jpg",
+						uri: state.image.url,
 					}}
 					style={styles.image}
 					resizeMode="cover"
@@ -57,7 +60,7 @@ const AskAboutImage = () => {
 					<Atoms.Text.Para>
 						Spurðu spurningu um{" "}
 						<Text style={styles.bold}>
-							Elísabetu Englandsdrottningu
+							{state.image.subject_tf}
 						</Text>
 					</Atoms.Text.Para>
 				</View>
