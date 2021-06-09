@@ -35,6 +35,7 @@ const Game = () => {
 
 	// set overlays
 	useEffect(() => {
+		console.log(`5`, 5, game.current);
 		// return if no game or if use has not signed affidavid
 		if (game.current === undefined || hasSigned !== true) return;
 
@@ -44,6 +45,7 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([OverlayType.announceGame])
 			);
+			console.log(`2`, 2);
 			// 2. if it is write question, show image to ask about
 			if (game.current === GameTypes.writeQuestion)
 				dispatch(
@@ -61,7 +63,7 @@ const Game = () => {
 				])
 			);
 		}
-	}, [game.lastLoaded]);
+	}, [game.lastLoaded, hasSigned]);
 
 	const affidavidKey = useMemo(
 		() => `${auth._id}:GAME:AFFIDAVID`,
