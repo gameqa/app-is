@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import reducers from "../../../../reducers";
 import { Colors } from "../../../../services";
 
 const styles = StyleSheet.create({
@@ -30,7 +29,36 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 		color: Colors.MapToDark.success,
 	},
-	image: { height: "100%", width: "100%" },
+	image: { 
+		height: "100%", 
+		width: "100%"
+	},
+	promptClose: {
+		position:"absolute",
+		right:20,
+		top:10,
+		elevation:1,
+		color: Colors.MapToDark["light-grey"],
+	},
+	promptOuter: {
+		bottom: 50,
+		padding: 10,
+		position: "absolute",
+		width: "95%",
+		marginLeft: "2.5%",
+		backgroundColor: "white",
+		zIndex: 20,
+		borderRadius: 5,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 0,
+		},
+		shadowOpacity: 0.08,
+		shadowRadius: 4.22,
+		elevation: 3,
+	},
+
 });
 
 export default styles;

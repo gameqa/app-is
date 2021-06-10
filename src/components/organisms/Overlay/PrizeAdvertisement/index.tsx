@@ -6,26 +6,28 @@ import * as Actions from "../../../../actions";
 import * as Atoms from "../../../atoms";
 import styles from "./styles";
 
-import { ChestsImages } from "./../../../../static/";
-const COUNT_DOWN = 10;
+import { Advertisement } from "./../../../../static/";
+import { StoreState } from "../../../../reducers";
+const COUNT_DOWN = 4;
 
 const PrizeAdvertisement = () => {
 
     const [count, setCount] = useState(COUNT_DOWN);
     const [hasLoaded, setHasLoaded] = useState(false);
 
+    const state = useSelector((state: StoreState) => state.writeQuestion);
     const dispatch = useDispatch();
 
     const handleHide = useCallback(() => {
-		if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
+        if (count > 3) return; 
+        if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
 	}, [count]);
 
-    console.log("ég er hér");
     useEffect(() => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
-		console.log(`count`, count);
+		
 		if (count === 0) handleHide();
 		else {
 			const interval = setInterval(() => {
@@ -47,15 +49,30 @@ const PrizeAdvertisement = () => {
             </View>                
             ): null}
             <TouchableOpacity onPress={handleHide}>
+                {(count < 3) ? (
+                <Atoms.Text.Para style={styles.promptClose}>
+                    Ýttu á skjá til að loka
+                </Atoms.Text.Para>
+                ) : null}                
                 <Image
                     onLoad={() => setHasLoaded(true)}
-                    source={{
-                        uri:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fnocco.com%2Fis%2Fblast%2F&psig=AOvVaw1m6A36Vnj5a3SBS8K3Kmx7&ust=1623255493930000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLD4koy4iPECFQAAAAAdAAAAABAD"
-                    }}
+                    source={Advertisement.noccoAdvertisement}
                     style={styles.image}
                     resizeMode="cover"
                     />
             </TouchableOpacity>
+            {hasLoaded ? (
+				<View style={styles.promptOuter}>
+					<Atoms.Text.Para>
+						Möguleiki á að vinna{" "}
+						<Text style={styles.bold}>
+                            "Vöru"
+							{/* {state.advertisement.subject_tf} */}
+						</Text>
+					</Atoms.Text.Para>
+				</View>
+			) : null}
+
         </View>
     );
 };

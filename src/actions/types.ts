@@ -43,6 +43,7 @@ export enum ActionTypes {
 	fetchPrizeCategories,
 	enqueOverlay,
 	dequeOverlay,
+
 }
 
 export type Actions =
