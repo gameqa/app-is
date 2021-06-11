@@ -6,6 +6,7 @@ import SelectSpan from "./SelectSpan";
 import EndOfRound from "./EndOfRound";
 import ReviewQuestion from "./ReviewQuestion";
 export * as Utils from "./Utils";
+export * as Hooks from "./Hooks";
 
 interface GameRound {
 	Component: () => JSX.Element;
