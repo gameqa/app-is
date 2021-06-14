@@ -22,7 +22,7 @@ const OpenBox = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 
 	const opacityValue = useRef(new Animated.Value(0)).current;
-	
+
 	// check for new prizes
 	useEffect(() => {
 		const catNameToKey = (name: string) => `${auth._id}:${name}`;
@@ -80,11 +80,11 @@ const OpenBox = () => {
 					useNativeDriver: false,
 				}).start();
 			}, DISSAPEAR_DELAY - ANIM_DURATION - BUFFER);
-	
+
 			const t2 = setTimeout(() => {
 				dispatch(Actions.Overlay.dequeOverlay());
 			}, DISSAPEAR_DELAY);
-	
+
 			return () => {
 				clearTimeout(t1);
 				clearTimeout(t2);
@@ -97,26 +97,31 @@ const OpenBox = () => {
 	if (!category) return <React.Fragment />;
 
 	return (
-		<Animated.View 
+		<Animated.View
 			style={{
 				...styles.outer,
-				backgroundColor: Chests.mapToColor(category.name)
+				backgroundColor: Chests.mapToColor(category.name),
 			}}
 			pointerEvents="box-none"
-				>
-					<Image
-						source={Chests.mapToPrize(category.name)}						
-						resizeMode="contain"
-					/>
-					<Atoms.Text.Heading style={{...styles.chestUnlockHeader,...styles.chestUnlockPara}}>
-						{category.name} {"\n"}
-					</Atoms.Text.Heading>				
-				<Atoms.Text.Heading style={styles.chestUnlockPara}>
-					
-					Þú ert kominn í pottinn! {/* setja inn catergory name hér inn */}
-				</Atoms.Text.Heading>
-				
-		<Confetti persist />
+		>
+			<Image
+				source={Chests.mapToPrize(category.name)}
+				resizeMode="contain"
+			/>
+			<Atoms.Text.Heading
+				style={{
+					...styles.chestUnlockHeader,
+					...styles.chestUnlockPara,
+				}}
+			>
+				{category.name} {"\n"}
+			</Atoms.Text.Heading>
+			<Atoms.Text.Heading style={styles.chestUnlockPara}>
+				Þú ert kominn í pottinn!{" "}
+				{/* setja inn catergory name hér inn */}
+			</Atoms.Text.Heading>
+
+			<Confetti />
 		</Animated.View>
 	);
 };
