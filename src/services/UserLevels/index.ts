@@ -29,13 +29,13 @@ const LEVEL_ICONS = [
 ];
 
 export const mapLevelToString = (level: number) => {
-	const string = LEVEL_NAMES[level - 1];
+	const string = LEVEL_NAMES[Math.floor(level / 3)];
 	if (string === undefined) return "Galdrakall";
 	return string;
 };
 
 export const mapLevelToIconURL = (level: number) => {
-	const URL = LEVEL_ICONS[level - 1];
+	const URL = LEVEL_ICONS[Math.floor(level / 3)];
 	if (URL === undefined) return "https://picsum.photos/70/70";
 	return URL;
 };

@@ -1,6 +1,12 @@
 import { CheckListItem } from "./interface";
 
-const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
+const getQuestions = (): CheckListItem[] => [
+	{
+		title: "Skiljanleg spurning",
+		description: "Það er skýrt hvað höfundur spurningarinnar á við.",
+		value: false,
+		badQuestionPrompt: "Finnst þér spurningin vera óskiljanleg?",
+	},
 	{
 		title: "Lengd svars",
 		description:
@@ -15,29 +21,6 @@ const getQuestions = (isYesOrNo: boolean): CheckListItem[] => [
 		value: false,
 		badQuestionPrompt: "Er svarið mismunandi milli aðstæða?",
 	},
-	{
-		title: "Skiljanleg spurning",
-		description: "Það er skýrt hvað höfundur spurningarinnar á við.",
-		value: false,
-		badQuestionPrompt: "Finnst þér spurningin vera óskiljanleg?",
-	},
-	isYesOrNo
-		? {
-				title: "Þetta er já/nei spurning",
-				description:
-					"Það ætti að vera hægt að svara þessari spurningu með annaðhvort já eða nei",
-				value: false,
-				badQuestionPrompt:
-					"Er svarið við spurningunni hvorki já eða nei?",
-		  }
-		: {
-				title: "Þetta er EKKI já/nei spurning",
-				description:
-					"Það er hvorki hægt að svara þessari spurningu með já eða nei",
-				value: false,
-				badQuestionPrompt:
-					"Er svarið við spurningunni já eða nei?",
-		  },
 ];
 
 export default getQuestions;
