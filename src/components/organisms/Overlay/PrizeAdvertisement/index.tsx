@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../../../actions";
 import * as Atoms from "../../../atoms";
 import styles from "./styles";
-
-import { Advertisement } from "./../../../../static/";
 import { StoreState } from "../../../../reducers";
 const COUNT_DOWN = 4;
 
@@ -15,13 +13,19 @@ const PrizeAdvertisement = () => {
     const [count, setCount] = useState(COUNT_DOWN);
     const [hasLoaded, setHasLoaded] = useState(false);
 
-    const state = useSelector((state: StoreState) => state.writeQuestion);
+    const advertisement = useSelector((state: StoreState) => state.advertisement);
+    console.log("advertisement",advertisement.prize?.name);
     const dispatch = useDispatch();
 
     const handleHide = useCallback(() => {
         if (count > 3) return; 
         if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
 	}, [count]);
+
+
+    useEffect(() => {
+        dispatch(Actions.Advertisement.fetchRandomPrize());
+    },[])
 
     useEffect(() => {
 		if (!hasLoaded) return;
@@ -39,10 +43,10 @@ const PrizeAdvertisement = () => {
 		}
 	}, [count, handleHide, hasLoaded]);
 
-
+    if(advertisement.prize === undefined) return <React.Fragment></React.Fragment>
 
     return (
-        <View style={styles.outer}>
+        <>
             {hasLoaded ? (
 				<View style={styles.counterOuter}>
                 <Atoms.Text.Para>{count}</Atoms.Text.Para>
@@ -56,24 +60,24 @@ const PrizeAdvertisement = () => {
                 ) : null}                
                 <Image
                     onLoad={() => setHasLoaded(true)}
-                    source={Advertisement.noccoAdvertisement}
+                    source={{
+                        uri:advertisement.prize.img}}
                     style={styles.image}
                     resizeMode="cover"
                     />
             </TouchableOpacity>
             {hasLoaded ? (
 				<View style={styles.promptOuter}>
-					<Atoms.Text.Para>
+                    <Atoms.Text.Para>
 						Möguleiki á að vinna{" "}
 						<Text style={styles.bold}>
-                            "Vöru"
-							{/* {state.advertisement.subject_tf} */}
+							{advertisement.prize.name}
 						</Text>
 					</Atoms.Text.Para>
 				</View>
 			) : null}
 
-        </View>
+        </>
     );
 };
 

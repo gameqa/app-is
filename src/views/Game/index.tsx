@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
-import React, { LegacyRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useMemo  } from "react";
 import LayoutWrapper from "../../layout";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,14 +10,13 @@ import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const ODDS_FOR_ADVERTISEMENT = 10;
 
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
 
-	const DISPLAY_AD_PROBABILITY = 0.1;
+	const DISPLAY_AD_PROBABILITY = 0.9;
 	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_AD_PROBABILITY, [OverlayType.advertisePrize]);
 	// undefined means that we have not checked the cache to find out
 	const [hasSigned, setHasSigned] = useState<boolean | undefined>();
@@ -41,7 +39,7 @@ const Game = () => {
 
 	// set overlays
 	useEffect(() => {
-		console.log(`5`, 5, game.current);
+		// console.log(`5`, 5, game.current);
 		// return if no game or if use has not signed affidavid
 		if (game.current === undefined || hasSigned !== true) return;
 

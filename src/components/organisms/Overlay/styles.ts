@@ -2,8 +2,8 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
 	outer: {
-		height: Dimensions.get("screen").height,
-		width: Dimensions.get("screen").width,
+		height: "100%",
+		width: "100%",
 		position: "absolute",
 		top: 0,
 		left: 0,
