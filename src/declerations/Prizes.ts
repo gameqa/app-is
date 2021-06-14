@@ -15,5 +15,5 @@ export interface PrizeCategory {
 
 export interface Prize {
 	name: string;
-	imageURL: string;
+	img: string;
 }

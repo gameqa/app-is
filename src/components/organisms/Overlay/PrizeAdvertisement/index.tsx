@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../../../actions";
 import * as Atoms from "../../../atoms";
 import styles from "./styles";
-import { Advertisement } from "./../../../../static/";
 import { StoreState } from "../../../../reducers";
 const COUNT_DOWN = 4;
 
@@ -16,11 +15,21 @@ const PrizeAdvertisement = () => {
 	const state = useSelector((state: StoreState) => state.writeQuestion);
 	const dispatch = useDispatch();
 
-	const handleHide = useCallback(() => {
-		if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
+    const advertisement = useSelector((state: StoreState) => state.advertisement);
+    console.log("advertisement",advertisement.prize?.name);
+    const dispatch = useDispatch();
+
+    const handleHide = useCallback(() => {
+        if (count > 3) return; 
+        if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
 	}, [count]);
 
-	useEffect(() => {
+
+    useEffect(() => {
+        dispatch(Actions.Advertisement.fetchRandomPrize());
+    },[])
+
+    useEffect(() => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
@@ -36,39 +45,42 @@ const PrizeAdvertisement = () => {
 		}
 	}, [count, handleHide, hasLoaded]);
 
-	return (
-		<View style={styles.outer}>
-			{hasLoaded ? (
+    if(advertisement.prize === undefined) return <React.Fragment></React.Fragment>
+
+    return (
+        <>
+            {hasLoaded ? (
 				<View style={styles.counterOuter}>
-					<Atoms.Text.Para>{count}</Atoms.Text.Para>
-				</View>
-			) : null}
-			<TouchableOpacity onPress={handleHide}>
-				{count < 3 ? (
-					<Atoms.Text.Para style={styles.promptClose}>
-						Ýttu á skjá til að loka
-					</Atoms.Text.Para>
-				) : null}
-				<Image
-					onLoad={() => setHasLoaded(true)}
-					source={Advertisement.noccoAdvertisement}
-					style={styles.image}
-					resizeMode="cover"
-				/>
-			</TouchableOpacity>
-			{hasLoaded ? (
+                <Atoms.Text.Para>{count}</Atoms.Text.Para>
+            </View>                
+            ): null}
+            <TouchableOpacity onPress={handleHide}>
+                {(count < 3) ? (
+                <Atoms.Text.Para style={styles.promptClose}>
+                    Ýttu á skjá til að loka
+                </Atoms.Text.Para>
+                ) : null}                
+                <Image
+                    onLoad={() => setHasLoaded(true)}
+                    source={{
+                        uri:advertisement.prize.img}}
+                    style={styles.image}
+                    resizeMode="cover"
+                    />
+            </TouchableOpacity>
+            {hasLoaded ? (
 				<View style={styles.promptOuter}>
-					<Atoms.Text.Para>
+                    <Atoms.Text.Para>
 						Möguleiki á að vinna{" "}
 						<Text style={styles.bold}>
-							"Vöru"
-							{/* {state.advertisement.subject_tf} */}
+							{advertisement.prize.name}
 						</Text>
 					</Atoms.Text.Para>
 				</View>
 			) : null}
-		</View>
-	);
+
+        </>
+    );
 };
 
 export default PrizeAdvertisement;

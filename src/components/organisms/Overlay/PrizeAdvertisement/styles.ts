@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
 	},
 	image: { 
 		height: "100%", 
-		width: "100%"
+		width: "100%",
+		zIndex:0,
 	},
 	promptClose: {
 		position:"absolute",
@@ -41,24 +42,17 @@ const styles = StyleSheet.create({
 		color: Colors.MapToDark["light-grey"],
 	},
 	promptOuter: {
-		bottom: 50,
-		padding: 10,
-		position: "absolute",
-		width: "95%",
-		marginLeft: "2.5%",
 		backgroundColor: "white",
-		zIndex: 20,
+		position: "absolute",
+		// flexDirection: "row",
+		bottom: 20,
+		width: "100%",
+		// bottom: "10%",
+		padding: 10,
+		zIndex: 30,
 		borderRadius: 5,
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 0,
-		},
-		shadowOpacity: 0.08,
-		shadowRadius: 4.22,
-		elevation: 3,
+		elevation:10,
 	},
-
 });
 
 export default styles;

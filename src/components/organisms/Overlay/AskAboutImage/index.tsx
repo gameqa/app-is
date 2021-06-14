@@ -25,7 +25,7 @@ const AskAboutImage = () => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
-		console.log(`count`, count);
+		// console.log(`count`, count);
 		if (count === 0) handleHide();
 		else {
 			const interval = setInterval(() => {

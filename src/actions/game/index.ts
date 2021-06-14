@@ -137,7 +137,7 @@ export const gameActionWrapperFunc = (
 			});
 
 			const { data } = await cb(dispatch);
-			console.log(`data`, data);
+			// console.log(`data`, data);
 			__handleUpdateTask(data);
 		} catch (e) {
 			console.log(`error`, e);

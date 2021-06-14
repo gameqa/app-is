@@ -13,6 +13,7 @@ import chartData from "./chartData";
 import pushNotification from "./pushNotification";
 import prize from "./prize";
 import overlay from "./overlay";
+import advertisement from "./advertisement";
 import motivation from "./motivation";
 
 export default combineReducers<StoreState>({
@@ -30,6 +31,7 @@ export default combineReducers<StoreState>({
 	prize,
 	overlay,
 	motivation,
+	advertisement,
 });
 
 export * from "./interface";

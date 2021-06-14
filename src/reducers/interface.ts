@@ -11,6 +11,7 @@ import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
 import * as Prize from "./prize";
 import * as Overlay from "./overlay";
+import * as Advertisement from "./advertisement";
 import * as Motivation from "./motivation";
 
 export interface StoreState {
@@ -28,4 +29,5 @@ export interface StoreState {
 	prize: Prize.State;
 	overlay: Overlay.State;
 	motivation: Motivation.State;
+	advertisement: Advertisement.State;
 }
