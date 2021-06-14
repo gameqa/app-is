@@ -5,6 +5,7 @@ import OpenBox from "./OpenBox";
 import AnnounceGame from "./AnnounceGame";
 import AskAboutImage from "./AskAboutImage";
 import PrizeAdvertisement from "./PrizeAdvertisement";
+import Motivation from "./Motivation";
 
 export interface OverlayScreen extends OverlayItem {
 	Component: () => JSX.Element;
@@ -35,8 +36,12 @@ const items: OverlayScreen[] = [
 		Component: AskAboutImage,
 	},
 	{
-		type:OverlayType.advertisePrize,
+		type: OverlayType.advertisePrize,
 		Component: PrizeAdvertisement,
+	},
+	{
+		type: OverlayType.motivation,
+		Component: Motivation,
 	},
 ];
 

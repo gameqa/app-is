@@ -7,53 +7,72 @@ const GANG_PRIZE = "Klíkan";
 const THE_CHOSEN_ONES_PRIZE = "Útvaldir";
 const INFLUENCER_PRIZE = "Áhrifavaldar";
 
+export const mapToPrize = (type?: string) => {
+	switch (type) {
+		case PARTICIPATION_PRIZE:
+			return Statics.ChestsImages.participationChestOpen;
+		case GANG_PRIZE:
+			return Statics.ChestsImages.gangChestOpen;
+		case THE_CHOSEN_ONES_PRIZE:
+			return Statics.ChestsImages.theChosenOnesChestOpen;
+		case INFLUENCER_PRIZE:
+			return Statics.ChestsImages.influencerChestOpen;
+		default:
+			return;
+	}
+};
 
-export const mapToPrize = (type?: String) => {
-    switch(type) {
-        case PARTICIPATION_PRIZE:
-            return Statics.ChestsImages.participationChestOpen;
-        case GANG_PRIZE:
-            return Statics.ChestsImages.gangChestOpen;
-        case THE_CHOSEN_ONES_PRIZE:
-            return Statics.ChestsImages.theChosenOnesChestOpen;
-        case INFLUENCER_PRIZE:
-            return Statics.ChestsImages.influencerChestOpen;
-        default:
-            return;
-    }
-}
+export const mapToNoPrize = (type?: string) => {
+	switch (type) {
+		case PARTICIPATION_PRIZE:
+			return Statics.ChestsImages.participationChest;
+		case GANG_PRIZE:
+			return Statics.ChestsImages.gangChest;
+		case THE_CHOSEN_ONES_PRIZE:
+			return Statics.ChestsImages.theChosenOnesChest;
+		case INFLUENCER_PRIZE:
+			return Statics.ChestsImages.influencerChest;
+		default:
+			return;
+	}
+};
 
-export const mapToNoPrize = (type?: String) => {
-    switch(type) {
-        case PARTICIPATION_PRIZE:
-            return Statics.ChestsImages.participationChest;
-        case GANG_PRIZE:
-            return Statics.ChestsImages.gangChest;
-        case THE_CHOSEN_ONES_PRIZE:
-            return Statics.ChestsImages.theChosenOnesChest;
-        case INFLUENCER_PRIZE:
-            return Statics.ChestsImages.influencerChest;
-        default:
-            return;
-    }
-} 
+export const mapIdtoName = (type?: string) => {
+	switch (type) {
+		case "1":
+			return PARTICIPATION_PRIZE;
+		case "2":
+			return GANG_PRIZE;
+		case "3":
+			return THE_CHOSEN_ONES_PRIZE;
+		case "4":
+			return INFLUENCER_PRIZE;
+		default:
+			return;
+	}
+};
 
 export const mapToColor = (type?: String) => {
-    switch (type) {
-        case PARTICIPATION_PRIZE:
-            //green chest
-            //mapToDark.highlight fer vel með fjólubláukistunni
-            return Colors.MapToDark.green;
-        case GANG_PRIZE:
-            //blue chest
-            return Colors.MapToDark.success;
-        case THE_CHOSEN_ONES_PRIZE:
-            //purple chest
-            return Colors.MapToDark.highlight;
-        case INFLUENCER_PRIZE:
-            //red chest
-            return Colors.MapToDark.danger;
-        default:
-            return;
-    }
-}
+	switch (type) {
+		case PARTICIPATION_PRIZE:
+			//green chest
+			//mapToDark.highlight fer vel með fjólubláukistunni
+			return Colors.MapToDark.green;
+		case GANG_PRIZE:
+			//blue chest
+			return Colors.MapToDark.success;
+		case THE_CHOSEN_ONES_PRIZE:
+			//purple chest
+			return Colors.MapToDark.highlight;
+		case INFLUENCER_PRIZE:
+			//red chest
+			return Colors.MapToDark.danger;
+		default:
+			return;
+	}
+};
+
+export const mapIdToNoPrize = (id: string) =>
+	mapToNoPrize(mapIdtoName(id));
+
+export const mapIdToColor = (id: string) => mapToColor(mapIdToNoPrize(id));

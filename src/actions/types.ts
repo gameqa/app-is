@@ -10,6 +10,7 @@ import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
 import * as PrizeCategory from "./prize";
 import * as Overlay from "./overlay";
+import * as Motivation from "./motivation";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -43,7 +44,9 @@ export enum ActionTypes {
 	fetchPrizeCategories,
 	enqueOverlay,
 	dequeOverlay,
-	pushOverlay
+	pushOverlay,
+	fetchMotivation,
+	clearMotivation,
 }
 
 export type Actions =
@@ -78,4 +81,5 @@ export type Actions =
 	| PrizeCategory.FetchPrizeCategoriesAction
 	| Overlay.Actions.DequeOverlayAction
 	| Overlay.Actions.EnqueOverlayAction
-	| Overlay.Actions.PushOverlayAction;
+	| Overlay.Actions.PushOverlayAction
+	| Motivation.Actions.FetchMotivationAction;
