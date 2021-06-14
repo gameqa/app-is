@@ -9,8 +9,6 @@ import styles from "./styles";
 import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ODDS_FOR_ADVERTISEMENT = 10;
-
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);

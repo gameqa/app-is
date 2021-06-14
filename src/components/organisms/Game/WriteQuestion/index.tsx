@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import { View, Image, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { StoreState } from "../../../../reducers";
@@ -8,6 +8,8 @@ import * as Actions from "../../../../actions";
 import { submitQuestion } from "../../../../actions/game";
 import { Alert, OverlayType } from "../../../../declerations";
 import { Utils } from "../";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const WriteQuestion = () => {
 	const state = useSelector((state: StoreState) => state.writeQuestion);
@@ -45,8 +47,9 @@ const WriteQuestion = () => {
 	};
 
 	return (
-		<View style={styles.flex}>
-			<Atoms.Alerts.Ribbon
+		<React.Fragment>
+			<KeyboardAwareScrollView>
+				{/* <Atoms.Alerts.Ribbon
 				item={
 					isYesNoQuestion
 						? {
@@ -58,27 +61,63 @@ const WriteQuestion = () => {
 								label: "Ekki skrifa já / nei spurningu",
 						  }
 				}
-			/>
-			<Atoms.Alerts.Ribbon item={error} />
-			<Utils.Explain>
-				Sendu inn spurningu sem aðrir notendur geta googlað svarið
-				við á íslensku. 🧑🔎🇮🇸
-			</Utils.Explain>
-			<View style={styles.marginTop}>
-				<Atoms.Inputs.Text
-					value={state.question}
-					placeholder="Skrifaðu spurninguna hér"
-					onChange={handleUserInput}
-					props={{
-						multiline: true,
-						numberOfLines: 3,
-						style: { height: 110 },
-						returnKeyType: "send",
-						onSubmitEditing: handleSubmit,
-					}}
-				/>
-			</View>
-
+			/> */}
+				<Atoms.Alerts.Ribbon item={error} />
+				<Utils.Explain>
+					Sendu inn spurningu sem aðrir notendur geta googlað
+					svarið við á íslensku. 🧑🔎🇮🇸
+				</Utils.Explain>
+				<View style={styles.marginTop}>
+					<View style={styles.imagePreview}>
+						<View style={styles.previewBanner}>
+							<Atoms.Text.Para>
+								Þú gætir spurt um {state.image.subject_tf}
+							</Atoms.Text.Para>
+						</View>
+						<View style={styles.buttonsContainer}>
+							<TouchableOpacity style={styles.button}>
+								<FontAwesome
+									name="refresh"
+									size={20}
+									color="white"
+								/>
+							</TouchableOpacity>
+							<TouchableOpacity
+								style={styles.button}
+								onPress={() =>
+									dispatch(
+										Actions.Overlay.enqueOverlay([
+											OverlayType.askAboutImage,
+										])
+									)
+								}
+							>
+								<Entypo
+									name="resize-full-screen"
+									size={20}
+									color="white"
+								/>
+							</TouchableOpacity>
+						</View>
+						<Image
+							style={styles.previewImage}
+							source={{ uri: state.image.url }}
+						/>
+					</View>
+					<Atoms.Inputs.Text
+						value={state.question}
+						placeholder="Skrifaðu spurninguna hér"
+						onChange={handleUserInput}
+						props={{
+							multiline: true,
+							numberOfLines: 3,
+							style: { height: 110 },
+							returnKeyType: "send",
+							onSubmitEditing: handleSubmit,
+						}}
+					/>
+				</View>
+			</KeyboardAwareScrollView>
 			<View style={[styles.flex, styles.alignEnd]}>
 				<Atoms.Buttons.Emoji
 					emoji="🚀"
@@ -87,7 +126,7 @@ const WriteQuestion = () => {
 					size={70}
 				/>
 			</View>
-		</View>
+		</React.Fragment>
 	);
 };
 
