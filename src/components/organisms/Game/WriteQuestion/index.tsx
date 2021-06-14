@@ -75,7 +75,14 @@ const WriteQuestion = () => {
 							</Atoms.Text.Para>
 						</View>
 						<View style={styles.buttonsContainer}>
-							<TouchableOpacity style={styles.button}>
+							<TouchableOpacity
+								style={styles.button}
+								onPress={() =>
+									dispatch(
+										Actions.WriteQuestion.refreshAskAboutImage()
+									)
+								}
+							>
 								<FontAwesome
 									name="refresh"
 									size={20}

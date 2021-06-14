@@ -47,6 +47,7 @@ export enum ActionTypes {
 	pushOverlay,
 	fetchMotivation,
 	clearMotivation,
+	refreshAskAboutImage,
 }
 
 export type Actions =
@@ -63,6 +64,7 @@ export type Actions =
 	| Game.Actions.StartCompletedViewRoundFromAPIAction
 	| Game.Actions.SetGameLoadingStateAction
 	| WriteQestion.Actions.WriteQuestionAction
+	| WriteQestion.Actions.RefreshAskAboutImageAction
 	| SelectSpan.Actions.ClearIndexRangeInParagraph
 	| SelectSpan.Actions.SelectFirstWordIndexInParagraphAction
 	| SelectSpan.Actions.SelectSecondWordIndexInParagraphAction
