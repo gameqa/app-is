@@ -9,9 +9,11 @@ import { StoreState } from "../../../../reducers";
 const COUNT_DOWN = 4;
 
 const PrizeAdvertisement = () => {
+	const [count, setCount] = useState(COUNT_DOWN);
+	const [hasLoaded, setHasLoaded] = useState(false);
 
-    const [count, setCount] = useState(COUNT_DOWN);
-    const [hasLoaded, setHasLoaded] = useState(false);
+	const state = useSelector((state: StoreState) => state.writeQuestion);
+	const dispatch = useDispatch();
 
     const advertisement = useSelector((state: StoreState) => state.advertisement);
     console.log("advertisement",advertisement.prize?.name);
@@ -31,7 +33,7 @@ const PrizeAdvertisement = () => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
-		
+
 		if (count === 0) handleHide();
 		else {
 			const interval = setInterval(() => {

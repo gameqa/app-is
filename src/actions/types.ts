@@ -10,6 +10,7 @@ import * as ChartData from "./chartData";
 import * as PushNotification from "./pushNotification";
 import * as PrizeCategory from "./prize";
 import * as Overlay from "./overlay";
+import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
 
 export enum ActionTypes {
@@ -44,8 +45,11 @@ export enum ActionTypes {
 	fetchPrizeCategories,
 	enqueOverlay,
 	dequeOverlay,
-	pushOverlay,
 	fetchRandomPrize,
+	pushOverlay,
+	fetchMotivation,
+	clearMotivation,
+	refreshAskAboutImage,
 }
 
 export type Actions =
@@ -62,6 +66,7 @@ export type Actions =
 	| Game.Actions.StartCompletedViewRoundFromAPIAction
 	| Game.Actions.SetGameLoadingStateAction
 	| WriteQestion.Actions.WriteQuestionAction
+	| WriteQestion.Actions.RefreshAskAboutImageAction
 	| SelectSpan.Actions.ClearIndexRangeInParagraph
 	| SelectSpan.Actions.SelectFirstWordIndexInParagraphAction
 	| SelectSpan.Actions.SelectSecondWordIndexInParagraphAction
@@ -80,5 +85,6 @@ export type Actions =
 	| PrizeCategory.FetchPrizeCategoriesAction
 	| Overlay.Actions.DequeOverlayAction
 	| Overlay.Actions.EnqueOverlayAction
-	| Overlay.Actions.PushOverlayAction
 	| Advertisement.Actions.FetchRandomPrize
+	| Overlay.Actions.PushOverlayAction
+	| Motivation.Actions.FetchMotivationAction;

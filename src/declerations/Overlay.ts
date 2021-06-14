@@ -5,6 +5,7 @@ export enum OverlayType {
 	announceGame,
 	askAboutImage,
 	advertisePrize,
+	motivation,
 }
 
 export interface OverlayItem {

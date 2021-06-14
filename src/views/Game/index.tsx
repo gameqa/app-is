@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo  } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import LayoutWrapper from "../../layout";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,15 +9,26 @@ import styles from "./styles";
 import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
 const Game = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
 
-	const DISPLAY_AD_PROBABILITY = 0.9;
-	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_AD_PROBABILITY, [OverlayType.advertisePrize]);
+	const DISPLAY_AD_PROBABILITY = 0.095;
+	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_AD_PROBABILITY, [
+		OverlayType.advertisePrize,
+	]);
+
+	const DISPLAY_MOTIVATION_PROBABILITY = 0.095;
+	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_MOTIVATION_PROBABILITY, [
+		OverlayType.motivation,
+	]);
+
+	// gets motivation when component loads
+	useEffect(() => {
+		dispatch(Actions.Motivation.fetchMotivation());
+	}, []);
+
 	// undefined means that we have not checked the cache to find out
 	const [hasSigned, setHasSigned] = useState<boolean | undefined>();
 
@@ -39,7 +50,6 @@ const Game = () => {
 
 	// set overlays
 	useEffect(() => {
-		// console.log(`5`, 5, game.current);
 		// return if no game or if use has not signed affidavid
 		if (game.current === undefined || hasSigned !== true) return;
 
@@ -49,7 +59,6 @@ const Game = () => {
 			dispatch(
 				Actions.Overlay.enqueOverlay([OverlayType.announceGame])
 			);
-			console.log(`2`, 2);
 			// 2. if it is write question, show image to ask about
 			if (game.current === GameTypes.writeQuestion)
 				dispatch(

@@ -21,7 +21,7 @@ const ReviewQuestion = () => {
 	const [current, setCurrent] = useState(0);
 
 	useEffect(() => {
-		setItems(getQuestions(state.isYesOrNo));
+		setItems(getQuestions());
 		setCurrent(0);
 	}, [game.lastLoaded]);
 
@@ -74,19 +74,6 @@ const ReviewQuestion = () => {
 
 	return (
 		<View style={styles.flex}>
-			{/* <Atoms.Text.Para style={styles.para}>
-				Áður en við reynum að finna svarið við þessari spurningu,
-				þá viljum við vera viss um að þetta sé góð spurning. Farðu
-				yfir tékklistann hér fyrir neðan og hakaðu við þau atriði
-				sem þú ert sammála.
-			</Atoms.Text.Para> */}
-			{/* {items.map((item, i) => (
-				<Atoms.Cards.CheckListItem
-					{...item}
-					onPress={() => markItem(i)}
-				/>
-			))} */}
-
 			<Utils.QuestionIs question={state.text} />
 
 			{item ? (
@@ -113,12 +100,6 @@ const ReviewQuestion = () => {
 					</View>
 				</View>
 			) : null}
-			{/* 
-			<Atoms.Buttons.Base
-				onPress={handleAlert}
-				label="Staðfesta"
-				type="highlight"
-			/> */}
 		</View>
 	);
 };

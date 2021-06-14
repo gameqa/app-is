@@ -12,3 +12,4 @@ export * as PushNotification from "./pushNotification";
 export * as PrizeCategory from "./prize";
 export * as Overlay from "./overlay";
 export * as Advertisement from "./advertisement";
+export * as Motivation from "./motivation";

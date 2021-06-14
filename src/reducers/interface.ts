@@ -12,6 +12,7 @@ import * as PushNotification from "./pushNotification";
 import * as Prize from "./prize";
 import * as Overlay from "./overlay";
 import * as Advertisement from "./advertisement";
+import * as Motivation from "./motivation";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -27,5 +28,6 @@ export interface StoreState {
 	pushNotification: PushNotification.State;
 	prize: Prize.State;
 	overlay: Overlay.State;
+	motivation: Motivation.State;
 	advertisement: Advertisement.State;
 }

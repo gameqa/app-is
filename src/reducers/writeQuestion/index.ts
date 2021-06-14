@@ -5,6 +5,10 @@ export const initialState: State = {
 	ideaWords: [],
 	questionType: "",
 	question: "",
+	image: {
+		url: "",
+		subject_tf: "",
+	},
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -20,7 +24,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				...state,
 				question: action.payload,
 			};
-
+		case ActionTypes.refreshAskAboutImage: {
+			return {
+				...state,
+				image: action.payload,
+			};
+		}
 		default:
 			return state;
 	}
