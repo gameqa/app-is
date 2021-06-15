@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Image, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import * as Actions from "../../../../actions";
@@ -25,7 +24,6 @@ const AskAboutImage = () => {
 		if (!hasLoaded) return;
 
 		const MS_IN_S = 1000;
-		// console.log(`count`, count);
 		if (count === 0) handleHide();
 		else {
 			const interval = setInterval(() => {
@@ -45,7 +43,7 @@ const AskAboutImage = () => {
 				</View>
 			) : null}
 
-			<TouchableOpacity onPress={handleHide}>
+			<View>
 				<Image
 					onLoad={() => setHasLoaded(true)}
 					source={{
@@ -54,7 +52,7 @@ const AskAboutImage = () => {
 					style={styles.image}
 					resizeMode="cover"
 				/>
-			</TouchableOpacity>
+			</View>
 			{hasLoaded ? (
 				<View style={styles.promptOuter}>
 					<Atoms.Text.Para>

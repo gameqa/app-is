@@ -19,7 +19,6 @@ const PrizeAdvertisement = () => {
 	const dispatch = useDispatch();
 
 	const handleHide = useCallback(() => {
-		if (count > 3) return;
 		if (hasLoaded) dispatch(Actions.Overlay.dequeOverlay());
 	}, [count]);
 
@@ -53,12 +52,7 @@ const PrizeAdvertisement = () => {
 					<Atoms.Text.Para>{count}</Atoms.Text.Para>
 				</View>
 			) : null}
-			<TouchableOpacity onPress={handleHide}>
-				{count < 3 ? (
-					<Atoms.Text.Para style={styles.promptClose}>
-						Ýttu á skjá til að loka
-					</Atoms.Text.Para>
-				) : null}
+			<View>
 				<Image
 					onLoad={() => setHasLoaded(true)}
 					source={{
@@ -67,7 +61,7 @@ const PrizeAdvertisement = () => {
 					style={styles.image}
 					resizeMode="cover"
 				/>
-			</TouchableOpacity>
+			</View>
 			{hasLoaded ? (
 				<View style={styles.promptOuter}>
 					<Atoms.Text.Para>
