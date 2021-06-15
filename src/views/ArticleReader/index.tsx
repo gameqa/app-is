@@ -115,7 +115,12 @@ const ArticleReaderView = ({
 					state.paragraphs.map((text, i) => (
 						<TouchableOpacity
 							onPress={() => handleSubmitParagraph(i)}
+							style={styles.paragraphOuter}
 						>
+							<Atoms.Text.Heading style={styles.enumeration}>
+								{i + 1}
+							</Atoms.Text.Heading>
+
 							<Atoms.Text.Para style={styles.textParagraph}>
 								{text}
 							</Atoms.Text.Para>
