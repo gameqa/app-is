@@ -11,16 +11,23 @@ const ReviewAnswer = () => {
 	type ReviewStage =
 		| "starting-state"
 		| "verify-boolean"
+		| "verify-not-boolean"
 		| "verify-answer"
 		| "verify-answer-short"
 		| "select-boolean";
+
 	const [stage, setStage] = useState<ReviewStage>("starting-state");
 
 	const state = useSelector((state: StoreState) => state.selectSpan);
 	const game = useSelector((state: StoreState) => state.game);
 
 	useEffect(() => {
-		setStage("verify-answer");
+		setStage(
+			state.isYesOrNo ? "verify-boolean" : "verify-not-boolean"
+		);
+		return () => {
+			setStage("starting-state");
+		};
 	}, [game.lastLoaded]);
 
 	const dispatch = useDispatch();
@@ -120,6 +127,23 @@ const ReviewAnswer = () => {
 					>
 						Er þetta já/nei spurning?
 					</Utils.VerifyButtons>
+				) : stage === "verify-not-boolean" ? (
+					<Utils.VerifyButtons
+						approveEmoji="👍"
+						declineEmoji="👎"
+						onApprove={() =>
+							dispatch(
+								Actions.Game.markAsYesOrNo(
+									game._id,
+									state._id,
+									true
+								)
+							)
+						}
+						onDecline={() => setStage("verify-answer")}
+					>
+						Er þetta já/nei spurning?
+					</Utils.VerifyButtons>
 				) : stage === "select-boolean" ? (
 					<Utils.VerifyButtons
 						approveEmoji="👍"
@@ -127,7 +151,7 @@ const ReviewAnswer = () => {
 						onApprove={() => handleVerifyYesOrNo(true)}
 						onDecline={() => handleVerifyYesOrNo(false)}
 					>
-						Er svarið já eða nei?
+						Hvort er svarið já eða nei?
 					</Utils.VerifyButtons>
 				) : null}
 			</View>

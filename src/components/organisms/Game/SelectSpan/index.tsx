@@ -62,6 +62,25 @@ const SelectSpan = () => {
 		);
 	}, [game._id, state._id, markKeyAsSeen, handleCompleteStep]);
 
+	const handleMarkAsYesOrNo = () => {
+		Alert.alert("Ertu viss?", "Er svarið annaðhvort já eða nei?", [
+			{
+				text: "Hætta við",
+			},
+			{
+				text: "Áfram",
+				onPress: () =>
+					dispatch(
+						Actions.Game.markAsYesOrNo(
+							game._id,
+							state._id,
+							true
+						)
+					),
+			},
+		]);
+	};
+
 	// const toogleSelectionState = () => setIsSelectingSpan((v) => !v);
 
 	const handleSubmit = useCallback(
@@ -117,15 +136,7 @@ const SelectSpan = () => {
 					<Utils.VerifyButtons
 						approveEmoji="👍"
 						declineEmoji="👎"
-						onApprove={() =>
-							dispatch(
-								Actions.Game.markAsYesOrNo(
-									game._id,
-									state._id,
-									true
-								)
-							)
-						}
+						onApprove={handleMarkAsYesOrNo}
 						onDecline={() => setStage("select-span")}
 					>
 						Er þetta já/nei spurning?
