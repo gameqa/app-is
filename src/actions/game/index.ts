@@ -278,4 +278,20 @@ export const submitArticleAndParagraph = (
 		)
 	);
 
+export const markAsYesOrNo = (
+	gameRoundId: string,
+	answerId: string,
+	isYesOrNo: boolean
+) =>
+	gameActionWrapperFunc((_dispatch: Dispatch) =>
+		Api.post<TaskFromBackend>(
+			`/api/v1/game_rounds/${gameRoundId}/advance`,
+			{
+				type: "set-yes-or-no-flag",
+				answerId,
+				isYesOrNo,
+			}
+		)
+	);
+
 export * as Actions from "./interface";

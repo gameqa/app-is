@@ -9,9 +9,11 @@ import * as Actions from "../../../../actions";
 import { StoreState } from "../../../../reducers";
 import { styles } from "./style";
 
+type stage = "verify-answer-present" | "is-boolean" | "select-span";
+
 const SelectSpan = () => {
 	// if it is true then user can locate answer span
-	const [isSelectingSpan, setIsSelectingSpan] = useState(false);
+	const [stage, setStage] = useState<stage>("verify-answer-present");
 
 	const state = useSelector((state: StoreState) => state.selectSpan);
 	const game = useSelector((state: StoreState) => state.game);
@@ -19,24 +21,10 @@ const SelectSpan = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		setIsSelectingSpan(false);
-	}, [game.lastLoaded]);
-
 	const archiveKey = useMemo(
 		() => `GAME:SELECTSPAN:ARCHIVEWARNING:${auth._id}`,
 		[auth._id]
 	);
-
-	// returns ture if key has been acknowledged by user before
-	const checkIfHasSeenKey = useCallback(async (): Promise<boolean> => {
-		try {
-			const value = await AsyncStorage.getItem(archiveKey);
-			return value !== null;
-		} catch (error) {
-			return false;
-		}
-	}, [archiveKey]);
 
 	// stores key as seen
 	const markKeyAsSeen = useCallback(async () => {
@@ -58,28 +46,42 @@ const SelectSpan = () => {
 	}, [game._id, state._id, state.firstWord, state.lastWord]);
 
 	const handleArchive = useCallback(async () => {
-		const hasSeenKey = await checkIfHasSeenKey();
-		if (hasSeenKey) {
-			dispatch(Actions.Game.archiveAnswer(game._id, state._id));
-		} else {
-			Alert.alert(
-				"Ekkert svar",
-				"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
-				[
-					{
-						text: "Hætta við",
-						onPress: () => markKeyAsSeen(),
-					},
-					{
-						text: "Áfram",
-						onPress: () => handleCompleteStep(),
-					},
-				]
-			);
-		}
+		Alert.alert(
+			"Ekkert svar",
+			"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
+			[
+				{
+					text: "Hætta við",
+					onPress: () => markKeyAsSeen(),
+				},
+				{
+					text: "Áfram",
+					onPress: () => handleCompleteStep(),
+				},
+			]
+		);
 	}, [game._id, state._id, markKeyAsSeen, handleCompleteStep]);
 
-	const toogleSelectionState = () => setIsSelectingSpan((v) => !v);
+	const handleMarkAsYesOrNo = () => {
+		Alert.alert("Ertu viss?", "Er svarið annaðhvort já eða nei?", [
+			{
+				text: "Hætta við",
+			},
+			{
+				text: "Áfram",
+				onPress: () =>
+					dispatch(
+						Actions.Game.markAsYesOrNo(
+							game._id,
+							state._id,
+							true
+						)
+					),
+			},
+		]);
+	};
+
+	// const toogleSelectionState = () => setIsSelectingSpan((v) => !v);
 
 	const handleSubmit = useCallback(
 		() =>
@@ -117,43 +119,47 @@ const SelectSpan = () => {
 					}
 					firstWord={state.firstWord}
 					lastWord={state.lastWord}
-					immutable={!isSelectingSpan}
+					immutable={stage !== "select-span"}
 				/>
 			</ScrollView>
 			<View>
-				{!isSelectingSpan ? (
-					<React.Fragment>
-						<Atoms.Buttons.Base
-							label="Ég sé svarið"
-							type="success"
-							onPress={toogleSelectionState}
-						/>
-						<Atoms.Buttons.Base
-							label="Ég sé ekki svarið"
-							type="danger"
-							onPress={handleArchive}
-						/>
-					</React.Fragment>
-				) : (
+				{stage === "verify-answer-present" ? (
+					<Utils.VerifyButtons
+						approveEmoji="😃"
+						declineEmoji="😒"
+						onApprove={() => setStage("is-boolean")}
+						onDecline={handleArchive}
+					>
+						Sérðu svarið?
+					</Utils.VerifyButtons>
+				) : stage === "is-boolean" ? (
+					<Utils.VerifyButtons
+						approveEmoji="👍"
+						declineEmoji="👎"
+						onApprove={handleMarkAsYesOrNo}
+						onDecline={() => setStage("select-span")}
+					>
+						Er þetta já/nei spurning?
+					</Utils.VerifyButtons>
+				) : stage === "select-span" ? (
 					<React.Fragment>
 						{state.firstWord !== undefined &&
 						state.lastWord !== undefined ? (
 							<Atoms.Buttons.Base
 								label="Staðfesta"
 								type="highlight"
-								inactive={false}
-								onPress={() => handleSubmit()}
+								onPress={handleSubmit}
 							/>
 						) : null}
-						<React.Fragment>
-							<Atoms.Buttons.Base
-								label="Til baka"
-								type="danger"
-								onPress={toogleSelectionState}
-							/>
-						</React.Fragment>
+						<Atoms.Buttons.Base
+							label="Til baka"
+							type="danger"
+							onPress={() =>
+								setStage("verify-answer-present")
+							}
+						/>
 					</React.Fragment>
-				)}
+				) : null}
 			</View>
 		</View>
 	);

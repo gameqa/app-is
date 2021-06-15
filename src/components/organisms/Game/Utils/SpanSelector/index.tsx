@@ -4,11 +4,7 @@ import styles from "./styles";
 import { IProps, SelectionStates } from "./interface";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../../../../services";
-import { Atoms, Organisms } from "../../../..";
-import {
-	setFirstWord,
-	setLastWord,
-} from "../../../../../actions/selectSpan";
+
 import { useDispatch } from "react-redux";
 import {
 	addNotificationItem,
@@ -71,17 +67,31 @@ const SpanSelector = ({
 				dispatch(
 					addNotificationItem({
 						title: "Veldu fyrsta staf",
-						text: "Smelltu á fyrsta stafinn sem þú heldur að svarið er",
+						text: "Smelltu á fyrsta stafinn sem myndar svarið",
 					})
 				);
+				break;
 			case "select-last":
 				dispatch(
 					addNotificationItem({
 						title: "Veldu seinasta staf",
-						text: "Smelltu á seinsta stafinn sem þú heldur að svarið er",
+						text: "Smelltu á seinasta stafinn sem myndar svarið",
 					})
 				);
+				break;
+			case "clear-selection":
+				dispatch(
+					addNotificationItem({
+						title: "Viltu breyta valinu?",
+						text: "Smelltu aftur á textann til að velja aftur",
+					})
+				);
+				break;
 		}
+
+		return () => {
+			dispatch(clearNotifications());
+		};
 	}, [selectionState, immutable]);
 
 	return (
