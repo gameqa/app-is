@@ -105,49 +105,31 @@ const SelectSpan = () => {
 			</ScrollView>
 			<View>
 				{stage === "verify-answer-present" ? (
-					<View style={styles.bottomWrapper}>
-						<Atoms.Text.Heading style={styles.bottomHeading}>
-							Sérðu svarið?
-						</Atoms.Text.Heading>
-						<View style={styles.bottomButtonWrapper}>
-							<Atoms.Buttons.Emoji
-								emoji="😃"
-								type="success"
-								onPress={() => setStage("is-boolean")}
-							/>
-							<Atoms.Buttons.Emoji
-								emoji="😒"
-								type="danger"
-								onPress={handleArchive}
-							/>
-						</View>
-					</View>
+					<Utils.VerifyButtons
+						approveEmoji="😃"
+						declineEmoji="😒"
+						onApprove={() => setStage("is-boolean")}
+						onDecline={handleArchive}
+					>
+						Sérðu svarið?
+					</Utils.VerifyButtons>
 				) : stage === "is-boolean" ? (
-					<View style={styles.bottomWrapper}>
-						<Atoms.Text.Heading style={styles.bottomHeading}>
-							Er þetta já/nei spurning?
-						</Atoms.Text.Heading>
-						<View style={styles.bottomButtonWrapper}>
-							<Atoms.Buttons.Emoji
-								emoji="👍"
-								type="success"
-								onPress={() =>
-									dispatch(
-										Actions.Game.markAsYesOrNo(
-											game._id,
-											state._id,
-											true
-										)
-									)
-								}
-							/>
-							<Atoms.Buttons.Emoji
-								emoji="👎"
-								type="danger"
-								onPress={() => setStage("select-span")}
-							/>
-						</View>
-					</View>
+					<Utils.VerifyButtons
+						approveEmoji="👍"
+						declineEmoji="👎"
+						onApprove={() =>
+							dispatch(
+								Actions.Game.markAsYesOrNo(
+									game._id,
+									state._id,
+									true
+								)
+							)
+						}
+						onDecline={() => setStage("select-span")}
+					>
+						Er þetta já/nei spurning?
+					</Utils.VerifyButtons>
 				) : stage === "select-span" ? (
 					<React.Fragment>
 						{state.firstWord !== undefined &&
