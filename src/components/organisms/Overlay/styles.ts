@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
 		top: 0,
 		left: 0,
 	},
+	touchable: {
+		height: "100%",
+		width: "100%",
+	},
 	closeCard: {
 		width: "95%",
 		padding: 15,
