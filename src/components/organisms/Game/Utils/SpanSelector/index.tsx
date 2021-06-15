@@ -71,14 +71,21 @@ const SpanSelector = ({
 				dispatch(
 					addNotificationItem({
 						title: "Veldu fyrsta staf",
-						text: "Smelltu á fyrsta stafinn sem þú heldur að svarið er",
+						text: "Smelltu á fyrsta stafinn sem myndar svarið",
 					})
 				);
 			case "select-last":
 				dispatch(
 					addNotificationItem({
 						title: "Veldu seinasta staf",
-						text: "Smelltu á seinsta stafinn sem þú heldur að svarið er",
+						text: "Smelltu á seinasta stafinn sem myndar svarið",
+					})
+				);
+			case "clear-selection":
+				dispatch(
+					addNotificationItem({
+						title: "Viltu breyta valinu?",
+						text: "Smelltu aftur á textann til að velja aftur",
 					})
 				);
 		}
