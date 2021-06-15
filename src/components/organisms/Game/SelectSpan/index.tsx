@@ -131,6 +131,15 @@ const SelectSpan = () => {
 							<Atoms.Buttons.Emoji
 								emoji="👍"
 								type="success"
+								onPress={() =>
+									dispatch(
+										Actions.Game.markAsYesOrNo(
+											game._id,
+											state._id,
+											true
+										)
+									)
+								}
 							/>
 							<Atoms.Buttons.Emoji
 								emoji="👎"
