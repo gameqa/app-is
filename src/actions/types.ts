@@ -50,6 +50,7 @@ export enum ActionTypes {
 	fetchMotivation,
 	clearMotivation,
 	refreshAskAboutImage,
+	resetPasswordUser,
 }
 
 export type Actions =
@@ -87,4 +88,5 @@ export type Actions =
 	| Overlay.Actions.EnqueOverlayAction
 	| Advertisement.Actions.FetchRandomPrize
 	| Overlay.Actions.PushOverlayAction
-	| Motivation.Actions.FetchMotivationAction;
+	| Motivation.Actions.FetchMotivationAction
+	| Auth.Actions.ResetPasswordAction;

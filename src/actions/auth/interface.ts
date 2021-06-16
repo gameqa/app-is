@@ -19,3 +19,8 @@ export interface FetchInvitesAction {
 	type: ActionTypes.fetchInvites;
 	payload: User[];
 }
+
+export interface ResetPasswordAction {
+	type: ActionTypes.resetPasswordUser;
+	payload: User;
+}

@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="29b8a8cf-16d9-4094-8287-0a0206beb73f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Overlay/PrizeAdvertisement/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Overlay/PrizeAdvertisement/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Game/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Game/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routing/declerations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routing/declerations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routing/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routing/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Authenticate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Authenticate/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +43,17 @@
       <screen x="0" y="0" width="2250" height="1460" />
     </state>
     <state x="151" y="555" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2250.1460@0.0.2250.1460" timestamp="1622648924011" />
-    <state x="839" y="276" width="1200" height="800" key="AVDManager" timestamp="1623672615260">
+    <state x="839" y="276" width="1200" height="800" key="AVDManager" timestamp="1623836114416">
       <screen x="0" y="0" width="2250" height="1460" />
     </state>
-    <state x="839" y="276" width="1200" height="800" key="AVDManager/0.0.2250.1460@0.0.2250.1460" timestamp="1623672615260" />
+    <state x="839" y="276" width="1200" height="800" key="AVDManager/0.0.2250.1460@0.0.2250.1460" timestamp="1623836114416" />
     <state x="196" y="545" key="SettingsEditor" timestamp="1622649035301">
       <screen x="0" y="0" width="2250" height="1460" />
     </state>
     <state x="196" y="545" key="SettingsEditor/0.0.2250.1460@0.0.2250.1460" timestamp="1622649035301" />
-    <state x="352" y="433" key="run.anything.popup" timestamp="1622648895252">
+    <state x="352" y="433" key="run.anything.popup" timestamp="1623836100293">
       <screen x="0" y="0" width="2250" height="1460" />
     </state>
-    <state x="352" y="433" key="run.anything.popup/0.0.2250.1460@0.0.2250.1460" timestamp="1622648895252" />
+    <state x="352" y="433" key="run.anything.popup/0.0.2250.1460@0.0.2250.1460" timestamp="1623836100293" />
   </component>
 </project>

@@ -52,4 +52,8 @@ export const authStack: AuthStackRoutes[] = [
 		id: "sign-up",
 		Component: Views.Register,
 	},
+	{
+		id: "reset-password",
+		Component: Views.ResetPassword,
+	}
 ];

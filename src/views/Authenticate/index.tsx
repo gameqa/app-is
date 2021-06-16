@@ -56,6 +56,11 @@ const Authenticate = () => {
 					onSubmit={handleAuth}
 					buttonColor="highlight"
 				>
+				<View style={styles.changeForm}>
+					<TouchableOpacity onPress={() => navigation.navigate("reset-password")}>
+						<Atoms.Text.Para>Gleymt lykilorð?</Atoms.Text.Para>
+					</TouchableOpacity>
+				</View>
 					<View style={{ flex: 1 }}>
 						<View style={styles.imageWrapper}>
 							<View style={styles.leftIconView}>

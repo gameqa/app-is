@@ -17,7 +17,7 @@ const FormBuilder = <T extends {}, K = {}>({
 	children,
 }: IProps<T, K>) => {
 	const [formObject, setFormObject] = useState(form);
-	const [errorMessage, setErrorMessage] = useState<Aler | undefined>(undefined);
+	const [errorMessage, setErrorMessage] = useState<Alert | undefined>(undefined);
 	const [isLoading, setIsLoading] = useState(false);
 
 	// handle typing in input factory element
