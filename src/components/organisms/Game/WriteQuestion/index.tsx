@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import {
+	View,
+	Image,
+	TouchableOpacity,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { StoreState } from "../../../../reducers";
@@ -9,7 +16,6 @@ import { submitQuestion } from "../../../../actions/game";
 import { Alert, OverlayType } from "../../../../declerations";
 import { Utils } from "../";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const WriteQuestion = () => {
 	const state = useSelector((state: StoreState) => state.writeQuestion);
@@ -47,21 +53,10 @@ const WriteQuestion = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<KeyboardAwareScrollView>
-				{/* <Atoms.Alerts.Ribbon
-				item={
-					isYesNoQuestion
-						? {
-								type: "success",
-								label: "Skrifaðu já / nei spurningu",
-						  }
-						: {
-								type: "warning",
-								label: "Ekki skrifa já / nei spurningu",
-						  }
-				}
-			/> */}
+		<ScrollView>
+			<KeyboardAvoidingView
+				behavior={Platform.OS !== "ios" ? "height" : "padding"}
+			>
 				<Atoms.Alerts.Ribbon item={error} />
 				<Utils.Explain>
 					Sendu inn spurningu sem aðrir notendur geta googlað
@@ -124,16 +119,16 @@ const WriteQuestion = () => {
 						}}
 					/>
 				</View>
-			</KeyboardAwareScrollView>
-			<View style={[styles.flex, styles.alignEnd]}>
-				<Atoms.Buttons.Emoji
-					emoji="🚀"
-					onPress={handleSubmit}
-					type="highlight"
-					size={70}
-				/>
-			</View>
-		</React.Fragment>
+				<View style={styles.submitButton}>
+					<Atoms.Buttons.Emoji
+						emoji="🚀"
+						onPress={handleSubmit}
+						type="highlight"
+						size={70}
+					/>
+				</View>
+			</KeyboardAvoidingView>
+		</ScrollView>
 	);
 };
 

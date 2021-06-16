@@ -58,6 +58,12 @@ const styles = StyleSheet.create({
 		shadowRadius: 2.22,
 		elevation: 3,
 	},
+	submitButton: {
+		justifyContent: "flex-end",
+		alignItems: "center",
+		flexDirection: "column",
+		marginTop: 10,
+	},
 });
 
 export default styles;
