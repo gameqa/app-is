@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
 	outer: {
 		paddingBottom: 20,
 	},
+	outerCotnainer: {
+		flex:1,
+	},
 });
 
 export default styles;
