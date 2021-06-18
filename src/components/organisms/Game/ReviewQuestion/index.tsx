@@ -6,15 +6,12 @@ import { Utils } from "../";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../../../reducers";
 import getQuestions from "./questions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Actions from "../../../../actions";
 import { CheckListItem } from "./interface";
-import style from "../../Notifications/styles";
 
 const ReviewQuestion = () => {
 	const state = useSelector((state: StoreState) => state.verifyQuestion);
 	const game = useSelector((state: StoreState) => state.game);
-	const auth = useSelector((state: StoreState) => state.auth);
 	const dispatch = useDispatch();
 
 	const [items, setItems] = useState<CheckListItem[]>([]);

@@ -14,12 +14,12 @@ const Game = () => {
 	const game = useSelector((state: StoreState) => state.game);
 	const dispatch = useDispatch();
 
-	const DISPLAY_AD_PROBABILITY = 0.095;
+	const DISPLAY_AD_PROBABILITY = 0.065;
 	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_AD_PROBABILITY, [
 		OverlayType.advertisePrize,
 	]);
 
-	const DISPLAY_MOTIVATION_PROBABILITY = 0.095;
+	const DISPLAY_MOTIVATION_PROBABILITY = 0.05;
 	Organisms.Game.Hooks.useRandomOverlay(DISPLAY_MOTIVATION_PROBABILITY, [
 		OverlayType.motivation,
 	]);

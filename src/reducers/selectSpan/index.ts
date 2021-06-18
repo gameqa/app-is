@@ -14,7 +14,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
 		case ActionTypes.startSelectSpanRound:
 			return {
-				...state,
+				...initialState,
 				...action.payload.taskInfo,
 				firstWord: undefined,
 				lastWord: undefined,
@@ -43,7 +43,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
 			};
 		case ActionTypes.startVerifySpanRound:
 			return {
-				...state,
+				...initialState,
 				...action.payload.taskInfo,
 			};
 		default:
