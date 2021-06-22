@@ -7,13 +7,15 @@ import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
 import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
-import { ICON_LVL_3, ICON_LVL_7 } from "../../static";
 import * as forms from "./forms";
+
+import * as Alerts from "../../components/atoms/Alerts";
+import styles from "./styles";
 
 
 const ResetPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
-
+	const [isSubmitted, setIsSubmitted] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -29,13 +31,17 @@ const ResetPassword = () => {
 
 	const navigation = useNavigation<any>();
 	const text = {
-		title: "Búa til nýjan aðgang",
+		title: "Fá nýtt lykilorð",
 		switchButton: "Ég er með aðgang",
 	};
 
 	const handleAuth = (user: User) => {
 		dispatch(registerUser(user));
-		Analytics.logEvent("register");
+		// Analytics.logEvent("register");
+		// dispatch()
+		console.log("handleAUth reset pass");
+		setIsSubmitted(true);
+
 	};
 
 	return isLoading ? (
@@ -46,16 +52,24 @@ const ResetPassword = () => {
 		<ScrollView>
 			<LayoutWrapper>
 				<View>
+					{/* {isSubmitted ? (
+						<Alerts.Ribbon item={{
+							type: "success",
+							label: "Ef Notendaaðgangur er skráð á þetta email þá færðu sendan link í tölvupósti til þess að fá nýtt lykilorð",
+						}} />
+					): null} */}
+					
+					{/* <Atoms.Alerts.Ribbon item={errorMessage} /> */}
 					<Organisms.Forms.Builder<User>
-						buttonLabel="Skrá nýtt lykilorð"
+						buttonLabel="Fá nýtt lykilorð"
 						form={forms.ResetPassword}
-						url="/api/auth/register"
+						url="/api/auth/reset-password"
 						HTTPmethod="post"
 						onSubmit={handleAuth}
 						buttonColor="highlight"
 					></Organisms.Forms.Builder>
 				</View>
-				<View>
+				<View style={styles.outer}>
 					<TouchableOpacity
 						onPress={() => navigation.navigate("log-in")}
 					>

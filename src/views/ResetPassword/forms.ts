@@ -1,16 +1,11 @@
 import { InputElementTypes, FormRecipe } from "../../declerations";
 
 export const ResetPassword: FormRecipe = {
-    password: {
-		type: InputElementTypes.hidden,
+	email: {
+		type: InputElementTypes.text,
 		value: "",
-		label: "Nýtt lykilorð",
-		placeholder: "Nýtt lykilorð",
+		label:"netfang",
+		placeholder: "eg@email.is"
 	},
-	password2: {
-		type: InputElementTypes.hidden,
-		value: "",
-		label: "Nýtt lykilorð (aftur)",
-		placeholder: "Nýtt lykilorð",
-	},
+
 }
