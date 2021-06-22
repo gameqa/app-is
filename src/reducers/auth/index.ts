@@ -26,10 +26,16 @@ const reducer = (state: State = initialState, action: Actions): State => {
 			return { ...initialState, type: "guest" };
 		}
 		case ActionTypes.fetchUserFromToken: {
+			console.log("fetchuserfromtoken", action.payload);
 			return { ...initialState, ...action.payload };
 		}
 		case ActionTypes.registerUser:
 			return { ...initialState, ...action.payload };
+
+		case ActionTypes.resetPasswordUser:
+			const newState = { ...initialState,type:"request-reset-password"}
+			console.log("brekbrek",newState);
+			return { ...initialState, type:"request-reset-password"}
 		// case ActionTypes.fetchScoreCard:
 		// 	return {
 		// 		...state,

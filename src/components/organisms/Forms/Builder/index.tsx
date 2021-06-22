@@ -35,8 +35,10 @@ const FormBuilder = <T extends {}, K = {}>({
 		setIsLoading(true);
 		const formValues: { [key in keyof K]: any } = { ...form };
 		for (const key in formValues) formValues[key] = formObject[key].value;
+		console.log("formvalues", formValues);
 		try {
 			const res = await Api[HTTPmethod]<T>(url, formValues);
+			console.log("res.data", res.data);
 			setErrorMessage(undefined);
 			onSubmit(res.data);
 			setFormObject({ ...form });

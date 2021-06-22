@@ -18,4 +18,4 @@ export interface ScoreCard {
 	invites: number;
 }
 
-export type UserType = "user" | "admin" | "loading" | "guest" | "not-verified";
+export type UserType = "user" | "admin" | "loading" | "guest" | "not-verified" | "request-reset-password";

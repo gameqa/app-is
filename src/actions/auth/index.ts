@@ -63,10 +63,11 @@ export const fetchInvites = () => {
 	};
 };
 
-export const resetPasswordUser = (user: User) => {
+export const resetPasswordUser = () => {
+	// console.log("email", email);
 	return {
 		type: ActionTypes.resetPasswordUser,
-		payload: user,
+		// payload: email,
 	}
 }
 

@@ -12,10 +12,11 @@ import * as forms from "./forms";
 import * as Alerts from "../../components/atoms/Alerts";
 import styles from "./styles";
 
+import * as Actions from "../../actions";
+
 
 const ResetPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
-	const [isSubmitted, setIsSubmitted] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -35,13 +36,11 @@ const ResetPassword = () => {
 		switchButton: "Ég er með aðgang",
 	};
 
-	const handleAuth = (user: User) => {
-		dispatch(registerUser(user));
-		// Analytics.logEvent("register");
-		// dispatch()
-		console.log("handleAUth reset pass");
-		setIsSubmitted(true);
-
+	const handleAuth = () => {
+		// Analytics.logEvent("reset-password");
+		console.log("handleAUth reset pass",);
+		dispatch(Actions.Auth.resetPasswordUser());
+		
 	};
 
 	return isLoading ? (
@@ -52,18 +51,12 @@ const ResetPassword = () => {
 		<ScrollView>
 			<LayoutWrapper>
 				<View>
-					{/* {isSubmitted ? (
-						<Alerts.Ribbon item={{
-							type: "success",
-							label: "Ef Notendaaðgangur er skráð á þetta email þá færðu sendan link í tölvupósti til þess að fá nýtt lykilorð",
-						}} />
-					): null} */}
-					
 					{/* <Atoms.Alerts.Ribbon item={errorMessage} /> */}
-					<Organisms.Forms.Builder<User>
+					<Organisms.Forms.Builder
 						buttonLabel="Fá nýtt lykilorð"
 						form={forms.ResetPassword}
-						url="/api/auth/reset-password"
+						// url="/api/auth/reset_password"
+						url="/api/auth/request_reset_password_code"
 						HTTPmethod="post"
 						onSubmit={handleAuth}
 						buttonColor="highlight"
