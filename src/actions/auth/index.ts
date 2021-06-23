@@ -63,12 +63,5 @@ export const fetchInvites = () => {
 	};
 };
 
-export const resetPasswordUser = () => {
-	// console.log("email", email);
-	return {
-		type: ActionTypes.resetPasswordUser,
-		// payload: email,
-	}
-}
 
 export * as Actions from "./interface";

@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, TouchableOpacity, ScrollView } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import * as Analytics from "expo-firebase-analytics";
-import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
-import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
 import * as forms from "./forms";
 
-import * as Alerts from "../../components/atoms/Alerts";
 import styles from "./styles";
-
-import * as Actions from "../../actions";
-
+import { StoreState } from "../../reducers";
 
 const ResetPassword = () => {
-    const [isLoading, setIsLoading] = useState(false);
-	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+	const state = useSelector((state: StoreState) => state.resetPassword);
 
 	useEffect(() => {
 		const LOADING_TIMEOUT = 500;
@@ -31,36 +25,32 @@ const ResetPassword = () => {
 	}, []);
 
 	const navigation = useNavigation<any>();
+
 	const text = {
 		title: "Fá nýtt lykilorð",
 		switchButton: "Ég er með aðgang",
 	};
 
-	const handleAuth = () => {
-		// Analytics.logEvent("reset-password");
-		console.log("handleAUth reset pass",);
-		dispatch(Actions.Auth.resetPasswordUser());
-		
-	};
+	const handleAuth = (email: string) => {};
 
 	return isLoading ? (
-		<View >
+		<View>
 			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
 		<ScrollView>
 			<LayoutWrapper>
 				<View>
-					{/* <Atoms.Alerts.Ribbon item={errorMessage} /> */}
-					<Organisms.Forms.Builder
-						buttonLabel="Fá nýtt lykilorð"
-						form={forms.ResetPassword}
-						// url="/api/auth/reset_password"
-						url="/api/auth/request_reset_password_code"
-						HTTPmethod="post"
-						onSubmit={handleAuth}
-						buttonColor="highlight"
-					></Organisms.Forms.Builder>
+					<Atoms.Text.Heading>
+						Gleymt lykilorð
+					</Atoms.Text.Heading>
+					<Atoms.Text.Para>
+						Skráðu inn email til að fá nýtt lykilorði
+					</Atoms.Text.Para>
+					{/* <Atoms.Inputs.Text
+						props={{ keyboardType: "email-address" }}
+					/>
+					<Atoms.Buttons>{text.title}</Atoms.Buttons> */}
 				</View>
 				<View style={styles.outer}>
 					<TouchableOpacity
@@ -73,7 +63,7 @@ const ResetPassword = () => {
 				</View>
 			</LayoutWrapper>
 		</ScrollView>
-    );
+	);
 };
 
 export default ResetPassword;

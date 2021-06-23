@@ -32,10 +32,10 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		case ActionTypes.registerUser:
 			return { ...initialState, ...action.payload };
 
-		case ActionTypes.resetPasswordUser:
-			const newState = { ...initialState,type:"request-reset-password"}
-			console.log("brekbrek",newState);
-			return { ...initialState, type:"request-reset-password"}
+		// case ActionTypes.requestResetPasswordUser:
+		// 	const newState = { ...initialState,type:"request-reset-password"}
+		// 	console.log("brekbrek",newState);
+		// 	return { ...initialState, type:"request-reset-password"}
 		// case ActionTypes.fetchScoreCard:
 		// 	return {
 		// 		...state,

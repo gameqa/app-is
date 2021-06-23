@@ -12,6 +12,7 @@ import * as PrizeCategory from "./prize";
 import * as Overlay from "./overlay";
 import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
+import * as ResetPassword from "./resetPassword";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -50,7 +51,10 @@ export enum ActionTypes {
 	fetchMotivation,
 	clearMotivation,
 	refreshAskAboutImage,
-	resetPasswordUser,
+	requestResetPasswordUserCode,
+	requestResetPasswordToken,
+	resetPasswordWithToken,
+	setResetPasswordEmail
 }
 
 export type Actions =
@@ -89,4 +93,7 @@ export type Actions =
 	| Advertisement.Actions.FetchRandomPrize
 	| Overlay.Actions.PushOverlayAction
 	| Motivation.Actions.FetchMotivationAction
-	| Auth.Actions.ResetPasswordAction;
+	| ResetPassword.Actions.RequestResetPasswordUserCodeAction
+	| ResetPassword.Actions.RequestResetPasswordTokenAction
+	| ResetPassword.Actions.ResetPasswordWithTokenAction
+	| ResetPassword.Actions.SetResetPasswordEmailAction
