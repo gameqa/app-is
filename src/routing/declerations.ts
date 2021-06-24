@@ -2,7 +2,12 @@ import React from "react";
 
 export type Tabs = "Ég" | "Spila" | "Vinningar" | "Bjóða";
 export type PrizeStackItems = "prize-cats" | "prize-items";
-export type AuthStackItems = "log-in" | "sign-up" | "reset-password";
+export type AuthStackItems =
+	| "log-in"
+	| "sign-up"
+	| "reset-password"
+	| "reset-password-authcode"
+	| "set-new-password";
 export type GameStackItems = "Spila" | "article-reader" | "prize-items";
 export type Icons = "puzzle-piece" | "tachometer" | "user-plus" | "trophy";
 

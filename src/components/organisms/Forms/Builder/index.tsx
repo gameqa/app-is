@@ -17,7 +17,9 @@ const FormBuilder = <T extends {}, K = {}>({
 	children,
 }: IProps<T, K>) => {
 	const [formObject, setFormObject] = useState(form);
-	const [errorMessage, setErrorMessage] = useState<Alert | undefined>(undefined);
+	const [errorMessage, setErrorMessage] = useState<Alert | undefined>(
+		undefined
+	);
 	const [isLoading, setIsLoading] = useState(false);
 
 	// handle typing in input factory element
@@ -34,11 +36,10 @@ const FormBuilder = <T extends {}, K = {}>({
 		if (isLoading) return;
 		setIsLoading(true);
 		const formValues: { [key in keyof K]: any } = { ...form };
-		for (const key in formValues) formValues[key] = formObject[key].value;
-		console.log("formvalues", formValues);
+		for (const key in formValues)
+			formValues[key] = formObject[key].value;
 		try {
 			const res = await Api[HTTPmethod]<T>(url, formValues);
-			console.log("res.data", res.data);
 			setErrorMessage(undefined);
 			onSubmit(res.data);
 			setFormObject({ ...form });

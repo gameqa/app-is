@@ -2,22 +2,42 @@ import { State } from "./interface";
 import { Actions, ActionTypes } from "../../actions";
 
 export const initialState: State = {
-	resetCode: ""
+	resetCode: "",
+	isLoading: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
-		case ActionTypes.requestResetPasswordUserCode:
+		case ActionTypes.setResetPasswordLoadingState:
 			return {
 				...state,
-				resetCode: "",
-				resetToken: undefined
-			}
+				isLoading: action.payload,
+			};
 		case ActionTypes.setResetPasswordEmail:
 			return {
 				...state,
-				email: action.payload
-			}
+				email: action.payload,
+			};
+		case ActionTypes.setResetPasswordCode:
+			return {
+				...state,
+				resetCode: action.payload,
+			};
+
+		case ActionTypes.requestResetPasswordToken:
+			return {
+				...state,
+				resetToken: action.payload,
+			};
+
+		case ActionTypes.setResetPasswordError:
+			return {
+				...state,
+				errorAlert: action.payload,
+			};
+
+		case ActionTypes.resetPasswordWithToken:
+			return initialState;
 		default:
 			return state;
 	}

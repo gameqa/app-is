@@ -26,7 +26,7 @@ const AuthCode = () => {
 	const text = {
 		title: "Staðfestingarkóði",
 		description: `Staðfestingarkóði hefur verið sendur á ${auth.email}`,
-		goBackText: "Útskrá'",
+		goBackText: "Útskrá",
 	};
 
 	return (

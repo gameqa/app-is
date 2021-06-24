@@ -1,43 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { View, Image, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { Atoms, Organisms } from "../../components";
+import { Atoms } from "../../components";
+import * as Actions from "../../actions";
 import LayoutWrapper from "../../layout";
-import * as forms from "./forms";
 
 import styles from "./styles";
 import { StoreState } from "../../reducers";
 
 const ResetPassword = () => {
-	const [isLoading, setIsLoading] = useState(false);
 	const state = useSelector((state: StoreState) => state.resetPassword);
 
-	useEffect(() => {
-		const LOADING_TIMEOUT = 500;
-		setIsLoading(true);
-		const t = setTimeout(() => {
-			setIsLoading(false);
-		}, LOADING_TIMEOUT);
-		return () => {
-			clearTimeout(t);
-		};
-	}, []);
+	const dispatch = useDispatch();
 
 	const navigation = useNavigation<any>();
 
 	const text = {
 		title: "Fá nýtt lykilorð",
 		switchButton: "Ég er með aðgang",
+		btnColor: "highlight",
 	};
 
-	const handleAuth = (email: string) => {};
+	const handleSubmit = useCallback(() => {
+		dispatch(
+			Actions.ResetPassword.getResetPasswordCode(state.email ?? "")
+		);
+		navigation.navigate("reset-password-authcode");
+	}, [state.email]);
 
-	return isLoading ? (
-		<View>
-			<Atoms.Loaders.CenterBox isLoading />
-		</View>
-	) : (
+	return (
 		<ScrollView>
 			<LayoutWrapper>
 				<View>
@@ -47,10 +39,26 @@ const ResetPassword = () => {
 					<Atoms.Text.Para>
 						Skráðu inn email til að fá nýtt lykilorði
 					</Atoms.Text.Para>
-					{/* <Atoms.Inputs.Text
-						props={{ keyboardType: "email-address" }}
+
+					<Atoms.Inputs.Text
+						value={state.email ?? ""}
+						placeholder="eg@email.is"
+						onChange={(value) =>
+							dispatch(
+								Actions.ResetPassword.setResetPasswordEmail(
+									value
+								)
+							)
+						}
+						props={{
+							keyboardType: "email-address",
+						}}
 					/>
-					<Atoms.Buttons>{text.title}</Atoms.Buttons> */}
+					<Atoms.Buttons.Base
+						type={"highlight"}
+						label={state.isLoading ? "Hleð" : text.title}
+						onPress={handleSubmit}
+					/>
 				</View>
 				<View style={styles.outer}>
 					<TouchableOpacity

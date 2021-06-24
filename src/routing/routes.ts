@@ -55,5 +55,13 @@ export const authStack: AuthStackRoutes[] = [
 	{
 		id: "reset-password",
 		Component: Views.ResetPassword,
-	}
+	},
+	{
+		id: "reset-password-authcode",
+		Component: Views.ResetPasswordAuthCode,
+	},
+	{
+		id: "set-new-password",
+		Component: Views.SetNewPassword,
+	},
 ];

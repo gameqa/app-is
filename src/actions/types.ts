@@ -51,10 +51,12 @@ export enum ActionTypes {
 	fetchMotivation,
 	clearMotivation,
 	refreshAskAboutImage,
-	requestResetPasswordUserCode,
+	setResetPasswordLoadingState,
 	requestResetPasswordToken,
 	resetPasswordWithToken,
-	setResetPasswordEmail
+	setResetPasswordEmail,
+	setResetPasswordCode,
+	setResetPasswordError,
 }
 
 export type Actions =
@@ -93,7 +95,9 @@ export type Actions =
 	| Advertisement.Actions.FetchRandomPrize
 	| Overlay.Actions.PushOverlayAction
 	| Motivation.Actions.FetchMotivationAction
-	| ResetPassword.Actions.RequestResetPasswordUserCodeAction
+	| ResetPassword.Actions.SetResetPasswordLoadingStateAction
 	| ResetPassword.Actions.RequestResetPasswordTokenAction
 	| ResetPassword.Actions.ResetPasswordWithTokenAction
 	| ResetPassword.Actions.SetResetPasswordEmailAction
+	| ResetPassword.Actions.SetResetPasswordCodeAction
+	| ResetPassword.Actions.SetResetPasswordErrorAction;

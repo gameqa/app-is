@@ -50,10 +50,6 @@ const PinCodeScreen = (props: IProps) => {
 			inputRef?.current?.shake();
 	}, [error]);
 
-	// useEffect(() => {
-	// dispatch(Actions.AuthCode.writeAuthCode(""));
-	// }, [auth._id]);
-
 	return (
 		<React.Fragment>
 			<TouchableOpacity

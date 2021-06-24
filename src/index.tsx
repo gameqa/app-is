@@ -35,7 +35,6 @@ export default function App() {
 	}, []);
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;
-	if(auth.type === "request-reset-password") return <Views.ResetPasswordAuthCode />
 	return (
 		<React.Fragment>
 			<Organisms.Notifications.Items />
