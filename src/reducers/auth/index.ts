@@ -30,6 +30,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		}
 		case ActionTypes.registerUser:
 			return { ...initialState, ...action.payload };
+
 		// case ActionTypes.fetchScoreCard:
 		// 	return {
 		// 		...state,

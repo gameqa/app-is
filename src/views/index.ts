@@ -7,5 +7,9 @@ export { default as PrizeItems } from "./PrizeItems";
 export { default as Game } from "./Game";
 export { default as ArticleReader } from "./ArticleReader";
 export { default as AuthCode } from "./AuthCode";
+export { default as ResetPassword } from "./ResetPassword";
+export { default as ResetPasswordAuthCode } from "./ResetPasswordAuth";
+export { default as SetNewPassword } from "./SetNewPassword";
+
 export * as Utils from "./utils";
 

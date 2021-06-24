@@ -12,6 +12,7 @@ import * as PrizeCategory from "./prize";
 import * as Overlay from "./overlay";
 import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
+import * as ResetPassword from "./resetPassword";
 import * as DeepLinks from "./deepLinks";
 
 export enum ActionTypes {
@@ -51,7 +52,13 @@ export enum ActionTypes {
 	fetchMotivation,
 	clearMotivation,
 	refreshAskAboutImage,
-	setLink,
+	setResetPasswordLoadingState,
+	requestResetPasswordToken,
+	resetPasswordWithToken,
+	setResetPasswordEmail,
+	setResetPasswordCode,
+	setResetPasswordError,
+	setLink
 }
 
 export type Actions =
@@ -90,4 +97,10 @@ export type Actions =
 	| Advertisement.Actions.FetchRandomPrize
 	| Overlay.Actions.PushOverlayAction
 	| Motivation.Actions.FetchMotivationAction
+	| ResetPassword.Actions.SetResetPasswordLoadingStateAction
+	| ResetPassword.Actions.RequestResetPasswordTokenAction
+	| ResetPassword.Actions.ResetPasswordWithTokenAction
+	| ResetPassword.Actions.SetResetPasswordEmailAction
+	| ResetPassword.Actions.SetResetPasswordCodeAction
+	| ResetPassword.Actions.SetResetPasswordErrorAction
 	| DeepLinks.Actions.SetLink;

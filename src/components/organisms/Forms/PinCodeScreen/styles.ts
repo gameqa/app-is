@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../services";
+import { Colors } from "../../../../services";
 
 const styles = StyleSheet.create({
 	outer: {
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
 		height: 42,
 		width: 42,
 		borderColor: Colors.MapToDark["light-grey"],
-		color: Colors.MapToDark["light-grey"],
 	},
 	cellStyleFocused: {
 		borderBottomWidth: 2,

@@ -13,6 +13,7 @@ import * as Prize from "./prize";
 import * as Overlay from "./overlay";
 import * as Advertisement from "./advertisement";
 import * as Motivation from "./motivation";
+import * as ResetPassword from "./resetPassword";
 import * as DeepLinks from "./deepLinks";
 
 export interface StoreState {
@@ -31,5 +32,6 @@ export interface StoreState {
 	overlay: Overlay.State;
 	motivation: Motivation.State;
 	advertisement: Advertisement.State;
+	resetPassword: ResetPassword.State;
 	deepLinks: DeepLinks.State;
 }
