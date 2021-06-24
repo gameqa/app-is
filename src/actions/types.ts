@@ -14,6 +14,7 @@ import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
 import * as ResetPassword from "./resetPassword";
 import * as DeepLinks from "./deepLinks";
+import * as Highscore from "./highscore";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -58,7 +59,8 @@ export enum ActionTypes {
 	setResetPasswordEmail,
 	setResetPasswordCode,
 	setResetPasswordError,
-	setLink
+	setLink,
+	fetchHighscorePlacement,
 }
 
 export type Actions =
@@ -103,4 +105,5 @@ export type Actions =
 	| ResetPassword.Actions.SetResetPasswordEmailAction
 	| ResetPassword.Actions.SetResetPasswordCodeAction
 	| ResetPassword.Actions.SetResetPasswordErrorAction
-	| DeepLinks.Actions.SetLink;
+	| DeepLinks.Actions.SetLink
+	| Highscore.Actions.FetchHighscorePlacementAction;

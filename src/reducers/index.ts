@@ -17,6 +17,7 @@ import advertisement from "./advertisement";
 import motivation from "./motivation";
 import resetPassword from "./resetPassword";
 import deepLinks from "./deepLinks";
+import highscore from "./highscore";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -34,8 +35,9 @@ export default combineReducers<StoreState>({
 	overlay,
 	motivation,
 	advertisement,
-	resetPassword
+	resetPassword,
 	deepLinks,
+	highscore,
 });
 
 export * from "./interface";
