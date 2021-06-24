@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { View, Image, TouchableOpacity, ScrollView } from "react-native";
-import { useDispatch } from "react-redux";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as Analytics from "expo-firebase-analytics";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
 import { User } from "../../declerations";
 import LayoutWrapper from "../../layout";
-import { ICON_LVL_3, ICON_LVL_7 } from "../../static";
 import * as forms from "./forms";
 import styles from "./styles";
+import * as Hooks from "../../hooks";
+import { StoreState } from "../../reducers";
 
 const Register = () => {
 	const [isLoading, setIsLoading] = useState(false);
+	const [referral] = Hooks.DeepLinks.useDeepLinking("referral");
 
 	const dispatch = useDispatch();
 
@@ -34,7 +36,12 @@ const Register = () => {
 	};
 
 	const handleAuth = (user: User) => {
-		dispatch(registerUser(user));
+		dispatch(
+			registerUser({
+				...referral,
+				...user,
+			})
+		);
 		Analytics.logEvent("register");
 	};
 
