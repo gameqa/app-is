@@ -14,3 +14,4 @@ export * as Overlay from "./overlay";
 export * as Advertisement from "./advertisement";
 export * as Motivation from "./motivation";
 export * as ResetPassword from "./resetPassword";
+export * as DeepLinks from "./deepLinks";

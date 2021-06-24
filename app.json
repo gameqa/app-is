@@ -1,44 +1,54 @@
 {
-  "expo": {
-    "name": "Spurningar",
-    "slug": "Spurningar",
-    "version": "1.2.2",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#8950fc"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist",
-      "bundleIdentifier": "com.spurningaris.Spurningar"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFA800"
-      },
-      "googleServicesFile": "./google-services.json",
-      "package": "com.spurningaris.Spurningar",
-      "permissions": [],
-      "versionCode": 11
-    },
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "config": {
-        "firebase": {
-          "measurementId": "G-7QPDVGGD0W"
-        }
-      }
-    },
-    "description": ""
-  }
+	"expo": {
+		"name": "Spurningar",
+		"slug": "Spurningar",
+		"scheme": "spurningaris",
+		"version": "1.2.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#8950fc"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true,
+			"googleServicesFile": "./GoogleService-Info.plist",
+			"bundleIdentifier": "com.spurningaris.Spurningar",
+			"config": {
+				"branch": {
+					"apiKey": "key_live_kkWb728Kh7lmtcY9KFBT9hdfwrlTN6eD"
+				}
+			},
+			"associatedDomains": ["applinks:spurningaris.app.link"]
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/adaptive-icon.png",
+				"backgroundColor": "#FFA800"
+			},
+			"googleServicesFile": "./google-services.json",
+			"package": "com.spurningaris.Spurningar",
+			"permissions": [],
+			"versionCode": 7,
+			"config": {
+				"branch": {
+					"apiKey": "key_live_kkWb728Kh7lmtcY9KFBT9hdfwrlTN6eD"
+				}
+			}
+		},
+		"web": {
+			"favicon": "./assets/favicon.png",
+			"config": {
+				"firebase": {
+					"measurementId": "G-7QPDVGGD0W"
+				}
+			}
+		},
+		"description": ""
+	}
 }

@@ -6,6 +6,8 @@ export interface User {
 	scoreCard: ScoreCard;
 	level: number;
 	hasCompletedTutorial: boolean;
+	referral?: string;
+	invitedBy?: string;
 }
 
 export interface ScoreCard {
@@ -18,4 +20,9 @@ export interface ScoreCard {
 	invites: number;
 }
 
-export type UserType = "user" | "admin" | "loading" | "guest" | "not-verified" | "request-reset-password";
+export type UserType =
+	| "user"
+	| "admin"
+	| "loading"
+	| "guest"
+	| "not-verified";

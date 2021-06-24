@@ -13,6 +13,7 @@ import * as Overlay from "./overlay";
 import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
 import * as ResetPassword from "./resetPassword";
+import * as DeepLinks from "./deepLinks";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -57,6 +58,7 @@ export enum ActionTypes {
 	setResetPasswordEmail,
 	setResetPasswordCode,
 	setResetPasswordError,
+	setLink
 }
 
 export type Actions =
@@ -100,4 +102,5 @@ export type Actions =
 	| ResetPassword.Actions.ResetPasswordWithTokenAction
 	| ResetPassword.Actions.SetResetPasswordEmailAction
 	| ResetPassword.Actions.SetResetPasswordCodeAction
-	| ResetPassword.Actions.SetResetPasswordErrorAction;
+	| ResetPassword.Actions.SetResetPasswordErrorAction
+	| DeepLinks.Actions.SetLink;

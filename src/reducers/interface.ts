@@ -14,6 +14,7 @@ import * as Overlay from "./overlay";
 import * as Advertisement from "./advertisement";
 import * as Motivation from "./motivation";
 import * as ResetPassword from "./resetPassword";
+import * as DeepLinks from "./deepLinks";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -32,4 +33,5 @@ export interface StoreState {
 	motivation: Motivation.State;
 	advertisement: Advertisement.State;
 	resetPassword: ResetPassword.State;
+	deepLinks: DeepLinks.State;
 }
