@@ -34,7 +34,7 @@ export default combineReducers<StoreState>({
 	overlay,
 	motivation,
 	advertisement,
-	resetPassword
+	resetPassword,
 	deepLinks,
 });
 
