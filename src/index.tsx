@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Routing from "./routing";
 import { Organisms } from "./components";
@@ -6,6 +7,9 @@ import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
 import { StatusBar } from "react-native";
+import Linking from "expo-linking";
+import Branch from "expo-branch";
+import parseUrl from "parse-url";
 
 console.disableYellowBox = true;
 
@@ -33,6 +37,34 @@ export default function App() {
 		dispatch(Actions.ChartData.fetchAnswersPerDay());
 		StatusBar.setHidden(true);
 	}, []);
+
+	Branch.subscribe((bundle) => {
+		if (bundle.error) {
+			console.error("Error: ", bundle.error);
+			return;
+		}
+
+		if (!bundle.params) {
+			console.log("Error no param");
+			return;
+		}
+
+		const link = bundle.params["~referring_link"];
+
+		if (!link) {
+			console.log("Missing link");
+			return;
+		}
+
+		const parsed = parseUrl(link);
+
+		dispatch(
+			Actions.DeepLinks.setLink({
+				path: parsed.pathname,
+				query: parsed.query,
+			})
+		);
+	});
 
 	if (auth.type === "not-verified") return <Views.AuthCode />;
 	return (

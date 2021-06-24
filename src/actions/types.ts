@@ -12,6 +12,7 @@ import * as PrizeCategory from "./prize";
 import * as Overlay from "./overlay";
 import * as Motivation from "./motivation";
 import * as Advertisement from "./advertisement";
+import * as DeepLinks from "./deepLinks";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -50,6 +51,7 @@ export enum ActionTypes {
 	fetchMotivation,
 	clearMotivation,
 	refreshAskAboutImage,
+	setLink,
 }
 
 export type Actions =
@@ -87,4 +89,5 @@ export type Actions =
 	| Overlay.Actions.EnqueOverlayAction
 	| Advertisement.Actions.FetchRandomPrize
 	| Overlay.Actions.PushOverlayAction
-	| Motivation.Actions.FetchMotivationAction;
+	| Motivation.Actions.FetchMotivationAction
+	| DeepLinks.Actions.SetLink;

@@ -15,6 +15,7 @@ import prize from "./prize";
 import overlay from "./overlay";
 import advertisement from "./advertisement";
 import motivation from "./motivation";
+import deepLinks from "./deepLinks";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -32,6 +33,7 @@ export default combineReducers<StoreState>({
 	overlay,
 	motivation,
 	advertisement,
+	deepLinks,
 });
 
 export * from "./interface";
