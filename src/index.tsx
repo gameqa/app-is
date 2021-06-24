@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Routing from "./routing";
 import { Organisms } from "./components";
@@ -7,7 +6,7 @@ import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
 import { StatusBar } from "react-native";
-import Linking from "expo-linking";
+
 
 console.disableYellowBox = true;
 
