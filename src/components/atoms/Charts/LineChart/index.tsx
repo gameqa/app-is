@@ -32,37 +32,35 @@ const CustomLineChart = ({ datasets, labels, height }: IProps) => {
 			style={{ height: height, ...styles.outer }}
 			onLayout={handleWidthChange}
 		>
-			{datasets.length < MIN_DATA_ITEM_COUNT ? (
-				<Text>Engin gögn eru til staðar</Text>
-			) : (
-				<LineChart
-					data={{
-						labels: labels,
-						datasets: datasets,
-					}}
-					width={width}
-					height={height}
-					chartConfig={{
-						backgroundColor:
-							Services.Colors.MapToDark["danger"],
-						backgroundGradientFrom:
-							Services.Colors.MapToDark["danger"],
-						backgroundGradientTo:
-							Services.Colors.MapToDark["danger"],
-						decimalPlaces: 2, // optional, defaults to 2dp
-						color: (opacity = 1) =>
-							`rgba(255, 255, 255, ${opacity})`,
-						style: {
-							borderRadius: 16,
-						},
-					}}
-					bezier
-					style={{
-						marginVertical: 8,
+			
+			<LineChart
+				data={{
+					labels: labels,
+					datasets: datasets,
+				}}
+				width={width}
+				height={height}
+				chartConfig={{
+					backgroundColor:
+						Services.Colors.MapToDark["danger"],
+					backgroundGradientFrom:
+						Services.Colors.MapToDark["danger"],
+					backgroundGradientTo:
+						Services.Colors.MapToDark["danger"],
+					decimalPlaces: 2, // optional, defaults to 2dp
+					color: (opacity = 1) =>
+						`rgba(255, 255, 255, ${opacity})`,
+					style: {
 						borderRadius: 16,
-					}}
-				/>
-			)}
+					},
+				}}
+				bezier
+				style={{
+					marginVertical: 8,
+					borderRadius: 16,
+				}}
+			/>
+			
 		</View>
 	);
 };

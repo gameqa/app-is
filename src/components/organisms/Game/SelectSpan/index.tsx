@@ -18,6 +18,7 @@ const SelectSpan = () => {
 	const state = useSelector((state: StoreState) => state.selectSpan);
 	const game = useSelector((state: StoreState) => state.game);
 	const auth = useSelector((state: StoreState) => state.auth);
+	const notiInfo = useSelector((state: StoreState) => state.notification);
 
 	const dispatch = useDispatch();
 
@@ -96,6 +97,8 @@ const SelectSpan = () => {
 		[game._id, state._id, state.firstWord, state.lastWord]
 	);
 
+	const notification = notiInfo.notifications[0];
+
 	return (
 		<View style={styles.outer}>
 			<ScrollView>
@@ -123,6 +126,14 @@ const SelectSpan = () => {
 				/>
 			</ScrollView>
 			<View>
+				{notification ?
+					<View style={styles.instructions}>
+						<Atoms.Text.Heading>{notification.title}</Atoms.Text.Heading>
+						<Atoms.Text.Para>{notification.text}</Atoms.Text.Para>
+
+					</View>
+				
+			: null}
 				{stage === "verify-answer-present" ? (
 					<Utils.VerifyButtons
 						approveEmoji="😃"
