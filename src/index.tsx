@@ -37,7 +37,6 @@ export default function App() {
 	if (auth.type === "not-verified") return <Views.AuthCode />;
 	return (
 		<React.Fragment>
-			<Organisms.Notifications.Items />
 			<Routing.AuthStackNavigator />
 			<Routing.TabNavigator />
 			<Organisms.Overlay />

@@ -42,8 +42,8 @@ const GoogleSearch = () => {
 		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
 			<Utils.Explain>
-				Hér getur þú notað Google til að finna svarið á íslensku
-				Wikipediu, Vísindavefnum, vísir.is og mbl.is 📚🔬📰
+				Þú þarft að nota Google til að finna svarið á íslensku
+				Wikipediu, Vísindavefnum, vísir.is eða mbl.is 📚🔬📰
 			</Utils.Explain>
 			<Atoms.Inputs.Google
 				onChange={(val) =>

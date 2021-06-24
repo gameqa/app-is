@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spurningar",
     "slug": "Spurningar",
-    "version": "1.2.0",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -29,7 +29,7 @@
       "googleServicesFile": "./google-services.json",
       "package": "com.spurningaris.Spurningar",
       "permissions": [],
-      "versionCode": 7
+      "versionCode": 11
     },
     "web": {
       "favicon": "./assets/favicon.png",
