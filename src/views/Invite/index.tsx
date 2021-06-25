@@ -4,34 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Atoms, Molecules } from "../../components";
+import { useFocusEffect } from "@react-navigation/core";
 
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
+	useFocusEffect( React.useCallback(() => {
 		dispatch(Actions.Highscore.fetchHighscorePlacement());
-		highscore.highscores.map((user) => console.log(user));
-	}, []);
+		console.log("helloooooo");
+	  }, []));
 
 	return (
 		<ScrollView>
 			{highscore.isLoading ? (
 				<ActivityIndicator />
 			) : (
-				highscore.highscores
-					.sort((user1, user2) =>
-						user1.scoreCard.hiscoreRank >
-						user2.scoreCard.hiscoreRank
-							? 1
-							: user2.scoreCard.hiscoreRank >
-							  user1.scoreCard.hiscoreRank
-							? -1
-							: 0
-					)
-					.map((user) => (
-						<Atoms.Cards.HighscoreItem user={user} />
-					))
+				highscore.highscores.map((user) => (
+					<Atoms.Cards.HighscoreItem user={user} />
+					// <Text>{user.username}</Text>
+				))
 			)}
 		</ScrollView>
 	);
