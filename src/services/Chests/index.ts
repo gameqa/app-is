@@ -5,7 +5,8 @@ import * as Statics from "../../static";
 const PARTICIPATION_PRIZE = "Allir taka þátt";
 const GANG_PRIZE = "Klíkan";
 const THE_CHOSEN_ONES_PRIZE = "Útvaldir";
-const INFLUENCER_PRIZE = "Áhrifavaldar";
+const ELITE_PRIZE = "Elítan";
+const WHITE_RAVENS_PRIZE = "Hvítir Hrafnar";
 
 export const mapToPrize = (type?: string) => {
 	switch (type) {
@@ -15,8 +16,10 @@ export const mapToPrize = (type?: string) => {
 			return Statics.ChestsImages.gangChestOpen;
 		case THE_CHOSEN_ONES_PRIZE:
 			return Statics.ChestsImages.theChosenOnesChestOpen;
-		case INFLUENCER_PRIZE:
-			return Statics.ChestsImages.influencerChestOpen;
+		case ELITE_PRIZE:
+			return Statics.ChestsImages.eliteOpenChest;
+		case WHITE_RAVENS_PRIZE:
+			return Statics.ChestsImages.ravensOpenChest;
 		default:
 			return;
 	}
@@ -30,8 +33,10 @@ export const mapToNoPrize = (type?: string) => {
 			return Statics.ChestsImages.gangChest;
 		case THE_CHOSEN_ONES_PRIZE:
 			return Statics.ChestsImages.theChosenOnesChest;
-		case INFLUENCER_PRIZE:
-			return Statics.ChestsImages.influencerChest;
+		case ELITE_PRIZE:
+			return Statics.ChestsImages.eliteClosedChest;
+		case WHITE_RAVENS_PRIZE:
+			return Statics.ChestsImages.ravensClosedChest;
 		default:
 			return;
 	}
@@ -46,7 +51,9 @@ export const mapIdtoName = (type?: string) => {
 		case "3":
 			return THE_CHOSEN_ONES_PRIZE;
 		case "4":
-			return INFLUENCER_PRIZE;
+			return ELITE_PRIZE;
+		case "5":
+			return WHITE_RAVENS_PRIZE;
 		default:
 			return;
 	}
@@ -64,9 +71,10 @@ export const mapToColor = (type?: String) => {
 		case THE_CHOSEN_ONES_PRIZE:
 			//purple chest
 			return Colors.MapToDark.highlight;
-		case INFLUENCER_PRIZE:
-			//red chest
-			return Colors.MapToDark.danger;
+		case ELITE_PRIZE:
+			return Colors.MapToDark.warning;;
+		case WHITE_RAVENS_PRIZE:
+			return Colors.MapToDark.warning;;
 		default:
 			return;
 	}
