@@ -15,6 +15,7 @@ import * as Advertisement from "./advertisement";
 import * as Motivation from "./motivation";
 import * as ResetPassword from "./resetPassword";
 import * as DeepLinks from "./deepLinks";
+import * as Highscore from "./highscore";
 
 export interface StoreState {
 	auth: Auth.State;
@@ -34,4 +35,5 @@ export interface StoreState {
 	advertisement: Advertisement.State;
 	resetPassword: ResetPassword.State;
 	deepLinks: DeepLinks.State;
+	highscore: Highscore.State;
 }

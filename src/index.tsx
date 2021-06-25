@@ -7,6 +7,7 @@ import { StoreState } from "./reducers";
 import * as Views from "./views";
 import { StatusBar } from "react-native";
 
+
 console.disableYellowBox = true;
 
 export default function App() {

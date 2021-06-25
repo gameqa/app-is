@@ -12,4 +12,3 @@ export { default as ResetPasswordAuthCode } from "./ResetPasswordAuth";
 export { default as SetNewPassword } from "./SetNewPassword";
 
 export * as Utils from "./utils";
-

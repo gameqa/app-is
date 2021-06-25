@@ -15,3 +15,4 @@ export * as Advertisement from "./advertisement";
 export * as Motivation from "./motivation";
 export * as ResetPassword from "./resetPassword";
 export * as DeepLinks from "./deepLinks";
+export * as Highscore from "./highscore";

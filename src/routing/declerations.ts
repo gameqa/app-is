@@ -1,6 +1,6 @@
 import React from "react";
 
-export type Tabs = "Ég" | "Spila" | "Vinningar" | "Bjóða";
+export type Tabs = "Ég" | "Spila" | "Vinningar" | "Stigatafla";
 export type PrizeStackItems = "prize-cats" | "prize-items";
 export type AuthStackItems =
 	| "log-in"
@@ -9,7 +9,11 @@ export type AuthStackItems =
 	| "reset-password-authcode"
 	| "set-new-password";
 export type GameStackItems = "Spila" | "article-reader" | "prize-items";
-export type Icons = "puzzle-piece" | "tachometer" | "user-plus" | "trophy";
+export type Icons =
+	| "puzzle-piece"
+	| "tachometer"
+	| "sort-amount-asc"
+	| "trophy";
 
 type Component = (() => JSX.Element) | ((v: any) => JSX.Element);
 export interface TabRoutes {
