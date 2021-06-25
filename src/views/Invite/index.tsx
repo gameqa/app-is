@@ -19,10 +19,19 @@ const Highscore = () => {
 			{highscore.isLoading ? (
 				<ActivityIndicator />
 			) : (
-				highscore.highscores.map((user) => (
-					<Atoms.Cards.HighscoreItem user={user} />
-					// <Text>{user.username}</Text>
-				))
+				highscore.highscores
+					.sort((user1, user2) =>
+						user1.scoreCard.hiscoreRank >
+						user2.scoreCard.hiscoreRank
+							? 1
+							: user2.scoreCard.hiscoreRank >
+							  user1.scoreCard.hiscoreRank
+							? -1
+							: 0
+					)
+					.map((user) => (
+						<Atoms.Cards.HighscoreItem user={user} />
+					))
 			)}
 		</ScrollView>
 	);
