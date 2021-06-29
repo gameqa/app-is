@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+import * as Colors from "../../../../declerations";
+import * as Services from "../../../../services";
+
 const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
@@ -29,6 +32,18 @@ const styles = StyleSheet.create({
 		borderBottomColor: "#e8e8e8",
 		borderBottomWidth: 4,
 		marginBottom: 25,
+	},
+	nameStyle: {
+		justifyContent: "flex-start",
+		paddingRight: 5,
+	},
+	streakStyle: {
+		justifyContent: "flex-start",
+		//color: Services.Colors.MapToDark.danger,
+		fontWeight: "600",
+	},
+	nameStreakContainer: {
+		flexDirection: "row",
 	},
 });
 

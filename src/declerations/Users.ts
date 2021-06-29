@@ -8,6 +8,7 @@ export interface User {
 	hasCompletedTutorial: boolean;
 	referral?: string;
 	invitedBy?: string;
+	streak: number;
 }
 
 export interface ScoreCard {

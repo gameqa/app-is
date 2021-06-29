@@ -18,6 +18,7 @@ export const initialState: State = {
 	level: 1,
 	hasCompletedTutorial: false,
 	invites: [],
+	streak: 1,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
