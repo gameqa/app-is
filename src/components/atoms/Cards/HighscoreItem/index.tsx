@@ -7,7 +7,7 @@ import { Colors } from "../../../../services";
 import { IProps, IRenderTextProps } from "./interface";
 
 const HighscoreItem = ({ user }: IProps) => {
-	const { username, level, scoreCard } = user;
+	const { username, streak, scoreCard } = user;
 	const { hiscoreRank } = scoreCard;
 
 	const currentUser = useSelector((state: StoreState) => state.auth);
@@ -51,8 +51,9 @@ const HighscoreItem = ({ user }: IProps) => {
 			</View>
 			<Atoms.Users.Avatar {...user} color="highlight" />
 
-			<View style={{ marginLeft: 10, justifyContent: "center" }}>
+			<View style={{ paddingHorizontal: 10, flexDirection: "row", justifyContent: "space-between", alignItems: "center", flex: 1 }}>
 				<RenderText>{username}</RenderText>
+				<RenderText>{streak > 1 ? `${streak}🔥` : null}</RenderText>
 			</View>
 		</View>
 	);
