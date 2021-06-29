@@ -26,9 +26,18 @@ const UsersInfo = (user: User) => {
 				<View
 					style={[styles.fullWidth, styles.userLevelContainer]}
 				>
-					<Atoms.Text.Heading>
-						{user.username}
-					</Atoms.Text.Heading>
+					<View
+						style={{
+							flexDirection: "row",
+						}}
+					>
+						<Atoms.Text.Heading style={styles.nameStyle}>
+							{user.username}
+						</Atoms.Text.Heading>
+						<Atoms.Text.Para style={styles.streakStyle}>
+							🔥 {user.streak}
+						</Atoms.Text.Para>
+					</View>
 					<Atoms.Text.Para>
 						Lvl {user.level}{" "}
 						{Services.UserLevels.mapLevelToString(user.level)}
