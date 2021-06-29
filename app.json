@@ -19,12 +19,6 @@
 			"supportsTablet": true,
 			"googleServicesFile": "./GoogleService-Info.plist",
 			"bundleIdentifier": "com.spurningaris.Spurningar",
-			"config": {
-				"branch": {
-					"apiKey": "key_live_kkWb728Kh7lmtcY9KFBT9hdfwrlTN6eD"
-				}
-			},
-			"associatedDomains": ["applinks:spurningaris.app.link"]
 		},
 		"android": {
 			"adaptiveIcon": {
