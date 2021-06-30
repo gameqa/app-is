@@ -3,6 +3,7 @@ import { State } from "./interface";
 
 export const initialState: State = {
 	giveAways: [],
+	isLoading: true,
 };
 
 export const reducer = (
@@ -11,9 +12,11 @@ export const reducer = (
 ): State => {
 	switch (action.type) {
 		case ActionTypes.fetchGiveAways:
-			const newState = { ...state, giveAways: [...action.payload] };
-			console.log("giveaways!!!", newState);
-			return newState;
+			return {
+				...state,
+				giveAways: [...action.payload],
+				isLoading: false,
+			};
 		default:
 			return state;
 	}

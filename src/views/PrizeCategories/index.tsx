@@ -8,22 +8,8 @@ import * as Actions from "../../actions";
 import { OverlayType } from "../../declerations";
 import { Linking, ScrollView, View } from "react-native";
 
-import CountDown from "react-native-countdown-component";
-
-import * as Services from "../../services";
-import { gameStack } from "../../routing/routes";
-
 const PrizeCategories = () => {
 	const [isGiveAway, setIsGiveAway] = useState(false);
-
-	const auth = useSelector((state: StoreState) => state.auth);
-	const prizeCategories = useSelector(
-		(state: StoreState) => state.prize.prizeCategories
-	);
-
-	const giveAwayTime = useSelector(
-		(state: StoreState) => state.giveAway.giveAways
-	);
 
 	// react-redux useDispatch hook
 	const dispatch = useDispatch();
@@ -32,10 +18,18 @@ const PrizeCategories = () => {
 		dispatch(Actions.GiveAway.fetchGiveAways());
 	}, [dispatch]);
 
+	const auth = useSelector((state: StoreState) => state.auth);
+	const prizeCategories = useSelector(
+		(state: StoreState) => state.prize.prizeCategories
+	);
+
+	const giveAway = useSelector((state: StoreState) => state.giveAway);
+
 	//calculate next giveaway time in seconds from array of giveaway dates
 	const getNextGiveAwayTime = () => {
 		const presentTime = Date.parse(new Date().toString());
-		var closest = 0;
+		const giveAwayTime = giveAway.giveAways;
+		var closest = presentTime;
 		for (let i = 1; i < giveAwayTime.length; i++) {
 			if (i === 1) {
 				let prev =
@@ -76,6 +70,8 @@ const PrizeCategories = () => {
 		setTimeout(setIsGiveAway, 300000, false);
 	};
 
+	const TIME_UNTIL_GIVEAWAY = getNextGiveAwayTime();
+
 	return (
 		<ScrollView>
 			<LayoutWrapper>
@@ -85,47 +81,13 @@ const PrizeCategories = () => {
 					Þú getur smellt á hvern flokk fyrir sig til þess að sjá
 					yfirlit yfir vinninga. 🏆🎁
 				</Atoms.Text.Para>
-				{!isGiveAway ? (
-					<View style={{ marginVertical: 10 }}>
-						<Atoms.Text.Heading
-							style={{
-								textAlign: "center",
-								marginBottom: 5,
-							}}
-						>
-							Útdráttur á Facebook eftir
-						</Atoms.Text.Heading>
-
-						<CountDown
-							until={getNextGiveAwayTime()}
-							onFinish={() => showGiveAwayAndReset()}
-							onPress={() => loadInBrowser()}
-							size={20}
-							timeLabels={{
-								d: "Dagar",
-								h: "Klst",
-								m: "Mínútur",
-								s: "Sekúndur",
-							}}
-							digitStyle={{
-								backgroundColor:
-									Services.Colors.MapToLight.highlight,
-							}}
-							digitTxtStyle={{
-								color: Services.Colors.MapToDark.highlight,
-							}}
-						/>
-					</View>
-				) : (
-					<View style={{ marginVertical: 10 }}>
-						<Atoms.Text.Heading
-							style={{ textAlign: "center" }}
-						>
-							Við erum að draga út vinninga á facebook
-							síðunni okkar.🥳🥳
-						</Atoms.Text.Heading>
-					</View>
-				)}
+				<Molecules.GiveAway.CountDownComponent
+					time={TIME_UNTIL_GIVEAWAY}
+					isCounting={!isGiveAway}
+					onFinish={showGiveAwayAndReset}
+					onPress={loadInBrowser}
+					isLoading={giveAway.isLoading}
+				/>
 
 				{prizeCategories.map((item) => (
 					<Atoms.Cards.PrizeCategory {...item} />
