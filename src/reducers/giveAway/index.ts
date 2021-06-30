@@ -2,7 +2,7 @@ import { Actions, ActionTypes } from "../../actions";
 import { State } from "./interface";
 
 export const initialState: State = {
-	info: { time: 0, items: [] },
+	giveAways: [],
 };
 
 export const reducer = (
@@ -11,8 +11,9 @@ export const reducer = (
 ): State => {
 	switch (action.type) {
 		case ActionTypes.fetchGiveAways:
-			console.log("giveaways!!!", action.payload);
-			return { ...state, ...action.payload };
+			const newState = { ...state, giveAways: [...action.payload] };
+			console.log("giveaways!!!", newState);
+			return newState;
 		default:
 			return state;
 	}

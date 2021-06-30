@@ -7,7 +7,7 @@ import { GiveAway } from "../../declerations";
 export const fetchGiveAways = () => {
 	return async function (dispatch: Dispatch) {
 		try {
-			const { data } = await Api.get<GiveAway>(
+			const { data } = await Api.get<GiveAway[]>(
 				"/api/v1/prize_give_aways/"
 			);
 			dispatch<FetchGiveAwaysAction>({
