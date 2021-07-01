@@ -18,7 +18,7 @@
 		"ios": {
 			"supportsTablet": true,
 			"googleServicesFile": "./GoogleService-Info.plist",
-			"bundleIdentifier": "com.spurningaris.Spurningar",
+			"bundleIdentifier": "com.spurningaris.Spurningar"
 		},
 		"android": {
 			"adaptiveIcon": {
@@ -28,7 +28,7 @@
 			"googleServicesFile": "./google-services.json",
 			"package": "com.spurningaris.Spurningar",
 			"permissions": [],
-			"versionCode": 14,
+			"versionCode": 15,
 			"config": {
 				"branch": {
 					"apiKey": "key_live_kkWb728Kh7lmtcY9KFBT9hdfwrlTN6eD"

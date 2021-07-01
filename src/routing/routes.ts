@@ -12,6 +12,10 @@ export const tab: TabRoutes[] = [
 		Component: Views.UserProgress,
 	},
 	{
+		id: "Deila",
+		Component: Views.UserProgress,
+	},
+	{
 		id: "Stigatafla",
 		Component: Views.Invite,
 	},

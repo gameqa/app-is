@@ -5,4 +5,5 @@ export const mapTabToIcon: { [k in Tabs]: Icons } = {
 	Stigatafla: "sort-amount-asc",
 	Vinningar: "trophy",
 	Ég: "tachometer",
+	Deila: "share"
 };
