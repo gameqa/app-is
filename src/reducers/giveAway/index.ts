@@ -13,8 +13,8 @@ export const reducer = (
 	switch (action.type) {
 		case ActionTypes.fetchGiveAways:
 			return {
-				...state,
-				giveAways: [...action.payload],
+				...initialState,
+				giveAways: action.payload,
 				isLoading: false,
 			};
 		default:

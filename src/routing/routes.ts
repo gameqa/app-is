@@ -13,11 +13,11 @@ export const tab: TabRoutes[] = [
 	},
 	{
 		id: "Deila",
-		Component: Views.UserProgress,
+		Component: Views.Invite,
 	},
 	{
 		id: "Stigatafla",
-		Component: Views.Invite,
+		Component: Views.Hiscore,
 	},
 ];
 

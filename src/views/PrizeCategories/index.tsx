@@ -25,27 +25,6 @@ const PrizeCategories = () => {
 
 	const giveAway = useSelector((state: StoreState) => state.giveAway);
 
-	//calculate next giveaway time in seconds from array of giveaway dates
-	const getNextGiveAwayTime = () => {
-		const presentTime = Date.parse(new Date().toString());
-		const giveAwayTime = giveAway.giveAways;
-		var closest = presentTime;
-		for (let i = 1; i < giveAwayTime.length; i++) {
-			if (i === 1) {
-				let prev =
-					Date.parse(giveAwayTime[i - 1].time.toString()) -
-					presentTime;
-				closest = prev;
-			}
-			let curr =
-				Date.parse(giveAwayTime[i].time.toString()) - presentTime;
-			if (curr < closest) {
-				closest = curr;
-			}
-		}
-		return closest / 1000;
-	};
-
 	// fetch prize categories from API
 	useEffect(() => {
 		dispatch(Actions.PrizeCategory.fetchPrizeCategories());
@@ -68,6 +47,25 @@ const PrizeCategories = () => {
 	const showGiveAwayAndReset = () => {
 		setIsGiveAway(true);
 		setTimeout(setIsGiveAway, 300000, false);
+	};
+
+	//calculate next giveaway time in seconds from array of giveaway dates
+	const getNextGiveAwayTime = () => {
+		let today = new Date();
+		let closest = new Date("2035-07-07T17:00:00.000Z");
+		var closestTime = closest.getTime();
+		for (let i = 0; i < giveAway.giveAways.length; i++) {
+			let currTime = new Date(giveAway.giveAways[i].time).getTime();
+			// let currTime = curr.getTime();
+
+			if (currTime < closestTime && currTime > today.getTime()) {
+				closestTime = currTime;
+			}
+		}
+		const presentTime = today.getTime();
+
+		let diffInMilliSeconds = closestTime - presentTime;
+		return diffInMilliSeconds / 1000;
 	};
 
 	const TIME_UNTIL_GIVEAWAY = getNextGiveAwayTime();
