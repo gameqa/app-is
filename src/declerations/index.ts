@@ -16,3 +16,5 @@ export * from "./Overlay";
 export * from "./Notifications";
 export * from "./Motivation";
 export * from "./Highscore";
+export * from "./GiveAway";
+export * from "./CountDownLabelType";
