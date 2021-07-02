@@ -14,6 +14,16 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				highscores: action.payload,
 				isLoading: false,
 			};
+		case ActionTypes.fetchMoreHighscoreUsersOnScrollUp:
+			return {
+				...state,
+				highscores: [...state.highscores, ...action.payload],
+			};
+		case ActionTypes.fetchMoreHighscoreUsersOnScrollDown:
+			return {
+				...state,
+				highscores: [...state.highscores, ...action.payload],
+			};
 		default:
 			return state;
 	}
