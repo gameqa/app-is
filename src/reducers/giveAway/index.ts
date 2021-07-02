@@ -2,16 +2,19 @@ import { Actions, ActionTypes } from "../../actions";
 import { State } from "./interface";
 
 export const initialState: State = {
-	highscores: [],
+	giveAways: [],
 	isLoading: true,
 };
 
-const reducer = (state: State = initialState, action: Actions): State => {
+export const reducer = (
+	state: State = initialState,
+	action: Actions
+): State => {
 	switch (action.type) {
-		case ActionTypes.fetchHighscorePlacement:
+		case ActionTypes.fetchGiveAways:
 			return {
-				...state,
-				highscores: action.payload,
+				...initialState,
+				giveAways: action.payload,
 				isLoading: false,
 			};
 		default:
