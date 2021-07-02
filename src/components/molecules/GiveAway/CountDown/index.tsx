@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 
 import { IProps } from "./interface";
@@ -19,33 +19,39 @@ const CountDownComponent = (props: IProps) => {
 		s: Services.CountDownLabel.MapToIcelandic.Seconds,
 	};
 
-	if (isLoading) return null;
+	if (isLoading || time === -1) return null;
 	return (
 		<View>
-			{isCounting ? (
-				<View style={styles.outer}>
-					<Atoms.Text.Heading style={styles.heading}>
-						Útdráttur á Facebook eftir
-					</Atoms.Text.Heading>
+			<TouchableOpacity onPress={() => onPress()}>
+				{isCounting ? (
+					<View style={styles.outer}>
+						<Atoms.Text.Heading style={styles.heading}>
+							Útdráttur á Facebook eftir
+						</Atoms.Text.Heading>
 
-					<CountDown
-						until={time}
-						onFinish={() => onFinish()}
-						onPress={() => onPress()}
-						size={20}
-						timeLabels={timeLabels}
-						digitStyle={styles.digitStyle}
-						digitTxtStyle={styles.digitTxtStyle}
-					/>
-				</View>
-			) : (
-				<View style={styles.outer}>
-					<Atoms.Text.Heading style={styles.giveAwayDrawText}>
-						Við erum að draga út vinninga á facebook síðunni
-						okkar.🥳🥳
-					</Atoms.Text.Heading>
-				</View>
-			)}
+						<CountDown
+							until={time}
+							onFinish={() => onFinish()}
+							onPress={() => onPress()}
+							size={20}
+							timeLabels={timeLabels}
+							digitStyle={styles.digitStyle}
+							digitTxtStyle={styles.digitTxtStyle}
+						/>
+					</View>
+				) : (
+					<View style={styles.outer}>
+						<Atoms.Text.Heading
+							style={styles.giveAwayDrawText}
+						>
+							Útdráttur í gangi á facebook.🥳🥳
+						</Atoms.Text.Heading>
+						<Atoms.Text.Para style={styles.giveAwayDrawText}>
+							Ýttu hér til að sjá streymi.
+						</Atoms.Text.Para>
+					</View>
+				)}
+			</TouchableOpacity>
 		</View>
 	);
 };

@@ -46,7 +46,7 @@ const PrizeCategories = () => {
 
 	const showGiveAwayAndReset = () => {
 		setIsGiveAway(true);
-		setTimeout(setIsGiveAway, 300000, false);
+		setTimeout(setIsGiveAway, 600000, false);
 	};
 
 	//calculate next giveaway time in seconds from array of giveaway dates
@@ -55,15 +55,15 @@ const PrizeCategories = () => {
 		let closest = new Date("2035-07-07T17:00:00.000Z");
 		var closestTime = closest.getTime();
 		for (let i = 0; i < giveAway.giveAways.length; i++) {
-			let currTime = new Date(giveAway.giveAways[i].time).getTime();
-			// let currTime = curr.getTime();
+			let curr = new Date(giveAway.giveAways[i].time);
+			let currTime = curr.getTime();
 
 			if (currTime < closestTime && currTime > today.getTime()) {
 				closestTime = currTime;
 			}
 		}
+		if (closestTime === closest.getTime()) return -1;
 		const presentTime = today.getTime();
-
 		let diffInMilliSeconds = closestTime - presentTime;
 		return diffInMilliSeconds / 1000;
 	};
