@@ -16,6 +16,7 @@ import styles from "./styles";
 import * as Services from "../../services";
 import * as Analytics from "expo-firebase-analytics";
 import * as Actions from "../../actions";
+import { eliteClosedChest } from "../../static/chestImages";
 
 export default function index() {
 	const [hasCopied, setHasCopied] = useState(false);
@@ -29,7 +30,7 @@ export default function index() {
 
 	const giveAway = useSelector((state: StoreState) => state.giveAway);
 
-	const url = `https://spurningar.is/`;
+	const url = "Https://spurningaris.app.link";
 
 	const alertCopy = () =>
 		Alert.alert("Afritað", "Afritun á hlekk tókst", [
@@ -75,7 +76,7 @@ export default function index() {
 
 	const showGiveAwayAndReset = () => {
 		setIsGiveAway(true);
-		setTimeout(setIsGiveAway, 300000, false);
+		setTimeout(setIsGiveAway, 600000, false);
 	};
 
 	const getNextGiveAwayTime = () => {
@@ -88,9 +89,9 @@ export default function index() {
 
 			if (currTime < closestTime && currTime > today.getTime()) {
 				closestTime = currTime;
-				// closest = curr;
 			}
 		}
+		if (closestTime === closest.getTime()) return -1;
 		const presentTime = today.getTime();
 		let diffInMilliSeconds = closestTime - presentTime;
 		return diffInMilliSeconds / 1000;
