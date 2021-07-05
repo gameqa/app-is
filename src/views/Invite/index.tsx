@@ -7,6 +7,7 @@ import {
 	View,
 	Share,
 	Linking,
+	ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Atoms, Molecules } from "../../components";
@@ -16,19 +17,17 @@ import styles from "./styles";
 import * as Services from "../../services";
 import * as Analytics from "expo-firebase-analytics";
 import * as Actions from "../../actions";
-import { eliteClosedChest } from "../../static/chestImages";
+import moment from "moment";
 
 export default function index() {
 	const [hasCopied, setHasCopied] = useState(false);
 	const [isGiveAway, setIsGiveAway] = useState(false);
 
 	const auth = useSelector((state: StoreState) => state.auth);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(Actions.GiveAway.fetchGiveAways());
-	}, [dispatch]);
 
-	const giveAway = useSelector((state: StoreState) => state.giveAway);
+	const chartData = useSelector((state: StoreState) => state.chartData);
+
+	const dispatch = useDispatch();
 
 	const url = "Https://spurningaris.app.link";
 
@@ -64,104 +63,93 @@ export default function index() {
 		});
 	};
 
-	//constant for link to Spurningar.is facebook site
-	const PRIZE_GIVEAWAY_SITE = "https://www.facebook.com/spurningar.is";
-
-	//open Spurningar.is facebook page if countdown is pressed
-	const loadInBrowser = () => {
-		Linking.openURL(PRIZE_GIVEAWAY_SITE).catch((err) =>
-			console.error("Couldn't load page", err)
-		);
-	};
-
-	const showGiveAwayAndReset = () => {
-		setIsGiveAway(true);
-		setTimeout(setIsGiveAway, 600000, false);
-	};
-
-	const getNextGiveAwayTime = () => {
-		let today = new Date();
-		let closest = new Date("2035-07-07T17:00:00.000Z");
-		var closestTime = closest.getTime();
-		for (let i = 0; i < giveAway.giveAways.length; i++) {
-			let curr = new Date(giveAway.giveAways[i].time);
-			let currTime = curr.getTime();
-
-			if (currTime < closestTime && currTime > today.getTime()) {
-				closestTime = currTime;
-			}
-		}
-		if (closestTime === closest.getTime()) return -1;
-		const presentTime = today.getTime();
-		let diffInMilliSeconds = closestTime - presentTime;
-		return diffInMilliSeconds / 1000;
-	};
-
-	const TIME_UNTIL_GIVEAWAY = getNextGiveAwayTime();
-
 	return (
 		<LayoutWrapper>
-			<Molecules.Users.Info {...auth} />
-			<Atoms.Text.Para style={styles.paragraph}>
-				Smelltu á deila, eða afritaðu hlekkinn til þess að bjóða
-				vinum að sækja appið.👫🤝
-			</Atoms.Text.Para>
-			<TouchableOpacity
-				onPress={handleCopy}
-				style={{
-					...styles.linkOuter,
-					borderColor: hasCopied
-						? Services.Colors.MapToDark.success
-						: Services.Colors.MapToDark.highlight,
-				}}
-			>
-				<View
+			<ScrollView>
+				<Molecules.Users.Info {...auth} />
+				<Atoms.Text.Para style={styles.paragraph}>
+					Smelltu á deila, eða afritaðu hlekkinn til þess að
+					bjóða vinum að sækja appið.👫🤝
+				</Atoms.Text.Para>
+				<TouchableOpacity
+					onPress={handleCopy}
 					style={{
-						...styles.copyIcon,
-						backgroundColor: hasCopied
+						...styles.linkOuter,
+						borderColor: hasCopied
 							? Services.Colors.MapToDark.success
 							: Services.Colors.MapToDark.highlight,
 					}}
 				>
+					<View
+						style={{
+							...styles.copyIcon,
+							backgroundColor: hasCopied
+								? Services.Colors.MapToDark.success
+								: Services.Colors.MapToDark.highlight,
+						}}
+					>
+						<FontAwesome
+							name="copy"
+							size={17}
+							color={Services.Colors.MapToDark["light-grey"]}
+						/>
+					</View>
+					<Atoms.Text.Para style={styles.link}>
+						{url.slice(0, 35)}...
+					</Atoms.Text.Para>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					style={styles.shareOuter}
+					onPress={handleShare}
+				>
 					<FontAwesome
-						name="copy"
-						size={17}
+						name="share"
+						size={14}
 						color={Services.Colors.MapToDark["light-grey"]}
 					/>
-				</View>
-				<Atoms.Text.Para style={styles.link}>
-					{url.slice(0, 35)}...
-				</Atoms.Text.Para>
-			</TouchableOpacity>
-
-			<TouchableOpacity
-				style={styles.shareOuter}
-				onPress={handleShare}
-			>
-				<FontAwesome
-					name="share"
-					size={14}
-					color={Services.Colors.MapToDark["light-grey"]}
+					<Atoms.Text.Para style={styles.shareText}>
+						Deila
+					</Atoms.Text.Para>
+				</TouchableOpacity>
+				<View
+					style={{
+						marginBottom: 20,
+						marginTop: 10,
+						borderBottomWidth: 1,
+						borderColor: "#ccc",
+					}}
 				/>
-				<Atoms.Text.Para style={styles.shareText}>
-					Deila
-				</Atoms.Text.Para>
-			</TouchableOpacity>
-			<View
-				style={{
-					marginBottom: 20,
-					marginTop: 10,
-					borderBottomWidth: 1,
-					borderColor: "#ccc",
-				}}
-			/>
-			<Molecules.GiveAway.CountDownComponent
-				time={TIME_UNTIL_GIVEAWAY}
-				isCounting={!isGiveAway}
-				onFinish={showGiveAwayAndReset}
-				onPress={loadInBrowser}
-				isLoading={giveAway.isLoading}
-			/>
+				<Atoms.Text.Heading>
+					Leiðin að 100 þúsund
+				</Atoms.Text.Heading>
+				<Atoms.Charts.LineChart
+					datasets={[
+						{
+							// data: [1, 2, 5, 10, 15, 22, 23, 33],
+							data: chartData.answersPerDay.reduce<number[]>(
+								(prev, curr) => {
+									if (prev.length === 0)
+										return [curr.count];
+									const last = prev[prev.length - 1];
+									prev.push(curr.count + last);
+									return prev;
+								},
+								[]
+							),
+						},
+					]}
+					labels={chartData.answersPerDay.map((item, i) => {
+						if (i === 0)
+							return moment(item.date).format("DD MM");
+						else if (i === chartData.answersPerDay.length - 1)
+							return "í dag      ";
+						return "";
+					})}
+					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
+					height={220}
+				/>
+			</ScrollView>
 		</LayoutWrapper>
 	);
 }

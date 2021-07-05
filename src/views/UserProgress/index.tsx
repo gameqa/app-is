@@ -9,7 +9,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import LayoutWrapper from "../../layout";
 import { logOutUser } from "../../actions/auth";
 import { ScrollView } from "react-native-gesture-handler";
-import moment from "moment";
 import * as Hooks from "../../hooks";
 import * as Actions from "../../actions";
 
@@ -67,35 +66,6 @@ const UserProgress = () => {
 					Minn árangur
 				</Atoms.Text.Heading>
 				<Organisms.Users.ScoreCard {...auth} />
-				<Atoms.Text.Heading style={styles.padTitleTop}>
-					Leiðin að 100 þúsund
-				</Atoms.Text.Heading>
-				<Atoms.Charts.LineChart
-					datasets={[
-						{
-							// data: [1, 2, 5, 10, 15, 22, 23, 33],
-							data: chartData.answersPerDay.reduce<number[]>(
-								(prev, curr) => {
-									if (prev.length === 0)
-										return [curr.count];
-									const last = prev[prev.length - 1];
-									prev.push(curr.count + last);
-									return prev;
-								},
-								[]
-							),
-						},
-					]}
-					labels={chartData.answersPerDay.map((item, i) => {
-						if (i === 0)
-							return moment(item.date).format("DD MM");
-						else if (i === chartData.answersPerDay.length - 1)
-							return "í dag      ";
-						return "";
-					})}
-					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
-					height={220}
-				/>
 			</LayoutWrapper>
 		</ScrollView>
 	);
