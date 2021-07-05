@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	ScrollView,
 	ActivityIndicator,
@@ -14,6 +14,9 @@ import { useFocusEffect } from "@react-navigation/core";
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
 	const dispatch = useDispatch();
+
+	const [countUp, setCountUp] = useState(0);
+	const [countDown, setCountDown] = useState(0);
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -42,8 +45,17 @@ const Highscore = () => {
 			onScroll={({ nativeEvent }) => {
 				if (isCloseToBottom(nativeEvent)) {
 					console.log("scroll a botninn!}!}!}!");
+					setCountUp(countUp + 1);
+					dispatch(
+						Actions.Highscore.fetchMoreHighscoreUsersOnScrollDown()
+					);
 				} else if (isCloseToTop(nativeEvent)) {
 					console.log("SCROLL A TOPPINN!");
+					setCountDown(countDown + 1);
+
+					dispatch(
+						Actions.Highscore.fetchMoreHighscoreUsersOnScrollUp()
+					);
 				}
 			}}
 			scrollEventThrottle={400}
