@@ -56,6 +56,7 @@ const Highscore = () => {
 					dispatch(
 						Actions.Highscore.fetchMoreHighscoreUsersOnScrollUp()
 					);
+					console.log(highscore.highscores);
 				}
 			}}
 			scrollEventThrottle={400}
