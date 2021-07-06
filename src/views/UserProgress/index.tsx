@@ -11,12 +11,20 @@ import { logOutUser } from "../../actions/auth";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Hooks from "../../hooks";
 import * as Actions from "../../actions";
+import { useEffect } from "react";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const chartData = useSelector((state: StoreState) => state.chartData);
 
+	const myQuestions = useSelector(
+		(state: StoreState) => state.myQuestions.questions
+	);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(Actions.MyQuestions.fetchMyQuestions());
+	}, []);
 
 	const alertSignOut = () =>
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [
@@ -66,6 +74,9 @@ const UserProgress = () => {
 					Minn árangur
 				</Atoms.Text.Heading>
 				<Organisms.Users.ScoreCard {...auth} />
+				{myQuestions.map((question) => (
+					<Atoms.Text.Para>{question.text}</Atoms.Text.Para>
+				))}
 			</LayoutWrapper>
 		</ScrollView>
 	);
