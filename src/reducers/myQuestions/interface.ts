@@ -1,5 +1,5 @@
-import { Question } from "../../declerations";
+import { QuestionWithAnswers } from "../../declerations";
 
 export interface State {
-	questions: Question[];
+	questions: QuestionWithAnswers[];
 }

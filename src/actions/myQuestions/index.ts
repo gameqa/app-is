@@ -2,12 +2,12 @@ import { ActionTypes } from "../types";
 import { Dispatch } from "redux";
 import Api from "../../api";
 import { FetchMyQuestionsAction } from "./interface";
-import { Question } from "../../declerations";
+import { Question, Answer, QuestionWithAnswers } from "../../declerations";
 
 export const fetchMyQuestions = () => {
 	return async function (dispatch: Dispatch) {
 		try {
-			const { data } = await Api.get<Question[]>(
+			const { data } = await Api.get<QuestionWithAnswers[]>(
 				"/api/v1/users/questions"
 			);
 			dispatch<FetchMyQuestionsAction>({
@@ -19,21 +19,5 @@ export const fetchMyQuestions = () => {
 		}
 	};
 };
-
-// export const fetchMyQuestionsAnswers = () => {
-// 	return async function (dispatch: Dispatch) {
-// 		try {
-// 			const { data } = await Api.get<Question[]>(
-// 				"/api/v1/users/questions"
-// 			);
-// 			dispatch<FetchMyQuestionsAction>({
-// 				type: ActionTypes.fetchMyQuestionsAnswers,
-// 				payload: data,
-// 			});
-// 		} catch (error) {
-// 			// do nothing on error
-// 		}
-// 	};
-// };
 
 export * as Actions from "./interface";
