@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Atoms } from "../../..";
 import { useDispatch } from "react-redux";
-import { IProps } from "./interface";
+import * as Interface from "./interface";
 import styles from "./styles";
 import { Answer, User } from "../../../../declerations";
 import Api from "../../../../api";
 import { useEffect } from "react";
+import { Colors } from "../../../../services";
+import moment from "moment";
+import "moment/locale/is";
 
-const QuestionAnswerCard = (question: IProps) => {
-	const { _id, isYesOrNo, text, answers: rawAnswers } = question;
+const QuestionAnswerCard = (question: Interface.IProps) => {
+	const { text, answers: rawAnswers, archived, isImpossible } = question;
 	const [answers, setAnswers] = useState<Answer[]>([]);
+
+	moment.locale("is");
 
 	const DEFAULT_SENDER: User = {
 		username: "",
@@ -43,7 +48,7 @@ const QuestionAnswerCard = (question: IProps) => {
 							)
 						)
 				);
-				console.log(answers.map((answer) => answer.data));
+				// console.log(answers.map((answer) => answer.data));
 				setAnswers(answers.map((answer) => answer.data));
 			} catch (error) {
 				console.log("ERROR FETCHING ANSWERS", error.message);
@@ -52,18 +57,37 @@ const QuestionAnswerCard = (question: IProps) => {
 		fetchAnswers();
 	}, []);
 
-	const RenderNoAnswerPrompt = () => (
+	const RenderErrorMessage = (props: Interface.ErrorProps) => (
 		<View
 			style={{
-				padding: 5,
-				borderRadius: 5,
-				backgroundColor: "#e3e3e3",
-				marginTop: 7,
+				...styles.errorMessageOuter,
+				backgroundColor: Colors.MapToDark[props.type],
 			}}
 		>
-			<Atoms.Text.Para>Ekkert svar fundist enn</Atoms.Text.Para>
+			<Atoms.Text.Para
+				style={{
+					color: Colors.MapToLight[props.type],
+				}}
+			>
+				{props.label}
+			</Atoms.Text.Para>
 		</View>
 	);
+
+	const RenderAnswerAtText = (props: Answer) => {
+		let text = "";
+		const user = props.createdBy?.username ?? "notandi";
+
+		if (props.type === "unknown") return null;
+		if (props.verifiedAt === undefined) text = user;
+		else
+			text = `${user} svaraði ${moment(props.verifiedAt).fromNow()}`;
+		return (
+			<Atoms.Text.Para style={styles.answeredAtLabel}>
+				{text}
+			</Atoms.Text.Para>
+		);
+	};
 
 	const RenderAnswer = (answer: Answer) => {
 		switch (answer.type) {
@@ -74,14 +98,7 @@ const QuestionAnswerCard = (question: IProps) => {
 							sender={answer.createdBy ?? DEFAULT_SENDER}
 							message={answer.textSpan}
 						/>
-						<Atoms.Text.Para
-							style={{ fontSize: 9, textAlign: "right" }}
-						>
-							{answer.createdBy
-								? `${answer.createdBy.username} svaraði 04.09 kl 12.00 `
-								: "Svar barst 11.11 kl 23:30"}
-							{/* Breki s */}
-						</Atoms.Text.Para>
+						<RenderAnswerAtText {...answer} />
 					</View>
 				);
 			case "yes-no":
@@ -91,17 +108,15 @@ const QuestionAnswerCard = (question: IProps) => {
 							sender={answer.createdBy ?? DEFAULT_SENDER}
 							message={answer.answerIs ? "Já" : "Nei"}
 						/>
-						<Atoms.Text.Para
-							style={{ fontSize: 9, textAlign: "right" }}
-						>
-							{answer.createdBy
-								? `${answer.createdBy.username} svaraði 04.09 kl 12.00 `
-								: "Svar barst 11.11 kl 23:30"}
-						</Atoms.Text.Para>
+						<RenderAnswerAtText {...answer} />
 					</View>
 				);
 			default:
-				return <RenderNoAnswerPrompt />;
+				return (
+					<RenderErrorMessage
+						{...{ type: "highlight", label: "villa kom upp" }}
+					/>
+				);
 		}
 	};
 
@@ -109,8 +124,27 @@ const QuestionAnswerCard = (question: IProps) => {
 		<View style={styles.outer}>
 			<View>
 				<Atoms.Cards.ChatBubble message={text} />
-				{answers.length === 0 ? (
-					<RenderNoAnswerPrompt />
+				{archived ? (
+					<RenderErrorMessage
+						{...{
+							type: "danger",
+							label: "Annar notandi merkti spurninguna sem slæma",
+						}}
+					/>
+				) : isImpossible ? (
+					<RenderErrorMessage
+						{...{
+							type: "warning",
+							label: "Notendur fundu ekki svarið",
+						}}
+					/>
+				) : answers.length === 0 ? (
+					<RenderErrorMessage
+						{...{
+							type: "highlight",
+							label: "Ekkert svar fundist enn.",
+						}}
+					/>
 				) : (
 					answers.map((answer) => <RenderAnswer {...answer} />)
 				)}
