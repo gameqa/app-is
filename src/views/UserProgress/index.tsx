@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Alert, TouchableOpacity } from "react-native";
+import {
+	View,
+	Alert,
+	TouchableOpacity,
+	ActivityIndicator,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
@@ -71,19 +76,31 @@ const UserProgress = () => {
 				</View>
 
 				<Atoms.Text.Heading>Mínar spurningar</Atoms.Text.Heading>
-				<FlatList
-					data={myQuestions.questions.sort((a, b) => {
-						if (a._id < b._id) return 1;
-						if (a._id > b._id) return -1;
-						return 0;
-					})}
-					keyExtractor={(item: QuestionWithAnswers) => item._id}
-					renderItem={(result: {
-						item: QuestionWithAnswers;
-					}) => (
-						<Atoms.Cards.QuestionAnswerItem {...result.item} />
-					)}
-				/>
+				{myQuestions.isLoading ? (
+					<ActivityIndicator />
+				) : myQuestions.questions.length === 0 ? (
+					<React.Fragment>
+						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
+					</React.Fragment>
+				) : (
+					<FlatList
+						data={myQuestions.questions.sort((a, b) => {
+							if (a._id < b._id) return 1;
+							if (a._id > b._id) return -1;
+							return 0;
+						})}
+						keyExtractor={(item: QuestionWithAnswers) =>
+							item._id
+						}
+						renderItem={(result: {
+							item: QuestionWithAnswers;
+						}) => (
+							<Atoms.Cards.QuestionAnswerItem
+								{...result.item}
+							/>
+						)}
+					/>
+				)}
 			</LayoutWrapper>
 		</ScrollView>
 	);
