@@ -19,6 +19,7 @@ import resetPassword from "./resetPassword";
 import deepLinks from "./deepLinks";
 import highscore from "./highscore";
 import giveAway from "./giveAway";
+import myQuestions from "./myQuestions";
 
 export default combineReducers<StoreState>({
 	auth,
@@ -40,6 +41,7 @@ export default combineReducers<StoreState>({
 	deepLinks,
 	highscore,
 	giveAway,
+	myQuestions,
 });
 
 export * from "./interface";

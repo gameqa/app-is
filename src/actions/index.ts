@@ -17,3 +17,4 @@ export * as ResetPassword from "./resetPassword";
 export * as DeepLinks from "./deepLinks";
 export * as Highscore from "./highscore";
 export * as GiveAway from "./giveAway";
+export * as MyQuestions from "./myQuestions";
