@@ -8,15 +8,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
-import { Atoms, Molecules } from "../../components";
+import { Atoms } from "../../components";
 import { useFocusEffect } from "@react-navigation/core";
 
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
 	const dispatch = useDispatch();
-
-	const [countUp, setCountUp] = useState(0);
-	const [countDown, setCountDown] = useState(0);
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -45,13 +42,11 @@ const Highscore = () => {
 			onScroll={({ nativeEvent }) => {
 				if (isCloseToBottom(nativeEvent)) {
 					console.log("scroll a botninn!}!}!}!");
-					setCountUp(countUp + 1);
 					dispatch(
 						Actions.Highscore.fetchMoreHighscoreUsersOnScrollDown()
 					);
 				} else if (isCloseToTop(nativeEvent)) {
 					console.log("SCROLL A TOPPINN!");
-					setCountDown(countDown + 1);
 
 					dispatch(
 						Actions.Highscore.fetchMoreHighscoreUsersOnScrollUp()
