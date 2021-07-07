@@ -22,7 +22,7 @@ const Highscore = () => {
 	);
 
 	const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
-		const paddingToBottom = 20;
+		const paddingToBottom = 0;
 		const { layoutMeasurement, contentOffset, contentSize } =
 			nativeEvent;
 		return (
@@ -37,24 +37,46 @@ const Highscore = () => {
 		return contentOffset.y == 0;
 	};
 
+	const DEFAULT_LIMIT = 10;
+
+	const getLastOffset = () => {
+		return (
+			highscore.highscores[highscore.highscores.length - 1]
+				?.scoreCard.hiscoreRank + DEFAULT_LIMIT ?? undefined
+		);
+	};
+
+	const getFirstOffset = () => {
+		return (
+			highscore.highscores[0]?.scoreCard.hiscoreRank -
+				DEFAULT_LIMIT ?? undefined
+		);
+	};
+
 	return (
 		<ScrollView
 			onScroll={({ nativeEvent }) => {
 				if (isCloseToBottom(nativeEvent)) {
 					console.log("scroll a botninn!}!}!}!");
 					dispatch(
-						Actions.Highscore.fetchMoreHighscoreUsersOnScrollDown()
+						Actions.Highscore.fetchHighscorePlacement(
+							getLastOffset(),
+							DEFAULT_LIMIT
+						)
 					);
 				} else if (isCloseToTop(nativeEvent)) {
 					console.log("SCROLL A TOPPINN!");
 
 					dispatch(
-						Actions.Highscore.fetchMoreHighscoreUsersOnScrollUp()
+						Actions.Highscore.fetchHighscorePlacement(
+							getFirstOffset() - 5,
+							DEFAULT_LIMIT
+						)
 					);
-					console.log(highscore.highscores);
+					// console.log(highscore.highscores);
 				}
 			}}
-			scrollEventThrottle={400}
+			scrollEventThrottle={700}
 			style={{ backgroundColor: "white" }}
 		>
 			<SafeAreaView>
