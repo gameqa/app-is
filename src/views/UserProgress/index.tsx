@@ -47,8 +47,10 @@ const UserProgress = () => {
 		const unSeenAnswers = answeredQuestions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
-		if (unSeenAnswers) {
+		if (unSeenAnswers.length > 0) {
 			setHasUnseenAnswers(true);
+		} else {
+			setHasUnseenAnswers(false);
 		}
 		return unSeenAnswers;
 	}, [answeredQuestions]);
@@ -164,32 +166,61 @@ const UserProgress = () => {
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						{/* <Atoms.Text.Para
-							style={{
-								backgroundColor: "red",
-								paddingHorizontal: 10,
-							}}
-						>
-							Gömul svör
-						</Atoms.Text.Para> */}
-						{/* <View
-							style={{
-								flex: 3,
-								flexDirection: "row",
-								justifyContent: "center",
-							}}
-						>
-							<View style={styles.unSeenLine}></View>
-							<Atoms.Text.Para
+						{hasUnseenAnswers ? (
+							<View
 								style={{
-									backgroundColor: "red",
-									paddingHorizontal: 10,
+									flex: 3,
+									flexDirection: "row",
+									flexWrap: "wrap",
+									justifyContent: "space-evenly",
+									height: "100%",
+									width: "100%",
 								}}
 							>
-								Gömul svör
-							</Atoms.Text.Para>
-							<View style={}></View>
-						</View> */}
+								<View
+									style={{
+										borderBottomWidth: 1,
+										borderColor: "#dadada",
+										width: "33%",
+										height: "33%",
+									}}
+								></View>
+								<View
+									style={{
+										width: "33%",
+										height: "33%",
+									}}
+								>
+									<Atoms.Text.Para
+										style={{
+											textAlign: "center",
+											paddingHorizontal: 10,
+											paddingBottom: 20,
+
+											width: "100%",
+											height: "100%",
+											borderWidth: 1,
+											borderRadius: 10,
+											borderColor: "#dadada",
+											overflow: "hidden",
+											// backgroundColor: "red",
+										}}
+									>
+										Gömul svör
+									</Atoms.Text.Para>
+								</View>
+
+								<View
+									style={{
+										borderBottomWidth: 1,
+										borderColor: "#dadada",
+										width: "33%",
+										height: "33%",
+									}}
+								></View>
+							</View>
+						) : null}
+
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
 							data={questionWithOnlySeenAnswers}
