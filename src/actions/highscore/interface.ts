@@ -5,3 +5,13 @@ export interface FetchHighscorePlacementAction {
 	type: ActionTypes.fetchHighscorePlacement;
 	payload: User[];
 }
+
+export interface FetchHighscorePlacementExpansionUpAction {
+	type: ActionTypes.fetchHighscorePlacementExpansionUp;
+	payload: User[];
+}
+
+export interface FetchHighscorePlacementExpansionDownAction {
+	type: ActionTypes.fetchHighscorePlacementExpansionDown;
+	payload: User[];
+}

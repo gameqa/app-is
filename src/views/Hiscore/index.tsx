@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { ScrollView, ActivityIndicator, SafeAreaView } from "react-native";
+import React from "react";
+import { RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
-import { Atoms, Molecules } from "../../components";
+import { Atoms } from "../../components";
 import { useFocusEffect } from "@react-navigation/core";
+import { FlatList } from "react-native-gesture-handler";
+import { User } from "../../declerations";
 
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
@@ -12,29 +14,60 @@ const Highscore = () => {
 
 	useFocusEffect(
 		React.useCallback(() => {
+			console.log("wtf");
 			dispatch(Actions.Highscore.fetchHighscorePlacement());
 		}, [])
 	);
 
-	return (
-		<ScrollView style={{backgroundColor: "white"}}>
-			<SafeAreaView>
-			{highscore.isLoading ? (
-				<ActivityIndicator />
-			) : (
-				highscore.highscores
-					.sort(
-						(a, b) =>
-							a.scoreCard.hiscoreRank -
-							b.scoreCard.hiscoreRank
-					)
-					.map((user) => (
-						<Atoms.Cards.HighscoreItem user={user} />
-					))
-			)}
+	const DEFAULT_LIMIT = 10;
 
-			</SafeAreaView>
-		</ScrollView>
+	const getLastOffset = () => {
+		return (
+			highscore.highscores[highscore.highscores.length - 1]
+				?.scoreCard.hiscoreRank + 1
+		);
+	};
+
+	const getFirstOffset = () => {
+		return Math.max(
+			1,
+			highscore.highscores[0]?.scoreCard.hiscoreRank - DEFAULT_LIMIT
+		);
+	};
+
+	return (
+		<FlatList
+			refreshControl={
+				<RefreshControl
+					refreshing={false}
+					onRefresh={() => {
+						dispatch(
+							Actions.Highscore.fetchHighscorePlacementExpansionUp(
+								getFirstOffset(),
+								DEFAULT_LIMIT
+							)
+						);
+					}}
+				/>
+			}
+			data={highscore.highscores}
+			keyExtractor={(item: User) => item._id}
+			onEndReached={() =>
+				dispatch(
+					Actions.Highscore.fetchHighscorePlacementExpansionDown(
+						getLastOffset(),
+						DEFAULT_LIMIT
+					)
+				)
+			}
+			onEndReachedThreshold={0}
+			renderItem={(result: { item: User }) => (
+				<Atoms.Cards.HighscoreItem
+					user={result.item}
+					key={result.item._id}
+				/>
+			)}
+		/>
 	);
 };
 

@@ -64,6 +64,8 @@ export enum ActionTypes {
 	setLink,
 	fetchHighscorePlacement,
 	fetchGiveAways,
+	fetchHighscorePlacementExpansionUp,
+	fetchHighscorePlacementExpansionDown,
 	fetchMyQuestions,
 }
 
@@ -112,4 +114,6 @@ export type Actions =
 	| DeepLinks.Actions.SetLink
 	| Highscore.Actions.FetchHighscorePlacementAction
 	| GiveAway.Actions.FetchGiveAwaysAction
+	| Highscore.Actions.FetchHighscorePlacementExpansionUpAction
+	| Highscore.Actions.FetchHighscorePlacementExpansionDownAction
 	| MyQuestions.Actions.FetchMyQuestionsAction;

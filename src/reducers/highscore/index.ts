@@ -14,6 +14,18 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				highscores: action.payload,
 				isLoading: false,
 			};
+
+		case ActionTypes.fetchHighscorePlacementExpansionUp:
+			return {
+				...state,
+				highscores: [...action.payload, ...state.highscores],
+				isLoading: false,
+			};
+		case ActionTypes.fetchHighscorePlacementExpansionDown:
+			return {
+				...state,
+				highscores: [...state.highscores, ...action.payload],
+			};
 		default:
 			return state;
 	}
