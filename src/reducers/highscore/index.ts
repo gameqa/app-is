@@ -9,10 +9,9 @@ export const initialState: State = {
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
 		case ActionTypes.fetchHighscorePlacement:
-			const newHighscores = [...state.highscores, ...action.payload];
 			return {
 				...state,
-				highscores: [...new Set(newHighscores)],
+				highscores: action.payload,
 				isLoading: false,
 			};
 

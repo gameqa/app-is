@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NativeScrollEvent, RefreshControl } from "react-native";
+import React from "react";
+import { RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
@@ -19,29 +19,9 @@ const Highscore = () => {
 		}, [])
 	);
 
-	// const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
-	// 	const paddingToBottom = 15;
-	// 	const { layoutMeasurement, contentOffset, contentSize } =
-	// 		nativeEvent;
-	// 	return (
-	// 		layoutMeasurement.height + contentOffset.y >=
-	// 		contentSize.height - paddingToBottom
-	// 	);
-	// };
-
-	// const isCloseToTop = (nativeEvent: NativeScrollEvent) => {
-	// 	const { layoutMeasurement, contentOffset, contentSize } =
-	// 		nativeEvent;
-	// 	return contentOffset.y == 0;
-	// };
-
 	const DEFAULT_LIMIT = 10;
 
 	const getLastOffset = () => {
-		console.log(
-			highscore.highscores[highscore.highscores.length - 1]
-				?.scoreCard.hiscoreRank
-		);
 		return (
 			highscore.highscores[highscore.highscores.length - 1]
 				?.scoreCard.hiscoreRank + 1
@@ -49,7 +29,8 @@ const Highscore = () => {
 	};
 
 	const getFirstOffset = () => {
-		return (
+		return Math.max(
+			1,
 			highscore.highscores[0]?.scoreCard.hiscoreRank - DEFAULT_LIMIT
 		);
 	};
@@ -62,7 +43,7 @@ const Highscore = () => {
 					onRefresh={() => {
 						dispatch(
 							Actions.Highscore.fetchHighscorePlacementExpansionUp(
-								getFirstOffset() - 5,
+								getFirstOffset(),
 								DEFAULT_LIMIT
 							)
 						);
@@ -91,40 +72,3 @@ const Highscore = () => {
 };
 
 export default Highscore;
-
-// highscore.highscores
-// .sort(
-// 	(a, b) =>
-// 		a.scoreCard.hiscoreRank -
-// 		b.scoreCard.hiscoreRank
-// )
-// .map((user) => (
-// 	<Atoms.Cards.HighscoreItem user={user} />
-// ))
-
-{
-	/* <ScrollView
-			onScroll={({ nativeEvent }) => {
-				if (isCloseToBottom(nativeEvent)) {
-					console.log("scroll a botninn!}!}!}!");
-					dispatch(
-						Actions.Highscore.fetchHighscorePlacementExpansion(
-							getLastOffset(),
-							DEFAULT_LIMIT
-						)
-					);
-				} else if (isCloseToTop(nativeEvent)) {
-					console.log("SCROLL A TOPPINN!");
-
-					dispatch(
-						Actions.Highscore.fetchHighscorePlacementExpansion(
-							getFirstOffset() - 5,
-							DEFAULT_LIMIT
-						)
-					);
-				}
-			}}
-			scrollEventThrottle={0}
-			style={{ backgroundColor: "white" }}
-		></ScrollView> */
-}
