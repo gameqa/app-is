@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	ScrollView,
-	ActivityIndicator,
-	SafeAreaView,
-	NativeScrollEvent,
-} from "react-native";
+import { NativeScrollEvent, RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
@@ -24,21 +19,21 @@ const Highscore = () => {
 		}, [])
 	);
 
-	const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
-		const paddingToBottom = 15;
-		const { layoutMeasurement, contentOffset, contentSize } =
-			nativeEvent;
-		return (
-			layoutMeasurement.height + contentOffset.y >=
-			contentSize.height - paddingToBottom
-		);
-	};
+	// const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
+	// 	const paddingToBottom = 15;
+	// 	const { layoutMeasurement, contentOffset, contentSize } =
+	// 		nativeEvent;
+	// 	return (
+	// 		layoutMeasurement.height + contentOffset.y >=
+	// 		contentSize.height - paddingToBottom
+	// 	);
+	// };
 
-	const isCloseToTop = (nativeEvent: NativeScrollEvent) => {
-		const { layoutMeasurement, contentOffset, contentSize } =
-			nativeEvent;
-		return contentOffset.y == 0;
-	};
+	// const isCloseToTop = (nativeEvent: NativeScrollEvent) => {
+	// 	const { layoutMeasurement, contentOffset, contentSize } =
+	// 		nativeEvent;
+	// 	return contentOffset.y == 0;
+	// };
 
 	const DEFAULT_LIMIT = 10;
 
@@ -60,7 +55,55 @@ const Highscore = () => {
 	};
 
 	return (
-		<ScrollView
+		<FlatList
+			refreshControl={
+				<RefreshControl
+					refreshing={false}
+					onRefresh={() => {
+						dispatch(
+							Actions.Highscore.fetchHighscorePlacementExpansionUp(
+								getFirstOffset() - 5,
+								DEFAULT_LIMIT
+							)
+						);
+					}}
+				/>
+			}
+			data={highscore.highscores}
+			keyExtractor={(item: User) => item._id}
+			onEndReached={() =>
+				dispatch(
+					Actions.Highscore.fetchHighscorePlacementExpansionDown(
+						getLastOffset(),
+						DEFAULT_LIMIT
+					)
+				)
+			}
+			onEndReachedThreshold={0}
+			renderItem={(result: { item: User }) => (
+				<Atoms.Cards.HighscoreItem
+					user={result.item}
+					key={result.item._id}
+				/>
+			)}
+		/>
+	);
+};
+
+export default Highscore;
+
+// highscore.highscores
+// .sort(
+// 	(a, b) =>
+// 		a.scoreCard.hiscoreRank -
+// 		b.scoreCard.hiscoreRank
+// )
+// .map((user) => (
+// 	<Atoms.Cards.HighscoreItem user={user} />
+// ))
+
+{
+	/* <ScrollView
 			onScroll={({ nativeEvent }) => {
 				if (isCloseToBottom(nativeEvent)) {
 					console.log("scroll a botninn!}!}!}!");
@@ -83,34 +126,5 @@ const Highscore = () => {
 			}}
 			scrollEventThrottle={0}
 			style={{ backgroundColor: "white" }}
-		>
-			<SafeAreaView>
-				{highscore.isLoading ? (
-					<ActivityIndicator />
-				) : (
-					<FlatList
-						data={highscore.highscores}
-						keyExtractor={(item: User) => item._id}
-						renderItem={(result: { item: User }) => (
-							<Atoms.Cards.HighscoreItem
-								user={result.item}
-							/>
-						)}
-					/>
-				)}
-			</SafeAreaView>
-		</ScrollView>
-	);
-};
-
-export default Highscore;
-
-// highscore.highscores
-// .sort(
-// 	(a, b) =>
-// 		a.scoreCard.hiscoreRank -
-// 		b.scoreCard.hiscoreRank
-// )
-// .map((user) => (
-// 	<Atoms.Cards.HighscoreItem user={user} />
-// ))
+		></ScrollView> */
+}

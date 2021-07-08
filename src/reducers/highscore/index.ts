@@ -9,19 +9,24 @@ export const initialState: State = {
 const reducer = (state: State = initialState, action: Actions): State => {
 	switch (action.type) {
 		case ActionTypes.fetchHighscorePlacement:
+			const newHighscores = [...state.highscores, ...action.payload];
 			return {
 				...state,
-				highscores: [...state.highscores, ...action.payload],
+				highscores: [...new Set(newHighscores)],
 				isLoading: false,
 			};
 
-		case ActionTypes.fetchHighscorePlacementExpansion:
+		case ActionTypes.fetchHighscorePlacementExpansionUp:
+			return {
+				...state,
+				highscores: [...action.payload, ...state.highscores],
+				isLoading: false,
+			};
+		case ActionTypes.fetchHighscorePlacementExpansionDown:
 			return {
 				...state,
 				highscores: [...state.highscores, ...action.payload],
-				isLoading: false,
 			};
-
 		default:
 			return state;
 	}
