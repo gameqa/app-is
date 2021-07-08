@@ -16,8 +16,8 @@ import { logOutUser } from "../../actions/auth";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import * as Hooks from "../../hooks";
 import * as Actions from "../../actions";
-import { useEffect } from "react";
-import { Question, QuestionWithAnswers } from "../../declerations";
+import {  QuestionWithAnswers } from "../../declerations";
+import { useFocusEffect } from "@react-navigation/native";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -27,9 +27,12 @@ const UserProgress = () => {
 	);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(Actions.MyQuestions.fetchMyQuestions());
-	}, []);
+
+	useFocusEffect(
+		React.useCallback(() => {
+			dispatch(Actions.MyQuestions.fetchMyQuestions());
+		}, [])
+	);
 
 	const alertSignOut = () =>
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [

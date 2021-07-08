@@ -1,12 +1,11 @@
 import { FontAwesome } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
 	TouchableOpacity,
 	Clipboard,
 	Alert,
 	View,
 	Share,
-	Linking,
 	ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,10 +17,10 @@ import * as Services from "../../services";
 import * as Analytics from "expo-firebase-analytics";
 import * as Actions from "../../actions";
 import moment from "moment";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function index() {
 	const [hasCopied, setHasCopied] = useState(false);
-	const [isGiveAway, setIsGiveAway] = useState(false);
 
 	const auth = useSelector((state: StoreState) => state.auth);
 
@@ -62,6 +61,12 @@ export default function index() {
 			link: url,
 		});
 	};
+
+	useFocusEffect(
+		React.useCallback(() => {
+			dispatch(Actions.ChartData.fetchAnswersPerDay());
+		}, [])
+	);
 
 	return (
 		<LayoutWrapper>
