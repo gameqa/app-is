@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		marginTop: 10,
 	},
+	padTitleTop: {
+		paddingTop: 40,
+	},
 });
 
 export default styles;

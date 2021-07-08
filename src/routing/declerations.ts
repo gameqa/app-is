@@ -1,6 +1,11 @@
 import React from "react";
 
-export type Tabs = "Ég" | "Spila" | "Vinningar" | "Stigatafla" | "Deila";
+export type Tabs =
+	| "Ég"
+	| "Spila"
+	| "Vinningar"
+	| "Stigatafla"
+	| "Samfélagið";
 export type PrizeStackItems = "prize-cats" | "prize-items";
 export type AuthStackItems =
 	| "log-in"
@@ -15,7 +20,7 @@ export type Icons =
 	| "tachometer"
 	| "sort-amount-asc"
 	| "trophy"
-	| "share";
+	| "users";
 
 type Component = (() => JSX.Element) | ((v: any) => JSX.Element);
 export interface TabRoutes {

@@ -18,3 +18,4 @@ export * from "./Motivation";
 export * from "./Highscore";
 export * from "./GiveAway";
 export * from "./CountDownLabelType";
+export * from "./Answer";

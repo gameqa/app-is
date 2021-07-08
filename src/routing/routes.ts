@@ -12,7 +12,7 @@ export const tab: TabRoutes[] = [
 		Component: Views.UserProgress,
 	},
 	{
-		id: "Deila",
+		id: "Samfélagið",
 		Component: Views.Invite,
 	},
 	{

@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Alert, TouchableOpacity } from "react-native";
+import {
+	View,
+	Alert,
+	TouchableOpacity,
+	ActivityIndicator,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
@@ -8,16 +13,26 @@ import * as Services from "../../services";
 import { FontAwesome } from "@expo/vector-icons";
 import LayoutWrapper from "../../layout";
 import { logOutUser } from "../../actions/auth";
-import { ScrollView } from "react-native-gesture-handler";
-import moment from "moment";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import * as Hooks from "../../hooks";
 import * as Actions from "../../actions";
+import {  QuestionWithAnswers } from "../../declerations";
+import { useFocusEffect } from "@react-navigation/native";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
-	const chartData = useSelector((state: StoreState) => state.chartData);
 
+	const myQuestions = useSelector(
+		(state: StoreState) => state.myQuestions
+	);
 	const dispatch = useDispatch();
+
+
+	useFocusEffect(
+		React.useCallback(() => {
+			dispatch(Actions.MyQuestions.fetchMyQuestions());
+		}, [])
+	);
 
 	const alertSignOut = () =>
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [
@@ -63,39 +78,32 @@ const UserProgress = () => {
 					</TouchableOpacity>
 				</View>
 
-				<Atoms.Text.Heading style={styles.padTitleTop}>
-					Minn árangur
-				</Atoms.Text.Heading>
-				<Organisms.Users.ScoreCard {...auth} />
-				<Atoms.Text.Heading style={styles.padTitleTop}>
-					Leiðin að 100 þúsund
-				</Atoms.Text.Heading>
-				<Atoms.Charts.LineChart
-					datasets={[
-						{
-							// data: [1, 2, 5, 10, 15, 22, 23, 33],
-							data: chartData.answersPerDay.reduce<number[]>(
-								(prev, curr) => {
-									if (prev.length === 0)
-										return [curr.count];
-									const last = prev[prev.length - 1];
-									prev.push(curr.count + last);
-									return prev;
-								},
-								[]
-							),
-						},
-					]}
-					labels={chartData.answersPerDay.map((item, i) => {
-						if (i === 0)
-							return moment(item.date).format("DD MM");
-						else if (i === chartData.answersPerDay.length - 1)
-							return "í dag      ";
-						return "";
-					})}
-					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
-					height={220}
-				/>
+				<Atoms.Text.Heading>Mínar spurningar</Atoms.Text.Heading>
+				{myQuestions.isLoading ? (
+					<ActivityIndicator />
+				) : myQuestions.questions.length === 0 ? (
+					<React.Fragment>
+						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
+					</React.Fragment>
+				) : (
+					<FlatList
+						data={myQuestions.questions.sort((a, b) => {
+							if (a._id < b._id) return 1;
+							if (a._id > b._id) return -1;
+							return 0;
+						})}
+						keyExtractor={(item: QuestionWithAnswers) =>
+							item._id
+						}
+						renderItem={(result: {
+							item: QuestionWithAnswers;
+						}) => (
+							<Atoms.Cards.QuestionAnswerItem
+								{...result.item}
+							/>
+						)}
+					/>
+				)}
 			</LayoutWrapper>
 		</ScrollView>
 	);

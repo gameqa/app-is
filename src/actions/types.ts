@@ -16,6 +16,7 @@ import * as ResetPassword from "./resetPassword";
 import * as DeepLinks from "./deepLinks";
 import * as Highscore from "./highscore";
 import * as GiveAway from "./giveAway";
+import * as MyQuestions from "./myQuestions";
 
 export enum ActionTypes {
 	fetchUserFromToken,
@@ -65,6 +66,7 @@ export enum ActionTypes {
 	fetchGiveAways,
 	fetchHighscorePlacementExpansionUp,
 	fetchHighscorePlacementExpansionDown,
+	fetchMyQuestions,
 }
 
 export type Actions =
@@ -113,4 +115,5 @@ export type Actions =
 	| Highscore.Actions.FetchHighscorePlacementAction
 	| GiveAway.Actions.FetchGiveAwaysAction
 	| Highscore.Actions.FetchHighscorePlacementExpansionUpAction
-	| Highscore.Actions.FetchHighscorePlacementExpansionDownAction;
+	| Highscore.Actions.FetchHighscorePlacementExpansionDownAction
+	| MyQuestions.Actions.FetchMyQuestionsAction;
