@@ -47,11 +47,12 @@ const UserProgress = () => {
 		const unSeenAnswers = answeredQuestions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
-		if (unSeenAnswers.length > 0) {
-			setHasUnseenAnswers(true);
-		} else {
-			setHasUnseenAnswers(false);
-		}
+		// if (unSeenAnswers.length > 0) {
+		// 	setHasUnseenAnswers(true);
+		// } else {
+		// 	setHasUnseenAnswers(false);
+		// }
+		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
 	}, [answeredQuestions]);
 
@@ -167,56 +168,20 @@ const UserProgress = () => {
 							renderItem={renderQuestionItem}
 						/>
 						{hasUnseenAnswers ? (
-							<View
-								style={{
-									flex: 3,
-									flexDirection: "row",
-									flexWrap: "wrap",
-									justifyContent: "space-evenly",
-									height: "100%",
-									width: "100%",
-								}}
-							>
+							<View style={styles.unSeenAnswerContainer}>
 								<View
-									style={{
-										borderBottomWidth: 1,
-										borderColor: "#dadada",
-										width: "33%",
-										height: "33%",
-									}}
+									style={styles.unSeenAnswerline}
 								></View>
-								<View
-									style={{
-										width: "33%",
-										height: "33%",
-									}}
-								>
+								<View style={styles.unSeenTextContainer}>
 									<Atoms.Text.Para
-										style={{
-											textAlign: "center",
-											paddingHorizontal: 10,
-											paddingBottom: 20,
-
-											width: "100%",
-											height: "100%",
-											borderWidth: 1,
-											borderRadius: 10,
-											borderColor: "#dadada",
-											overflow: "hidden",
-											// backgroundColor: "red",
-										}}
+										style={styles.unSeenText}
 									>
 										Gömul svör
 									</Atoms.Text.Para>
 								</View>
 
 								<View
-									style={{
-										borderBottomWidth: 1,
-										borderColor: "#dadada",
-										width: "33%",
-										height: "33%",
-									}}
+									style={styles.unSeenAnswerline}
 								></View>
 							</View>
 						) : null}
