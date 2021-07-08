@@ -120,6 +120,13 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
+	useEffect(() => {
+		console.log("STRUCT");
+		return () => {
+			console.log("DE STRUCT");
+		};
+	}, []);
+
 	return (
 		<View style={styles.outer}>
 			<View>

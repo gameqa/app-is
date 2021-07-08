@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { AuthCode } from "../../actions";
 
 const styles = StyleSheet.create({
 	row: {
@@ -15,6 +16,9 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		right: 0,
 		padding: 15,
+	},
+	unSeenLine: {
+		backgroundColor: "green",
 	},
 });
 

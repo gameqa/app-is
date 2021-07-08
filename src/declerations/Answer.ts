@@ -21,6 +21,7 @@ export interface RawAnswer {
 	// flags
 	canBeShortened: boolean;
 	yesOrNoAnswer?: boolean;
+	seenByQuestionerAt?: Date;
 }
 
 export interface AnswerWithYesNo {
