@@ -10,6 +10,8 @@ import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
 import { Atoms } from "../../components";
 import { useFocusEffect } from "@react-navigation/core";
+import { FlatList } from "react-native-gesture-handler";
+import { User } from "../../declerations";
 
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
@@ -17,12 +19,13 @@ const Highscore = () => {
 
 	useFocusEffect(
 		React.useCallback(() => {
+			console.log("wtf");
 			dispatch(Actions.Highscore.fetchHighscorePlacement());
 		}, [])
 	);
 
 	const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
-		const paddingToBottom = 0;
+		const paddingToBottom = 15;
 		const { layoutMeasurement, contentOffset, contentSize } =
 			nativeEvent;
 		return (
@@ -40,16 +43,19 @@ const Highscore = () => {
 	const DEFAULT_LIMIT = 10;
 
 	const getLastOffset = () => {
+		console.log(
+			highscore.highscores[highscore.highscores.length - 1]
+				?.scoreCard.hiscoreRank
+		);
 		return (
 			highscore.highscores[highscore.highscores.length - 1]
-				?.scoreCard.hiscoreRank + DEFAULT_LIMIT ?? undefined
+				?.scoreCard.hiscoreRank + 1
 		);
 	};
 
 	const getFirstOffset = () => {
 		return (
-			highscore.highscores[0]?.scoreCard.hiscoreRank -
-				DEFAULT_LIMIT ?? undefined
+			highscore.highscores[0]?.scoreCard.hiscoreRank - DEFAULT_LIMIT
 		);
 	};
 
@@ -59,7 +65,7 @@ const Highscore = () => {
 				if (isCloseToBottom(nativeEvent)) {
 					console.log("scroll a botninn!}!}!}!");
 					dispatch(
-						Actions.Highscore.fetchHighscorePlacement(
+						Actions.Highscore.fetchHighscorePlacementExpansion(
 							getLastOffset(),
 							DEFAULT_LIMIT
 						)
@@ -68,30 +74,29 @@ const Highscore = () => {
 					console.log("SCROLL A TOPPINN!");
 
 					dispatch(
-						Actions.Highscore.fetchHighscorePlacement(
+						Actions.Highscore.fetchHighscorePlacementExpansion(
 							getFirstOffset() - 5,
 							DEFAULT_LIMIT
 						)
 					);
-					// console.log(highscore.highscores);
 				}
 			}}
-			scrollEventThrottle={700}
+			scrollEventThrottle={0}
 			style={{ backgroundColor: "white" }}
 		>
 			<SafeAreaView>
 				{highscore.isLoading ? (
 					<ActivityIndicator />
 				) : (
-					highscore.highscores
-						.sort(
-							(a, b) =>
-								a.scoreCard.hiscoreRank -
-								b.scoreCard.hiscoreRank
-						)
-						.map((user) => (
-							<Atoms.Cards.HighscoreItem user={user} />
-						))
+					<FlatList
+						data={highscore.highscores}
+						keyExtractor={(item: User) => item._id}
+						renderItem={(result: { item: User }) => (
+							<Atoms.Cards.HighscoreItem
+								user={result.item}
+							/>
+						)}
+					/>
 				)}
 			</SafeAreaView>
 		</ScrollView>
@@ -99,3 +104,13 @@ const Highscore = () => {
 };
 
 export default Highscore;
+
+// highscore.highscores
+// .sort(
+// 	(a, b) =>
+// 		a.scoreCard.hiscoreRank -
+// 		b.scoreCard.hiscoreRank
+// )
+// .map((user) => (
+// 	<Atoms.Cards.HighscoreItem user={user} />
+// ))

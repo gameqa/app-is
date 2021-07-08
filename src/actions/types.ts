@@ -63,6 +63,7 @@ export enum ActionTypes {
 	setLink,
 	fetchHighscorePlacement,
 	fetchGiveAways,
+	fetchHighscorePlacementExpansion,
 }
 
 export type Actions =
@@ -109,4 +110,5 @@ export type Actions =
 	| ResetPassword.Actions.SetResetPasswordErrorAction
 	| DeepLinks.Actions.SetLink
 	| Highscore.Actions.FetchHighscorePlacementAction
-	| GiveAway.Actions.FetchGiveAwaysAction;
+	| GiveAway.Actions.FetchGiveAwaysAction
+	| Highscore.Actions.FetchHighscorePlacementExpansionAction;

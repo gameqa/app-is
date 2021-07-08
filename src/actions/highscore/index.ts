@@ -11,6 +11,25 @@ export const fetchHighscorePlacement = (
 	return async function (dispatch: Dispatch) {
 		try {
 			const { data } = await Api.get<User[]>(
+				"/api/v1/users/hiscore_placement"
+			);
+			dispatch<FetchHighscorePlacementAction>({
+				type: ActionTypes.fetchHighscorePlacement,
+				payload: data,
+			});
+		} catch (error) {
+			// do nothing on error
+		}
+	};
+};
+
+export const fetchHighscorePlacementExpansion = (
+	offset?: number,
+	limit?: number
+) => {
+	return async function (dispatch: Dispatch) {
+		try {
+			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement",
 				{
 					params: {
