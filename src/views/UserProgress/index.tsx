@@ -20,6 +20,7 @@ import { QuestionWithAnswers } from "../../declerations";
 import { useFocusEffect } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
+import { Ionicons } from "@expo/vector-icons";
 
 const UserProgress = () => {
 	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
@@ -148,6 +149,72 @@ const UserProgress = () => {
 						/>
 					</TouchableOpacity>
 				</View>
+				<ScrollView
+					showsHorizontalScrollIndicator={false}
+					horizontal={true}
+					contentContainerStyle={{
+						marginHorizontal: 20,
+						alignItems: "center",
+
+						// shadowColor: "#000",
+						// shadowOffset: { width: 0, height: 1 },
+						// shadowOpacity: 10,
+						// shadowRadius: 2,
+						// elevation: 5,
+					}}
+				>
+					<View
+						style={{
+							height: 100,
+							width: 100,
+							backgroundColor: "#ECECEC",
+							marginHorizontal: 20,
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<Ionicons
+							name="checkmark-circle-sharp"
+							size={32}
+							color="black"
+						/>
+						<Atoms.Text.Para>Med svar</Atoms.Text.Para>
+					</View>
+					<View
+						style={{
+							height: 100,
+							width: 100,
+							backgroundColor: "#ECECEC",
+							marginHorizontal: 20,
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<Ionicons
+							name="checkmark-circle-sharp"
+							size={24}
+							color="black"
+						/>
+						<Atoms.Text.Para>Med svar</Atoms.Text.Para>
+					</View>
+					<View
+						style={{
+							height: 100,
+							width: 100,
+							backgroundColor: "#ECECEC",
+							marginHorizontal: 20,
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<Ionicons
+							name="checkmark-circle-sharp"
+							size={24}
+							color="black"
+						/>
+						<Atoms.Text.Para>Merkt sem lelegt</Atoms.Text.Para>
+					</View>
+				</ScrollView>
 
 				<Atoms.Text.Heading>Mínar spurningar</Atoms.Text.Heading>
 				{myQuestions.isLoading ? (
