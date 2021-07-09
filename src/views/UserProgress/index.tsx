@@ -24,6 +24,8 @@ import api from "../../api";
 const UserProgress = () => {
 	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
 
+	const [answerTypeViewSelected, setAnswerTypeViewSelected] = useState();
+
 	const auth = useSelector((state: StoreState) => state.auth);
 
 	const myQuestions = useSelector(
