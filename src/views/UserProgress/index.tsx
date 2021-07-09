@@ -20,7 +20,6 @@ import { QuestionWithAnswers } from "../../declerations";
 import { useFocusEffect } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
-import { Ionicons } from "@expo/vector-icons";
 
 const UserProgress = () => {
 	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
@@ -153,70 +152,170 @@ const UserProgress = () => {
 					showsHorizontalScrollIndicator={false}
 					horizontal={true}
 					contentContainerStyle={{
-						marginHorizontal: 20,
 						alignItems: "center",
-
-						// shadowColor: "#000",
-						// shadowOffset: { width: 0, height: 1 },
-						// shadowOpacity: 10,
-						// shadowRadius: 2,
-						// elevation: 5,
+						marginBottom: 20,
 					}}
 				>
-					<View
+					<TouchableOpacity
+						onPress={() => console.log("Pressed")}
 						style={{
-							height: 100,
-							width: 100,
-							backgroundColor: "#ECECEC",
-							marginHorizontal: 20,
-							alignItems: "center",
+							height: 80,
+							width: 120,
+							borderRadius: 7,
+							backgroundColor:
+								Services.Colors.MapToLight.highlight,
+							marginRight: 20,
 							justifyContent: "center",
+							padding: 10,
 						}}
 					>
-						<Ionicons
-							name="checkmark-circle-sharp"
-							size={32}
-							color="black"
-						/>
-						<Atoms.Text.Para>Med svar</Atoms.Text.Para>
-					</View>
-					<View
+						<Atoms.Text.Para
+							style={{
+								fontSize: 28,
+								fontWeight: "500",
+								color: Services.Colors.MapToDark.highlight,
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							4
+						</Atoms.Text.Para>
+						<Atoms.Text.Para
+							style={{
+								fontSize: 14,
+								fontWeight: "500",
+								marginTop: 5,
+								color: Services.Colors.MapToDark.highlight,
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							Svör
+						</Atoms.Text.Para>
+						<View
+							style={{
+								position: "absolute",
+								left: 5,
+								top: 5,
+							}}
+						>
+							<Atoms.Text.Para>💡</Atoms.Text.Para>
+						</View>
+						<View
+							style={{
+								position: "absolute",
+								left: 5,
+								bottom: 5,
+							}}
+						>
+							<Atoms.Text.Para>💡</Atoms.Text.Para>
+						</View>
+						<View
+							style={{
+								position: "absolute",
+								right: 5,
+								top: 5,
+							}}
+						>
+							<Atoms.Text.Para>💡</Atoms.Text.Para>
+						</View>
+						<View
+							style={{
+								position: "absolute",
+								right: 5,
+								bottom: 5,
+							}}
+						>
+							<Atoms.Text.Para>💡</Atoms.Text.Para>
+						</View>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						onPress={() => console.log("Pressed")}
 						style={{
-							height: 100,
-							width: 100,
-							backgroundColor: "#ECECEC",
-							marginHorizontal: 20,
-							alignItems: "center",
+							height: 80,
+
+							width: 120,
+							marginRight: 20,
 							justifyContent: "center",
+							padding: 10,
+							borderRadius: 7,
+							borderWidth: 1,
+							borderColor: "#dedede",
 						}}
 					>
-						<Ionicons
-							name="checkmark-circle-sharp"
-							size={24}
-							color="black"
-						/>
-						<Atoms.Text.Para>Med svar</Atoms.Text.Para>
-					</View>
-					<View
+						<Atoms.Text.Para
+							style={{
+								fontSize: 28,
+								fontWeight: "500",
+								color: Services.Colors.MapToDark[
+									"dark-grey"
+								],
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							3
+						</Atoms.Text.Para>
+						<Atoms.Text.Para
+							style={{
+								fontSize: 14,
+								fontWeight: "500",
+								marginTop: 5,
+								color: Services.Colors.MapToDark[
+									"dark-grey"
+								],
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							Ekkert svar
+						</Atoms.Text.Para>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						onPress={() => console.log("Pressed")}
 						style={{
-							height: 100,
-							width: 100,
-							backgroundColor: "#ECECEC",
-							marginHorizontal: 20,
-							alignItems: "center",
+							height: 80,
+							width: 120,
+							marginRight: 20,
 							justifyContent: "center",
+							padding: 10,
+							borderRadius: 7,
+							borderWidth: 1,
+							borderColor: "#dedede",
 						}}
 					>
-						<Ionicons
-							name="checkmark-circle-sharp"
-							size={24}
-							color="black"
-						/>
-						<Atoms.Text.Para>Merkt sem lelegt</Atoms.Text.Para>
-					</View>
+						<Atoms.Text.Para
+							style={{
+								fontSize: 28,
+								fontWeight: "500",
+								color: Services.Colors.MapToDark[
+									"dark-grey"
+								],
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							14
+						</Atoms.Text.Para>
+						<Atoms.Text.Para
+							style={{
+								fontSize: 14,
+								fontWeight: "500",
+								marginTop: 5,
+								color: Services.Colors.MapToDark[
+									"dark-grey"
+								],
+								margin: 0,
+								textAlign: "center",
+							}}
+						>
+							Í vinnslu
+						</Atoms.Text.Para>
+					</TouchableOpacity>
 				</ScrollView>
 
-				<Atoms.Text.Heading>Mínar spurningar</Atoms.Text.Heading>
 				{myQuestions.isLoading ? (
 					<ActivityIndicator />
 				) : myQuestions.questions.length === 0 ? (
