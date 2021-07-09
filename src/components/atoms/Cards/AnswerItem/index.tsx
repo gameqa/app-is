@@ -120,12 +120,6 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
-	useEffect(() => {
-		console.log("STRUCT");
-		return () => {
-			console.log("DE STRUCT");
-		};
-	}, []);
 
 	return (
 		<View style={styles.outer}>
@@ -136,13 +130,6 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 						{...{
 							type: "danger",
 							label: "Annar notandi merkti spurninguna sem slæma",
-						}}
-					/>
-				) : isImpossible ? (
-					<RenderErrorMessage
-						{...{
-							type: "warning",
-							label: "Notendur fundu ekki svarið",
 						}}
 					/>
 				) : answers.length === 0 ? (

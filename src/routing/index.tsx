@@ -75,7 +75,7 @@ export const TabNavigator = () => {
 	if (auth.type === "guest") return null;
 
 	const mapRouteIdToTabBarBadge = (routeName: Tabs) => {
-		return 0
+		return undefined
 	}
 
 	return (

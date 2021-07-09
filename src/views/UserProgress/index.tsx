@@ -47,11 +47,6 @@ const UserProgress = () => {
 		const unSeenAnswers = answeredQuestions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
-		// if (unSeenAnswers.length > 0) {
-		// 	setHasUnseenAnswers(true);
-		// } else {
-		// 	setHasUnseenAnswers(false);
-		// }
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
 	}, [answeredQuestions]);
@@ -152,7 +147,6 @@ const UserProgress = () => {
 					</TouchableOpacity>
 				</View>
 
-				<Atoms.Text.Heading>Mínar spurningar</Atoms.Text.Heading>
 				{myQuestions.isLoading ? (
 					<ActivityIndicator />
 				) : myQuestions.questions.length === 0 ? (
