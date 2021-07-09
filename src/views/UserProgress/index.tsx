@@ -21,12 +21,12 @@ import { useFocusEffect } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
 
+import * as Utils from "./utils";
+
 const UserProgress = () => {
-	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
-
-	const [answerTypeViewSelected, setAnswerTypeViewSelected] = useState();
-
 	const auth = useSelector((state: StoreState) => state.auth);
+	const [currentScreen, setCurrentScreen] =
+		useState<Utils.Screens>("answer");
 
 	const myQuestions = useSelector(
 		(state: StoreState) => state.myQuestions
@@ -49,9 +49,6 @@ const UserProgress = () => {
 		const unSeenAnswers = answeredQuestions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
-		if (unSeenAnswers) {
-			setHasUnseenAnswers(true);
-		}
 		return unSeenAnswers;
 	}, [answeredQuestions]);
 
@@ -134,6 +131,47 @@ const UserProgress = () => {
 
 	const extractKey = (item: QuestionWithAnswers) => item._id;
 
+	const RenderButton = React.useCallback(
+		(props: Utils.ButtonItem) => (
+			<TouchableOpacity
+				onPress={() => setCurrentScreen(props.screenId)}
+				style={styles.selectViewButton}
+			>
+				<Atoms.Text.Para style={styles.answerCount}>
+					4
+				</Atoms.Text.Para>
+				<Atoms.Text.Para style={styles.buttonLabel}>
+					{props.text}
+				</Atoms.Text.Para>
+				{currentScreen === props.screenId ? (
+					<React.Fragment>
+						<View style={styles.topLeftCorner}>
+							<Atoms.Text.Para>
+								{props.emoji}
+							</Atoms.Text.Para>
+						</View>
+						<View style={styles.bottomLeftCorner}>
+							<Atoms.Text.Para>
+								{props.emoji}
+							</Atoms.Text.Para>
+						</View>
+						<View style={styles.bottomRightCorner}>
+							<Atoms.Text.Para>
+								{props.emoji}
+							</Atoms.Text.Para>
+						</View>
+						<View style={styles.topRightCorner}>
+							<Atoms.Text.Para>
+								{props.emoji}
+							</Atoms.Text.Para>
+						</View>
+					</React.Fragment>
+				) : null}
+			</TouchableOpacity>
+		),
+		[currentScreen]
+	);
+
 	return (
 		<ScrollView>
 			<LayoutWrapper>
@@ -153,169 +191,11 @@ const UserProgress = () => {
 				<ScrollView
 					showsHorizontalScrollIndicator={false}
 					horizontal={true}
-					contentContainerStyle={{
-						alignItems: "center",
-						marginBottom: 20,
-					}}
+					contentContainerStyle={styles.scrollContainer}
 				>
-					<TouchableOpacity
-						onPress={() => console.log("Pressed")}
-						style={{
-							height: 80,
-							width: 120,
-							borderRadius: 7,
-							backgroundColor:
-								Services.Colors.MapToLight.highlight,
-							marginRight: 20,
-							justifyContent: "center",
-							padding: 10,
-						}}
-					>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 28,
-								fontWeight: "500",
-								color: Services.Colors.MapToDark.highlight,
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							4
-						</Atoms.Text.Para>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 14,
-								fontWeight: "500",
-								marginTop: 5,
-								color: Services.Colors.MapToDark.highlight,
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							Svör
-						</Atoms.Text.Para>
-						<View
-							style={{
-								position: "absolute",
-								left: 5,
-								top: 5,
-							}}
-						>
-							<Atoms.Text.Para>💡</Atoms.Text.Para>
-						</View>
-						<View
-							style={{
-								position: "absolute",
-								left: 5,
-								bottom: 5,
-							}}
-						>
-							<Atoms.Text.Para>💡</Atoms.Text.Para>
-						</View>
-						<View
-							style={{
-								position: "absolute",
-								right: 5,
-								top: 5,
-							}}
-						>
-							<Atoms.Text.Para>💡</Atoms.Text.Para>
-						</View>
-						<View
-							style={{
-								position: "absolute",
-								right: 5,
-								bottom: 5,
-							}}
-						>
-							<Atoms.Text.Para>💡</Atoms.Text.Para>
-						</View>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => console.log("Pressed")}
-						style={{
-							height: 80,
-
-							width: 120,
-							marginRight: 20,
-							justifyContent: "center",
-							padding: 10,
-							borderRadius: 7,
-							borderWidth: 1,
-							borderColor: "#dedede",
-						}}
-					>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 28,
-								fontWeight: "500",
-								color: Services.Colors.MapToDark[
-									"dark-grey"
-								],
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							3
-						</Atoms.Text.Para>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 14,
-								fontWeight: "500",
-								marginTop: 5,
-								color: Services.Colors.MapToDark[
-									"dark-grey"
-								],
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							Ekkert svar
-						</Atoms.Text.Para>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						onPress={() => console.log("Pressed")}
-						style={{
-							height: 80,
-							width: 120,
-							marginRight: 20,
-							justifyContent: "center",
-							padding: 10,
-							borderRadius: 7,
-							borderWidth: 1,
-							borderColor: "#dedede",
-						}}
-					>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 28,
-								fontWeight: "500",
-								color: Services.Colors.MapToDark[
-									"dark-grey"
-								],
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							14
-						</Atoms.Text.Para>
-						<Atoms.Text.Para
-							style={{
-								fontSize: 14,
-								fontWeight: "500",
-								marginTop: 5,
-								color: Services.Colors.MapToDark[
-									"dark-grey"
-								],
-								margin: 0,
-								textAlign: "center",
-							}}
-						>
-							Í vinnslu
-						</Atoms.Text.Para>
-					</TouchableOpacity>
+					{Utils.BUTTONS.map((button) => (
+						<RenderButton {...button} />
+					))}
 				</ScrollView>
 
 				{myQuestions.isLoading ? (
