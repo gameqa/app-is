@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Alert,
@@ -28,36 +28,88 @@ const UserProgress = () => {
 	const [currentScreen, setCurrentScreen] =
 		useState<Utils.Screens>("answer");
 
+	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
+
 	const myQuestions = useSelector(
 		(state: StoreState) => state.myQuestions
 	);
 	const dispatch = useDispatch();
 
-	const answeredQuestions = React.useMemo(
-		() =>
-			myQuestions.questions
-				.filter((question) => question.answers.length)
-				.sort((a, b) => {
-					if (a._id < b._id) return 1;
-					if (a._id > b._id) return -1;
-					return 0;
-				}),
-		[myQuestions.questions]
-	);
+	// const questions = React.useMemo(
+	// 	() =>
+	// 		myQuestions.questions
+	// 			// .filter((question) => question.answers.length)
+	// 			.sort((a, b) => {
+	// 				if (a._id < b._id) return 1;
+	// 				if (a._id > b._id) return -1;
+	// 				return 0;
+	// 			}),
+	// 	[myQuestions.questions]
+	// );
+
+	const ANSWER = "answer";
+	const IN_PROGRESS = "in-progress";
+	const NO_ANSWERS = "no-answers";
+
+	const questions = React.useMemo(() => {
+		switch (currentScreen) {
+			case ANSWER:
+				return myQuestions.questions
+					.filter((question) => question.answers.length)
+					.sort((a, b) => {
+						if (a._id < b._id) return 1;
+						if (a._id > b._id) return -1;
+						return 0;
+					});
+			case IN_PROGRESS:
+				return myQuestions.questions
+					.filter(
+						(question) =>
+							question.answers.length === 0 &&
+							!question.archived
+					)
+					.sort((a, b) => {
+						if (a._id < b._id) return 1;
+						if (a._id > b._id) return -1;
+						return 0;
+					});
+
+			case NO_ANSWERS:
+				return myQuestions.questions
+					.filter(
+						(question) =>
+							question.isImpossible || question.archived
+					)
+					.sort((a, b) => {
+						if (a._id < b._id) return 1;
+						if (a._id > b._id) return -1;
+						return 0;
+					});
+
+			default:
+				return myQuestions.questions
+					.filter((question) => question.answers.length)
+					.sort((a, b) => {
+						if (a._id < b._id) return 1;
+						if (a._id > b._id) return -1;
+						return 0;
+					});
+		}
+	}, [myQuestions.questions, currentScreen]);
 
 	const questionWithUnseenAnswers = React.useMemo(() => {
-		const unSeenAnswers = answeredQuestions.filter((question) =>
+		const unSeenAnswers = questions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
-	}, [answeredQuestions]);
+	}, [questions, currentScreen]);
 
 	const questionWithOnlySeenAnswers = React.useMemo(() => {
-		return answeredQuestions.filter((question) =>
+		return questions.filter((question) =>
 			question.answers.every((answer) => !!answer.seenByQuestionerAt)
 		);
-	}, [answeredQuestions]);
+	}, [questions, currentScreen]);
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -173,6 +225,83 @@ const UserProgress = () => {
 		[currentScreen]
 	);
 
+	const UnSeenTextPrompt = () => (
+		<>
+			{hasUnseenAnswers ? (
+				<View style={styles.unSeenAnswerContainer}>
+					<View style={styles.unSeenAnswerline}></View>
+					<View style={styles.unSeenTextContainer}>
+						<Atoms.Text.Para style={styles.unSeenText}>
+							Gömul svör
+						</Atoms.Text.Para>
+					</View>
+
+					<View style={styles.unSeenAnswerline}></View>
+				</View>
+			) : null}
+		</>
+	);
+
+	const RenderScreen = () => {
+		switch (currentScreen) {
+			case ANSWER:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={questionWithUnseenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+						<UnSeenTextPrompt />
+						{/* Render next all questions that have only seen answers */}
+						<FlatList
+							data={questionWithOnlySeenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+			case NO_ANSWERS:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={questionWithUnseenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+						<UnSeenTextPrompt />
+
+						{/* Render next all questions that have only seen answers */}
+						<FlatList
+							data={questionWithOnlySeenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+			case IN_PROGRESS:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={questionWithUnseenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+						<UnSeenTextPrompt />
+
+						{/* Render next all questions that have only seen answers */}
+						<FlatList
+							data={questionWithOnlySeenAnswers}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+		}
+	};
 	return (
 		<ScrollView>
 			<LayoutWrapper>
@@ -206,39 +335,7 @@ const UserProgress = () => {
 						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
 					</React.Fragment>
 				) : (
-					<React.Fragment>
-						{/* Render all questions that have an unseen answer first */}
-						<FlatList
-							data={questionWithUnseenAnswers}
-							keyExtractor={extractKey}
-							renderItem={renderQuestionItem}
-						/>
-						{hasUnseenAnswers ? (
-							<View style={styles.unSeenAnswerContainer}>
-								<View
-									style={styles.unSeenAnswerline}
-								></View>
-								<View style={styles.unSeenTextContainer}>
-									<Atoms.Text.Para
-										style={styles.unSeenText}
-									>
-										Gömul svör
-									</Atoms.Text.Para>
-								</View>
-
-								<View
-									style={styles.unSeenAnswerline}
-								></View>
-							</View>
-						) : null}
-
-						{/* Render next all questions that have only seen answers */}
-						<FlatList
-							data={questionWithOnlySeenAnswers}
-							keyExtractor={extractKey}
-							renderItem={renderQuestionItem}
-						/>
-					</React.Fragment>
+					<RenderScreen />
 				)}
 			</LayoutWrapper>
 		</ScrollView>
@@ -246,3 +343,59 @@ const UserProgress = () => {
 };
 
 export default UserProgress;
+
+// const inProgressQuestions = React.useMemo(
+// 	() =>
+// 		myQuestions.questions
+// 			.filter(
+// 				(question) =>
+// 					question.answers.length === 0 && !question.archived
+// 			)
+// 			.sort((a, b) => {
+// 				if (a._id < b._id) return 1;
+// 				if (a._id > b._id) return -1;
+// 				return 0;
+// 			}),
+// 	[myQuestions.questions]
+// );
+
+// const filterQuestions = () => {
+// 	switch (currentScreen) {
+// 		case "answer":
+// 			console.log("eg er jer");
+// 			return myQuestions.questions.filter(
+// 				(question) => question.answers.length
+// 			);
+// 		// .sort((a, b) => {
+// 		// 	if (a._id < b._id) return 1;
+// 		// 	if (a._id > b._id) return -1;
+// 		// 	return 0;
+// 		// });
+
+// 		case "in-progress":
+// 			console.log("tetstst");
+// 			return myQuestions.questions.filter(
+// 				(question) =>
+// 					question.answers.length === 0 && !question.archived
+// 				// !(question.isImpossible || question.archived)
+// 			);
+// 		// .sort((a, b) => {
+// 		// 	if (a._id < b._id) return 1;
+// 		// 	if (a._id > b._id) return -1;
+// 		// 	return 0;
+// 		// });
+
+// 		case "no-answers":
+// 			return myQuestions.questions.filter(
+// 				(question) =>
+// 					question.isImpossible || question.archived
+// 			);
+// 		// .sort((a, b) => {
+// 		// 	if (a._id < b._id) return 1;
+// 		// 	if (a._id > b._id) return -1;
+// 		// 	return 0;
+// 		// });
+// 		default:
+// 			return myQuestions.questions;
+// 	}
+// };
