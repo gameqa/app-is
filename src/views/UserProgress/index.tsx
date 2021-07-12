@@ -35,81 +35,51 @@ const UserProgress = () => {
 	);
 	const dispatch = useDispatch();
 
-	// const questions = React.useMemo(
-	// 	() =>
-	// 		myQuestions.questions
-	// 			// .filter((question) => question.answers.length)
-	// 			.sort((a, b) => {
-	// 				if (a._id < b._id) return 1;
-	// 				if (a._id > b._id) return -1;
-	// 				return 0;
-	// 			}),
-	// 	[myQuestions.questions]
-	// );
-
 	const ANSWER = "answer";
 	const IN_PROGRESS = "in-progress";
 	const NO_ANSWERS = "no-answers";
 
-	const questions = React.useMemo(() => {
-		switch (currentScreen) {
-			case ANSWER:
-				return myQuestions.questions
-					.filter((question) => question.answers.length)
-					.sort((a, b) => {
-						if (a._id < b._id) return 1;
-						if (a._id > b._id) return -1;
-						return 0;
-					});
-			case IN_PROGRESS:
-				return myQuestions.questions
-					.filter(
-						(question) =>
-							question.answers.length === 0 &&
-							!question.archived
-					)
-					.sort((a, b) => {
-						if (a._id < b._id) return 1;
-						if (a._id > b._id) return -1;
-						return 0;
-					});
+	const questionsWithAnswers = React.useMemo(
+		() => myQuestions.questions.filter(Utils.FILTER_HAS_ANSWER),
+		[myQuestions.questions]
+	);
 
-			case NO_ANSWERS:
-				return myQuestions.questions
-					.filter(
-						(question) =>
-							question.isImpossible || question.archived
-					)
-					.sort((a, b) => {
-						if (a._id < b._id) return 1;
-						if (a._id > b._id) return -1;
-						return 0;
-					});
-
-			default:
-				return myQuestions.questions
-					.filter((question) => question.answers.length)
-					.sort((a, b) => {
-						if (a._id < b._id) return 1;
-						if (a._id > b._id) return -1;
-						return 0;
-					});
-		}
-	}, [myQuestions.questions, currentScreen]);
+	const questionsWithNoAnswers = React.useMemo(
+		() => myQuestions.questions.filter(Utils.FILTER_HAS_NO_ANSWER),
+		[myQuestions.questions]
+	);
+	const questionsInProgress = React.useMemo(
+		() => myQuestions.questions.filter(Utils.FILTER_IS_IN_PROGRESS),
+		[myQuestions.questions]
+	);
 
 	const questionWithUnseenAnswers = React.useMemo(() => {
-		const unSeenAnswers = questions.filter((question) =>
+		const unSeenAnswers = questionsWithAnswers.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
-	}, [questions, currentScreen]);
+	}, [myQuestions.questions, currentScreen]);
 
 	const questionWithOnlySeenAnswers = React.useMemo(() => {
-		return questions.filter((question) =>
+		return questionsWithAnswers.filter((question) =>
 			question.answers.every((answer) => !!answer.seenByQuestionerAt)
 		);
-	}, [questions, currentScreen]);
+	}, [myQuestions.questions, currentScreen]);
+
+	const questionsWithNoAnswersNotSeen = React.useMemo(() => {
+		const unSeenAnswers = questionsWithAnswers.filter((question) =>
+			question.answers.some((answer) => !answer.seenByQuestionerAt)
+		);
+		setHasUnseenAnswers(unSeenAnswers.length > 0);
+		return unSeenAnswers;
+	}, [myQuestions.questions, currentScreen]);
+
+	const questionsWithNoAnswersSeen = React.useMemo(() => {
+		return questionsWithNoAnswers.filter((question) =>
+			question.answers.every((answer) => !!answer.seenByQuestionerAt)
+		);
+	}, [myQuestions.questions, currentScreen]);
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -152,6 +122,43 @@ const UserProgress = () => {
 		}, [questionWithUnseenAnswers])
 	);
 
+	useFocusEffect(
+		React.useCallback(() => {
+			const answerIds = questionsWithNoAnswersNotSeen.reduce<
+				string[]
+			>(
+				(prev, curr) => [
+					...prev,
+					...curr.answers.map((item) => item._id),
+				],
+				[]
+			);
+			console.log(answerIds);
+			const markAnswersAsSeen = async () => {
+				try {
+					await Promise.all(
+						answerIds.map((answerId) =>
+							api.patch(`/api/v1/answers/${answerId}`, {
+								seenByQuestionerAt: new Date(),
+							})
+						)
+					);
+					console.log("done with patches");
+				} catch (error) {
+					console.log(error);
+					console.log("ERROR MARKANSWERASSEEN");
+				}
+			};
+
+			const TIMEOUT_LENGTH = 4000;
+			const t = setTimeout(markAnswersAsSeen, TIMEOUT_LENGTH);
+
+			return () => {
+				clearTimeout(t);
+			};
+		}, [questionsWithNoAnswersNotSeen])
+	);
+
 	const alertSignOut = () =>
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [
 			{
@@ -190,9 +197,22 @@ const UserProgress = () => {
 				onPress={() => setCurrentScreen(props.screenId)}
 				style={styles.selectViewButton}
 			>
-				<Atoms.Text.Para style={styles.answerCount}>
-					4
-				</Atoms.Text.Para>
+				{props.screenId === "answer" ? (
+					<Atoms.Text.Para style={styles.answerCount}>
+						{questionWithUnseenAnswers.length +
+							questionWithOnlySeenAnswers.length}
+					</Atoms.Text.Para>
+				) : props.screenId === "no-answers" ? (
+					<Atoms.Text.Para style={styles.answerCount}>
+						{questionsWithNoAnswersNotSeen.length +
+							questionsWithNoAnswersSeen.length}
+					</Atoms.Text.Para>
+				) : (
+					<Atoms.Text.Para style={styles.answerCount}>
+						{questionsInProgress.length}
+					</Atoms.Text.Para>
+				)}
+
 				<Atoms.Text.Para style={styles.buttonLabel}>
 					{props.text}
 				</Atoms.Text.Para>
@@ -267,7 +287,7 @@ const UserProgress = () => {
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
-							data={questionWithUnseenAnswers}
+							data={questionsWithNoAnswersNotSeen}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -275,7 +295,7 @@ const UserProgress = () => {
 
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
-							data={questionWithOnlySeenAnswers}
+							data={questionsWithNoAnswersSeen}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -286,15 +306,7 @@ const UserProgress = () => {
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
-							data={questionWithUnseenAnswers}
-							keyExtractor={extractKey}
-							renderItem={renderQuestionItem}
-						/>
-						<UnSeenTextPrompt />
-
-						{/* Render next all questions that have only seen answers */}
-						<FlatList
-							data={questionWithOnlySeenAnswers}
+							data={questionsInProgress}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -343,6 +355,52 @@ const UserProgress = () => {
 };
 
 export default UserProgress;
+
+// const questions = React.useMemo(() => {
+// 	switch (currentScreen) {
+// 		case ANSWER:
+// 			return myQuestions.questions
+// 				.filter((question) => question.answers.length)
+// 				.sort((a, b) => {
+// 					if (a._id < b._id) return 1;
+// 					if (a._id > b._id) return -1;
+// 					return 0;
+// 				});
+// 		case IN_PROGRESS:
+// 			return myQuestions.questions
+// 				.filter(
+// 					(question) =>
+// 						question.answers.length === 0 &&
+// 						!question.archived
+// 				)
+// 				.sort((a, b) => {
+// 					if (a._id < b._id) return 1;
+// 					if (a._id > b._id) return -1;
+// 					return 0;
+// 				});
+
+// 		case NO_ANSWERS:
+// 			return myQuestions.questions
+// 				.filter(
+// 					(question) =>
+// 						question.isImpossible || question.archived
+// 				)
+// 				.sort((a, b) => {
+// 					if (a._id < b._id) return 1;
+// 					if (a._id > b._id) return -1;
+// 					return 0;
+// 				});
+
+// 		default:
+// 			return myQuestions.questions
+// 				.filter((question) => question.answers.length)
+// 				.sort((a, b) => {
+// 					if (a._id < b._id) return 1;
+// 					if (a._id > b._id) return -1;
+// 					return 0;
+// 				});
+// 	}
+// }, [myQuestions.questions, currentScreen]);
 
 // const inProgressQuestions = React.useMemo(
 // 	() =>

@@ -1,3 +1,5 @@
+import { QuestionWithAnswers } from "../../declerations";
+
 export interface ButtonItem {
 	text: string;
 	emoji: string;
@@ -23,3 +25,12 @@ export const BUTTONS: ButtonItem[] = [
 		screenId: "no-answers",
 	},
 ];
+
+export const FILTER_HAS_ANSWER = (question: QuestionWithAnswers) =>
+	question.answers.length;
+
+export const FILTER_HAS_NO_ANSWER = (question: QuestionWithAnswers) =>
+	question.archived || question.archived;
+
+export const FILTER_IS_IN_PROGRESS = (question: QuestionWithAnswers) =>
+	question.answers.length === 0 && !question.archived;
