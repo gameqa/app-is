@@ -6,14 +6,18 @@ import {
 	FetchHighscorePlacementAction,
 	FetchHighscorePlacementExpansionDownAction,
 	FetchHighscorePlacementExpansionUpAction,
+	SetHighscoreLoadingStatusAction
 } from "./interface";
+import store from "../../../store";
 
-export const fetchHighscorePlacement = (
-	offset?: number,
-	limit?: number
-) => {
+export const fetchHighscorePlacement = () => {
 	return async function (dispatch: Dispatch) {
 		try {
+			if (store.getState().highscore.isLoading) return;
+			dispatch<SetHighscoreLoadingStatusAction>({
+				type: ActionTypes.setHighscoreLoadingStatus,
+				payload: true
+			})
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement"
 			);
@@ -23,7 +27,7 @@ export const fetchHighscorePlacement = (
 			});
 		} catch (error) {
 			// do nothing on error
-		}
+		} 
 	};
 };
 
@@ -33,6 +37,11 @@ export const fetchHighscorePlacementExpansionUp = (
 ) => {
 	return async function (dispatch: Dispatch) {
 		try {
+			if (store.getState().highscore.isLoading) return;
+			dispatch<SetHighscoreLoadingStatusAction>({
+				type: ActionTypes.setHighscoreLoadingStatus,
+				payload: true
+			})
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement",
 				{
@@ -58,6 +67,12 @@ export const fetchHighscorePlacementExpansionDown = (
 ) => {
 	return async function (dispatch: Dispatch) {
 		try {
+
+			if (store.getState().highscore.isLoading) return;
+			dispatch<SetHighscoreLoadingStatusAction>({
+				type: ActionTypes.setHighscoreLoadingStatus,
+				payload: true
+			})
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement",
 				{

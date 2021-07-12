@@ -3,7 +3,7 @@ import { State } from "./interface";
 
 export const initialState: State = {
 	highscores: [],
-	isLoading: true,
+	isLoading: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -14,8 +14,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				highscores: action.payload,
 				isLoading: false,
 			};
-
 		case ActionTypes.fetchHighscorePlacementExpansionUp:
+
 			return {
 				...state,
 				highscores: [...action.payload, ...state.highscores],
@@ -25,6 +25,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 			return {
 				...state,
 				highscores: [...state.highscores, ...action.payload],
+				isLoading: false,
+			};
+		case ActionTypes.setHighscoreLoadingStatus:
+			return {
+				...state,
+				isLoading: action.payload
 			};
 		default:
 			return state;

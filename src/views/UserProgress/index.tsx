@@ -49,6 +49,7 @@ const UserProgress = () => {
 		const unSeenAnswers = answeredQuestions.filter((question) =>
 			question.answers.some((answer) => !answer.seenByQuestionerAt)
 		);
+		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
 	}, [answeredQuestions]);
 
@@ -212,32 +213,25 @@ const UserProgress = () => {
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						{/* <Atoms.Text.Para
-							style={{
-								backgroundColor: "red",
-								paddingHorizontal: 10,
-							}}
-						>
-							Gömul svör
-						</Atoms.Text.Para> */}
-						{/* <View
-							style={{
-								flex: 3,
-								flexDirection: "row",
-								justifyContent: "center",
-							}}
-						>
-							<View style={styles.unSeenLine}></View>
-							<Atoms.Text.Para
-								style={{
-									backgroundColor: "red",
-									paddingHorizontal: 10,
-								}}
-							>
-								Gömul svör
-							</Atoms.Text.Para>
-							<View style={}></View>
-						</View> */}
+						{hasUnseenAnswers ? (
+							<View style={styles.unSeenAnswerContainer}>
+								<View
+									style={styles.unSeenAnswerline}
+								></View>
+								<View style={styles.unSeenTextContainer}>
+									<Atoms.Text.Para
+										style={styles.unSeenText}
+									>
+										Gömul svör
+									</Atoms.Text.Para>
+								</View>
+
+								<View
+									style={styles.unSeenAnswerline}
+								></View>
+							</View>
+						) : null}
+
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
 							data={questionWithOnlySeenAnswers}

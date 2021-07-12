@@ -66,6 +66,7 @@ export enum ActionTypes {
 	fetchGiveAways,
 	fetchHighscorePlacementExpansionUp,
 	fetchHighscorePlacementExpansionDown,
+	setHighscoreLoadingStatus,
 	fetchMyQuestions,
 }
 
@@ -112,8 +113,9 @@ export type Actions =
 	| ResetPassword.Actions.SetResetPasswordCodeAction
 	| ResetPassword.Actions.SetResetPasswordErrorAction
 	| DeepLinks.Actions.SetLink
-	| Highscore.Actions.FetchHighscorePlacementAction
 	| GiveAway.Actions.FetchGiveAwaysAction
 	| Highscore.Actions.FetchHighscorePlacementExpansionUpAction
 	| Highscore.Actions.FetchHighscorePlacementExpansionDownAction
+	| Highscore.Actions.FetchHighscorePlacementAction
+	| Highscore.Actions.SetHighscoreLoadingStatusAction
 	| MyQuestions.Actions.FetchMyQuestionsAction;

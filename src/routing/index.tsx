@@ -74,6 +74,10 @@ export const TabNavigator = () => {
 	});
 	if (auth.type === "guest") return null;
 
+	const mapRouteIdToTabBarBadge = (routeName: Tabs) => {
+		return undefined
+	}
+
 	return (
 		<NavigationContainer ref={navigatorRef}>
 			<Tab.Navigator
@@ -93,6 +97,7 @@ export const TabNavigator = () => {
 							/>
 						</TouchableOpacity>
 					),
+				
 				})}
 				tabBarOptions={{
 					activeTintColor: activeColor,
@@ -103,6 +108,7 @@ export const TabNavigator = () => {
 					<Tab.Screen
 						name={route.id}
 						component={route.Component}
+						options={{tabBarBadge: mapRouteIdToTabBarBadge(route.id)}}
 					/>
 				))}
 				<Tab.Screen

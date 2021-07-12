@@ -8,13 +8,14 @@ import { useFocusEffect } from "@react-navigation/core";
 import { FlatList } from "react-native-gesture-handler";
 import { User } from "../../declerations";
 
+const FETCH_MORE_AT_SCROLL_POSITION = 0.6;
+
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
 	const dispatch = useDispatch();
 
 	useFocusEffect(
 		React.useCallback(() => {
-			console.log("wtf");
 			dispatch(Actions.Highscore.fetchHighscorePlacement());
 		}, [])
 	);
@@ -60,7 +61,7 @@ const Highscore = () => {
 					)
 				)
 			}
-			onEndReachedThreshold={0}
+			onEndReachedThreshold={FETCH_MORE_AT_SCROLL_POSITION}
 			renderItem={(result: { item: User }) => (
 				<Atoms.Cards.HighscoreItem
 					user={result.item}

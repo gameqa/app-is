@@ -15,3 +15,9 @@ export interface FetchHighscorePlacementExpansionDownAction {
 	type: ActionTypes.fetchHighscorePlacementExpansionDown;
 	payload: User[];
 }
+
+export interface SetHighscoreLoadingStatusAction {
+	type: ActionTypes.setHighscoreLoadingStatus;
+	payload: boolean;
+}
+
