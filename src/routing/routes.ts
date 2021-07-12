@@ -3,14 +3,11 @@ import {
 	PrizeStackRoutes,
 	TabRoutes,
 	GameStackRoutes,
+	ProfileStackRoutes,
 } from "./declerations";
 import * as Views from "../views";
 
 export const tab: TabRoutes[] = [
-	{
-		id: "Ég",
-		Component: Views.UserProgress,
-	},
 	{
 		id: "Samfélagið",
 		Component: Views.Invite,
@@ -69,3 +66,19 @@ export const authStack: AuthStackRoutes[] = [
 		Component: Views.SetNewPassword,
 	},
 ];
+
+export const profileStack: ProfileStackRoutes[] = [
+	{
+		id: "Ég",
+		Component: Views.UserProgress,
+	},
+	{
+		id: "Google",
+		Component: Views.GoogleSearchView,
+	},
+	{
+		id: "article-reader",
+		Component: Views.ArticleReader,
+	},
+];
+

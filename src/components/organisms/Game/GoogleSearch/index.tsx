@@ -7,8 +7,6 @@ import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
 import PagePreview from "./PagePreview";
 import styles from "./styles";
-import { FontAwesome } from "@expo/vector-icons";
-import { Colors } from "../../../../services";
 
 const GoogleSearch = () => {
 	const state = useSelector((state: StoreState) => state.googleSearch);

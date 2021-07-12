@@ -11,5 +11,6 @@ export { default as ResetPassword } from "./ResetPassword";
 export { default as ResetPasswordAuthCode } from "./ResetPasswordAuth";
 export { default as SetNewPassword } from "./SetNewPassword";
 export { default as Invite } from "./Invite";
+export { default as GoogleSearchView } from "./GoogleSearchView";
 
 export * as Utils from "./utils";

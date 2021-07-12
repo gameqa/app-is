@@ -40,4 +40,6 @@ const Rounds: GameRound[] = [
 	},
 ];
 
+export {default as GoogleSearch} from "./GoogleSearch"
+
 export default Rounds;

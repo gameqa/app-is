@@ -50,6 +50,22 @@ export const GameStackNavigator = () => (
 	</GameStack.Navigator>
 );
 
+export const ProfileStackNavigator = () => (
+	<GameStack.Navigator
+		screenOptions={{
+			headerShown: false,
+		}}
+	>
+		{routes.profileStack.map((route) => (
+			<GameStack.Screen
+				name={route.id}
+				component={route.Component}
+			/>
+		))}
+	</GameStack.Navigator>
+);
+
+
 export const TabNavigator = () => {
 	const navigatorRef = React.useRef<NavigationContainerRef>(null);
 
@@ -104,6 +120,9 @@ export const TabNavigator = () => {
 					inactiveTintColor: inActiveColor,
 				}}
 			>
+				<Tab.Screen name="Ég" 
+					component={ProfileStackNavigator} />
+				
 				{routes.tab.map((route) => (
 					<Tab.Screen
 						name={route.id}

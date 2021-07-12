@@ -6,6 +6,7 @@ export type Tabs =
 	| "Vinningar"
 	| "Stigatafla"
 	| "Samfélagið";
+
 export type PrizeStackItems = "prize-cats" | "prize-items";
 export type AuthStackItems =
 	| "log-in"
@@ -14,6 +15,7 @@ export type AuthStackItems =
 	| "reset-password-authcode"
 	| "set-new-password";
 export type GameStackItems = "Spila" | "article-reader" | "prize-items";
+export type ProfileStackItems = "Ég" | "Google" | "article-reader"
 
 export type Icons =
 	| "puzzle-piece"
@@ -23,6 +25,8 @@ export type Icons =
 	| "users";
 
 type Component = (() => JSX.Element) | ((v: any) => JSX.Element);
+
+
 export interface TabRoutes {
 	Component: Component;
 	id: Tabs;
@@ -39,3 +43,8 @@ export interface PrizeStackRoutes {
 	Component: Component;
 	id: PrizeStackItems;
 }
+export interface ProfileStackRoutes {
+	Component: Component;
+	id: ProfileStackItems;
+}
+
