@@ -7,6 +7,14 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 		borderWidth: 3,
 	},
+	badgeOuter: {
+		position: "absolute",
+		bottom: -5,
+		right: -5,
+		borderRadius: 30,
+		padding: 3,
+		borderWidth: 2,
+	},
 });
 
 export default styles;

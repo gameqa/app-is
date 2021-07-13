@@ -9,6 +9,7 @@ export interface User {
 	referral?: string;
 	invitedBy?: string;
 	streak: number;
+	resetCount: number;
 }
 
 export interface ScoreCard {
