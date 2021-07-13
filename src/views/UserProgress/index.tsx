@@ -191,58 +191,50 @@ const UserProgress = () => {
 
 	const extractKey = (item: QuestionWithAnswers) => item._id;
 
-	const RenderButton = React.useCallback(
-		(props: Utils.ButtonItem) => (
-			<TouchableOpacity
-				onPress={() => setCurrentScreen(props.screenId)}
-				style={styles.selectViewButton}
-			>
-				{props.screenId === "answer" ? (
-					<Atoms.Text.Para style={styles.answerCount}>
-						{questionWithUnseenAnswers.length +
-							questionWithOnlySeenAnswers.length}
-					</Atoms.Text.Para>
-				) : props.screenId === "no-answers" ? (
-					<Atoms.Text.Para style={styles.answerCount}>
-						{questionsWithNoAnswersNotSeen.length +
-							questionsWithNoAnswersSeen.length}
-					</Atoms.Text.Para>
-				) : (
-					<Atoms.Text.Para style={styles.answerCount}>
-						{questionsInProgress.length}
-					</Atoms.Text.Para>
-				)}
+	// const RenderButton = React.useCallback(
+	// (props: Utils.ButtonItem) => (
 
-				<Atoms.Text.Para style={styles.buttonLabel}>
-					{props.text}
+	const RenderButton = (props: Utils.ButtonItem) => (
+		<TouchableOpacity
+			onPress={() => setCurrentScreen(props.screenId)}
+			style={styles.selectViewButton}
+		>
+			{props.screenId === "answer" ? (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionWithUnseenAnswers.length +
+						questionWithOnlySeenAnswers.length}
 				</Atoms.Text.Para>
-				{currentScreen === props.screenId ? (
-					<React.Fragment>
-						<View style={styles.topLeftCorner}>
-							<Atoms.Text.Para>
-								{props.emoji}
-							</Atoms.Text.Para>
-						</View>
-						<View style={styles.bottomLeftCorner}>
-							<Atoms.Text.Para>
-								{props.emoji}
-							</Atoms.Text.Para>
-						</View>
-						<View style={styles.bottomRightCorner}>
-							<Atoms.Text.Para>
-								{props.emoji}
-							</Atoms.Text.Para>
-						</View>
-						<View style={styles.topRightCorner}>
-							<Atoms.Text.Para>
-								{props.emoji}
-							</Atoms.Text.Para>
-						</View>
-					</React.Fragment>
-				) : null}
-			</TouchableOpacity>
-		),
-		[currentScreen]
+			) : props.screenId === "no-answers" ? (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionsWithNoAnswersNotSeen.length +
+						questionsWithNoAnswersSeen.length}
+				</Atoms.Text.Para>
+			) : (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionsInProgress.length}
+				</Atoms.Text.Para>
+			)}
+
+			<Atoms.Text.Para style={styles.buttonLabel}>
+				{props.text}
+			</Atoms.Text.Para>
+			{currentScreen === props.screenId ? (
+				<React.Fragment>
+					<View style={styles.topLeftCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.bottomLeftCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.bottomRightCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.topRightCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+				</React.Fragment>
+			) : null}
+		</TouchableOpacity>
 	);
 
 	const UnSeenTextPrompt = () => (
@@ -262,6 +254,14 @@ const UserProgress = () => {
 		</>
 	);
 
+	const sortFlatListData = (data: QuestionWithAnswers[]) => {
+		return data.sort((a, b) => {
+			if (a._id < b._id) return 1;
+			if (a._id > b._id) return -1;
+			return 0;
+		});
+	};
+
 	const RenderScreen = () => {
 		switch (currentScreen) {
 			case ANSWER:
@@ -269,14 +269,18 @@ const UserProgress = () => {
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
-							data={questionWithUnseenAnswers}
+							data={sortFlatListData(
+								questionWithUnseenAnswers
+							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
 						<UnSeenTextPrompt />
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
-							data={questionWithOnlySeenAnswers}
+							data={sortFlatListData(
+								questionWithOnlySeenAnswers
+							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -287,7 +291,9 @@ const UserProgress = () => {
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
-							data={questionsWithNoAnswersNotSeen}
+							data={sortFlatListData(
+								questionsWithNoAnswersNotSeen
+							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -295,7 +301,9 @@ const UserProgress = () => {
 
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
-							data={questionsWithNoAnswersSeen}
+							data={sortFlatListData(
+								questionsWithNoAnswersSeen
+							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -306,7 +314,7 @@ const UserProgress = () => {
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
-							data={questionsInProgress}
+							data={sortFlatListData(questionsInProgress)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -355,105 +363,3 @@ const UserProgress = () => {
 };
 
 export default UserProgress;
-
-// const questions = React.useMemo(() => {
-// 	switch (currentScreen) {
-// 		case ANSWER:
-// 			return myQuestions.questions
-// 				.filter((question) => question.answers.length)
-// 				.sort((a, b) => {
-// 					if (a._id < b._id) return 1;
-// 					if (a._id > b._id) return -1;
-// 					return 0;
-// 				});
-// 		case IN_PROGRESS:
-// 			return myQuestions.questions
-// 				.filter(
-// 					(question) =>
-// 						question.answers.length === 0 &&
-// 						!question.archived
-// 				)
-// 				.sort((a, b) => {
-// 					if (a._id < b._id) return 1;
-// 					if (a._id > b._id) return -1;
-// 					return 0;
-// 				});
-
-// 		case NO_ANSWERS:
-// 			return myQuestions.questions
-// 				.filter(
-// 					(question) =>
-// 						question.isImpossible || question.archived
-// 				)
-// 				.sort((a, b) => {
-// 					if (a._id < b._id) return 1;
-// 					if (a._id > b._id) return -1;
-// 					return 0;
-// 				});
-
-// 		default:
-// 			return myQuestions.questions
-// 				.filter((question) => question.answers.length)
-// 				.sort((a, b) => {
-// 					if (a._id < b._id) return 1;
-// 					if (a._id > b._id) return -1;
-// 					return 0;
-// 				});
-// 	}
-// }, [myQuestions.questions, currentScreen]);
-
-// const inProgressQuestions = React.useMemo(
-// 	() =>
-// 		myQuestions.questions
-// 			.filter(
-// 				(question) =>
-// 					question.answers.length === 0 && !question.archived
-// 			)
-// 			.sort((a, b) => {
-// 				if (a._id < b._id) return 1;
-// 				if (a._id > b._id) return -1;
-// 				return 0;
-// 			}),
-// 	[myQuestions.questions]
-// );
-
-// const filterQuestions = () => {
-// 	switch (currentScreen) {
-// 		case "answer":
-// 			console.log("eg er jer");
-// 			return myQuestions.questions.filter(
-// 				(question) => question.answers.length
-// 			);
-// 		// .sort((a, b) => {
-// 		// 	if (a._id < b._id) return 1;
-// 		// 	if (a._id > b._id) return -1;
-// 		// 	return 0;
-// 		// });
-
-// 		case "in-progress":
-// 			console.log("tetstst");
-// 			return myQuestions.questions.filter(
-// 				(question) =>
-// 					question.answers.length === 0 && !question.archived
-// 				// !(question.isImpossible || question.archived)
-// 			);
-// 		// .sort((a, b) => {
-// 		// 	if (a._id < b._id) return 1;
-// 		// 	if (a._id > b._id) return -1;
-// 		// 	return 0;
-// 		// });
-
-// 		case "no-answers":
-// 			return myQuestions.questions.filter(
-// 				(question) =>
-// 					question.isImpossible || question.archived
-// 			);
-// 		// .sort((a, b) => {
-// 		// 	if (a._id < b._id) return 1;
-// 		// 	if (a._id > b._id) return -1;
-// 		// 	return 0;
-// 		// });
-// 		default:
-// 			return myQuestions.questions;
-// 	}
-// };
