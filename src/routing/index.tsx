@@ -73,7 +73,9 @@ export const TabNavigator = () => {
 	const inActiveColor = Services.Colors.MapToDark["grey"];
 
 	const auth = useSelector((state: StoreState) => state.auth);
-
+	const myQuestions = useSelector(
+		(state: StoreState) => state.myQuestions
+	);
 	// Hook to check if user interacts with notification
 	Hooks.Notifications.useResponseListener((response) => {
 		// Read data sent in notification
@@ -91,8 +93,20 @@ export const TabNavigator = () => {
 	if (auth.type === "guest") return null;
 
 	const mapRouteIdToTabBarBadge = (routeName: Tabs) => {
-		return undefined
-	}
+		switch (routeName) {
+			case "Ég":
+				const answers =
+					Services.FilterMyQuestions.questionsWithAnswers(
+						myQuestions.questions
+					);
+
+				const unSeenAnswers =
+					Services.FilterMyQuestions.questionsUnseen(answers);
+				if (unSeenAnswers.length) return unSeenAnswers.length;
+			default:
+				return;
+		}
+	};
 
 	return (
 		<NavigationContainer ref={navigatorRef}>
@@ -113,7 +127,6 @@ export const TabNavigator = () => {
 							/>
 						</TouchableOpacity>
 					),
-				
 				})}
 				tabBarOptions={{
 					activeTintColor: activeColor,
@@ -127,7 +140,9 @@ export const TabNavigator = () => {
 					<Tab.Screen
 						name={route.id}
 						component={route.Component}
-						options={{tabBarBadge: mapRouteIdToTabBarBadge(route.id)}}
+						options={{
+							tabBarBadge: mapRouteIdToTabBarBadge(route.id),
+						}}
 					/>
 				))}
 				<Tab.Screen

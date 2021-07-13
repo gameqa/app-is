@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Alert,
@@ -21,45 +21,82 @@ import { useFocusEffect } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
 
-const UserProgress = () => {
-	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
+import * as Utils from "./utils";
 
+const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
+	const [currentScreen, setCurrentScreen] =
+		useState<Utils.Screens>("answer");
+
+	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
 
 	const myQuestions = useSelector(
 		(state: StoreState) => state.myQuestions
 	);
 	const dispatch = useDispatch();
 
-	const answeredQuestions = React.useMemo(
+	const ANSWER = "answer";
+	const IN_PROGRESS = "in-progress";
+	const NO_ANSWERS = "no-answers";
+
+	const questionsWithAnswers = React.useMemo(
 		() =>
-			myQuestions.questions
-				.filter((question) => question.answers.length)
-				.sort((a, b) => {
-					if (a._id < b._id) return 1;
-					if (a._id > b._id) return -1;
-					return 0;
-				}),
+			Services.FilterMyQuestions.questionsWithAnswers(
+				myQuestions.questions
+			),
+		[myQuestions.questions]
+	);
+
+	const questionsWithNoAnswers = React.useMemo(
+		() =>
+			Services.FilterMyQuestions.questionsWithNoAnswers(
+				myQuestions.questions
+			),
+		[myQuestions.questions]
+	);
+	const questionsInProgress = React.useMemo(
+		() =>
+			Services.FilterMyQuestions.questionsInProgress(
+				myQuestions.questions
+			),
 		[myQuestions.questions]
 	);
 
 	const questionWithUnseenAnswers = React.useMemo(() => {
-		const unSeenAnswers = answeredQuestions.filter((question) =>
-			question.answers.some((answer) => !answer.seenByQuestionerAt)
+		const unSeenAnswers = Services.FilterMyQuestions.questionsUnseen(
+			questionsWithAnswers
 		);
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
-	}, [answeredQuestions]);
+	}, [myQuestions.questions, currentScreen]);
 
 	const questionWithOnlySeenAnswers = React.useMemo(() => {
-		return answeredQuestions.filter((question) =>
+		return questionsWithAnswers.filter((question) =>
 			question.answers.every((answer) => !!answer.seenByQuestionerAt)
 		);
-	}, [answeredQuestions]);
+	}, [myQuestions.questions, currentScreen]);
+
+	const questionsWithNoAnswersNotSeen = React.useMemo(() => {
+		const unSeenAnswers = Services.FilterMyQuestions.questionsUnseen(
+			questionsWithAnswers
+		);
+
+		setHasUnseenAnswers(unSeenAnswers.length > 0);
+		return unSeenAnswers;
+	}, [myQuestions.questions, currentScreen]);
+
+	const questionsWithNoAnswersSeen = React.useMemo(() => {
+		return questionsWithNoAnswers.filter((question) =>
+			question.answers.every((answer) => !!answer.seenByQuestionerAt)
+		);
+	}, [myQuestions.questions, currentScreen]);
 
 	useFocusEffect(
 		React.useCallback(() => {
 			dispatch(Actions.MyQuestions.fetchMyQuestions());
+			return () => {
+				dispatch(Actions.MyQuestions.fetchMyQuestions());
+			};
 		}, [])
 	);
 
@@ -72,7 +109,6 @@ const UserProgress = () => {
 				],
 				[]
 			);
-			console.log(answerIds);
 			const markAnswersAsSeen = async () => {
 				try {
 					await Promise.all(
@@ -82,10 +118,8 @@ const UserProgress = () => {
 							})
 						)
 					);
-					console.log("done with patches");
 				} catch (error) {
 					console.log(error);
-					console.log("ERROR MARKANSWERASSEEN");
 				}
 			};
 
@@ -130,6 +164,137 @@ const UserProgress = () => {
 
 	const extractKey = (item: QuestionWithAnswers) => item._id;
 
+	// const RenderButton = React.useCallback(
+	// (props: Utils.ButtonItem) => (
+
+	const RenderButton = (props: Utils.ButtonItem) => (
+		<TouchableOpacity
+			onPress={() => setCurrentScreen(props.screenId)}
+			style={styles.selectViewButton}
+		>
+			{props.screenId === "answer" ? (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionWithUnseenAnswers.length +
+						questionsWithAnswers.length}
+				</Atoms.Text.Para>
+			) : props.screenId === "no-answers" ? (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionsWithNoAnswersNotSeen.length +
+						questionsWithNoAnswersSeen.length}
+				</Atoms.Text.Para>
+			) : (
+				<Atoms.Text.Para style={styles.answerCount}>
+					{questionsInProgress.length}
+				</Atoms.Text.Para>
+			)}
+
+			<Atoms.Text.Para style={styles.buttonLabel}>
+				{props.text}
+			</Atoms.Text.Para>
+			{currentScreen === props.screenId ? (
+				<React.Fragment>
+					<View style={styles.topLeftCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.bottomLeftCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.bottomRightCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+					<View style={styles.topRightCorner}>
+						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
+					</View>
+				</React.Fragment>
+			) : null}
+		</TouchableOpacity>
+	);
+
+	const UnSeenTextPrompt = () => (
+		<>
+			{hasUnseenAnswers ? (
+				<View style={styles.unSeenAnswerContainer}>
+					<View style={styles.unSeenAnswerline}></View>
+					<View style={styles.unSeenTextContainer}>
+						<Atoms.Text.Para style={styles.unSeenText}>
+							Gömul svör
+						</Atoms.Text.Para>
+					</View>
+
+					<View style={styles.unSeenAnswerline}></View>
+				</View>
+			) : null}
+		</>
+	);
+
+	const sortFlatListData = (data: QuestionWithAnswers[]) => {
+		return data.sort((a, b) => {
+			if (a._id < b._id) return 1;
+			if (a._id > b._id) return -1;
+			return 0;
+		});
+	};
+
+	const RenderScreen = () => {
+		switch (currentScreen) {
+			case ANSWER:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={sortFlatListData(
+								questionWithUnseenAnswers
+							)}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+						<UnSeenTextPrompt />
+						{/* Render next all questions that have only seen answers */}
+						<FlatList
+							data={sortFlatListData(
+								questionWithOnlySeenAnswers
+							)}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+			case NO_ANSWERS:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={sortFlatListData(
+								questionsWithNoAnswersNotSeen
+							)}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+						<UnSeenTextPrompt />
+
+						{/* Render next all questions that have only seen answers */}
+						<FlatList
+							data={sortFlatListData(
+								questionsWithNoAnswersSeen
+							)}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+			case IN_PROGRESS:
+				return (
+					<React.Fragment>
+						{/* Render all questions that have an unseen answer first */}
+						<FlatList
+							data={sortFlatListData(questionsInProgress)}
+							keyExtractor={extractKey}
+							renderItem={renderQuestionItem}
+						/>
+					</React.Fragment>
+				);
+		}
+	};
 	return (
 		<ScrollView>
 			<LayoutWrapper>
@@ -146,6 +311,15 @@ const UserProgress = () => {
 						/>
 					</TouchableOpacity>
 				</View>
+				<ScrollView
+					showsHorizontalScrollIndicator={false}
+					horizontal={true}
+					contentContainerStyle={styles.scrollContainer}
+				>
+					{Utils.BUTTONS.map((button) => (
+						<RenderButton {...button} />
+					))}
+				</ScrollView>
 
 				{myQuestions.isLoading ? (
 					<ActivityIndicator />
@@ -154,39 +328,7 @@ const UserProgress = () => {
 						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
 					</React.Fragment>
 				) : (
-					<React.Fragment>
-						{/* Render all questions that have an unseen answer first */}
-						<FlatList
-							data={questionWithUnseenAnswers}
-							keyExtractor={extractKey}
-							renderItem={renderQuestionItem}
-						/>
-						{hasUnseenAnswers ? (
-							<View style={styles.unSeenAnswerContainer}>
-								<View
-									style={styles.unSeenAnswerline}
-								></View>
-								<View style={styles.unSeenTextContainer}>
-									<Atoms.Text.Para
-										style={styles.unSeenText}
-									>
-										Gömul svör
-									</Atoms.Text.Para>
-								</View>
-
-								<View
-									style={styles.unSeenAnswerline}
-								></View>
-							</View>
-						) : null}
-
-						{/* Render next all questions that have only seen answers */}
-						<FlatList
-							data={questionWithOnlySeenAnswers}
-							keyExtractor={extractKey}
-							renderItem={renderQuestionItem}
-						/>
-					</React.Fragment>
+					<RenderScreen />
 				)}
 			</LayoutWrapper>
 		</ScrollView>
