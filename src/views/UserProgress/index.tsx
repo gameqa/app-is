@@ -40,22 +40,31 @@ const UserProgress = () => {
 	const NO_ANSWERS = "no-answers";
 
 	const questionsWithAnswers = React.useMemo(
-		() => myQuestions.questions.filter(Utils.FILTER_HAS_ANSWER),
+		() =>
+			Services.FilterMyQuestions.questionsWithAnswers(
+				myQuestions.questions
+			),
 		[myQuestions.questions]
 	);
 
 	const questionsWithNoAnswers = React.useMemo(
-		() => myQuestions.questions.filter(Utils.FILTER_HAS_NO_ANSWER),
+		() =>
+			Services.FilterMyQuestions.questionsWithNoAnswers(
+				myQuestions.questions
+			),
 		[myQuestions.questions]
 	);
 	const questionsInProgress = React.useMemo(
-		() => myQuestions.questions.filter(Utils.FILTER_IS_IN_PROGRESS),
+		() =>
+			Services.FilterMyQuestions.questionsInProgress(
+				myQuestions.questions
+			),
 		[myQuestions.questions]
 	);
 
 	const questionWithUnseenAnswers = React.useMemo(() => {
-		const unSeenAnswers = questionsWithAnswers.filter((question) =>
-			question.answers.some((answer) => !answer.seenByQuestionerAt)
+		const unSeenAnswers = Services.FilterMyQuestions.questionsUnseen(
+			questionsWithAnswers
 		);
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
@@ -68,9 +77,10 @@ const UserProgress = () => {
 	}, [myQuestions.questions, currentScreen]);
 
 	const questionsWithNoAnswersNotSeen = React.useMemo(() => {
-		const unSeenAnswers = questionsWithAnswers.filter((question) =>
-			question.answers.some((answer) => !answer.seenByQuestionerAt)
+		const unSeenAnswers = Services.FilterMyQuestions.questionsUnseen(
+			questionsWithAnswers
 		);
+
 		setHasUnseenAnswers(unSeenAnswers.length > 0);
 		return unSeenAnswers;
 	}, [myQuestions.questions, currentScreen]);
@@ -84,6 +94,9 @@ const UserProgress = () => {
 	useFocusEffect(
 		React.useCallback(() => {
 			dispatch(Actions.MyQuestions.fetchMyQuestions());
+			return () => {
+				dispatch(Actions.MyQuestions.fetchMyQuestions());
+			};
 		}, [])
 	);
 
@@ -96,7 +109,6 @@ const UserProgress = () => {
 				],
 				[]
 			);
-			console.log(answerIds);
 			const markAnswersAsSeen = async () => {
 				try {
 					await Promise.all(
@@ -106,10 +118,8 @@ const UserProgress = () => {
 							})
 						)
 					);
-					console.log("done with patches");
 				} catch (error) {
 					console.log(error);
-					console.log("ERROR MARKANSWERASSEEN");
 				}
 			};
 
@@ -120,43 +130,6 @@ const UserProgress = () => {
 				clearTimeout(t);
 			};
 		}, [questionWithUnseenAnswers])
-	);
-
-	useFocusEffect(
-		React.useCallback(() => {
-			const answerIds = questionsWithNoAnswersNotSeen.reduce<
-				string[]
-			>(
-				(prev, curr) => [
-					...prev,
-					...curr.answers.map((item) => item._id),
-				],
-				[]
-			);
-			console.log(answerIds);
-			const markAnswersAsSeen = async () => {
-				try {
-					await Promise.all(
-						answerIds.map((answerId) =>
-							api.patch(`/api/v1/answers/${answerId}`, {
-								seenByQuestionerAt: new Date(),
-							})
-						)
-					);
-					console.log("done with patches");
-				} catch (error) {
-					console.log(error);
-					console.log("ERROR MARKANSWERASSEEN");
-				}
-			};
-
-			const TIMEOUT_LENGTH = 4000;
-			const t = setTimeout(markAnswersAsSeen, TIMEOUT_LENGTH);
-
-			return () => {
-				clearTimeout(t);
-			};
-		}, [questionsWithNoAnswersNotSeen])
 	);
 
 	const alertSignOut = () =>
@@ -202,7 +175,7 @@ const UserProgress = () => {
 			{props.screenId === "answer" ? (
 				<Atoms.Text.Para style={styles.answerCount}>
 					{questionWithUnseenAnswers.length +
-						questionWithOnlySeenAnswers.length}
+						questionsWithAnswers.length}
 				</Atoms.Text.Para>
 			) : props.screenId === "no-answers" ? (
 				<Atoms.Text.Para style={styles.answerCount}>
