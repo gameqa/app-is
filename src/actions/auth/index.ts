@@ -3,10 +3,13 @@ import {
 	FetchInvitesAction,
 	FetchUserFromTokenAction,
 	LogOutUserAction,
+	ResetLevelAction,
+	SetResettingLevelAction,
 } from "./interface";
 import { User } from "../../declerations";
 import { Dispatch } from "redux";
 import Api from "../../api";
+import store from "../../../store";
 
 export const fetchUserFromToken = () => {
 	return async function (dispatch: Dispatch) {
@@ -52,7 +55,9 @@ export const fetchInvites = () => {
 				type: ActionTypes.fetchInvites,
 				payload: [],
 			});
-			const { data } = await Api.get<User[]>("/api/v1/users/current/invites");
+			const { data } = await Api.get<User[]>(
+				"/api/v1/users/current/invites"
+			);
 			dispatch<FetchInvitesAction>({
 				type: ActionTypes.fetchInvites,
 				payload: data,
@@ -63,5 +68,25 @@ export const fetchInvites = () => {
 	};
 };
 
+export const resetLevel = () => {
+	return async function (dispatch: Dispatch) {
+		try {
+			dispatch<SetResettingLevelAction>({
+				type: ActionTypes.setResettingLevel,
+			});
+			const { data } = await Api.post<User>(
+				"/api/v1/users/reset_level"
+			);
+			dispatch<ResetLevelAction>({
+				type: ActionTypes.resetLevel,
+				payload: data,
+			});
+		} catch (error) {
+			//
+		} finally {
+			//
+		}
+	};
+};
 
 export * as Actions from "./interface";

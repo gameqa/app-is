@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import styles from "./styles";
 import { IProps } from "./interface";
 import * as Services from "../../../../services";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { ColorType } from "../../../../declerations";
 
 const UserAvatar = ({
@@ -61,9 +61,9 @@ const UserAvatar = ({
 					backgroundColor: badgeBackgroundColor,
 				}}
 			>
-				<MaterialCommunityIcons
-					name="trophy-award"
-					size={size / 3}
+				<FontAwesome
+					name="star"
+					size={size / 5.5}
 					color={badgeIconColor}
 				/>
 			</View>

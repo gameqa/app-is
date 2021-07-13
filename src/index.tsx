@@ -6,8 +6,6 @@ import * as Actions from "./actions";
 import { StoreState } from "./reducers";
 import * as Views from "./views";
 import { StatusBar } from "react-native";
-
-
 console.disableYellowBox = true;
 
 export default function App() {
@@ -35,7 +33,13 @@ export default function App() {
 		StatusBar.setHidden(true);
 	}, []);
 
+	const shouldUserRestart = React.useMemo(() => {
+		const RESTART_AT_LEVEL = 20;
+		return auth.level >= RESTART_AT_LEVEL;
+	}, [auth.level]);
+
 	if (auth.type === "not-verified") return <Views.AuthCode />;
+	if (shouldUserRestart) return <Views.RestartLevelView />;
 	return (
 		<React.Fragment>
 			<Routing.AuthStackNavigator />

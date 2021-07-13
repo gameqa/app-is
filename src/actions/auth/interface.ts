@@ -20,13 +20,11 @@ export interface FetchInvitesAction {
 	payload: User[];
 }
 
-// export interface ResetPasswordCodeAction {
-// 	type: ActionTypes.resetPasswordUserCode;
-// 	payload: String;
-// }
+export interface ResetLevelAction {
+	type: ActionTypes.resetLevel;
+	payload: User;
+}
 
-// export interface ResetPasswordTokenAction {
-// 	type: ActionTypes.resetPasswordUserToken;
-// 	payload: String;
-// }
-
+export interface SetResettingLevelAction {
+	type: ActionTypes.setResettingLevel;
+}

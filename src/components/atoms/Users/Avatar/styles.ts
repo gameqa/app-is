@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		bottom: -5,
 		right: -5,
 		borderRadius: 30,
-		padding: 3,
+		padding: 10,
 		borderWidth: 2,
 	},
 });

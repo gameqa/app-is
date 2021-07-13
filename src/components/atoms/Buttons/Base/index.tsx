@@ -1,5 +1,5 @@
-import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableHighlight, Text } from "react-native";
 import { IProps } from "./interface";
 import * as Services from "../../../../services";
 import styles from "./styles";
@@ -7,22 +7,28 @@ import styles from "./styles";
 const BaseButton = (props: IProps) => {
 	const { label, type, inactive } = props;
 
-	const cb = inactive ? undefined : props.onPress;
+	const [isActive, setIsActive] = useState(true);
+
+	useEffect(() => {
+		setIsActive(!inactive);
+	}, [inactive]);
+
+	const cb = isActive ? props.onPress : undefined;
+
 	return (
-		<TouchableOpacity
+		<TouchableHighlight
 			{...props}
 			style={{
 				backgroundColor: Services.Colors.MapToDark[type],
 				...styles.outer,
-				opacity: inactive ? 0.15 : 1,
+				opacity: isActive ? 1 : 0.15,
 			}}
-			activeOpacity={0.15}
 			onPress={cb}
 		>
 			<Text style={{ color: Services.Colors.MapToLight[type] }}>
 				{label}
 			</Text>
-		</TouchableOpacity>
+		</TouchableHighlight>
 	);
 };
 

@@ -68,6 +68,8 @@ export enum ActionTypes {
 	fetchHighscorePlacementExpansionDown,
 	setHighscoreLoadingStatus,
 	fetchMyQuestions,
+	resetLevel,
+	setResettingLevel,
 }
 
 export type Actions =
@@ -75,6 +77,8 @@ export type Actions =
 	| Auth.Actions.LogOutUserAction
 	| Auth.Actions.RegisterUserAction
 	| Auth.Actions.FetchInvitesAction
+	| Auth.Actions.ResetLevelAction
+	| Auth.Actions.SetResettingLevelAction
 	| Game.Actions.SetCurrentGameRoundAction
 	| Game.Actions.StartWriteQuestionRoundFromAPIAction
 	| Game.Actions.StartVerifyQuestionRoundFromAPIAction

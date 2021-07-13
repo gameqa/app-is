@@ -19,6 +19,8 @@ export const initialState: State = {
 	hasCompletedTutorial: false,
 	invites: [],
 	streak: 1,
+	resetCount: 0,
+	isResettingLevel: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -31,7 +33,18 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		}
 		case ActionTypes.registerUser:
 			return { ...initialState, ...action.payload };
-
+		case ActionTypes.setResettingLevel: {
+			return {
+				...state,
+				isResettingLevel: true,
+			};
+		}
+		case ActionTypes.resetLevel:
+			return {
+				...state,
+				...action.payload,
+				isResettingLevel: false,
+			};
 		// case ActionTypes.fetchScoreCard:
 		// 	return {
 		// 		...state,
