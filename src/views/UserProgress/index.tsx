@@ -22,6 +22,7 @@ import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
 
 import * as Utils from "./utils";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
@@ -262,6 +263,11 @@ const UserProgress = () => {
 			case NO_ANSWERS:
 				return (
 					<React.Fragment>
+						<Atoms.Text.Para style={{}}>
+							Þetta eru spurningar sem aðrir notendur fundu
+							ekki svar við. Getur þú fundið svörin á Google.
+							🤓🤔
+						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
 							data={sortFlatListData(

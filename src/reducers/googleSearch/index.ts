@@ -45,6 +45,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				...state,
 				searchError: false,
 			};
+		case ActionTypes.setImpossibleQuestion:
+			return {
+				...initialState,
+				_id: action.payload._id,
+				text: action.payload.text,
+			};
 		default:
 			return state;
 	}
