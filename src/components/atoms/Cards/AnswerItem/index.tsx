@@ -34,6 +34,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		level: 1,
 		hasCompletedTutorial: false,
 		streak: 1,
+		resetCount: 0,
 	};
 
 	useEffect(() => {
@@ -120,19 +121,18 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
-
 	return (
 		<View style={styles.outer}>
 			<View>
 				<Atoms.Cards.ChatBubble message={text} />
-				{archived ? (
+				{isImpossible ? (
 					<RenderErrorMessage
 						{...{
-							type: "danger",
-							label: "Annar notandi merkti spurninguna sem slæma",
+							type: "warning",
+							label: "Notandi fann ekki svarið á Google",
 						}}
 					/>
-				) : answers.length === 0 ? (
+				) : archived ? null : answers.length === 0 ? (
 					<RenderErrorMessage
 						{...{
 							type: "highlight",

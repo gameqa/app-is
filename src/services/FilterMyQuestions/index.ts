@@ -6,14 +6,13 @@ export const questionsWithAnswers = (
 
 export const questionsWithNoAnswers = (
 	questionList: QuestionWithAnswers[]
-) =>
-	questionList.filter(
-		(question) => question.archived || question.isImpossible
-	);
+) => questionList.filter((question) => question.isImpossible);
 
 export const questionsInProgress = (questionList: QuestionWithAnswers[]) =>
 	questionList.filter(
-		(question) => question.answers.length === 0 && !question.archived
+		(question) =>
+			question.answers.length === 0 &&
+			!(question.archived || question.isImpossible)
 	);
 
 export const questionsUnseen = (
