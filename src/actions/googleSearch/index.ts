@@ -8,7 +8,7 @@ import { Dispatch } from "redux";
 import Api from "../../api";
 import { Game } from "../";
 import store from "../../../store";
-import { ArticlePreview } from "../../declerations";
+import { ArticlePreview, Question } from "../../declerations";
 import axios from "axios";
 
 export const writeGoogleQuery = (user: string): WriteGoogleQueryAction => {
@@ -28,7 +28,9 @@ export const fetchArticlesQuery = () => {
 				request: { cancelToken: cancelToken },
 			});
 			const { data } = await Api.get<ArticlePreview[]>(
-				`/api/v1/articles?query=${store.getState().googleSearch.query}`,
+				`/api/v1/articles?query=${
+					store.getState().googleSearch.query
+				}`,
 				{
 					cancelToken: cancelToken.token,
 				}
@@ -48,6 +50,13 @@ export const fetchArticlesQuery = () => {
 				payload: false,
 			});
 		}
+	};
+};
+
+export const setImpossibleQuestion = (question: Question) => {
+	return {
+		type: ActionTypes.setImpossibleQuestion,
+		payload: question,
 	};
 };
 

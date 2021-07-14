@@ -4,16 +4,27 @@ import { Atoms } from "../../..";
 import { useDispatch } from "react-redux";
 import * as Interface from "./interface";
 import styles from "./styles";
-import { Answer, User } from "../../../../declerations";
+import { Answer, User, Question } from "../../../../declerations";
 import Api from "../../../../api";
 import { useEffect } from "react";
 import { Colors } from "../../../../services";
 import moment from "moment";
 import "moment/locale/is";
+import { useNavigation } from "@react-navigation/native";
+import * as Actions from "../../../../actions";
 
 const QuestionAnswerCard = (question: Interface.IProps) => {
-	const { text, answers: rawAnswers, archived, isImpossible } = question;
+	const {
+		text,
+		answers: rawAnswers,
+		archived,
+		isImpossible,
+		_id,
+	} = question;
 	const [answers, setAnswers] = useState<Answer[]>([]);
+
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
 
 	moment.locale("is");
 
@@ -121,17 +132,29 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
+	const getImpossibleQuestion = (question: Question) => {
+		dispatch(Actions.GoogleSearch.setImpossibleQuestion(question));
+		navigation.navigate("Google");
+	};
+
 	return (
 		<View style={styles.outer}>
 			<View>
 				<Atoms.Cards.ChatBubble message={text} />
 				{isImpossible ? (
-					<RenderErrorMessage
-						{...{
-							type: "warning",
-							label: "Notandi fann ekki svarið á Google",
-						}}
-					/>
+					<React.Fragment>
+						<RenderErrorMessage
+							{...{
+								type: "warning",
+								label: "Notandi fann ekki svarið á Google",
+							}}
+						/>
+						<Atoms.Buttons.Base
+							type={"highlight"}
+							label={"Finna svarið"}
+							onPress={() => getImpossibleQuestion(question)}
+						/>
+					</React.Fragment>
 				) : archived ? null : answers.length === 0 ? (
 					<RenderErrorMessage
 						{...{

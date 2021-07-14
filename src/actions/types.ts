@@ -70,6 +70,7 @@ export enum ActionTypes {
 	fetchMyQuestions,
 	resetLevel,
 	setResettingLevel,
+	setImpossibleQuestion,
 }
 
 export type Actions =
@@ -97,6 +98,7 @@ export type Actions =
 	| GoogleSearch.Actions.WriteGoogleQueryAction
 	| GoogleSearch.Actions.SetSearchErrorAction
 	| GoogleSearch.Actions.FetchArticlesQueryAction
+	| GoogleSearch.Actions.SetImpossibleQuestionAction
 	| ArticleReader.Actions.FetchArticleParagraphsAction
 	| ArticleReader.Actions.SetArticleReaderErrorAction
 	| AuthCode.Actions.WriteAuthCodeAction
