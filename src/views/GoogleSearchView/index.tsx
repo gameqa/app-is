@@ -1,8 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import {Molecules, Organisms } from "../../components";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Atoms, Molecules, Organisms } from "../../components";
 import LayoutWrapper from "../../layout";
-import { StoreState } from '../../reducers';
+import { StoreState } from "../../reducers";
 
 /**
  * This view is not a part of the game under the PLAY tab,
@@ -10,18 +10,29 @@ import { StoreState } from '../../reducers';
  * to allow the user to search for answers for his own
  * questions that have been marked as impossible
  * @returns JSX Element
- * 
+ *
  */
 const GoogleSearchView = () => {
+	const auth = useSelector((state: StoreState) => state.auth);
+	const game = useSelector((state: StoreState) => state.game);
 
-    const auth = useSelector((state: StoreState) => state.auth);
-    
-    return (
-        <LayoutWrapper>
-        <Molecules.Users.Info {...auth} />
-            <Organisms.Game.GoogleSearch />
-        </LayoutWrapper>
-    )
-}
+	return (
+		<LayoutWrapper>
+			<Molecules.Users.Info {...auth} />
+			{game.isLoading ? (
+				<Atoms.Loaders.CenterBox
+					isLoading={game.isLoading}
+					onCancel={
+						game.axiosCancelTokenSource
+							? () => game.axiosCancelTokenSource?.cancel()
+							: undefined
+					}
+				/>
+			) : (
+				<Organisms.Game.GoogleSearch />
+			)}
+		</LayoutWrapper>
+	);
+};
 
-export default GoogleSearchView
+export default GoogleSearchView;
