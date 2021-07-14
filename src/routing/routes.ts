@@ -81,4 +81,3 @@ export const profileStack: ProfileStackRoutes[] = [
 		Component: Views.ArticleReader,
 	},
 ];
-
