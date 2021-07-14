@@ -1,19 +1,31 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View, Image } from "react-native";
 import { Atoms } from "../../..";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Interface from "./interface";
 import styles from "./styles";
-import { Answer, User } from "../../../../declerations";
+import { Answer, User, Question } from "../../../../declerations";
 import Api from "../../../../api";
 import { useEffect } from "react";
 import { Colors } from "../../../../services";
 import moment from "moment";
 import "moment/locale/is";
+import { useNavigation } from "@react-navigation/native";
+import { StoreState } from "../../../../reducers";
+import * as Actions from "../../../../actions";
 
 const QuestionAnswerCard = (question: Interface.IProps) => {
-	const { text, answers: rawAnswers, archived, isImpossible } = question;
+	const {
+		text,
+		answers: rawAnswers,
+		archived,
+		isImpossible,
+		_id,
+	} = question;
 	const [answers, setAnswers] = useState<Answer[]>([]);
+
+	const navigation = useNavigation();
+	const dispatch = useDispatch();
 
 	moment.locale("is");
 
@@ -121,17 +133,36 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
+	const setImpossibleQuestion = () => {
+		dispatch(Actions.GoogleSearch.setImpossibleQuestion(question));
+		navigation.navigate("Google");
+	};
+
+	const RenderButton = () => (
+		<TouchableOpacity onPress={() => setImpossibleQuestion()}>
+			<Atoms.Cards.ChatBubble
+				message={
+					"❌ Notandi fann ekki svarið. \n\n 🔎 Ýttu hér til að finna svarið sjálf/ur"
+				}
+				isInbound
+			/>
+		</TouchableOpacity>
+	);
+
 	return (
 		<View style={styles.outer}>
 			<View>
 				<Atoms.Cards.ChatBubble message={text} />
 				{isImpossible ? (
-					<RenderErrorMessage
-						{...{
-							type: "warning",
-							label: "Notandi fann ekki svarið á Google",
-						}}
-					/>
+					<React.Fragment>
+						{/* <RenderErrorMessage
+							{...{
+								type: "warning",
+								label: "Notandi fann ekki svarið á Google",
+							}}
+						/> */}
+						<RenderButton />
+					</React.Fragment>
 				) : archived ? null : answers.length === 0 ? (
 					<RenderErrorMessage
 						{...{

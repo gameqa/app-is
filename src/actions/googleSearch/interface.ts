@@ -1,4 +1,4 @@
-import { ArticlePreview } from "../../declerations";
+import { ArticlePreview, Question } from "../../declerations";
 import { ActionTypes } from "../types";
 
 export interface WriteGoogleQueryAction {
@@ -13,4 +13,9 @@ export interface FetchArticlesQueryAction {
 
 export interface SetSearchErrorAction {
 	type: ActionTypes.setGoogleSearchError;
+}
+
+export interface SetImpossibleQuestionAction {
+	type: ActionTypes.setImpossibleQuestion;
+	payload: Question;
 }

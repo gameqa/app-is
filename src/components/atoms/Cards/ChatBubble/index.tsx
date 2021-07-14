@@ -9,10 +9,14 @@ import { StoreState } from "../../../../reducers";
 import { IProps } from "./interface";
 import styles from "./styles";
 
-const ChatBubble = ({ sender, message }: IProps) => {
+const ChatBubble = ({
+	sender,
+	message,
+	isInbound: isInboundProp,
+}: IProps) => {
 	const auth = useSelector((state: StoreState) => state.auth);
 
-	const isInbound = !!sender;
+	const isInbound = !!sender || isInboundProp;
 
 	const itemStyles = isInbound
 		? [styles.item, styles.itemOut]
