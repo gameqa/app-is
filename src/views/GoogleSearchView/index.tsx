@@ -1,4 +1,5 @@
-import React from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
 import LayoutWrapper from "../../layout";
@@ -16,6 +17,13 @@ const GoogleSearchView = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const game = useSelector((state: StoreState) => state.game);
 
+	const navigation = useNavigation();
+
+	const startTime = React.useRef(new Date().getTime());
+
+	useEffect(() => {
+		if (game.lastLoaded > startTime.current) navigation.goBack();
+	}, [startTime, game.lastLoaded]);
 	return (
 		<LayoutWrapper>
 			<Molecules.Users.Info {...auth} />

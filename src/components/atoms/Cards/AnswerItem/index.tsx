@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View, Image } from "react-native";
 import { Atoms } from "../../..";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Interface from "./interface";
 import styles from "./styles";
 import { Answer, User, Question } from "../../../../declerations";
@@ -11,6 +11,7 @@ import { Colors } from "../../../../services";
 import moment from "moment";
 import "moment/locale/is";
 import { useNavigation } from "@react-navigation/native";
+import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
 
 const QuestionAnswerCard = (question: Interface.IProps) => {
@@ -23,8 +24,8 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 	} = question;
 	const [answers, setAnswers] = useState<Answer[]>([]);
 
-	const dispatch = useDispatch();
 	const navigation = useNavigation();
+	const dispatch = useDispatch();
 
 	moment.locale("is");
 
@@ -132,10 +133,21 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		}
 	};
 
-	const getImpossibleQuestion = (question: Question) => {
+	const setImpossibleQuestion = () => {
 		dispatch(Actions.GoogleSearch.setImpossibleQuestion(question));
 		navigation.navigate("Google");
 	};
+
+	const RenderButton = () => (
+		<TouchableOpacity onPress={() => setImpossibleQuestion()}>
+			<Atoms.Cards.ChatBubble
+				message={
+					"❌ Notandi fann ekki svarið. \n\n 🔎 Ýttu hér til að finna svarið sjálf/ur"
+				}
+				isInbound
+			/>
+		</TouchableOpacity>
+	);
 
 	return (
 		<View style={styles.outer}>
@@ -143,17 +155,13 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 				<Atoms.Cards.ChatBubble message={text} />
 				{isImpossible ? (
 					<React.Fragment>
-						<RenderErrorMessage
+						{/* <RenderErrorMessage
 							{...{
 								type: "warning",
 								label: "Notandi fann ekki svarið á Google",
 							}}
-						/>
-						<Atoms.Buttons.Base
-							type={"highlight"}
-							label={"Finna svarið"}
-							onPress={() => getImpossibleQuestion(question)}
-						/>
+						/> */}
+						<RenderButton />
 					</React.Fragment>
 				) : archived ? null : answers.length === 0 ? (
 					<RenderErrorMessage
