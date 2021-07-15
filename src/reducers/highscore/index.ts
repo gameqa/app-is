@@ -15,22 +15,31 @@ const reducer = (state: State = initialState, action: Actions): State => {
 				isLoading: false,
 			};
 		case ActionTypes.fetchHighscorePlacementExpansionUp:
-
 			return {
 				...state,
-				highscores: [...action.payload, ...state.highscores],
+				highscores: [
+					...action.payload,
+					...state.highscores,
+				].filter(
+					(v, i, a) => a.findIndex((t) => t._id === v._id) === i
+				),
 				isLoading: false,
 			};
 		case ActionTypes.fetchHighscorePlacementExpansionDown:
 			return {
 				...state,
-				highscores: [...state.highscores, ...action.payload],
+				highscores: [
+					...state.highscores,
+					...action.payload,
+				].filter(
+					(v, i, a) => a.findIndex((t) => t._id === v._id) === i
+				),
 				isLoading: false,
 			};
 		case ActionTypes.setHighscoreLoadingStatus:
 			return {
 				...state,
-				isLoading: action.payload
+				isLoading: action.payload,
 			};
 		default:
 			return state;
