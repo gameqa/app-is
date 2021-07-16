@@ -3,18 +3,22 @@ import { View, Image } from "react-native";
 import styles from "./styles";
 import { IProps } from "./interface";
 import * as Services from "../../../../services";
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { ColorType } from "../../../../declerations";
+import * as Icons from "../../../../static/icons";
 
 const UserAvatar = ({
 	level,
 	color,
 	size: sizeProp,
 	resetCount,
+	scoreCard,
 }: IProps) => {
 	const DEFAULT_SIZE = 70;
 	const size = sizeProp === undefined ? DEFAULT_SIZE : sizeProp;
 	const borderRadius = size / 2;
+
+	const isFirst = scoreCard.hiscoreRank === 1;
 
 	const MAP_TO_BACKGROUND: { [key: number]: ColorType } = {
 		1: "highlight",
@@ -71,6 +75,15 @@ const UserAvatar = ({
 
 	return (
 		<View>
+			{isFirst ? (
+				<View style={styles.crownContainer}>
+					<Image
+						source={Icons.CROWN_ICON}
+						style={styles.crownImage}
+					/>
+				</View>
+			) : null}
+
 			<Image
 				style={{
 					...styles.outer,
