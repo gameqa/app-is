@@ -70,8 +70,6 @@ const PrizeCategories = () => {
 
 	const TIME_UNTIL_GIVEAWAY = getNextGiveAwayTime();
 
-	console.log(prizeCategories);
-
 	return (
 		<ScrollView>
 			<LayoutWrapper>
