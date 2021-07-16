@@ -22,8 +22,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		case ActionTypes.pushOverlay: {
 			return {
 				...state,
-				queue: [...action.payload, ...state.queue]
-			}	
+				queue: [...action.payload, ...state.queue],
+			};
 		}
 		default:
 			return state;

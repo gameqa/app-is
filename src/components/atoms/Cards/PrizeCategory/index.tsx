@@ -3,20 +3,15 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useMemo } from "react";
 import { View, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { PrizeCategory } from "../../../../declerations";
-import { StoreState } from "../../../../reducers";
-import { Colors } from "../../../../services";
 import styles from "./styles";
-
-import { Chests } from "./../../../../services";
 
 const PrizeCategoryCard = (category: PrizeCategory) => {
 	const navigation = useNavigation();
 	const handleGoToItemsView = () =>
 		navigation.navigate("prize-items", category);
-	
+
 	// console.log("PrizeCategoryCArd",category)
 
 	return (
@@ -24,21 +19,15 @@ const PrizeCategoryCard = (category: PrizeCategory) => {
 			<Atoms.Cards.Base>
 				<View style={styles.outer}>
 					<View style={styles.imageOuter}>
-						{category.isAvailable 
-						?
 						<Image
 							style={styles.image}
-							source={Chests.mapToPrize(category.name)}
+							source={{
+								uri: category.isAvailable
+									? category.unlockedImg
+									: category.lockedImg,
+							}}
 							resizeMode="contain"
 						/>
-						:
-						<Image
-							style={styles.image}
-							source={Chests.mapToNoPrize(category.name)}
-							resizeMode="contain"
-						/> 
-						}
-						
 					</View>
 					<Atoms.Text.Heading>
 						{category.name}
