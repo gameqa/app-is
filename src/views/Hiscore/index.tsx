@@ -67,7 +67,7 @@ const Highscore = () => {
 	);
 
 	return (
-		<View style={{ backgroundColor: "white" }}>
+		<View style={styles.outer}>
 			<FlatList
 				// @ts-ignore
 				ref={flatListRef}

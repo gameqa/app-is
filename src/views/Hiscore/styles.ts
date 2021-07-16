@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	outer: { backgroundColor: "white" },
 });
 
 export default styles;
