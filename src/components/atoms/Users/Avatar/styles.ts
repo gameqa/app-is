@@ -15,6 +15,20 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderWidth: 2,
 	},
+	crownContainer: {
+		position: "absolute",
+		left: 0,
+		top: 0,
+		height: "35%",
+		width: "100%",
+		transform: [{ translateY: "-2.5%" }],
+		zIndex: 10,
+		alignItems: "center",
+	},
+	crownImage: {
+		width: "80%",
+		height: "100%",
+	},
 });
 
 export default styles;
