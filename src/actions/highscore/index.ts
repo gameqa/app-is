@@ -6,7 +6,7 @@ import {
 	FetchHighscorePlacementAction,
 	FetchHighscorePlacementExpansionDownAction,
 	FetchHighscorePlacementExpansionUpAction,
-	SetHighscoreLoadingStatusAction
+	SetHighscoreLoadingStatusAction,
 } from "./interface";
 import store from "../../../store";
 
@@ -16,8 +16,8 @@ export const fetchHighscorePlacement = () => {
 			if (store.getState().highscore.isLoading) return;
 			dispatch<SetHighscoreLoadingStatusAction>({
 				type: ActionTypes.setHighscoreLoadingStatus,
-				payload: true
-			})
+				payload: true,
+			});
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement"
 			);
@@ -27,7 +27,34 @@ export const fetchHighscorePlacement = () => {
 			});
 		} catch (error) {
 			// do nothing on error
-		} 
+		}
+	};
+};
+
+export const fetchTopOfHiscore = () => {
+	return async function (dispatch: Dispatch) {
+		try {
+			if (store.getState().highscore.isLoading) return;
+			dispatch<SetHighscoreLoadingStatusAction>({
+				type: ActionTypes.setHighscoreLoadingStatus,
+				payload: true,
+			});
+			const { data } = await Api.get<User[]>(
+				"/api/v1/users/hiscore_placement",
+				{
+					params: {
+						offset: 1,
+						limit: 20,
+					},
+				}
+			);
+			dispatch<FetchHighscorePlacementAction>({
+				type: ActionTypes.fetchHighscorePlacement,
+				payload: data,
+			});
+		} catch (error) {
+			// do nothing on error
+		}
 	};
 };
 
@@ -40,8 +67,8 @@ export const fetchHighscorePlacementExpansionUp = (
 			if (store.getState().highscore.isLoading) return;
 			dispatch<SetHighscoreLoadingStatusAction>({
 				type: ActionTypes.setHighscoreLoadingStatus,
-				payload: true
-			})
+				payload: true,
+			});
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement",
 				{
@@ -67,12 +94,11 @@ export const fetchHighscorePlacementExpansionDown = (
 ) => {
 	return async function (dispatch: Dispatch) {
 		try {
-
 			if (store.getState().highscore.isLoading) return;
 			dispatch<SetHighscoreLoadingStatusAction>({
 				type: ActionTypes.setHighscoreLoadingStatus,
-				payload: true
-			})
+				payload: true,
+			});
 			const { data } = await Api.get<User[]>(
 				"/api/v1/users/hiscore_placement",
 				{

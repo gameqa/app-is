@@ -1,18 +1,28 @@
 import React from "react";
-import { RefreshControl } from "react-native";
+import {
+	RefreshControl,
+	SectionList,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
-import { Atoms } from "../../components";
+import { Atoms, Molecules } from "../../components";
 import { useFocusEffect } from "@react-navigation/core";
 import { FlatList } from "react-native-gesture-handler";
 import { User } from "../../declerations";
+import styles from "./styles";
+import { FontAwesome } from "@expo/vector-icons";
+import { Colors } from "../../services";
 
 const FETCH_MORE_AT_SCROLL_POSITION = 0.6;
 
 const Highscore = () => {
 	const highscore = useSelector((state: StoreState) => state.highscore);
 	const dispatch = useDispatch();
+
+	const flatListRef = React.useRef<FlatList<any>>();
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -36,39 +46,65 @@ const Highscore = () => {
 		);
 	};
 
+	const handleScrollToTop = () => {
+		const hasTopLoadded =
+			highscore.highscores[0]?.scoreCard?.hiscoreRank === 1;
+		if (hasTopLoadded)
+			flatListRef.current?.scrollToOffset({
+				animated: true,
+				offset: 0,
+			});
+		else dispatch(Actions.Highscore.fetchTopOfHiscore());
+	};
+
 	return (
-		<FlatList
-			refreshControl={
-				<RefreshControl
-					refreshing={false}
-					onRefresh={() => {
-						dispatch(
-							Actions.Highscore.fetchHighscorePlacementExpansionUp(
-								getFirstOffset(),
-								DEFAULT_LIMIT
-							)
-						);
-					}}
-				/>
-			}
-			data={highscore.highscores}
-			keyExtractor={(item: User) => item._id}
-			onEndReached={() =>
-				dispatch(
-					Actions.Highscore.fetchHighscorePlacementExpansionDown(
-						getLastOffset(),
-						DEFAULT_LIMIT
+		<View>
+			<FlatList
+				// @ts-ignore
+				ref={flatListRef}
+				refreshControl={
+					<RefreshControl
+						refreshing={false}
+						onRefresh={() => {
+							dispatch(
+								Actions.Highscore.fetchHighscorePlacementExpansionUp(
+									getFirstOffset(),
+									DEFAULT_LIMIT
+								)
+							);
+						}}
+					/>
+				}
+				data={highscore.highscores}
+				keyExtractor={(item: User) => item._id}
+				onEndReached={() =>
+					dispatch(
+						Actions.Highscore.fetchHighscorePlacementExpansionDown(
+							getLastOffset(),
+							DEFAULT_LIMIT
+						)
 					)
-				)
-			}
-			onEndReachedThreshold={FETCH_MORE_AT_SCROLL_POSITION}
-			renderItem={(result: { item: User }) => (
-				<Atoms.Cards.HighscoreItem
-					user={result.item}
-					key={result.item._id}
+				}
+				onEndReachedThreshold={FETCH_MORE_AT_SCROLL_POSITION}
+				renderItem={(result: { item: User }) => (
+					<Atoms.Cards.HighscoreItem
+						user={result.item}
+						key={result.item._id}
+					/>
+				)}
+			/>
+			<TouchableOpacity
+				style={styles.absoluteButton}
+				onPress={handleScrollToTop}
+			>
+				<FontAwesome
+					name="chevron-up"
+					size={20}
+					color={Colors.MapToLight.highlight}
 				/>
-			)}
-		/>
+			</TouchableOpacity>
+			<Atoms.Loaders.CenterBox isLoading={highscore.isLoading} />
+		</View>
 	);
 };
 
