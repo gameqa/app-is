@@ -3,7 +3,7 @@ import { Actions, ActionTypes } from "../../actions";
 import { OverlayType } from "../../declerations";
 
 export const initialState: State = {
-	queue: [],
+	queue: [OverlayType.newPrize],
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -22,8 +22,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
 		case ActionTypes.pushOverlay: {
 			return {
 				...state,
-				queue: [...action.payload, ...state.queue]
-			}	
+				queue: [...action.payload, ...state.queue],
+			};
 		}
 		default:
 			return state;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 /**
  * Module imports an instance of Axios
@@ -10,7 +10,9 @@ const url = isProd
 	? "https://spurningar.herokuapp.com"
 	: "http://localhost:5000";
 
-export default axios.create({
+const r = axios.create({
 	baseURL: url,
 	withCredentials: true,
 });
+
+export default r;

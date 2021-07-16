@@ -2,7 +2,7 @@ export enum PrizeTypes {
 	participationPrize,
 	gangPrize,
 	theChosenOnesPrize,
-	influencerPrize
+	influencerPrize,
 }
 
 export interface PrizeCategory {
@@ -11,6 +11,8 @@ export interface PrizeCategory {
 	prereqDescription: string;
 	isAvailable: boolean;
 	prizes: Prize[];
+	lockedImg: string;
+	unlockedImg: string;
 }
 
 export interface Prize {
