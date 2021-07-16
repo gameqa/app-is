@@ -38,6 +38,8 @@ const HighscoreItem = ({ user }: IProps) => {
 				height: 80,
 				marginBottom: 2,
 				paddingVertical: 5,
+				borderBottomWidth: 1,
+				borderBottomColor: "#eee",
 			}}
 		>
 			<View
@@ -51,9 +53,19 @@ const HighscoreItem = ({ user }: IProps) => {
 			</View>
 			<Atoms.Users.Avatar {...user} color="highlight" />
 
-			<View style={{ paddingHorizontal: 10, flexDirection: "row", justifyContent: "space-between", alignItems: "center", flex: 1 }}>
+			<View
+				style={{
+					paddingHorizontal: 10,
+					flexDirection: "row",
+					justifyContent: "space-between",
+					alignItems: "center",
+					flex: 1,
+				}}
+			>
 				<RenderText>{username}</RenderText>
-				<RenderText>{streak > 1 ? `${streak}🔥` : null}</RenderText>
+				<RenderText>
+					{streak > 1 ? `${streak}🔥` : null}
+				</RenderText>
 			</View>
 		</View>
 	);

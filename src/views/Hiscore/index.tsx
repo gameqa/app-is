@@ -1,16 +1,15 @@
 import React from "react";
 import {
 	RefreshControl,
-	SectionList,
 	TouchableOpacity,
 	View,
+	FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import * as Actions from "../../actions";
-import { Atoms, Molecules } from "../../components";
+import { Atoms } from "../../components";
 import { useFocusEffect } from "@react-navigation/core";
-import { FlatList } from "react-native-gesture-handler";
 import { User } from "../../declerations";
 import styles from "./styles";
 import { FontAwesome } from "@expo/vector-icons";
@@ -57,8 +56,18 @@ const Highscore = () => {
 		else dispatch(Actions.Highscore.fetchTopOfHiscore());
 	};
 
+	const PADDING_IF_AT_TOP = 75;
+
+	const paddingToTop = React.useMemo(
+		() =>
+			highscore.highscores[0]?.scoreCard?.hiscoreRank === 1
+				? PADDING_IF_AT_TOP
+				: 0,
+		[highscore.highscores]
+	);
+
 	return (
-		<View>
+		<View style={{ backgroundColor: "white" }}>
 			<FlatList
 				// @ts-ignore
 				ref={flatListRef}
@@ -77,14 +86,14 @@ const Highscore = () => {
 				}
 				data={highscore.highscores}
 				keyExtractor={(item: User) => item._id}
-				onEndReached={() =>
+				onEndReached={() => {
 					dispatch(
 						Actions.Highscore.fetchHighscorePlacementExpansionDown(
 							getLastOffset(),
 							DEFAULT_LIMIT
 						)
-					)
-				}
+					);
+				}}
 				onEndReachedThreshold={FETCH_MORE_AT_SCROLL_POSITION}
 				renderItem={(result: { item: User }) => (
 					<Atoms.Cards.HighscoreItem
@@ -92,6 +101,7 @@ const Highscore = () => {
 						key={result.item._id}
 					/>
 				)}
+				style={{ paddingTop: paddingToTop }}
 			/>
 			<TouchableOpacity
 				style={styles.absoluteButton}
