@@ -14,9 +14,11 @@ const PrizeItems = ({
 		<ScrollView>
 			<LayoutWrapper>
 				<Utils.NavigateBack goBackHandler={goBack} />
-				{params?.prizes.map((prize) => (
-					<Atoms.Cards.PrizeItem {...prize} />
-				))}
+				{params?.prizes
+					.sort((value) => (value.available ? -1 : 1))
+					.map((prize) => (
+						<Atoms.Cards.PrizeItem {...prize} />
+					))}
 			</LayoutWrapper>
 		</ScrollView>
 	);
