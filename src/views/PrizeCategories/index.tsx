@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import LayoutWrapper from "../../layout";
-import { Atoms, Molecules, Organisms } from "../../components";
+import { Atoms, Molecules } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Actions from "../../actions";
 import { OverlayType } from "../../declerations";
 import { Linking, ScrollView, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 
 const PrizeCategories = () => {
 	const [isGiveAway, setIsGiveAway] = useState(false);
@@ -23,12 +22,13 @@ const PrizeCategories = () => {
 	const prizeCategories = useSelector(
 		(state: StoreState) => state.prize.prizeCategories
 	);
+
 	const giveAway = useSelector((state: StoreState) => state.giveAway);
 
 	// fetch prize categories from API
 	useEffect(() => {
 		dispatch(Actions.PrizeCategory.fetchPrizeCategories());
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(Actions.Overlay.enqueOverlay([OverlayType.newPrize]));
@@ -86,6 +86,7 @@ const PrizeCategories = () => {
 					onPress={loadInBrowser}
 					isLoading={giveAway.isLoading}
 				/>
+
 				{prizeCategories.map((item) => (
 					<Atoms.Cards.PrizeCategory {...item} />
 				))}

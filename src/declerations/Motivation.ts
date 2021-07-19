@@ -11,8 +11,6 @@ export interface ICloseToPrize {
 	type: "close-to-prize";
 	text: string;
 	prizeId: string;
-	lockedImg: string;
-	name: string;
 }
 
 export interface ISocialImpact {

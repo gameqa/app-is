@@ -29,21 +29,18 @@ const style = StyleSheet.create({
 		paddingTop: 20,
 	},
 	image: {
-		flex: 1,
+		height: "80%",
+		width: "80%",
 	},
-	chestUnlockHeader: {
-		fontSize: 20,
+	chestUnlockHeader:{
+		fontSize: 20
 	},
 	chestUnlockPara: {
-		color: "white",
-		position: "relative",
-		textAlign: "center",
+		color:"white", 
+		position: "relative", 
+		textAlign:"center",
 	},
-	imageWrapper: {
-		flexDirection: "row",
-		height: 200,
-		margin: 50,
-	},
+	
 });
 
 export default style;
