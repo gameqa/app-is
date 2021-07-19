@@ -11,8 +11,6 @@ export interface PrizeCategory {
 	prereqDescription: string;
 	isAvailable: boolean;
 	prizes: Prize[];
-	lockedImg: string;
-	unlockedImg: string;
 }
 
 export interface Prize {

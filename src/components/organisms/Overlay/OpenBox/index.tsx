@@ -8,7 +8,9 @@ import * as Actions from "../../../../actions";
 import styles from "./styles";
 import Confetti from "../Confetti";
 import { Atoms } from "../../..";
-import { Sounds, Colors } from "../../../../services";
+import { Sounds } from "../../../../services";
+
+import { Chests } from "../../../../services";
 
 const OpenBox = () => {
 	// categories the user has not seen yeat
@@ -26,7 +28,7 @@ const OpenBox = () => {
 		const catNameToKey = (name: string) => `${auth._id}:${name}`;
 
 		const hasSeen = async (name: string) => {
-			return false;
+			return !!(await AsyncStorage.getItem(catNameToKey(name)));
 		};
 		const markAsSeen = async (name: string) =>
 			await AsyncStorage.setItem(catNameToKey(name), "[OK]");
@@ -98,17 +100,14 @@ const OpenBox = () => {
 		<Animated.View
 			style={{
 				...styles.outer,
-				backgroundColor: Colors.MapToDark["success"],
+				backgroundColor: Chests.mapToColor(category.name),
 			}}
 			pointerEvents="box-none"
 		>
-			<View style={styles.imageWrapper}>
-				<Image
-					source={{ uri: category.unlockedImg }}
-					resizeMode="contain"
-					style={styles.image}
-				/>
-			</View>
+			<Image
+				source={Chests.mapToPrize(category.name)}
+				resizeMode="contain"
+			/>
 			<Atoms.Text.Heading
 				style={{
 					...styles.chestUnlockHeader,
