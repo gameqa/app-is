@@ -56,8 +56,6 @@ const Motivation = () => {
 	const RenderCloseToPrize = ({
 		text,
 		prizeId,
-		lockedImg,
-		name,
 	}: Declerations.ICloseToPrize) => (
 		<View
 			style={{
@@ -65,10 +63,13 @@ const Motivation = () => {
 				backgroundColor: "white",
 			}}
 		>
-			<Image style={styles.chest} source={{ uri: lockedImg }} />
+			<Image
+				style={styles.chest}
+				source={Services.Chests.mapIdToNoPrize(prizeId)}
+			/>
 
 			<Atoms.Text.Heading style={styles.closeToPrizeText}>
-				{name}
+				{Services.Chests.mapIdtoName(prizeId)}
 			</Atoms.Text.Heading>
 
 			<Atoms.Text.Para style={styles.closeToPrizeText}>
