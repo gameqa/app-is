@@ -269,20 +269,18 @@ const UserProgress = () => {
 							🤓🤔
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(
 								questionsWithNoAnswersNotSeen
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						<UnSeenTextPrompt />
+						<UnSeenTextPrompt /> */}
 
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
-							data={sortFlatListData(
-								questionsWithNoAnswersSeen
-							)}
+							data={sortFlatListData(questionsWithNoAnswers)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
