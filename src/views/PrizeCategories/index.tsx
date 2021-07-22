@@ -44,6 +44,7 @@ const PrizeCategories = () => {
 		);
 	};
 
+	// Change state of giveAway to true for 10 min.
 	const showGiveAwayAndReset = () => {
 		setIsGiveAway(true);
 		setTimeout(setIsGiveAway, 600000, false);

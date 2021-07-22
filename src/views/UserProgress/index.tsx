@@ -17,7 +17,7 @@ import { FlatList, ScrollView } from "react-native-gesture-handler";
 import * as Hooks from "../../hooks";
 import * as Actions from "../../actions";
 import { QuestionWithAnswers } from "../../declerations";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
 
@@ -35,7 +35,7 @@ const UserProgress = () => {
 		(state: StoreState) => state.myQuestions
 	);
 	const dispatch = useDispatch();
-
+	const navigation = useNavigation();
 	const ANSWER = "answer";
 	const IN_PROGRESS = "in-progress";
 	const NO_ANSWERS = "no-answers";
@@ -269,20 +269,18 @@ const UserProgress = () => {
 							🤓🤔
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(
 								questionsWithNoAnswersNotSeen
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						<UnSeenTextPrompt />
+						<UnSeenTextPrompt /> */}
 
 						{/* Render next all questions that have only seen answers */}
 						<FlatList
-							data={sortFlatListData(
-								questionsWithNoAnswersSeen
-							)}
+							data={sortFlatListData(questionsWithNoAnswers)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
@@ -332,6 +330,11 @@ const UserProgress = () => {
 				) : myQuestions.questions.length === 0 ? (
 					<React.Fragment>
 						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
+						<Atoms.Buttons.Base
+							type={"highlight"}
+							label={"Hefja leik"}
+							onPress={() => navigation.navigate("Spila")}
+						/>
 					</React.Fragment>
 				) : (
 					<RenderScreen />

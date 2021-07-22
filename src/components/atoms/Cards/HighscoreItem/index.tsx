@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { Atoms } from "../../..";
 import { StoreState } from "../../../../reducers";
 import { Colors } from "../../../../services";
 import { IProps, IRenderTextProps } from "./interface";
+import styles from "./styles";
 
 const HighscoreItem = ({ user }: IProps) => {
 	const { username, streak, scoreCard } = user;
@@ -17,6 +18,12 @@ const HighscoreItem = ({ user }: IProps) => {
 		[currentUser, user]
 	);
 
+	/**
+	 * Renders each info on highscore card for each specific user.
+	 * If highscore card is logged in user, use different style.
+	 * @param props ReactNode
+	 * @returns JSX element
+	 */
 	const RenderText = (props: IRenderTextProps) =>
 		isCurrent ? (
 			<Atoms.Text.Heading
@@ -42,26 +49,12 @@ const HighscoreItem = ({ user }: IProps) => {
 				borderBottomColor: "#eee",
 			}}
 		>
-			<View
-				style={{
-					height: "100%",
-					justifyContent: "center",
-					paddingHorizontal: 10,
-				}}
-			>
+			<View style={styles.highscoreRankContainer}>
 				<RenderText># {hiscoreRank}</RenderText>
 			</View>
 			<Atoms.Users.Avatar {...user} color="highlight" />
 
-			<View
-				style={{
-					paddingHorizontal: 10,
-					flexDirection: "row",
-					justifyContent: "space-between",
-					alignItems: "center",
-					flex: 1,
-				}}
-			>
+			<View style={styles.usernameAndStreakContainer}>
 				<RenderText>{username}</RenderText>
 				<RenderText>
 					{streak > 1 ? `${streak}🔥` : null}
