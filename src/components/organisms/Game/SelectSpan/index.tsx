@@ -133,7 +133,7 @@ const SelectSpan = () => {
 			: null}
 				{stage === "verify-answer-present" ? (
 					<Utils.VerifyButtons
-						approveEmoji="😃"
+						approveEmoji="[[translation:75105759-92f1-4db4-b454-348a6942e8fb]]"
 						declineEmoji="[[translation:b6d3182e-3b8b-4b3c-92b8-8264a7ddd645]]"
 						onApprove={() => setStage("is-boolean")}
 						onDecline={handleArchive}
