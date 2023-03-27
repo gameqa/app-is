@@ -49,7 +49,7 @@ const SelectSpan = () => {
 	const handleArchive = useCallback(async () => {
 		Alert.alert(
 			"[[translation:c35d4988-1f40-401b-88a8-552871a987cd]]",
-			"[[translation:78f8e09e-b039-44f9-bbbe-fd134d603d6a]].",
+			"[[translation:78f8e09e-b039-44f9-bbbe-fd134d603d6a]]",
 			[
 				{
 					text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",

@@ -3,7 +3,7 @@ import { Actions, ActionTypes } from "../../actions";
 
 export const initialState: State = {
 	_id: "",
-	text: "Hvenær fæddist Vigdís Finnbogadóttir?",
+	text: "",
 	isYesOrNo: false,
 };
 

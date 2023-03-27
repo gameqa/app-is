@@ -31,7 +31,7 @@ const Authenticate = () => {
 	const navigation = useNavigation<any>();
 
 	const text = {
-		title: "[[translation:b529825f-fa0a-417c-8432-d30a7b56f35c]]!",
+		title: "[[translation:b529825f-fa0a-417c-8432-d30a7b56f35c]]",
 		switchButton: "[[translation:cdba63bc-8764-4360-8f6d-d17b6da0b769]]",
 	};
 

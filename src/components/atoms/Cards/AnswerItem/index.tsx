@@ -142,7 +142,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		<TouchableOpacity onPress={() => setImpossibleQuestion()}>
 			<Atoms.Cards.ChatBubble
 				message={
-					"❌ [[translation:c2b441ce-7f73-4664-a51f-067601786e1d]]. \n\n 🔎 Ýttu hér til að finna svarið sjálf/ur"
+					"❌ [[translation:c2b441ce-7f73-4664-a51f-067601786e1d]] \n\n 🔎 [[translation:eeec7d49-6ba9-45f6-ba92-3c6d6c899ddb]]"
 				}
 				isInbound
 			/>

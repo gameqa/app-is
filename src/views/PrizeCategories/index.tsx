@@ -76,7 +76,7 @@ const PrizeCategories = () => {
 			<LayoutWrapper>
 				<Molecules.Users.Info {...auth} />
 				<Atoms.Text.Para style={styles.paragraph}>
-				[[translation:55d8a451-664a-45b3-9ed8-13ddd8548b4d]]. 🏆🎁
+				[[translation:55d8a451-664a-45b3-9ed8-13ddd8548b4d]] 🏆🎁
 				</Atoms.Text.Para>
 				<Molecules.GiveAway.CountDownComponent
 					time={TIME_UNTIL_GIVEAWAY}
@@ -85,7 +85,6 @@ const PrizeCategories = () => {
 					onPress={loadInBrowser}
 					isLoading={giveAway.isLoading}
 				/>
-
 				{prizeCategories.map((item) => (
 					<Atoms.Cards.PrizeCategory {...item} />
 				))}

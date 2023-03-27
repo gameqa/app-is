@@ -59,7 +59,7 @@ const WriteQuestion = () => {
 			>
 				<Atoms.Alerts.Ribbon item={error} />
 				<Utils.Explain>
-					[[translation:239e14d4-ee59-4ec9-8977-7c3daba674fa]]. [[translation:5d837438-3c49-4ff1-8a55-68874a826574]]🔎[[translation:019caaf7-b2f7-4d8a-a1d7-966e74e4301a]]
+					[[translation:7c18efa6-d7d6-43ef-b24a-be4b83150c68]]. [[translation:5d837438-3c49-4ff1-8a55-68874a826574]]🔎[[translation:019caaf7-b2f7-4d8a-a1d7-966e74e4301a]]
 				</Utils.Explain>
 				<View style={styles.marginTop}>
 					<View style={styles.imagePreview}>

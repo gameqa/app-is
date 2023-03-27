@@ -49,7 +49,7 @@ const ReviewQuestion = () => {
 	const handleArchive = async () =>
 		Alert.alert(
 			"[[translation:43ad9161-97e6-4bac-9b90-1e08e5537118]]",
-			`${item?.badQuestionPrompt} [[translation:a937537e-a7d5-4852-be69-e09c00a6b43f]].`,
+			`${item?.badQuestionPrompt} [[translation:a937537e-a7d5-4852-be69-e09c00a6b43f]]`,
 			[
 				{
 					text: "[[translation:0fa2c05f-f16c-432f-b4dd-3f04ffc15f1f]]",

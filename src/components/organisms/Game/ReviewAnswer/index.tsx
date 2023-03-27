@@ -50,8 +50,8 @@ const ReviewAnswer = () => {
 
 	const handleArchive = useCallback(async () => {
 		Alert.alert(
-			"[[translation:733eaeaf-7c00-4bd9-ab7d-26359b6855c9]]?",
-			"[[translation:ed3713df-4b8b-447a-b97b-e5b0bc29e399]].",
+			"[[translation:733eaeaf-7c00-4bd9-ab7d-26359b6855c9]]",
+			"[[translation:ed3713df-4b8b-447a-b97b-e5b0bc29e399]]",
 			[
 				{
 					text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",
@@ -72,7 +72,7 @@ const ReviewAnswer = () => {
 			<ScrollView>
 				<Utils.QuestionIs question={state.text} />
 				<Utils.Explain>
-					[[translation:51234ad0-149a-46a4-97db-428d6c36f865]]. 🖊️[[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
+					[[translation:51234ad0-149a-46a4-97db-428d6c36f865]] 🖊️[[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 				</Utils.Explain>
 				<Utils.SpanSelector
 					immutable={true}
@@ -98,7 +98,7 @@ const ReviewAnswer = () => {
 						onApprove={() => setStage("verify-answer-short")}
 						onDecline={handleArchive}
 					>
-						[[translation:2181c771-6e4b-4250-880f-d27364c79f15]]?
+						[[translation:2181c771-6e4b-4250-880f-d27364c79f15]]
 					</Utils.VerifyButtons>
 				) : stage === "verify-answer-short" ? (
 					<Utils.VerifyButtons

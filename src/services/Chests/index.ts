@@ -2,10 +2,10 @@
 import * as Colors from "../Colors";
 import * as Statics from "../../static";
 
-const PARTICIPATION_PRIZE = "Allir taka þátt";
-const GANG_PRIZE = "Klíkan";
-const THE_CHOSEN_ONES_PRIZE = "Útvaldir";
-const ELITE_PRIZE = "Elítan";
+const PARTICIPATION_PRIZE = "[[translation:82363b73-5494-4ef3-bca6-9c0a3f2c1110]]";
+const GANG_PRIZE = "[[translation:26c428fe-1b0b-4cc1-9c7f-e5cfadb97d2e]]";
+const THE_CHOSEN_ONES_PRIZE = "[[translation:185b1e6a-ca25-4538-ab83-a2e719f7199d]]";
+const ELITE_PRIZE = "[[translation:0f0ba1ba-3b00-44ba-9114-f68902c5ec0c]]";
 const WHITE_RAVENS_PRIZE = "[[translation:a0891da8-8741-4867-a3c4-7bb927896c41]]";
 
 export const mapToPrize = (type?: string) => {

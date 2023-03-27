@@ -133,7 +133,7 @@ const UserProgress = () => {
 	);
 
 	const alertSignOut = () =>
-		Alert.alert("Útskráning", "Viltu skrá þig út?", [
+		Alert.alert("[[translation:9d378a47-8350-4ade-8f4b-10f7ba5488d0]]", "[[translation:54d10c8b-e468-4566-ae52-bc0b4bb454dc]]", [
 			{
 				text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
 				onPress: () => null,
