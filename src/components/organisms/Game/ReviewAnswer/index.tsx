@@ -57,7 +57,7 @@ const ReviewAnswer = () => {
 					text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",
 				},
 				{
-					text: "[[translation:0fa2c05f-f16c-432f-b4dd-3f04ffc15f1f]]",
+					text: "[[translation:398b6757-1af6-407d-a8a2-d7c0dd667211]]",
 					onPress: () =>
 						dispatch(
 							Actions.Game.archiveAnswer(game._id, state._id)
