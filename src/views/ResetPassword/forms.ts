@@ -4,8 +4,8 @@ export const ResetPassword: FormRecipe = {
 	email: {
 		type: InputElementTypes.text,
 		value: "",
-		label:"netfang",
-		placeholder: "eg@email.is"
+		label:"[[translation:dde6ca46-20e4-4ee9-b3ef-2fda486360d3]]",
+		placeholder: "[[translation:106400a5-1f09-4bea-9459-0c5704fa8450]]"
 	},
 
 }

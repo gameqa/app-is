@@ -9,18 +9,18 @@ import * as Views from "../views";
 
 export const tab: TabRoutes[] = [
 	{
-		id: "Samfélagið",
+		id: "[[translation:27d82309-5af5-4387-8151-15bdbadf719b]]",
 		Component: Views.Invite,
 	},
 	{
-		id: "Stigatafla",
+		id: "[[translation:ffa22022-0151-47c4-bc9c-4645eef5af50]]",
 		Component: Views.Hiscore,
 	},
 ];
 
 export const gameStack: GameStackRoutes[] = [
 	{
-		id: "Spila",
+		id: "[[translation:ca5523c3-7fcb-487c-8e2c-64e992eafefc]]",
 		Component: Views.Game,
 	},
 	{
@@ -69,7 +69,7 @@ export const authStack: AuthStackRoutes[] = [
 
 export const profileStack: ProfileStackRoutes[] = [
 	{
-		id: "Ég",
+		id: "[[translation:bbeac5e8-68b8-4c10-98f1-269857ba9347]]",
 		Component: Views.UserProgress,
 	},
 	{

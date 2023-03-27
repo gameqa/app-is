@@ -10,7 +10,7 @@ const QuestionIs = ({ question, center }: IProps) => {
 				...(center ? { textAlign: "center" } : {}),
 			}}
 		>
-			Spurningin er „{question}“
+			[[translation:43a56caf-107e-4148-b94d-0e6fd43019ab]] „{question}“
 		</Atoms.Text.Heading>
 	);
 };

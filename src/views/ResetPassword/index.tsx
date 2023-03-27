@@ -17,8 +17,8 @@ const ResetPassword = () => {
 	const navigation = useNavigation<any>();
 
 	const text = {
-		title: "Fá nýtt lykilorð",
-		switchButton: "Ég er með aðgang",
+		title: "[[translation:a131ec39-c67f-49be-82c2-d3081d72e020]]",
+		switchButton: "[[translation:c24cdc16-0a15-4c6c-b042-9da5e5a06142]]",
 		btnColor: "highlight",
 	};
 
@@ -34,15 +34,15 @@ const ResetPassword = () => {
 			<LayoutWrapper>
 				<View>
 					<Atoms.Text.Heading>
-						Gleymt lykilorð
+					[[translation:37697751-2f22-4df1-b942-00ed6e525a4e]]
 					</Atoms.Text.Heading>
 					<Atoms.Text.Para>
-						Skráðu inn email til að fá nýtt lykilorði
+					[[translation:59475d93-9003-41f0-8f3b-64bb0847cb0a]]
 					</Atoms.Text.Para>
 
 					<Atoms.Inputs.Text
 						value={state.email ?? ""}
-						placeholder="eg@email.is"
+						placeholder="[[translation:106400a5-1f09-4bea-9459-0c5704fa8450]]"
 						onChange={(value) =>
 							dispatch(
 								Actions.ResetPassword.setResetPasswordEmail(
@@ -56,7 +56,7 @@ const ResetPassword = () => {
 					/>
 					<Atoms.Buttons.Base
 						type={"highlight"}
-						label={state.isLoading ? "Hleð" : text.title}
+						label={state.isLoading ? "[[translation:40f55f23-1d45-46dc-ae39-02a61e4d6594]]" : text.title}
 						onPress={handleSubmit}
 					/>
 				</View>

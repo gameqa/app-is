@@ -116,21 +116,16 @@ const Game = () => {
 				{!hasSigned ? (
 					<View>
 						<Atoms.Text.Heading style={styles.para}>
-							Heiðursmannasamkomulag
+						[[translation:86cf4916-78a4-428a-a536-6da032839372]]
 						</Atoms.Text.Heading>
 						<Atoms.Text.Para style={styles.para}>
-							Ég heiti því að spila leikinn af heilindum. Ég
-							mun skrifa skiljanlegar spurningar, ég mun
-							svara eftir minni bestu getu og fara yfir
-							spurningar og svör eftir minni bestu samvisku.
+						[[translation:f1c66777-721a-4389-b680-6b74994242dd]]
 						</Atoms.Text.Para>
 						<Atoms.Text.Para style={styles.para}>
-							Ég skil einnig að ef mitt framlag brýtur gegn
-							þessu heiðursmannasamkomulagi þá mun ég ekki
-							eiga möguleika á að vinna vinninga.
+						[[translation:d940ddd4-1050-4d02-8490-f418f094d50e]]
 						</Atoms.Text.Para>
 						<Atoms.Buttons.Base
-							label="Samþykkja"
+							label="[[translation:1259ccfc-ae1b-458e-8faa-e4e991ccc0b0]]"
 							type="highlight"
 							onPress={() => setHasSigned(true)}
 						/>

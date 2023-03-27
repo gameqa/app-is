@@ -79,7 +79,7 @@ const PinCodeScreen = (props: IProps) => {
 								/>
 							</View>
 							<Text style={styles.greyText}>
-								Senda aftur
+								[[translation:78431932-9dae-4300-9505-0aba46fcda5d]]
 							</Text>
 						</TouchableOpacity>
 						<SmoothPinCodeInput

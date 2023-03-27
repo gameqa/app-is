@@ -13,7 +13,7 @@ const CenterBoxLoader = ({ isLoading, onCancel }: IProps) => {
 			{onCancel !== undefined ? (
 				<TouchableOpacity onPress={onCancel} style={styles.cancel}>
 					<Text style={styles.cancelText}>
-						Hætta við leit 🙅‍♀️
+					[[translation:8a6e3047-e77f-4c85-b713-2e93e2c26d6a]] [[translation:3b44ed43-0d08-4095-b9ec-f442f545b73a]]
 					</Text>
 				</TouchableOpacity>
 			) : null}

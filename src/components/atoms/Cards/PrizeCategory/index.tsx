@@ -46,16 +46,16 @@ const PrizeCategoryCard = (category: PrizeCategory) => {
 					<View style={styles.topLine}>
 						{category.isAvailable ? (
 							<Atoms.Text.Para>
-								Þú ert komin/n í pottinn.
+								[[translation:15a0c52c-dfa3-40a6-a7af-b67dee25ecd3]]
 							</Atoms.Text.Para>
 						) : (
 							<Atoms.Text.Para style={styles.para}>
-								Þú þarft að {category.prereqDescription}.
+								[[translation:679571b1-de5e-437c-9208-ca5c755a0d4f]] {category.prereqDescription}.
 							</Atoms.Text.Para>
 						)}
 					</View>
 					<Atoms.Text.Para>
-						{category.prizes.length} vinningar í þessum flokki
+						{category.prizes.length} [[translation:85936485-09df-41a1-b19a-163832d182f6]]
 					</Atoms.Text.Para>
 				</View>
 			</Atoms.Cards.Base>

@@ -15,15 +15,15 @@ const GoogleSearch = () => {
 
 	const handleMarkImposible = useCallback(() => {
 		Alert.alert(
-			"Ertu viss?",
-			"Það gerist af og til að ekkert svar finnst.",
+			"[[translation:43ad9161-97e6-4bac-9b90-1e08e5537118]]",
+			"[[translation:c3b2e703-6e25-40da-b3d3-c7d2ae4f42fc]]",
 			[
 				{
-					text: "Nei",
+					text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
 					onPress: () => null,
 				},
 				{
-					text: "Já",
+					text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]",
 					onPress: () =>
 						dispatch(
 							Actions.Game.markQuestionAsImpossible(
@@ -40,8 +40,7 @@ const GoogleSearch = () => {
 		<ScrollView>
 			<Utils.QuestionIs question={state.text} />
 			<Utils.Explain>
-				Þú þarft að nota Google til að finna svarið á íslensku
-				Wikipediu, Vísindavefnum, vísir.is eða mbl.is 📚🔬📰
+			[[translation:6eb6fc05-e841-4511-ab4e-735c5be89476]] 📚🔬📰
 			</Utils.Explain>
 			<Atoms.Inputs.Google
 				onChange={(val) =>
@@ -56,9 +55,7 @@ const GoogleSearch = () => {
 			{state.articles.length > 0 ? (
 				<React.Fragment>
 					<Atoms.Text.Para>
-						Þú getur opnað síðurnar sem þér þykir líklegar. Þú
-						þarft þar að velja efnisgreinina sem inniheldur
-						svarið.
+					[[translation:2732e272-cd47-4bc5-8ff6-3c48d3f5e32b]]
 					</Atoms.Text.Para>
 				</React.Fragment>
 			) : null}
@@ -66,21 +63,21 @@ const GoogleSearch = () => {
 				style={styles.cantFindOuter}
 				onPress={handleMarkImposible}
 			>
-				<Atoms.Text.Para>😩 Ég finn ekki svarið</Atoms.Text.Para>
+				<Atoms.Text.Para>[[translation:36a2969e-55ce-4c22-9832-d3e292df97dc]] [[translation:e65b7ce4-027f-4a5f-a821-333a71d1804b]]</Atoms.Text.Para>
 			</TouchableOpacity>
 			<View style={styles.ribbon}>
 				{state.searchError ? (
 					<Atoms.Alerts.Ribbon
 						item={{
 							type: "danger",
-							label: "Villa við leit, prófaðu annan leitarstreng",
+							label: "[[translation:61735474-90bf-4d3f-aa14-e02a20469934]]",
 						}}
 					/>
 				) : state.noResults ? (
 					<Atoms.Alerts.Ribbon
 						item={{
 							type: "warning",
-							label: "Ekkert fannst, prófaðu annan leitarstreng",
+							label: "[[translation:e64d9651-83b0-4444-b5b2-5fb2a1428624]]",
 						}}
 					/>
 				) : null}

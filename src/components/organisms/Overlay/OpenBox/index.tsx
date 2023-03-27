@@ -117,7 +117,7 @@ const OpenBox = () => {
 				{category.name} {"\n"}
 			</Atoms.Text.Heading>
 			<Atoms.Text.Heading style={styles.chestUnlockPara}>
-				Þú ert kominn í pottinn!{" "}
+			[[translation:8e0b57d4-0c0f-49a3-af15-35a6bc5d1e08]]{" "}
 				{/* setja inn catergory name hér inn */}
 			</Atoms.Text.Heading>
 

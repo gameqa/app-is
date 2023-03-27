@@ -9,13 +9,13 @@ import {
 } from "../../static";
 
 const LEVEL_NAMES = [
-	"Smábarn",
-	"Byrjandi",
-	"Nemandi",
-	"Menntskælingur",
-	"Dúx",
-	"Kennari",
-	"Prófessor",
+	"[[translation:1e33cec2-ccd7-47b8-bf86-e41ffa849df4]]",
+	"[[translation:9df058c6-a144-4b75-976a-2997f67f7349]]",
+	"[[translation:34f440f1-c872-4118-8f9b-d0ed5cefd6a1]]",
+	"[[translation:56f24152-d8fd-4d86-8cbc-66ddcdb269e6]]",
+	"[[translation:9010208c-3c45-4358-87a1-a61ea3252037]]",
+	"[[translation:c3d4773c-75ad-4240-9657-b5e221c94d74]]",
+	"[[translation:3dda0399-962d-4862-ac77-c124e033029a]]",
 ];
 
 const LEVEL_ICONS = [
@@ -30,7 +30,7 @@ const LEVEL_ICONS = [
 
 export const mapLevelToString = (level: number) => {
 	const string = LEVEL_NAMES[Math.floor(level / 3)];
-	if (string === undefined) return "Galdrakall";
+	if (string === undefined) return "[[translation:239e14d4-ee59-4ec9-8977-7c3daba674fa]]";
 	return string;
 };
 

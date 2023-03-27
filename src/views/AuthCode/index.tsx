@@ -24,9 +24,9 @@ const AuthCode = () => {
 	);
 
 	const text = {
-		title: "Staðfestingarkóði",
-		description: `Staðfestingarkóði hefur verið sendur á ${auth.email}`,
-		goBackText: "Útskrá",
+		title: "[[translation:d6ffe4e3-4a31-44f4-8961-b36d343400c2]]",
+		description: `[[translation:99cce31d-82f5-455f-af84-e83ca96b52e7]] ${auth.email}`,
+		goBackText: "[[translation:65accc94-b1d8-4899-85e7-4cc048d70759]]",
 	};
 
 	return (

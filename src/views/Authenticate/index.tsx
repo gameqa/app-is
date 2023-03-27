@@ -31,8 +31,8 @@ const Authenticate = () => {
 	const navigation = useNavigation<any>();
 
 	const text = {
-		title: "Velkomin/n aftur!",
-		switchButton: "Mig vantar aðgang",
+		title: "[[translation:b529825f-fa0a-417c-8432-d30a7b56f35c]]!",
+		switchButton: "[[translation:cdba63bc-8764-4360-8f6d-d17b6da0b769]]",
 	};
 
 	const handleAuth = (user: User) => {
@@ -49,7 +49,7 @@ const Authenticate = () => {
 		<LayoutWrapper>
 			<View style={styles.form}>
 				<Organisms.Forms.Builder<User>
-					buttonLabel="Skrá inn"
+					buttonLabel="[[translation:b5f212d7-7751-4abf-af59-7e8553b26cd8]]"
 					form={forms.Authenticate}
 					url="/api/auth/authenticate"
 					HTTPmethod="post"
@@ -58,7 +58,7 @@ const Authenticate = () => {
 				>
 				<View style={styles.changeForm}>
 					<TouchableOpacity onPress={() => navigation.navigate("reset-password")}>
-						<Atoms.Text.Para>Gleymt lykilorð?</Atoms.Text.Para>
+						<Atoms.Text.Para>[[translation:6b1a9363-c272-40f5-90bf-700797df6550]]</Atoms.Text.Para>
 					</TouchableOpacity>
 				</View>
 					<View style={{ flex: 1 }}>

@@ -48,15 +48,15 @@ const SelectSpan = () => {
 
 	const handleArchive = useCallback(async () => {
 		Alert.alert(
-			"Ekkert svar",
-			"Ef þú sérð ekki svarið hér þá eyðum við þessari efnisgrein.",
+			"[[translation:c35d4988-1f40-401b-88a8-552871a987cd]]",
+			"[[translation:78f8e09e-b039-44f9-bbbe-fd134d603d6a]].",
 			[
 				{
-					text: "Hætta við",
+					text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",
 					onPress: () => markKeyAsSeen(),
 				},
 				{
-					text: "Áfram",
+					text: "[[translation:398b6757-1af6-407d-a8a2-d7c0dd667211]]",
 					onPress: () => handleCompleteStep(),
 				},
 			]
@@ -64,12 +64,12 @@ const SelectSpan = () => {
 	}, [game._id, state._id, markKeyAsSeen, handleCompleteStep]);
 
 	const handleMarkAsYesOrNo = () => {
-		Alert.alert("Ertu viss?", "Er svarið annaðhvort já eða nei?", [
+		Alert.alert("[[translation:43ad9161-97e6-4bac-9b90-1e08e5537118]]", "[[translation:9ed9d5ea-217b-4e61-9928-62a1150522fc]]", [
 			{
-				text: "Hætta við",
+				text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",
 			},
 			{
-				text: "Áfram",
+				text: "[[translation:398b6757-1af6-407d-a8a2-d7c0dd667211]]",
 				onPress: () =>
 					dispatch(
 						Actions.Game.markAsYesOrNo(
@@ -104,10 +104,7 @@ const SelectSpan = () => {
 			<ScrollView>
 				<Utils.QuestionIs question={state.text} />
 				<Atoms.Text.Para>
-					Þessi efnisgrein var valin af öðrum notanda sem telur
-					að svarið sé hér að finna. Nú þurfum við að vita hvort
-					hluti af textanum svari spurningunni. Ef svo er, þá
-					þarft þú að velja réttu orðin sem mynda svarið.
+					[[translation:3dde1386-6f44-499b-8756-72d24d17788d]]
 				</Atoms.Text.Para>
 				<Utils.SpanSelector
 					paragraph={state.paragraph}
@@ -137,33 +134,33 @@ const SelectSpan = () => {
 				{stage === "verify-answer-present" ? (
 					<Utils.VerifyButtons
 						approveEmoji="😃"
-						declineEmoji="😒"
+						declineEmoji="[[translation:b6d3182e-3b8b-4b3c-92b8-8264a7ddd645]]"
 						onApprove={() => setStage("is-boolean")}
 						onDecline={handleArchive}
 					>
-						Sérðu svarið?
+						[[translation:448a1aee-2d52-437e-bf1c-d38789cb1077]]
 					</Utils.VerifyButtons>
 				) : stage === "is-boolean" ? (
 					<Utils.VerifyButtons
-						approveEmoji="👍"
-						declineEmoji="👎"
+						approveEmoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
+						declineEmoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 						onApprove={handleMarkAsYesOrNo}
 						onDecline={() => setStage("select-span")}
 					>
-						Er þetta já/nei spurning?
+						[[translation:2f05d98d-7fde-45c7-ae46-b02abec5d246]]
 					</Utils.VerifyButtons>
 				) : stage === "select-span" ? (
 					<React.Fragment>
 						{state.firstWord !== undefined &&
 						state.lastWord !== undefined ? (
 							<Atoms.Buttons.Base
-								label="Staðfesta"
+								label="[[translation:63d51e1b-3367-4529-9849-925856fdaff1]]"
 								type="highlight"
 								onPress={handleSubmit}
 							/>
 						) : null}
 						<Atoms.Buttons.Base
-							label="Til baka"
+							label="[[translation:78d06c58-3368-44ef-b0b6-135f6a9f4936]]"
 							type="danger"
 							onPress={() =>
 								setStage("verify-answer-present")

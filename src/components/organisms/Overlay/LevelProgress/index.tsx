@@ -51,7 +51,7 @@ const AnnounceScreen = () => {
 					{Math.round(current * 100)}%
 				</Text>
 				<Text style={styles.toLevel}>
-					- að lvl {auth.level + 1} -
+					- [[translation:ca3392df-1aab-478c-99f6-1659b7021980]] {auth.level + 1} -
 				</Text>
 			</View>
 		</View>

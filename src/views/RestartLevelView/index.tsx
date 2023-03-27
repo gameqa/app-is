@@ -57,13 +57,9 @@ const RestartLevelView = () => {
 					<Atoms.Users.Avatar {...upgrade} size={avatarSize} />
 				</View>
 				<View style={styles.text}>
-					<Atoms.Text.Heading>Vel gert!</Atoms.Text.Heading>
+					<Atoms.Text.Heading>[[translation:a1f4560f-51dc-4c01-bd09-041a635b7116]]!</Atoms.Text.Heading>
 					<Atoms.Text.Para>
-						Heldur þú að þú sért kominn á toppinn? Ekki alveg.
-						Hvað ef þú gætir margfaldað líkurnar þínar á að
-						vinna vinninga? Nú hefur þú tækifæri á því að fara
-						aftur í LVL 1 og aflæsa kisturnar upp á nýtt.
-						Þannig færð þú fleiri sæti í hverjum útdrætti.
+					[[translation:58f91cc3-7268-4c49-9dc7-6715ae0888f3]]
 					</Atoms.Text.Para>
 				</View>
 				<View style={styles.bulletContainer}>
@@ -72,7 +68,7 @@ const RestartLevelView = () => {
 					))}
 				</View>
 				<Atoms.Buttons.Base
-					label="Áfram"
+					label="[[translation:398b6757-1af6-407d-a8a2-d7c0dd667211]]"
 					onPress={() => dispatch(Actions.Auth.resetLevel())}
 					type="highlight"
 					inactive={auth.isResettingLevel}

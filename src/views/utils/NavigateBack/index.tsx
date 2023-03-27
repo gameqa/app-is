@@ -14,7 +14,7 @@ const NavigateBack = (props: IProps) => {
 				size={15}
 				color={Services.Colors.MapToDark["grey"]}
 			/>
-			<Atoms.Text.Para style={styles.backText}>Til Baka</Atoms.Text.Para>
+			<Atoms.Text.Para style={styles.backText}>[[translation:78d06c58-3368-44ef-b0b6-135f6a9f4936]]</Atoms.Text.Para>
 		</TouchableOpacity>
 	);
 };

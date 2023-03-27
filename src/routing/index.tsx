@@ -94,7 +94,7 @@ export const TabNavigator = () => {
 
 	const mapRouteIdToTabBarBadge = (routeName: Tabs) => {
 		switch (routeName) {
-			case "Ég":
+			case "[[translation:bbeac5e8-68b8-4c10-98f1-269857ba9347]]":
 				const answers =
 					Services.FilterMyQuestions.questionsWithAnswers(
 						myQuestions.questions
@@ -133,7 +133,7 @@ export const TabNavigator = () => {
 					inactiveTintColor: inActiveColor,
 				}}
 			>
-				<Tab.Screen name="Ég" 
+				<Tab.Screen name="[[translation:bbeac5e8-68b8-4c10-98f1-269857ba9347]]" 
 					component={ProfileStackNavigator} />
 				
 				{routes.tab.map((route) => (
@@ -146,10 +146,10 @@ export const TabNavigator = () => {
 					/>
 				))}
 				<Tab.Screen
-					name="Vinningar"
+					name="[[translation:749736db-66a3-42dc-ba0f-0ccd44135d4d]]"
 					component={PrizeStackNavigator}
 				/>
-				<Tab.Screen name="Spila" component={GameStackNavigator} />
+				<Tab.Screen name="[[translation:ca5523c3-7fcb-487c-8e2c-64e992eafefc]]" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

@@ -48,15 +48,15 @@ const ReviewQuestion = () => {
 	// handles archive
 	const handleArchive = async () =>
 		Alert.alert(
-			"Ertu viss?",
-			`${item?.badQuestionPrompt} Ef svo er þá munum við eyða henni.`,
+			"[[translation:43ad9161-97e6-4bac-9b90-1e08e5537118]]",
+			`${item?.badQuestionPrompt} [[translation:a937537e-a7d5-4852-be69-e09c00a6b43f]].`,
 			[
 				{
-					text: "Hætta við",
+					text: "[[translation:0fa2c05f-f16c-432f-b4dd-3f04ffc15f1f]]",
 					onPress: () => null,
 				},
 				{
-					text: "Já",
+					text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]",
 					onPress: () => handleCompleteStep(false),
 				},
 			]
@@ -84,12 +84,12 @@ const ReviewQuestion = () => {
 						</Atoms.Text.Para>
 						<View style={styles.buttons}>
 							<Atoms.Buttons.Emoji
-								emoji="👍"
+								emoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
 								onPress={() => advance(true)}
 								type="success"
 							/>
 							<Atoms.Buttons.Emoji
-								emoji="👎"
+								emoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 								onPress={() => advance(false)}
 								type="danger"
 							/>

@@ -89,12 +89,12 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 
 	const RenderAnswerAtText = (props: Answer) => {
 		let text = "";
-		const user = props.createdBy?.username ?? "notandi";
+		const user = props.createdBy?.username ?? "[[translation:00918805-65ec-4530-bd73-8bf08face8b4]]";
 
 		if (props.type === "unknown") return null;
 		if (props.verifiedAt === undefined) text = user;
 		else
-			text = `${user} svaraði ${moment(props.verifiedAt).fromNow()}`;
+			text = `${user} [[translation:5ba54eb3-1517-4379-8a2d-1bd80ce7758b]] ${moment(props.verifiedAt).fromNow()}`;
 		return (
 			<Atoms.Text.Para style={styles.answeredAtLabel}>
 				{text}
@@ -119,7 +119,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 					<View>
 						<Atoms.Cards.ChatBubble
 							sender={answer.createdBy ?? DEFAULT_SENDER}
-							message={answer.answerIs ? "Já" : "Nei"}
+							message={answer.answerIs ? "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]" : "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]"}
 						/>
 						<RenderAnswerAtText {...answer} />
 					</View>
@@ -127,7 +127,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 			default:
 				return (
 					<RenderErrorMessage
-						{...{ type: "highlight", label: "villa kom upp" }}
+						{...{ type: "highlight", label: "[[translation:2e222ada-7c4c-4d4d-a131-c84d5f160cef]]" }}
 					/>
 				);
 		}
@@ -142,7 +142,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 		<TouchableOpacity onPress={() => setImpossibleQuestion()}>
 			<Atoms.Cards.ChatBubble
 				message={
-					"❌ Notandi fann ekki svarið. \n\n 🔎 Ýttu hér til að finna svarið sjálf/ur"
+					"❌ [[translation:c2b441ce-7f73-4664-a51f-067601786e1d]]. \n\n 🔎 Ýttu hér til að finna svarið sjálf/ur"
 				}
 				isInbound
 			/>
@@ -167,7 +167,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 					<RenderErrorMessage
 						{...{
 							type: "highlight",
-							label: "Ekkert svar fundist enn.",
+							label: "[[translation:c2b441ce-7f73-4664-a51f-067601786e1d]]",
 						}}
 					/>
 				) : (

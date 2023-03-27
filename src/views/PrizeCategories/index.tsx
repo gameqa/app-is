@@ -76,9 +76,7 @@ const PrizeCategories = () => {
 			<LayoutWrapper>
 				<Molecules.Users.Info {...auth} />
 				<Atoms.Text.Para style={styles.paragraph}>
-					Hér sérðu lista yfir þá verðlaunaflokka sem eru í boði.
-					Þú getur smellt á hvern flokk fyrir sig til þess að sjá
-					yfirlit yfir vinninga. 🏆🎁
+				[[translation:55d8a451-664a-45b3-9ed8-13ddd8548b4d]]. 🏆🎁
 				</Atoms.Text.Para>
 				<Molecules.GiveAway.CountDownComponent
 					time={TIME_UNTIL_GIVEAWAY}

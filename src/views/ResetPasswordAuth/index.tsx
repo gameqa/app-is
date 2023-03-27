@@ -44,9 +44,9 @@ const ResetPasswordAuth = () => {
 	const CODE_LENGTH = 8;
 
 	const text = {
-		title: "Staðfestingarkóði",
-		description: `Kóði hefur verið sendur á ${resetPass.email}`,
-		goBackText: "Til baka",
+		title: "[[translation:d6ffe4e3-4a31-44f4-8961-b36d343400c2]]",
+		description: `[[translation:2ea52d7f-e7cc-423b-b7d1-6cb238fe4cf6]] ${resetPass.email}`,
+		goBackText: "[[translation:78d06c58-3368-44ef-b0b6-135f6a9f4936]]",
 	};
 
 	return (

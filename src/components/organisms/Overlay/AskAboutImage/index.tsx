@@ -56,7 +56,7 @@ const AskAboutImage = () => {
 			{hasLoaded ? (
 				<View style={styles.promptOuter}>
 					<Atoms.Text.Para>
-						Þú gætir spurt um{" "}
+					[[translation:80a89a34-0646-44a9-a169-5daf07edc421]]{" "}
 						<Text style={styles.bold}>
 							{state.image.subject_tf}
 						</Text>

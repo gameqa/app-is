@@ -37,10 +37,10 @@ const WriteQuestion = () => {
 		const MIN_QUESTION_LENGTH = 13;
 		try {
 			if (question.length < MIN_QUESTION_LENGTH)
-				throw new Error(`Spurningin er ekki nógu löng`);
+				throw new Error(`[[translation:d9e95a1f-d9e9-4f89-8c98-baca4805b55e]]`);
 			if (question.slice(-1) !== "?")
 				throw new Error(
-					`Spurningin verður að enda á spurningarmerki`
+					`[[translation:fd1f418f-135f-4b13-b28b-eb6a543cc579]]`
 				);
 			setError(undefined);
 			dispatch(
@@ -59,14 +59,13 @@ const WriteQuestion = () => {
 			>
 				<Atoms.Alerts.Ribbon item={error} />
 				<Utils.Explain>
-					Sendu inn spurningu sem aðrir notendur geta googlað
-					svarið við á íslensku. 🧑🔎🇮🇸
+					[[translation:239e14d4-ee59-4ec9-8977-7c3daba674fa]]. [[translation:5d837438-3c49-4ff1-8a55-68874a826574]]🔎[[translation:019caaf7-b2f7-4d8a-a1d7-966e74e4301a]]
 				</Utils.Explain>
 				<View style={styles.marginTop}>
 					<View style={styles.imagePreview}>
 						<View style={styles.previewBanner}>
 							<Atoms.Text.Para>
-								Þú gætir spurt um {state.image.subject_tf}
+								[[translation:80a89a34-0646-44a9-a169-5daf07edc421]] {state.image.subject_tf}
 							</Atoms.Text.Para>
 						</View>
 						<View style={styles.buttonsContainer}>
@@ -108,7 +107,7 @@ const WriteQuestion = () => {
 					</View>
 					<Atoms.Inputs.Text
 						value={state.question}
-						placeholder="Skrifaðu spurninguna hér"
+						placeholder="[[translation:3ac7f23c-c311-4cbc-9ab7-28d504132fa6]]"
 						onChange={handleUserInput}
 						props={{
 							multiline: true,

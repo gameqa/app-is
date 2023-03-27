@@ -6,7 +6,7 @@ const PARTICIPATION_PRIZE = "Allir taka þátt";
 const GANG_PRIZE = "Klíkan";
 const THE_CHOSEN_ONES_PRIZE = "Útvaldir";
 const ELITE_PRIZE = "Elítan";
-const WHITE_RAVENS_PRIZE = "Hvítir Hrafnar";
+const WHITE_RAVENS_PRIZE = "[[translation:a0891da8-8741-4867-a3c4-7bb927896c41]]";
 
 export const mapToPrize = (type?: string) => {
 	switch (type) {

@@ -41,7 +41,7 @@ const UsersInfo = (user: User) => {
 						{Services.UserLevels.mapLevelToString(user.level)}
 					</Atoms.Text.Para>
 					<Atoms.Text.Para>
-						#{user.scoreCard.hiscoreRank} á stigatöflunni
+						#{user.scoreCard.hiscoreRank} [[translation:c9138e47-8cd5-4804-8d63-aae658f3e2c1]]
 					</Atoms.Text.Para>
 				</View>
 			</View>
@@ -49,7 +49,7 @@ const UsersInfo = (user: User) => {
 			<View style={styles.textOuter}>
 				<Atoms.Text.Para>
 					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}
-					% að Lvl {user.level + 1}
+					% [[translation:ca3392df-1aab-478c-99f6-1659b7021980]] {user.level + 1}
 				</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome

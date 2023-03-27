@@ -20,7 +20,6 @@ import { QuestionWithAnswers } from "../../declerations";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { QuestionAnswerItem } from "../../components/atoms/Cards";
 import api from "../../api";
-
 import * as Utils from "./utils";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -136,11 +135,11 @@ const UserProgress = () => {
 	const alertSignOut = () =>
 		Alert.alert("Útskráning", "Viltu skrá þig út?", [
 			{
-				text: "Nei",
+				text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
 				onPress: () => null,
 				style: "cancel",
 			},
-			{ text: "Já", onPress: () => dispatch(logOutUser()) },
+			{ text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]", onPress: () => dispatch(logOutUser()) },
 		]);
 
 	// fired when notification is received while app is open
@@ -218,7 +217,7 @@ const UserProgress = () => {
 					<View style={styles.unSeenAnswerline}></View>
 					<View style={styles.unSeenTextContainer}>
 						<Atoms.Text.Para style={styles.unSeenText}>
-							Gömul svör
+						[[translation:a197b9af-1812-4cef-9d50-c46dc49bc4e2]]
 						</Atoms.Text.Para>
 					</View>
 
@@ -264,9 +263,8 @@ const UserProgress = () => {
 				return (
 					<React.Fragment>
 						<Atoms.Text.Para style={{}}>
-							Þetta eru spurningar sem aðrir notendur fundu
-							ekki svar við. Getur þú fundið svörin á Google.
-							🤓🤔
+						[[translation:74332ff0-bea7-4b49-9992-7ebee1c9a5d4]]
+							[[translation:ce9b3903-f33a-4ae6-b932-3ff5ffa06bd9]][[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						{/* <FlatList
@@ -329,11 +327,11 @@ const UserProgress = () => {
 					<ActivityIndicator />
 				) : myQuestions.questions.length === 0 ? (
 					<React.Fragment>
-						<Atoms.Cards.ChatBubble message="Þú hefur ekki spurt neinar spurningar enn þá. Þínar spurningar birtast hér." />
+						<Atoms.Cards.ChatBubble message="[[translation:80a9c4a8-ca73-4819-ad5c-53d0ac4215a9]]" />
 						<Atoms.Buttons.Base
 							type={"highlight"}
-							label={"Hefja leik"}
-							onPress={() => navigation.navigate("Spila")}
+							label={"[[translation:e7b7d7ef-397a-4f09-a408-16fdabd6a0c4]]"}
+							onPress={() => navigation.navigate("[[translation:ca5523c3-7fcb-487c-8e2c-64e992eafefc]]")}
 						/>
 					</React.Fragment>
 				) : (

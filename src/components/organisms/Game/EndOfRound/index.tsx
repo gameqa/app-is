@@ -21,15 +21,9 @@ const EndOfRound = () => {
 	return (
 		<View style={styles.outerCotnainer}>
 			<ScrollView style={styles.outer}>
-				<Atoms.Text.Heading>Vel gert! 👏</Atoms.Text.Heading>
+				<Atoms.Text.Heading>[[translation:a1f4560f-51dc-4c01-bd09-041a635b7116]]! 👏</Atoms.Text.Heading>
 				<Atoms.Text.Collapsable style={styles.para}>
-					Þú ert komin/n í Lvl {auth.level} og ert númer{" "}
-					{auth.scoreCard.hiscoreRank} á stigatöflunni. Því meira sem
-					þú spilar, því fleiri stigum safnarðu og því fleiri og
-					flottari vinninga áttu möguleika á að vinna.
-					Allar spurningarnar og svörin sem þú býrð til nýtast til
-					þess að kenna gervigreind að finna svör við spurningum á
-					íslensku.🤖🇮🇸
+				[[translation:3bfe0891-2017-4080-afb8-7449c2da8ad9]]. [[translation:261ecbc8-559f-4423-a0c0-22acc5a149f5]]
 				</Atoms.Text.Collapsable>
 				{prizeCategories.map((item) => (
 					<Atoms.Cards.PrizeCategory {...item} />
@@ -37,7 +31,7 @@ const EndOfRound = () => {
 			</ScrollView>
 			<Atoms.Buttons.Base
 					type="highlight"
-					label="Áfram"
+					label="[[translation:398b6757-1af6-407d-a8a2-d7c0dd667211]]"
 					onPress={() =>
 						dispatch(Actions.Game.fetchCurrentGameRound())
 					}

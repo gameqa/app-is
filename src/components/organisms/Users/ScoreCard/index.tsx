@@ -16,7 +16,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Atoms.Text.Para>Spurningar</Atoms.Text.Para>
+				<Atoms.Text.Para>[[translation:9eb6138d-bbb5-447b-9440-a9b1f1062b43]]</Atoms.Text.Para>
 				<Atoms.Text.Para>{data.questions}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
@@ -30,7 +30,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Atoms.Text.Para>Svör</Atoms.Text.Para>
+				<Atoms.Text.Para>[[translation:7923fe3c-e9c7-44cb-bdf0-dad4c39b8daf]]</Atoms.Text.Para>
 				<Atoms.Text.Para>{data.answers}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
@@ -44,7 +44,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			
 			*/}
 			<View style={styles.labelLine}>
-				<Atoms.Text.Para>Skráðir vinir (boð)</Atoms.Text.Para>
+				<Atoms.Text.Para>[[translation:64baabaa-5024-40ad-9020-56f7921ea11e]]</Atoms.Text.Para>
 				<Atoms.Text.Para>{data.invites}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
@@ -56,7 +56,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 			{/* Articles found progress  */}
 
 			<View style={styles.labelLine}>
-				<Atoms.Text.Para>Vefsíður með svörum</Atoms.Text.Para>
+				<Atoms.Text.Para>[[translation:3472e80f-b8ef-4c51-85cc-9bf7124f8e79]]</Atoms.Text.Para>
 				<Atoms.Text.Para>{data.articles}</Atoms.Text.Para>
 			</View>
 			<Atoms.Charts.ProgressBar
@@ -67,7 +67,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 
 			{/* question qa progress */}
 			<View style={styles.labelLine}>
-				<Text>Yfirfarnar spurningar</Text>
+				<Text>[[translation:335c874b-ee4b-4a6c-af75-8ee692590f2b]]</Text>
 				<Text>{data.questionVerifications}</Text>
 			</View>
 			<Atoms.Charts.ProgressBar
@@ -78,7 +78,7 @@ const UserScoreCard = ({ scoreCard: data }: User) => {
 
 			{/* Answer review progress */}
 			<View style={styles.labelLine}>
-				<Text>Yfirfarin svör</Text>
+				<Text>[[translation:f1af8ed8-14f6-491d-ab60-cf24c9434138]]</Text>
 				<Text>{data.answerVerifications}</Text>
 			</View>
 			<Atoms.Charts.ProgressBar

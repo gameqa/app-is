@@ -47,15 +47,15 @@ const ArticleReaderView = ({
 	const handleSubmitParagraph = useCallback(
 		(paragraphIndex: number) => {
 			Alert.alert(
-				"Ertu viss?",
-				"Inniheldur þessi efnsgrein svarið við spurningunni?",
+				"[[translation:43ad9161-97e6-4bac-9b90-1e08e5537118]]",
+				"[[translation:cc04c157-b887-40f6-8a7a-d0e80b5dbdec]]",
 				[
 					{
-						text: "Nei",
+						text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
 						onPress: () => null,
 					},
 					{
-						text: "Já",
+						text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]",
 						onPress: () => {
 							dispatch(
 								Actions.Game.submitArticleAndParagraph(
@@ -94,7 +94,7 @@ const ArticleReaderView = ({
 				<NavigateBack goBackHandler={goBack} />
 				<Utils.QuestionIs question={googleSearch.text} />
 				<Utils.Explain>
-					Smelltu á efnisgreinina sem inniheldur svarið 🙋👆
+				[[translation:29930e79-e5a6-4a8a-80d9-aa1f28878b53]] [[translation:8474d3ed-c4d0-4c3f-a627-83e374cbe4cc]][[translation:518de081-a2c2-44fd-a301-ead55605c482]]
 				</Utils.Explain>
 				<View style={styles.topLine}>
 					<Image
@@ -108,7 +108,7 @@ const ArticleReaderView = ({
 					<Atoms.Alerts.Ribbon
 						item={{
 							type: "danger",
-							label: "Ekki tókst að sækja grein",
+							label: "[[translation:9af276ad-fc7f-4342-893c-e174bbf87ff6]]",
 						}}
 					/>
 				) : (

@@ -50,14 +50,14 @@ const ReviewAnswer = () => {
 
 	const handleArchive = useCallback(async () => {
 		Alert.alert(
-			"Vitlaust merkt?",
-			"Ef svarið er vitlaust merkt þá eyðum við svarinu.",
+			"[[translation:733eaeaf-7c00-4bd9-ab7d-26359b6855c9]]?",
+			"[[translation:ed3713df-4b8b-447a-b97b-e5b0bc29e399]].",
 			[
 				{
-					text: "Hætta við",
+					text: "[[translation:69bad13a-c901-41c6-9bf4-21113918ab60]]",
 				},
 				{
-					text: "Áfram",
+					text: "[[translation:0fa2c05f-f16c-432f-b4dd-3f04ffc15f1f]]",
 					onPress: () =>
 						dispatch(
 							Actions.Game.archiveAnswer(game._id, state._id)
@@ -72,8 +72,7 @@ const ReviewAnswer = () => {
 			<ScrollView>
 				<Utils.QuestionIs question={state.text} />
 				<Utils.Explain>
-					Annar notandi hefur merkt svarið inn. Nú þurfum við að
-					athuga hvort svarið sé rétt merkt. 🖊️🤔
+					[[translation:51234ad0-149a-46a4-97db-428d6c36f865]]. 🖊️[[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 				</Utils.Explain>
 				<Utils.SpanSelector
 					immutable={true}
@@ -94,26 +93,26 @@ const ReviewAnswer = () => {
 			<View>
 				{stage === "verify-answer" ? (
 					<Utils.VerifyButtons
-						approveEmoji="😀"
-						declineEmoji="😒"
+						approveEmoji="[[translation:75105759-92f1-4db4-b454-348a6942e8fb]]"
+						declineEmoji="[[translation:b6d3182e-3b8b-4b3c-92b8-8264a7ddd645]]"
 						onApprove={() => setStage("verify-answer-short")}
 						onDecline={handleArchive}
 					>
-						Er svarið rétt merkt?
+						[[translation:2181c771-6e4b-4250-880f-d27364c79f15]]?
 					</Utils.VerifyButtons>
 				) : stage === "verify-answer-short" ? (
 					<Utils.VerifyButtons
-						approveEmoji="👍"
-						declineEmoji="👎"
+						approveEmoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
+						declineEmoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 						onApprove={() => handleVerifyDispatch(true)}
 						onDecline={() => handleVerifyDispatch(false)}
 					>
-						Eru of mörg orð valin?
+						[[translation:f79ee784-1409-4baa-9bb8-d99bb85ede8c]]
 					</Utils.VerifyButtons>
 				) : stage === "verify-boolean" ? (
 					<Utils.VerifyButtons
-						approveEmoji="👍"
-						declineEmoji="👎"
+						approveEmoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
+						declineEmoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 						onApprove={() => setStage("select-boolean")}
 						onDecline={() =>
 							dispatch(
@@ -125,12 +124,12 @@ const ReviewAnswer = () => {
 							)
 						}
 					>
-						Er þetta já/nei spurning?
+						[[translation:2f05d98d-7fde-45c7-ae46-b02abec5d246]]
 					</Utils.VerifyButtons>
 				) : stage === "verify-not-boolean" ? (
 					<Utils.VerifyButtons
-						approveEmoji="👍"
-						declineEmoji="👎"
+						approveEmoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
+						declineEmoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 						onApprove={() =>
 							dispatch(
 								Actions.Game.markAsYesOrNo(
@@ -142,16 +141,16 @@ const ReviewAnswer = () => {
 						}
 						onDecline={() => setStage("verify-answer")}
 					>
-						Er þetta já/nei spurning?
+						[[translation:2f05d98d-7fde-45c7-ae46-b02abec5d246]]
 					</Utils.VerifyButtons>
 				) : stage === "select-boolean" ? (
 					<Utils.VerifyButtons
-						approveEmoji="👍"
-						declineEmoji="👎"
+						approveEmoji="[[translation:41d2a076-2114-47b8-9cbd-a21b45a280e0]]"
+						declineEmoji="[[translation:524de2de-7c9b-4385-98ed-40c9bfc4b771]]"
 						onApprove={() => handleVerifyYesOrNo(true)}
 						onDecline={() => handleVerifyYesOrNo(false)}
 					>
-						Hvort er svarið já eða nei?
+						[[translation:018ec61e-740e-47e3-8a65-77dd4d6f9ce1]]
 					</Utils.VerifyButtons>
 				) : null}
 			</View>

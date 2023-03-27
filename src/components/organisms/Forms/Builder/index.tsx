@@ -71,7 +71,7 @@ const FormBuilder = <T extends {}, K = {}>({
 				{children ?? null}
 				<Atoms.Buttons.Base
 					type={buttonColor ?? "highlight"}
-					label={isLoading ? "Hleð" : buttonLabel}
+					label={isLoading ? "[[translation:40f55f23-1d45-46dc-ae39-02a61e4d6594]]" : buttonLabel}
 					onPress={handleSubmit}
 				/>
 			</View>

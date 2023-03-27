@@ -41,11 +41,11 @@ const Motivation = () => {
 	}: Declerations.IInviteOthers) => (
 		<React.Fragment>
 			<View style={styles.centerIcons}>
-				<Text style={styles.inviteIcon}>🤫</Text>
-				<Text style={styles.inviteIcon}>🤸</Text>
-				<Text style={styles.inviteIcon}>👱</Text>
-				<Text style={styles.inviteIcon}>🧕</Text>
-				<Text style={styles.inviteIcon}>🧘</Text>
+				<Text style={styles.inviteIcon}>[[translation:20abd71d-22c7-457b-9498-70e41f539968]]</Text>
+				<Text style={styles.inviteIcon}>[[translation:ee544bdc-6141-4ee8-ab7f-fa6a78cf5c5f]]</Text>
+				<Text style={styles.inviteIcon}>[[translation:5466e9ee-6ea5-4780-a89c-7c4d017fc73d]]</Text>
+				<Text style={styles.inviteIcon}>[[translation:89d019d5-f291-414c-a161-fbca90593a6d]]</Text>
+				<Text style={styles.inviteIcon}>[[translation:2e9c8812-372e-4b0d-af84-636e4e561c9e]]</Text>
 			</View>
 			<Atoms.Text.Para style={styles.inviteText}>
 				{description}
@@ -73,7 +73,7 @@ const Motivation = () => {
 			</Atoms.Text.Heading>
 
 			<Atoms.Text.Para style={styles.closeToPrizeText}>
-				{text}. Skoðaðu verðlaunaflipann fyrir meiri upplýsingar.
+				{text}. [[translation:069990cf-44ef-4c10-aa6f-67ceef76f5b1]]
 			</Atoms.Text.Para>
 		</View>
 	);

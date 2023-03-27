@@ -65,7 +65,7 @@ const PrizeAdvertisement = () => {
 			{hasLoaded ? (
 				<View style={styles.promptOuter}>
 					<Atoms.Text.Para>
-						Möguleiki á að vinna{" "}
+					[[translation:2a014aab-8a7c-43b4-9367-32d9424a9c65]]{" "}
 						<Text style={styles.bold}>
 							{advertisement.prize.name}
 						</Text>

@@ -28,10 +28,10 @@ export default function index() {
 
 	const dispatch = useDispatch();
 
-	const url = "Https://spurningaris.app.link";
+	const url = "[[translation:635caeef-372a-4b39-a96e-3e1d25f93706]]";
 
 	const alertCopy = () =>
-		Alert.alert("Afritað", "Afritun á hlekk tókst", [
+		Alert.alert("[[translation:b0325be3-7704-4cf7-838d-b87e44910121]]", "[[translation:e455478b-c64c-46c9-a5c0-c88446558008]]", [
 			{
 				text: "OK",
 				onPress: () => null,
@@ -42,13 +42,13 @@ export default function index() {
 		Share.share(
 			{
 				message:
-					"Spurningaleikur þar sem þú getur unnið alvöru vinninga og stutt við íslensku í nútímanum",
+					"[[translation:3aa3fb90-1f9c-4408-9004-b7d2c2624de1]]",
 				url: url,
-				title: "Spurningar.is",
+				title: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]",
 			},
 			{
 				// Android only:
-				dialogTitle: "Spurningar.is",
+				dialogTitle: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]s",
 			}
 		);
 
@@ -73,8 +73,7 @@ export default function index() {
 			<ScrollView>
 				<Molecules.Users.Info {...auth} />
 				<Atoms.Text.Para style={styles.paragraph}>
-					Smelltu á deila, eða afritaðu hlekkinn til þess að
-					bjóða vinum að sækja appið.👫🤝
+				[[translation:6d779c31-0784-4adc-8aa1-b1d115754296]].[[translation:defd268e-7e37-4d39-a898-bfc1d8615169]][[translation:a35858d0-09d8-4ca9-9150-49eb550346db]]
 				</Atoms.Text.Para>
 				<TouchableOpacity
 					onPress={handleCopy}
@@ -114,7 +113,7 @@ export default function index() {
 						color={Services.Colors.MapToDark["light-grey"]}
 					/>
 					<Atoms.Text.Para style={styles.shareText}>
-						Deila
+					[[translation:c71ca2d5-22ec-4d4d-85f8-799d2860c62f]]
 					</Atoms.Text.Para>
 				</TouchableOpacity>
 				<View
@@ -126,7 +125,7 @@ export default function index() {
 					}}
 				/>
 				<Atoms.Text.Heading>
-					Leiðin að 100 þúsund
+					[[translation:feda1bfa-88a7-45bc-bd13-993a95e36c02]]
 				</Atoms.Text.Heading>
 				<Atoms.Charts.LineChart
 					datasets={[
@@ -148,7 +147,7 @@ export default function index() {
 						if (i === 0)
 							return moment(item.date).format("DD MM");
 						else if (i === chartData.answersPerDay.length - 1)
-							return "í dag      ";
+							return "[[translation:f61875f1-9689-4062-af19-f58323279e65]]      ";
 						return "";
 					})}
 					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}

@@ -12,7 +12,7 @@ const PrizeCategoryCard = ({ name, img, available }: Prize) => {
 				<Image source={{ uri: img }} style={styles.image} />
 				<View style={styles.pad}>
 					<Atoms.Text.Heading>
-						{name} {!available ? "(Farið)" : null}
+						{name} {!available ? "([[translation:7d5f2e8b-be14-4e44-9456-9d942b43ca95]])" : null}
 					</Atoms.Text.Heading>
 				</View>
 			</View>

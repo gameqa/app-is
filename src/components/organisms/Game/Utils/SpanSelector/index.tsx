@@ -66,24 +66,24 @@ const SpanSelector = ({
 			case "select-first":
 				dispatch(
 					addNotificationItem({
-						title: "Veldu fyrsta staf",
-						text: "Smelltu á fyrsta stafinn sem myndar svarið",
+						title: "[[translation:02fe5731-80ab-4216-8cac-1e93b6ba7f28]]",
+						text: "[[translation:948e93b8-77bb-453d-a604-af480a4998a0]]",
 					})
 				);
 				break;
 			case "select-last":
 				dispatch(
 					addNotificationItem({
-						title: "Veldu seinasta staf",
-						text: "Smelltu á seinasta stafinn sem myndar svarið",
+						title: "[[translation:5f53f041-9ebf-4a81-87ad-c4a0bf0852eb]]",
+						text: "[[translation:8e058ed8-7d7c-45ae-95ba-2fe3a227d6f1]]",
 					})
 				);
 				break;
 			case "clear-selection":
 				dispatch(
 					addNotificationItem({
-						title: "Viltu breyta valinu?",
-						text: "Smelltu aftur á textann til að velja aftur",
+						title: "[[translation:e762e8f0-30b5-4b38-9d0a-d072e85b6d15]]",
+						text: "[[translation:fa7a48e5-0b40-4a24-9edb-ef614c645e13]]",
 					})
 				);
 				break;
