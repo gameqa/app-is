@@ -6,6 +6,8 @@ import * as Actions from "../../../../actions";
 import * as Atoms from "../../../atoms";
 import styles from "./styles";
 import { StoreState } from "../../../../reducers";
+import * as config from "../,,/../../../../config";
+
 const COUNT_DOWN = 4;
 
 const PrizeAdvertisement = () => {
@@ -42,9 +44,8 @@ const PrizeAdvertisement = () => {
 		}
 	}, [count, handleHide, hasLoaded]);
 
-	if (advertisement.prize === undefined)
+	if (advertisement.prize === undefined || !config.SHOW_PRIZE_ADS)
 		return <React.Fragment></React.Fragment>;
-
 	return (
 		<>
 			{hasLoaded ? (

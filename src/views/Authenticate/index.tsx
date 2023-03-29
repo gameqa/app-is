@@ -37,7 +37,6 @@ const Authenticate = () => {
 
 	const handleAuth = (user: User) => {
 		dispatch(registerUser(user));
-
 		Analytics.logEvent("login");
 	};
 

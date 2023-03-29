@@ -38,6 +38,19 @@ export default function index() {
 			},
 		]);
 
+	const numbers = React.useMemo(() => {
+		const date = new Date();
+		const yesterday = date.setDate(date.getDate() - 1);
+		return chartData.answersPerDay.length === 0
+				? [
+						{
+							date: new Date(),
+							count: 0,
+						},
+				  ]
+				: chartData.answersPerDay;
+	}, []);
+
 	const handleShare = () =>
 		Share.share(
 			{
@@ -132,7 +145,7 @@ export default function index() {
 					datasets={[
 						{
 							// data: [1, 2, 5, 10, 15, 22, 23, 33],
-							data: chartData.answersPerDay.reduce<number[]>(
+							data: numbers.reduce<number[]>(
 								(prev, curr) => {
 									if (prev.length === 0)
 										return [curr.count];

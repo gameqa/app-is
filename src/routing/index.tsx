@@ -145,10 +145,10 @@ export const TabNavigator = () => {
 						}}
 					/>
 				))}
-				<Tab.Screen
+				{/* <Tab.Screen
 					name="Vinningar"
 					component={PrizeStackNavigator}
-				/>
+				/> */}
 				<Tab.Screen name="Spila" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>

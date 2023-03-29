@@ -38,6 +38,7 @@ export default function App() {
 		return auth.level >= RESTART_AT_LEVEL;
 	}, [auth.level]);
 
+	console.log(auth.type)
 	if (auth.type === "not-verified") return <Views.AuthCode />;
 	if (shouldUserRestart) return <Views.RestartLevelView />;
 	return (

@@ -9,7 +9,7 @@ import styles from "./styles";
 import Confetti from "../Confetti";
 import { Atoms } from "../../..";
 import { Sounds } from "../../../../services";
-
+import * as config from "../,,/../../../../config";
 import { Chests } from "../../../../services";
 
 const OpenBox = () => {
@@ -94,7 +94,7 @@ const OpenBox = () => {
 
 	const category = newCategories[0];
 
-	if (!category) return <React.Fragment />;
+	if (!category || !config.SHOW_BOX_OVERLAYS) return <React.Fragment />;
 
 	return (
 		<Animated.View
