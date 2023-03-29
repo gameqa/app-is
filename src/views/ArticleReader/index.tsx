@@ -108,7 +108,7 @@ const ArticleReaderView = ({
 					<Atoms.Alerts.Ribbon
 						item={{
 							type: "danger",
-							label: "[[translation:9af276ad-fc7f-4342-893c-e174bbf87ff6]]",
+							label: "[[translation:fcf6cdd8-0f87-4fbc-b11c-5ac09432f813]]",
 						}}
 					/>
 				) : (
