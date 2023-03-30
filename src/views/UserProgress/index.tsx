@@ -264,7 +264,7 @@ const UserProgress = () => {
 					<React.Fragment>
 						<Atoms.Text.Para style={{}}>
 						[[translation:74332ff0-bea7-4b49-9992-7ebee1c9a5d4]]
-							[[translation:ce9b3903-f33a-4ae6-b932-3ff5ffa06bd9]][[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
+						[[translation:ce9b3903-f33a-4ae6-b932-3ff5ffa06bd9]][[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						{/* <FlatList
