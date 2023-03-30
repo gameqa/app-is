@@ -28,7 +28,7 @@ export default function index() {
 
 	const dispatch = useDispatch();
 
-	const url = "[[translation:635caeef-372a-4b39-a96e-3e1d25f93706]]";
+	const url = "Https://spurningaris.app.link";
 
 	const alertCopy = () =>
 		Alert.alert("[[translation:b0325be3-7704-4cf7-838d-b87e44910121]]", "[[translation:e455478b-c64c-46c9-a5c0-c88446558008]]", [
