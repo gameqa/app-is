@@ -48,7 +48,7 @@ export default function index() {
 			},
 			{
 				// Android only:
-				dialogTitle: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]s",
+				dialogTitle: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]",
 			}
 		);
 
