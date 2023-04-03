@@ -4,10 +4,10 @@ import axios from "axios";
  * Module imports an instance of Axios
  * that accesses the api root by default
  */
-const isProd = false;
+const isProd = true;
 
 const url = isProd
-	? "https://spurningar.herokuapp.com"
+	? "https://gameqa-is.herokuapp.com"
 	: "http://localhost:5000";
 
 export default axios.create({

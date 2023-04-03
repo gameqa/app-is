@@ -9,6 +9,7 @@ const CustomTextInput = (props: TextInputProps) => (
 		{...(props.props ?? {})}
 		style={{ ...InputStyles.outer, ...((props.props?.style as {}) ?? {}) }}
 		onChangeText={props.onChange}
+		autoCorrect={false}
 	/>
 );
 
