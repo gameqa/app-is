@@ -5,7 +5,6 @@ import Api from "../../api";
 import { Motivation } from "../../declerations";
 
 export const fetchMotivation = () => {
-	console.log(`payload`, 134);
 	return async function (dispatch: Dispatch) {
 		try {
 			dispatch<ClearMotivationAction>({
