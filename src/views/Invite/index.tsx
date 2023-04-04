@@ -41,11 +41,20 @@ export default function index() {
 	const numbers = React.useMemo(() => {
 		const date = new Date();
 		const yesterday = date.setDate(date.getDate() - 1);
+		const dayBefore = date.setDate(date.getDate() - 2);
 		return chartData.answersPerDay.length === 0
 				? [
 						{
-							date: new Date(),
+							date: dayBefore,
 							count: 0,
+						},
+						{
+							date: yesterday,
+							count: 1,
+						},
+						{
+							date: date,
+							count: 2,
 						},
 				  ]
 				: chartData.answersPerDay;

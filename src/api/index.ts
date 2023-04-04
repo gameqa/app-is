@@ -12,5 +12,5 @@ const url = isProd
 
 export default axios.create({
 	baseURL: url,
-	withCredentials: true,
+	withCredentials: true
 });
