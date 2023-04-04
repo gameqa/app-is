@@ -145,10 +145,10 @@ export const TabNavigator = () => {
 						}}
 					/>
 				))}
-				<Tab.Screen
+				{/* <Tab.Screen
 					name="[[translation:749736db-66a3-42dc-ba0f-0ccd44135d4d]]"
 					component={PrizeStackNavigator}
-				/>
+				/> */}
 				<Tab.Screen name="[[translation:ca5523c3-7fcb-487c-8e2c-64e992eafefc]]" component={GameStackNavigator} />
 			</Tab.Navigator>
 		</NavigationContainer>

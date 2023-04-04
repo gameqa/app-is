@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 		top: 0,
 		height: "35%",
 		width: "100%",
-		transform: [{ translateY: "-2.5%" }],
+		transform: [{ translateY: 0.025}],
 		zIndex: 10,
 		alignItems: "center",
 	},

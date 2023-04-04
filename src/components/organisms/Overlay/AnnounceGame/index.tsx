@@ -29,7 +29,7 @@ const AnnounceGame = () => {
 
 		Services.Sounds.play("new-task")
 			.then(() => {
-				console.log(`4`, 4);
+				//
 			})
 			.catch((e) => {
 				console.log(`e`, e);

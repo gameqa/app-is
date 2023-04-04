@@ -7,6 +7,7 @@ import * as Actions from "../../../../actions";
 import * as Services from "../../../../services";
 import styles from "./styles";
 import { Atoms } from "../../..";
+import * as config from "../../../../config";
 
 const COUNT_DOWN = 4;
 
@@ -85,7 +86,10 @@ const Motivation = () => {
 			case "invite-others":
 				return <RenderInviteOthers {...props} />;
 			case "close-to-prize":
-				return <RenderCloseToPrize {...props} />;
+				if(config.SHOW_BOX_OVERLAYS)
+					return <RenderCloseToPrize {...props} />;
+				handleHide();
+				return null;
 			default:
 				handleHide();
 				return null;

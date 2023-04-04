@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LayoutChangeEvent, View, Text } from "react-native";
+import { LayoutChangeEvent, View, Text, Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import styles from "./styles";
 import { IProps } from "./interface";
@@ -14,6 +14,8 @@ const CustomLineChart = ({ datasets, labels, height }: IProps) => {
 	const handleWidthChange = (e: LayoutChangeEvent) => {
 		setWidth(e.nativeEvent.layout.width);
 	};
+
+	const screenWidth = Dimensions.get("window").width;
 
 	useEffect(() => {
 		const TIMEOUT = 1250;
@@ -60,6 +62,7 @@ const CustomLineChart = ({ datasets, labels, height }: IProps) => {
 					borderRadius: 16,
 				}}
 			/>
+
 			
 		</View>
 	);
