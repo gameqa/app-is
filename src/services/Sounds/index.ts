@@ -27,6 +27,4 @@ export const play = async (soundName: SoundNames) => {
 		mapNamesToSounds(soundName)
 	);
 	const a = await sound.playAsync();
-	// console.log(`a`, a.isLoaded);
-	// await sound.unloadAsync();
 };
