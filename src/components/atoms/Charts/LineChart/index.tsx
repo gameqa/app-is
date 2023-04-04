@@ -36,32 +36,32 @@ const CustomLineChart = ({ datasets, labels, height }: IProps) => {
 		>
 			
 			<LineChart
-        data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-          datasets: [
-            {
-              data: [20, 45, 28, 80, 99, 43],
-              strokeWidth: 2,
-            },
-          ],
-        }}
-        width={Dimensions.get('window').width - 16}
-        height={220}
-        chartConfig={{
-          backgroundColor: '#1cc910',
-          backgroundGradientFrom: '#eff3ff',
-          backgroundGradientTo: '#efefef',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
-      />
+				data={{
+					labels: labels,
+					datasets: datasets,
+				}}
+				width={width}
+				height={height}
+				chartConfig={{
+					backgroundColor:
+						Services.Colors.MapToDark["danger"],
+					backgroundGradientFrom:
+						Services.Colors.MapToDark["danger"],
+					backgroundGradientTo:
+						Services.Colors.MapToDark["danger"],
+					decimalPlaces: 2, // optional, defaults to 2dp
+					color: (opacity = 1) =>
+						`rgba(255, 255, 255, ${opacity})`,
+					style: {
+						borderRadius: 16,
+					},
+				}}
+				bezier
+				style={{
+					marginVertical: 8,
+					borderRadius: 16,
+				}}
+			/>
 
 			
 		</View>
