@@ -4,6 +4,12 @@ import { Provider } from "react-redux";
 import Views from "./src";
 
 export default () => (
+
+	React.useEffect(() => {
+		console.log(process.env.GOOGLE_SERVICES_PLIST);
+		console.log(process.env.GOOGLE_SERVICES_JSON);
+	}, []);
+	
 	<Provider store={store}>
 		<Views />
 	</Provider>
