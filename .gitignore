@@ -15,3 +15,6 @@ web-build/
 # Firebase
 google-services.json
 GoogleService-Info.plist
+
+# expo
+.expo-shared/*
