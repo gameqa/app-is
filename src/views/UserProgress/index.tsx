@@ -4,8 +4,8 @@ import {
 	Alert,
 	TouchableOpacity,
 	ActivityIndicator,
-	SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
@@ -160,6 +160,7 @@ const UserProgress = () => {
 			Actions.PushNotification.sendPushNotificationToken(token)
 		);
 	});
+	
 	const renderQuestionItem = (result: { item: QuestionWithAnswers }) => (
 		<Atoms.Cards.QuestionAnswerItem {...result.item} />
 	);
@@ -232,22 +233,22 @@ const UserProgress = () => {
 				return (
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
-						{/* <FlatList
+						<FlatList
 							data={sortFlatListData(
 								questionWithUnseenAnswers
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/> */}
+						/>
 						<UnSeenTextPrompt />
 						{/* Render next all questions that have only seen answers */}
-						{/* <FlatList
+						<FlatList
 							data={sortFlatListData(
 								questionWithOnlySeenAnswers
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/> */}
+						/>
 					</React.Fragment>
 				);
 			case NO_ANSWERS:
@@ -259,32 +260,32 @@ const UserProgress = () => {
 							🤓🤔
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
-						{/* <FlatList
+						<FlatList
 							data={sortFlatListData(
 								questionsWithNoAnswersNotSeen
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						<UnSeenTextPrompt /> */}
+						<UnSeenTextPrompt />
 
-						{/* Render next all questions that have only seen answers */}
-						{/* <FlatList
+						{/*Render next all questions that have only seen answers */}
+						 <FlatList
 							data={sortFlatListData(questionsWithNoAnswers)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/> */}
+						/>
 					</React.Fragment>
 				);
 			case IN_PROGRESS:
 				return (
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
-						{/* <FlatList
+						<FlatList
 							data={sortFlatListData(questionsInProgress)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/> */}
+						/>
 					</React.Fragment>
 				);
 		}

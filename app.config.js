@@ -9,7 +9,7 @@ export default {
 		supportsTablet: true,
 		googleServicesFile: process.env.GOOGLE_SERVICES_PLIST,
 		bundleIdentifier: "com.spurningaris.Spurningar",
-		buildNumber: "1.4.2",
+		buildNumber: "1.4.3",
 	},
 	android: {
 		adaptiveIcon: {
@@ -26,7 +26,7 @@ export default {
 			},
 		},
 	},
-	version: "1.4.2",
+	version: "1.4.3",
 	orientation: "portrait",
 	icon: "./assets/icon.png",
 	splash: {

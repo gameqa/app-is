@@ -68,7 +68,7 @@ const Highscore = () => {
 
 	return (
 		<View style={styles.outer}>
-			{/* <FlatList
+			<FlatList
 				// @ts-ignore
 				ref={flatListRef}
 				refreshControl={
@@ -102,7 +102,7 @@ const Highscore = () => {
 					/>
 				)}
 				style={{ paddingTop: paddingToTop }}
-			/> */}
+			/>
 			<TouchableOpacity
 				style={styles.absoluteButton}
 				onPress={handleScrollToTop}

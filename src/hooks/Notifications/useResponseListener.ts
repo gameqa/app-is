@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as Notifications from "expo-notifications";
-import { Subscription } from "@unimodules/core";
+import {Subscription} from "expo-modules-core";
 
 const useNotificationListener = (
 	cb: (noti: Notifications.NotificationResponse) => void
