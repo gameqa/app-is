@@ -61,10 +61,9 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 							)
 						)
 				);
-				// console.log(answers.map((answer) => answer.data));
 				setAnswers(answers.map((answer) => answer.data));
 			} catch (error) {
-				console.log("ERROR FETCHING ANSWERS", error.message);
+				//
 			}
 		}
 		fetchAnswers();

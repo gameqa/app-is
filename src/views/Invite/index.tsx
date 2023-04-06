@@ -14,7 +14,6 @@ import LayoutWrapper from "../../layout";
 import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
-import * as Analytics from "expo-firebase-analytics";
 import * as Actions from "../../actions";
 import moment from "moment";
 import { useFocusEffect } from "@react-navigation/native";
@@ -79,9 +78,9 @@ export default function index() {
 		alertCopy();
 		setHasCopied(true);
 
-		Analytics.logEvent("copy_invite", {
-			link: url,
-		});
+		// Analytics.logEvent("copy_invite", {
+		// 	link: url,
+		// });
 	};
 
 	useFocusEffect(

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import * as Analytics from "expo-firebase-analytics";
+// import * as Analytics from "expo-firebase-analytics";
 import { registerUser } from "../../actions/auth";
 import { Atoms, Organisms } from "../../components";
 import { User } from "../../declerations";
@@ -42,7 +42,7 @@ const Register = () => {
 				...user,
 			})
 		);
-		Analytics.logEvent("register");
+		// Analytics.logEvent("register");
 	};
 
 	return isLoading ? (

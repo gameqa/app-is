@@ -14,10 +14,6 @@ const UsersInfo = (user: User) => {
 	const ratio = (game.currentRound - 1) / game.totalRounds;
 	const BASE_RATIO = 0.015;
 
-	useEffect(() => {
-		console.log(user.level);
-	}, [user.level]);
-
 	return (
 		<View style={styles.outer}>
 			{/* The avatar and level info */}

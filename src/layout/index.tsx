@@ -16,7 +16,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
-		<SafeAreaView style={{ flex: 1 }}>
+		<SafeAreaView style={{flex: 1}} >
 			<View style={styles.inner}>{children}</View>
 		</SafeAreaView>
 	);

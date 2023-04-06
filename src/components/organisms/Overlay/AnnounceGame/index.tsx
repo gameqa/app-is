@@ -32,7 +32,7 @@ const AnnounceGame = () => {
 				//
 			})
 			.catch((e) => {
-				console.log(`e`, e);
+				//
 			});
 
 		const t1 = setTimeout(() => {

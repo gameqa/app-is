@@ -4,6 +4,7 @@ import {
 	Alert,
 	TouchableOpacity,
 	ActivityIndicator,
+	SafeAreaView,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
@@ -27,7 +28,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const [currentScreen, setCurrentScreen] =
-		useState<Utils.Screens>("answer");
+		useState<Utils.Screens>("in-progress");
 
 	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
 
@@ -120,7 +121,7 @@ const UserProgress = () => {
 						)
 					);
 				} catch (error) {
-					console.log(error);
+					//
 				}
 			};
 
@@ -145,12 +146,12 @@ const UserProgress = () => {
 
 	// fired when notification is received while app is open
 	Hooks.Notifications.useNotificationListener((item) => {
-		console.log("NEW NOTIFICATION:", item);
+		// console.log("NEW NOTIFICATION:", item);
 	});
 
 	// fired when notification response is received
 	Hooks.Notifications.useResponseListener((response) => {
-		console.log("NEW NOTIFICATION RESPONSE:", response);
+		// console.log("NEW NOTIFICATION RESPONSE:", response);
 	});
 
 	// handle get permission
@@ -165,13 +166,10 @@ const UserProgress = () => {
 
 	const extractKey = (item: QuestionWithAnswers) => item._id;
 
-	// const RenderButton = React.useCallback(
-	// (props: Utils.ButtonItem) => (
-
 	const RenderButton = (props: Utils.ButtonItem) => (
 		<TouchableOpacity
 			onPress={() => setCurrentScreen(props.screenId)}
-			style={styles.selectViewButton}
+			style={currentScreen === props.screenId ? styles.selectViewButtonSelected : styles.selectViewButton}
 		>
 			{props.screenId === "answer" ? (
 				<Atoms.Text.Para style={styles.answerCount}>
@@ -194,18 +192,10 @@ const UserProgress = () => {
 			</Atoms.Text.Para>
 			{currentScreen === props.screenId ? (
 				<React.Fragment>
-					<View style={styles.topLeftCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
-					<View style={styles.bottomLeftCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
 					<View style={styles.bottomRightCorner}>
 						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
 					</View>
-					<View style={styles.topRightCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
+					
 				</React.Fragment>
 			) : null}
 		</TouchableOpacity>
@@ -242,22 +232,22 @@ const UserProgress = () => {
 				return (
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(
 								questionWithUnseenAnswers
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/>
+						/> */}
 						<UnSeenTextPrompt />
 						{/* Render next all questions that have only seen answers */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(
 								questionWithOnlySeenAnswers
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/>
+						/> */}
 					</React.Fragment>
 				);
 			case NO_ANSWERS:
@@ -279,28 +269,28 @@ const UserProgress = () => {
 						<UnSeenTextPrompt /> */}
 
 						{/* Render next all questions that have only seen answers */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(questionsWithNoAnswers)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/>
+						/> */}
 					</React.Fragment>
 				);
 			case IN_PROGRESS:
 				return (
 					<React.Fragment>
 						{/* Render all questions that have an unseen answer first */}
-						<FlatList
+						{/* <FlatList
 							data={sortFlatListData(questionsInProgress)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
-						/>
+						/> */}
 					</React.Fragment>
 				);
 		}
 	};
 	return (
-		<ScrollView>
+		<ScrollView contentInsetAdjustmentBehavior="automatic">
 			<LayoutWrapper>
 				<View>
 					<Molecules.Users.Info {...auth} />
@@ -315,15 +305,13 @@ const UserProgress = () => {
 						/>
 					</TouchableOpacity>
 				</View>
-				<ScrollView
-					showsHorizontalScrollIndicator={false}
-					horizontal={true}
-					contentContainerStyle={styles.scrollContainer}
+				<View
+					style={styles.scrollContainer}
 				>
 					{Utils.BUTTONS.map((button) => (
-						<RenderButton {...button} />
+						<RenderButton {...button} key={button.screenId}/>
 					))}
-				</ScrollView>
+				</View>
 
 				{myQuestions.isLoading ? (
 					<ActivityIndicator />

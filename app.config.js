@@ -9,6 +9,7 @@ export default {
 		supportsTablet: true,
 		googleServicesFile: process.env.GOOGLE_SERVICES_PLIST,
 		bundleIdentifier: "com.spurningaris.Spurningar",
+		buildNumber: "1.4.2",
 	},
 	android: {
 		adaptiveIcon: {
@@ -18,22 +19,23 @@ export default {
 		googleServicesFile: process.env.GOOGLE_SERVICES_JSON,
 		package: "com.spurningaris.Spurningar",
 		permissions: [],
-		versionCode: 23,
+		versionCode: 24,
 		config: {
 			branch: {
 				apiKey: "key_live_kkWb728Kh7lmtcY9KFBT9hdfwrlTN6eD",
 			},
 		},
 	},
-    "plugins": [
-        "@react-native-firebase/app",
-        [
-         "expo-build-properties",
-          {
-           "ios": {
-              "useFrameworks": "static"
-            }
-          }
-        ]
-      ]
+	version: "1.4.2",
+	orientation: "portrait",
+	icon: "./assets/icon.png",
+	splash: {
+		image: "./assets/splash.png",
+		resizeMode: "contain",
+		backgroundColor: "#8950fc",
+	},
+	updates: {
+		fallbackToCacheTimeout: 0,
+	},
+	assetBundlePatterns: ["*/"],
 };
