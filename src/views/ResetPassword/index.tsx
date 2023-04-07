@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
 	const text = {
 		title: "[[translation:a131ec39-c67f-49be-82c2-d3081d72e020]]",
-		switchButton: "[[translation:c24cdc16-0a15-4c6c-b042-9da5e5a06142]]",
+		switchButton: "[[translation:bfaf4b4a-1fa8-414a-ba11-4d753bdd20bd]]",
 		btnColor: "highlight",
 	};
 
