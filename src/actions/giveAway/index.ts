@@ -16,7 +16,6 @@ export const fetchGiveAways = () => {
 			});
 		} catch (error) {
 			//
-			console.log("FETCH GIVEAWAY PRIZES", error.message);
 		}
 	};
 };

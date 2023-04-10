@@ -23,7 +23,7 @@ export const refreshAskAboutImage = () => {
 				payload: data,
 			});
 		} catch (error) {
-			console.log(`error`, error);
+			//
 		}
 	};
 };

@@ -5,6 +5,7 @@ import {
 	TouchableOpacity,
 	ActivityIndicator,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from "react-redux";
 import { Atoms, Molecules, Organisms } from "../../components";
 import { StoreState } from "../../reducers";
@@ -26,7 +27,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 const UserProgress = () => {
 	const auth = useSelector((state: StoreState) => state.auth);
 	const [currentScreen, setCurrentScreen] =
-		useState<Utils.Screens>("answer");
+		useState<Utils.Screens>("in-progress");
 
 	const [hasUnseenAnswers, setHasUnseenAnswers] = useState(false);
 
@@ -119,7 +120,7 @@ const UserProgress = () => {
 						)
 					);
 				} catch (error) {
-					console.log(error);
+					//
 				}
 			};
 
@@ -144,12 +145,12 @@ const UserProgress = () => {
 
 	// fired when notification is received while app is open
 	Hooks.Notifications.useNotificationListener((item) => {
-		console.log("NEW NOTIFICATION:", item);
+		// console.log("NEW NOTIFICATION:", item);
 	});
 
 	// fired when notification response is received
 	Hooks.Notifications.useResponseListener((response) => {
-		console.log("NEW NOTIFICATION RESPONSE:", response);
+		// console.log("NEW NOTIFICATION RESPONSE:", response);
 	});
 
 	// handle get permission
@@ -158,19 +159,17 @@ const UserProgress = () => {
 			Actions.PushNotification.sendPushNotificationToken(token)
 		);
 	});
+	
 	const renderQuestionItem = (result: { item: QuestionWithAnswers }) => (
 		<Atoms.Cards.QuestionAnswerItem {...result.item} />
 	);
 
 	const extractKey = (item: QuestionWithAnswers) => item._id;
 
-	// const RenderButton = React.useCallback(
-	// (props: Utils.ButtonItem) => (
-
 	const RenderButton = (props: Utils.ButtonItem) => (
 		<TouchableOpacity
 			onPress={() => setCurrentScreen(props.screenId)}
-			style={styles.selectViewButton}
+			style={currentScreen === props.screenId ? styles.selectViewButtonSelected : styles.selectViewButton}
 		>
 			{props.screenId === "answer" ? (
 				<Atoms.Text.Para style={styles.answerCount}>
@@ -193,18 +192,10 @@ const UserProgress = () => {
 			</Atoms.Text.Para>
 			{currentScreen === props.screenId ? (
 				<React.Fragment>
-					<View style={styles.topLeftCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
-					<View style={styles.bottomLeftCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
 					<View style={styles.bottomRightCorner}>
 						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
 					</View>
-					<View style={styles.topRightCorner}>
-						<Atoms.Text.Para>{props.emoji}</Atoms.Text.Para>
-					</View>
+					
 				</React.Fragment>
 			) : null}
 		</TouchableOpacity>
@@ -267,17 +258,17 @@ const UserProgress = () => {
 						[[translation:ce9b3903-f33a-4ae6-b932-3ff5ffa06bd9]][[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
-						{/* <FlatList
+						<FlatList
 							data={sortFlatListData(
 								questionsWithNoAnswersNotSeen
 							)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
 						/>
-						<UnSeenTextPrompt /> */}
+						<UnSeenTextPrompt />
 
-						{/* Render next all questions that have only seen answers */}
-						<FlatList
+						{/*Render next all questions that have only seen answers */}
+						 <FlatList
 							data={sortFlatListData(questionsWithNoAnswers)}
 							keyExtractor={extractKey}
 							renderItem={renderQuestionItem}
@@ -298,7 +289,7 @@ const UserProgress = () => {
 		}
 	};
 	return (
-		<ScrollView>
+		<ScrollView contentInsetAdjustmentBehavior="automatic">
 			<LayoutWrapper>
 				<View>
 					<Molecules.Users.Info {...auth} />
@@ -313,15 +304,13 @@ const UserProgress = () => {
 						/>
 					</TouchableOpacity>
 				</View>
-				<ScrollView
-					showsHorizontalScrollIndicator={false}
-					horizontal={true}
-					contentContainerStyle={styles.scrollContainer}
+				<View
+					style={styles.scrollContainer}
 				>
 					{Utils.BUTTONS.map((button) => (
-						<RenderButton {...button} />
+						<RenderButton {...button} key={button.screenId}/>
 					))}
-				</ScrollView>
+				</View>
 
 				{myQuestions.isLoading ? (
 					<ActivityIndicator />

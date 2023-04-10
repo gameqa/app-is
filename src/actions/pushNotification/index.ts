@@ -14,9 +14,8 @@ export const sendPushNotificationToken = (token: string) => {
 				type: ActionTypes.sendPushNotificationToken,
 				payload: token,
 			});
-			// console.log("Sent token to backend");
 		} catch (error) {
-			console.log("ERROR: sending token to backend", error);
+			//
 		}
 	};
 };

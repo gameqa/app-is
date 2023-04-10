@@ -35,8 +35,6 @@ const RestartLevelView = () => {
 		);
 	};
 
-	console.log(auth);
-
 	return (
 		<LayoutWrapper>
 			<ScrollView style={styles.outer}>

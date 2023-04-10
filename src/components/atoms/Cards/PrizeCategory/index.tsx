@@ -17,7 +17,6 @@ const PrizeCategoryCard = (category: PrizeCategory) => {
 	const handleGoToItemsView = () =>
 		navigation.navigate("prize-items", category);
 	
-	// console.log("PrizeCategoryCArd",category)
 
 	return (
 		<TouchableOpacity onPress={handleGoToItemsView}>

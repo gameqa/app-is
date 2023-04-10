@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
-	SafeAreaView,
 	Text,
 	View,
 	TouchableOpacity,
 	Keyboard,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import SmoothPinCodeInput from "react-native-smooth-pincode-input";
 import styles from "./styles";
 import { Colors } from "../../../../services";

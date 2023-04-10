@@ -10,7 +10,6 @@ import * as forms from "./forms";
 import styles from "./styles";
 import * as Services from "../../services";
 import { ICON_LVL_1, ICON_LVL_5 } from "../../static";
-import * as Analytics from "expo-firebase-analytics";
 
 const Authenticate = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +36,7 @@ const Authenticate = () => {
 
 	const handleAuth = (user: User) => {
 		dispatch(registerUser(user));
-		Analytics.logEvent("login");
+		// Analytics.logEvent("login");
 	};
 
 	return isLoading ? (

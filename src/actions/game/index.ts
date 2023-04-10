@@ -137,10 +137,8 @@ export const gameActionWrapperFunc = (
 			});
 
 			const { data } = await cb(dispatch);
-			// console.log(`data`, data);
 			__handleUpdateTask(data);
 		} catch (e) {
-			console.log(`error`, e);
 			store.dispatch(fetchCurrentGameRound() as any);
 		} finally {
 			// release loading in both cases

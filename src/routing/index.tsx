@@ -30,6 +30,7 @@ const PrizeStackNavigator = () => (
 			<PrizeStack.Screen
 				name={route.id}
 				component={route.Component}
+				key={route.id}
 			/>
 		))}
 	</PrizeStack.Navigator>
@@ -45,6 +46,7 @@ export const GameStackNavigator = () => (
 			<GameStack.Screen
 				name={route.id}
 				component={route.Component}
+				key={route.id}
 			/>
 		))}
 	</GameStack.Navigator>
@@ -60,6 +62,7 @@ export const ProfileStackNavigator = () => (
 			<GameStack.Screen
 				name={route.id}
 				component={route.Component}
+				key={route.id}
 			/>
 		))}
 	</GameStack.Navigator>
@@ -86,7 +89,7 @@ export const TabNavigator = () => {
 			try {
 				navigatorRef.current?.navigate(route);
 			} catch {
-				console.log(`${route} does not exist in TabNavigator`);
+				//
 			}
 		}
 	});
@@ -143,6 +146,7 @@ export const TabNavigator = () => {
 						options={{
 							tabBarBadge: mapRouteIdToTabBarBadge(route.id),
 						}}
+						key={route.id}
 					/>
 				))}
 				{/* <Tab.Screen

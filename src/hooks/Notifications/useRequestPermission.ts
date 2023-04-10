@@ -33,7 +33,7 @@ const registerForPushNotificationsAsync = (cb: (token: string) => void) => {
 			handleGetPermission()
 				.then(cb)
 				.catch((e) => {
-					console.log("DID NOT GET PERMISSION FOR TOKEN:", e);
+					//
 				});
 	}, [auth.type, pushNotification.hasPermission]);
 

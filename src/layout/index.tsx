@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView } from "react-native";
+import { View } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { IProps } from "./interface";
 import styles from "./styles";
 import { useSelector } from "react-redux";
@@ -16,7 +17,7 @@ const LayoutWrapper = ({ children }: IProps) => {
 			<Atoms.Loaders.CenterBox isLoading />
 		</View>
 	) : (
-		<SafeAreaView style={{ flex: 1 }}>
+		<SafeAreaView style={{flex: 1}} >
 			<View style={styles.inner}>{children}</View>
 		</SafeAreaView>
 	);
