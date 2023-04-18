@@ -7,7 +7,7 @@ import axios from "axios";
 const isProd = true;
 
 const url = isProd
-	? "https://gameqa-is.herokuapp.com"
+	? "https://gameqa-en.herokuapp.com"
 	: "http://localhost:5000";
 
 export default axios.create({
