@@ -95,7 +95,7 @@ export default function index() {
 				<Molecules.Users.Info {...auth} />
 				<Atoms.Text.Para style={styles.paragraph}>
 					Smelltu á deila, eða afritaðu hlekkinn til þess að
-					bjóða vinum að sækja appið.👫🤝
+					bjóða vinum að sækja appið👫🤝
 				</Atoms.Text.Para>
 				<TouchableOpacity
 					onPress={handleCopy}
@@ -149,6 +149,9 @@ export default function index() {
 				<Atoms.Text.Heading>
 					Leiðin að 100 þúsund
 				</Atoms.Text.Heading>
+				<Atoms.Text.Para>
+					Hér sérðu fjölda spurninga sem samfélagið hefur safnað fyrir máltækni á íslensku.
+				</Atoms.Text.Para>
 				<Atoms.Charts.LineChart
 					datasets={[
 						{
