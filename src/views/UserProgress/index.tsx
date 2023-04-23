@@ -134,15 +134,6 @@ const UserProgress = () => {
 		}, [questionWithUnseenAnswers])
 	);
 
-	const alertSignOut = () =>
-		Alert.alert("Útskráning", "Viltu skrá þig út?", [
-			{
-				text: "Nei",
-				onPress: () => null,
-				style: "cancel",
-			},
-			{ text: "Já", onPress: () => dispatch(logOutUser()) },
-		]);
 
 	// fired when notification is received while app is open
 	Hooks.Notifications.useNotificationListener((item) => {
@@ -301,11 +292,11 @@ const UserProgress = () => {
 				<View>
 					<Molecules.Users.Info {...auth} />
 					<TouchableOpacity
-						onPress={alertSignOut}
+						onPress={() => navigation.navigate("Settings")}
 						style={styles.lock}
 					>
 						<FontAwesome
-							name="lock"
+							name="gear"
 							size={20}
 							color={Services.Colors.MapToDark["grey"]}
 						/>

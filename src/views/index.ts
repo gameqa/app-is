@@ -13,5 +13,6 @@ export { default as SetNewPassword } from "./SetNewPassword";
 export { default as Invite } from "./Invite";
 export { default as GoogleSearchView } from "./GoogleSearchView";
 export { default as RestartLevelView } from "./RestartLevelView";
+export { default as Settings } from "./Settings";
 
 export * as Utils from "./utils";

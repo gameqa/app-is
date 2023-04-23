@@ -27,4 +27,5 @@ export type UserType =
 	| "admin"
 	| "loading"
 	| "guest"
-	| "not-verified";
+	| "not-verified"
+	| "deleted";

@@ -25,38 +25,20 @@ const styles = StyleSheet.create({
 		shadowRadius: 4.22,
 		elevation: 3,
 	},
-
-	// promptOuter: {
-	// 	bottom: 50,
-	// 	padding: 10,
-	// 	position: "absolute",
-	// 	width: "100%",
-	// 	marginLeft: "2.5%",
-	// 	backgroundColor: "white",
-	// 	zIndex: 20,
-	// 	borderRadius: 5,
-	// 	shadowColor: "#000",
-	// 	shadowOffset: {
-	// 		width: 0,
-	// 		height: 0,
-	// 	},
-	// 	shadowOpacity: 0.08,
-	// 	shadowRadius: 4.22,
-	// 	elevation: 3,
-	// },
 	promptOuter: {
 		backgroundColor: "white",
 		position: "absolute",
-		// flexDirection: "row",
-		bottom: 20,
-		width: "100%",
-		// bottom: "10%",
-		padding: 10,
+		bottom: 40,
+		width: "90%",
+		marginLeft: "5%",
+		padding: 20,
 		zIndex: 30,
 		borderRadius: 5,
 		elevation:10,
 	},
-
+	promptText: {
+		fontSize: 15
+	},
 	bold: {
 		fontWeight: "600",
 		color: Colors.MapToDark.success,
