@@ -26,8 +26,11 @@ const WriteQuestion = () => {
 	const [error, setError] = useState<Alert>();
 	const dispatch = useDispatch();
 
-	const handleUserInput = (text: string) =>
-		dispatch(Actions.WriteQuestion.writeQuestion(text));
+	const handleUserInput = (text: string) => {
+		if(typeof text !== 'string') return;
+		else if(text.slice(-1) === '\n') handleSubmit();
+		else dispatch(Actions.WriteQuestion.writeQuestion(text));
+	}
 
 	const YES_NO_INDICATOR = "Já/Nei";
 	const isYesNoQuestion = state.questionType === YES_NO_INDICATOR;
