@@ -150,7 +150,7 @@ export default function index() {
 					Leiðin að 100 þúsund
 				</Atoms.Text.Heading>
 				<Atoms.Text.Para>
-					Hér sérðu fjölda spurninga sem samfélagið hefur safnað fyrir máltækni á íslensku.
+					Hér sérðu fjölda spurninga sem samfélagið hefur safnað fyrir íslenska máltækni.
 				</Atoms.Text.Para>
 				<Atoms.Charts.LineChart
 					datasets={[

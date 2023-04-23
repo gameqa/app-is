@@ -223,6 +223,10 @@ const UserProgress = () => {
 			case ANSWER:
 				return (
 					<React.Fragment>
+						<Atoms.Text.Para>
+						Þetta eru spurningarnar sem aðrir notendur hafa fundið svarið við
+						🤓😁💡
+						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
 							data={sortFlatListData(

@@ -25,7 +25,7 @@ const Settings = () => {
 				onPress: () => null,
 				style: "cancel",
 			},
-			{ text: "Já", onPress: () => dispatch(logOutUser()) },
+			{ text: "Já", onPress: () => dispatch(Actions.Auth.logOutUser()) },
 		]);
     }
 
@@ -48,17 +48,17 @@ const Settings = () => {
 					<View>
 						<TouchableOpacity style={styles.item} onPress={handleLogOut}>
 							<Atoms.Text.Para style={styles.itemText}>
-								Log Out
+								Útskráning
 							</Atoms.Text.Para>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.item} onPress={handleDeleteAccount}>
 							<Atoms.Text.Para style={styles.dangerItemText}>
-								Delete Account
+								Eyða aðgangi
 							</Atoms.Text.Para>
 						</TouchableOpacity>
 					</View>
 					<TouchableOpacity style={styles.item} onPress={handleGoBack}>
-						<Atoms.Text.Para>Go Back</Atoms.Text.Para>
+						<Atoms.Text.Para>Til baka</Atoms.Text.Para>
 					</TouchableOpacity>
 				</View>
 			</View>
