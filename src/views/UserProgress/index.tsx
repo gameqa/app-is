@@ -254,7 +254,7 @@ const UserProgress = () => {
 			case NO_ANSWERS:
 				return (
 					<React.Fragment>
-						<Atoms.Text.Para style={{}}>
+						<Atoms.Text.Para>
 							Þetta eru spurningar sem aðrir notendur fundu
 							ekki svar við. Getur þú fundið svörin á Google.
 							🤓🤔
@@ -280,6 +280,11 @@ const UserProgress = () => {
 			case IN_PROGRESS:
 				return (
 					<React.Fragment>
+
+						<Atoms.Text.Para>
+							Hér sérðu þínar spurningar sem samfélagið er að reyna að svara
+							🤝🔜💡
+						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
 							data={sortFlatListData(questionsInProgress)}
