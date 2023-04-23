@@ -1,5 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { Atoms } from "../../..";
@@ -9,10 +9,43 @@ import * as Services from "../../../../services";
 import styles from "./styles";
 
 const UsersInfo = (user: User) => {
-	const game = useSelector((state: StoreState) => state.game);
 
-	const ratio = (game.currentRound - 1) / game.totalRounds;
-	const BASE_RATIO = 0.015;
+	const game = useSelector((state: StoreState) => state.game);
+	const auth = useSelector((state: StoreState) => state.auth);
+	const [ratioIncreased, setRatioIncreased] = useState(true);
+
+	const BASE_RATIO = 0;
+
+	const ratio = useMemo(() => {
+		return (game.currentRound - 1) / game.totalRounds
+	}, [
+		game.currentRound, game.totalRounds
+	]);
+
+	useEffect(() => {
+
+		if(ratioIncreased){
+			setRatioIncreased(false);
+			return;
+		}
+
+		const TIMEOUT_DELAY = 5000;
+
+		setRatioIncreased(true);
+
+		const t = setTimeout(() => {
+			setRatioIncreased(false);
+		}, TIMEOUT_DELAY);
+		
+		return () => clearTimeout(t);
+
+	}, [ratio])
+	
+	const levelProgressStyles = ratioIncreased ? {
+		color: Services.Colors.MapToDark['highlight'],
+		fontWeight: '600'
+	} : {};
+
 
 	return (
 		<View style={styles.outer}>
@@ -37,15 +70,16 @@ const UsersInfo = (user: User) => {
 						{Services.UserLevels.mapLevelToString(user.level)}
 					</Atoms.Text.Para>
 					<Atoms.Text.Para>
-						#{user.scoreCard.hiscoreRank} á stigatöflunni
+						#{user.scoreCard.hiscoreRank} on the leaderboard
 					</Atoms.Text.Para>
 				</View>
 			</View>
 			{/* Level progress info */}
 			<View style={styles.textOuter}>
-				<Atoms.Text.Para>
-					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}
-					% að Lvl {user.level + 1}
+				<Atoms.Text.Para style={levelProgressStyles}>
+					
+					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}% að LVL {auth.level + 1}
+					{ratioIncreased ? " ⬆️" : ""}
 				</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome

@@ -163,11 +163,9 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 						<RenderButton />
 					</React.Fragment>
 				) : archived ? null : answers.length === 0 ? (
-					<RenderErrorMessage
-						{...{
-							type: "highlight",
-							label: "Ekkert svar fundist enn.",
-						}}
+					<Atoms.Cards.ChatBubble
+						message="🤷 An answer hasn't been found yet"
+						isInbound
 					/>
 				) : (
 					answers.map((answer) => <RenderAnswer {...answer} />)
