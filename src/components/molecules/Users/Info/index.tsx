@@ -70,7 +70,7 @@ const UsersInfo = (user: User) => {
 						{Services.UserLevels.mapLevelToString(user.level)}
 					</Atoms.Text.Para>
 					<Atoms.Text.Para>
-						#{user.scoreCard.hiscoreRank} on the leaderboard
+						#{user.scoreCard.hiscoreRank} á stigatöflunni
 					</Atoms.Text.Para>
 				</View>
 			</View>

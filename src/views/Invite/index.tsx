@@ -150,7 +150,7 @@ export default function index() {
 					Leiðin að 100 þúsund
 				</Atoms.Text.Heading>
 				<Atoms.Text.Para>
-					Hér sérðu fjölda spurninga sem samfélagið hefur safnað fyrir íslenska máltækni.
+					Hér sérðu fjölda spurninga (í þúsundum) sem samfélagið hefur safnað fyrir íslenska máltækni.
 				</Atoms.Text.Para>
 				<Atoms.Charts.LineChart
 					datasets={[
@@ -159,13 +159,13 @@ export default function index() {
 							data: numbers.reduce<number[]>(
 								(prev, curr) => {
 									if (prev.length === 0)
-										return [curr.count];
+										return [curr.count + 23000];
 									const last = prev[prev.length - 1];
 									prev.push(curr.count + last);
 									return prev;
 								},
 								[]
-							),
+							).map((item) => (item / 1000)),
 						},
 					]}
 					labels={chartData.answersPerDay.map((item, i) => {

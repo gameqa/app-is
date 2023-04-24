@@ -1,11 +1,12 @@
-const IOS_BUILD_NUMBER =  "1.5.0";
+const IOS_BUILD_NUMBER =  "1.5.1";
 const VERSION_NUMBER = 25;
 
 export default {
-	slug: "Spurningar",
+	slug: "spurningar",
+	owner: "njallis",
 	extra: {
 		eas: {
-			projectId: "9714a9ea-d1e4-4c09-bebf-a8399b26110c",
+			projectId: "5523f3b6-7c14-42df-9f79-1d6ac15159e0",
 		},
 	},
 	ios: {
