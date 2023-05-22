@@ -274,8 +274,8 @@ const UserProgress = () => {
 					<React.Fragment>
 
 						<Atoms.Text.Para>
-							Hér sérðu þínar spurningar sem samfélagið er að reyna að svara
-							🤝🔜💡
+							[[translation:d186a714-fd95-45c3-81ef-36bf121a136b]]
+							[[translation:a35858d0-09d8-4ca9-9150-49eb550346db]]🔜💡
 						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
