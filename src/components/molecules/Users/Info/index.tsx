@@ -76,16 +76,9 @@ const UsersInfo = (user: User) => {
 			</View>
 			{/* Level progress info */}
 			<View style={styles.textOuter}>
-<<<<<<< HEAD
 				<Atoms.Text.Para>
 					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}
 					% [[translation:ca3392df-1aab-478c-99f6-1659b7021980]] {user.level + 1}
-=======
-				<Atoms.Text.Para style={levelProgressStyles}>
-					
-					{ratio < 0 || ratio == 1 ? 0 : Math.round(100 * ratio)}% að LVL {auth.level + 1}
-					{ratioIncreased ? " ⬆️" : ""}
->>>>>>> main
 				</Atoms.Text.Para>
 				<View style={[styles.row, styles.alignCenter]}>
 					<FontAwesome

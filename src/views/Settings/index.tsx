@@ -19,24 +19,24 @@ const Settings = () => {
     }
 
     const handleLogOut = () => {
-		Alert.alert("Útskráning", "Viltu skrá þig út?", [
+		Alert.alert("[[translation:9d378a47-8350-4ade-8f4b-10f7ba5488d0]]", "[[translation:54d10c8b-e468-4566-ae52-bc0b4bb454dc]]", [
 			{
-				text: "Nei",
+				text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
 				onPress: () => null,
 				style: "cancel",
 			},
-			{ text: "Já", onPress: () => dispatch(Actions.Auth.logOutUser()) },
+			{ text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]", onPress: () => dispatch(Actions.Auth.logOutUser()) },
 		]);
     }
 
     const handleDeleteAccount = () => {
-		Alert.alert("Eyða aðgangi", "Ertu viss? Þú munt tapa öllum árangrinum þínum.", [
+		Alert.alert("[[translation:f369db68-01bc-4bc1-8baa-773d3ab052ea]]", "[[translation:0942cee5-457b-4d3b-912a-d6305647df37]]", [
 			{
-				text: "Nei ",
+				text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]] ",
 				onPress: () => null,
 				style: "cancel",
 			},
-			{ text: "Já", onPress: () => dispatch(Actions.Auth.deleteUser()) },
+			{ text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]", onPress: () => dispatch(Actions.Auth.deleteUser()) },
 		]);
     }
 
@@ -48,17 +48,17 @@ const Settings = () => {
 					<View>
 						<TouchableOpacity style={styles.item} onPress={handleLogOut}>
 							<Atoms.Text.Para style={styles.itemText}>
-								Útskráning
+								[[translation:65accc94-b1d8-4899-85e7-4cc048d70759]]
 							</Atoms.Text.Para>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.item} onPress={handleDeleteAccount}>
 							<Atoms.Text.Para style={styles.dangerItemText}>
-								Eyða aðgangi
+								[[translation:f369db68-01bc-4bc1-8baa-773d3ab052ea]]
 							</Atoms.Text.Para>
 						</TouchableOpacity>
 					</View>
 					<TouchableOpacity style={styles.item} onPress={handleGoBack}>
-						<Atoms.Text.Para>Til baka</Atoms.Text.Para>
+						<Atoms.Text.Para>[[translation:78d06c58-3368-44ef-b0b6-135f6a9f4936]]</Atoms.Text.Para>
 					</TouchableOpacity>
 				</View>
 			</View>
