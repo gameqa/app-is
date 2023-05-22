@@ -81,6 +81,23 @@ export const resetLevel = () => {
 				payload: data,
 			});
 		} catch (error) {
+
+		} finally {
+			//
+		}
+	};
+};
+
+export const deleteUser = () => {
+	return async function (dispatch: Dispatch) {
+		try {
+			const { data } = await Api.post<User>(
+				"/api/v1/users/delete"
+			);
+			dispatch<LogOutUserAction>({
+				type: ActionTypes.logOutUser,
+			});
+		} catch (error) {
 			//
 		} finally {
 			//

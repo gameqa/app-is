@@ -46,6 +46,11 @@ const SelectSpan = () => {
 		}
 	}, [game._id, state._id, state.firstWord, state.lastWord]);
 
+	useEffect(() => {
+		if(stage === "verify-answer-present")
+			dispatch(Actions.SelectSpan.clearRange())
+	}, [stage])
+
 	const handleArchive = useCallback(async () => {
 		Alert.alert(
 			"[[translation:c35d4988-1f40-401b-88a8-552871a987cd]]",

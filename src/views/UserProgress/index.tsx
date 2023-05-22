@@ -133,16 +133,6 @@ const UserProgress = () => {
 		}, [questionWithUnseenAnswers])
 	);
 
-	const alertSignOut = () =>
-		Alert.alert("[[translation:9d378a47-8350-4ade-8f4b-10f7ba5488d0]]", "[[translation:54d10c8b-e468-4566-ae52-bc0b4bb454dc]]", [
-			{
-				text: "[[translation:b1e80198-9c0f-433b-b352-0a7d84dbc635]]",
-				onPress: () => null,
-				style: "cancel",
-			},
-			{ text: "[[translation:17b6284a-7cac-430b-9815-705e1737a072]]", onPress: () => dispatch(logOutUser()) },
-		]);
-
 	// fired when notification is received while app is open
 	Hooks.Notifications.useNotificationListener((item) => {
 		// console.log("NEW NOTIFICATION:", item);
@@ -231,6 +221,10 @@ const UserProgress = () => {
 			case ANSWER:
 				return (
 					<React.Fragment>
+						<Atoms.Text.Para>
+						Þetta eru spurningarnar sem aðrir notendur hafa fundið svarið við
+						🤓😁💡
+						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
 							data={sortFlatListData(
@@ -253,7 +247,7 @@ const UserProgress = () => {
 			case NO_ANSWERS:
 				return (
 					<React.Fragment>
-						<Atoms.Text.Para style={{}}>
+						<Atoms.Text.Para>
 						[[translation:74332ff0-bea7-4b49-9992-7ebee1c9a5d4]]
 						[[translation:ce9b3903-f33a-4ae6-b932-3ff5ffa06bd9]][[translation:f0a05edd-4af1-4cb2-92ce-cc1de6bb6423]]
 						</Atoms.Text.Para>
@@ -278,6 +272,11 @@ const UserProgress = () => {
 			case IN_PROGRESS:
 				return (
 					<React.Fragment>
+
+						<Atoms.Text.Para>
+							Hér sérðu þínar spurningar sem samfélagið er að reyna að svara
+							🤝🔜💡
+						</Atoms.Text.Para>
 						{/* Render all questions that have an unseen answer first */}
 						<FlatList
 							data={sortFlatListData(questionsInProgress)}
@@ -294,11 +293,11 @@ const UserProgress = () => {
 				<View>
 					<Molecules.Users.Info {...auth} />
 					<TouchableOpacity
-						onPress={alertSignOut}
+						onPress={() => navigation.navigate("Settings")}
 						style={styles.lock}
 					>
 						<FontAwesome
-							name="lock"
+							name="gear"
 							size={20}
 							color={Services.Colors.MapToDark["grey"]}
 						/>

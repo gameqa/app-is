@@ -15,6 +15,7 @@ import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
 import * as Actions from "../../actions";
+import * as GlobalConfig from "../../config";
 import moment from "moment";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -148,6 +149,9 @@ export default function index() {
 				<Atoms.Text.Heading>
 					[[translation:feda1bfa-88a7-45bc-bd13-993a95e36c02]]
 				</Atoms.Text.Heading>
+				<Atoms.Text.Para>
+					Hér sérðu fjölda spurninga (í þúsundum) sem samfélagið hefur safnað fyrir íslenska máltækni.
+				</Atoms.Text.Para>
 				<Atoms.Charts.LineChart
 					datasets={[
 						{
@@ -155,23 +159,22 @@ export default function index() {
 							data: numbers.reduce<number[]>(
 								(prev, curr) => {
 									if (prev.length === 0)
-										return [curr.count];
+										return [curr.count + 23000];
 									const last = prev[prev.length - 1];
 									prev.push(curr.count + last);
 									return prev;
 								},
 								[]
-							),
+							).map((item) => (item / 1000)),
 						},
 					]}
 					labels={chartData.answersPerDay.map((item, i) => {
 						if (i === 0)
-							return moment(item.date).format("DD MM");
+							return moment(item.date).format(GlobalConfig.MOMENT_LANG_DATE_FORMAT);
 						else if (i === chartData.answersPerDay.length - 1)
 							return "[[translation:f61875f1-9689-4062-af19-f58323279e65]]      ";
 						return "";
 					})}
-					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
 					height={220}
 				/>
 			</ScrollView>

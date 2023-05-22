@@ -33,6 +33,13 @@ export default function App() {
 		StatusBar.setHidden(true);
 	}, []);
 
+	// if user is marked as deleted, log them out
+	React.useEffect(() => {
+		if (auth.type == "deleted")
+			dispatch(Actions.Auth.logOutUser());
+	}, [auth.type])
+	
+
 	const shouldUserRestart = React.useMemo(() => {
 		const RESTART_AT_LEVEL = 20;
 		return auth.level >= RESTART_AT_LEVEL;

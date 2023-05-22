@@ -13,6 +13,7 @@ import "moment/locale/is";
 import { useNavigation } from "@react-navigation/native";
 import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
+import * as GlobalConfig from "../../../../config";
 
 const QuestionAnswerCard = (question: Interface.IProps) => {
 	const {
@@ -27,7 +28,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
 
-	moment.locale("is");
+	moment.locale(GlobalConfig.MOMENT_LANG_CODE);
 
 	const DEFAULT_SENDER: User = {
 		username: "",
@@ -153,21 +154,11 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 			<View>
 				<Atoms.Cards.ChatBubble message={text} />
 				{isImpossible ? (
-					<React.Fragment>
-						{/* <RenderErrorMessage
-							{...{
-								type: "warning",
-								label: "Notandi fann ekki svarið á Google",
-							}}
-						/> */}
-						<RenderButton />
-					</React.Fragment>
+					<RenderButton />
 				) : archived ? null : answers.length === 0 ? (
-					<RenderErrorMessage
-						{...{
-							type: "highlight",
-							label: "[[translation:c2b441ce-7f73-4664-a51f-067601786e1d]]",
-						}}
+					<Atoms.Cards.ChatBubble
+						message="[[translation:b9293cae-7eb3-4450-b5d6-1340e22bb36e]] [[translation:c2b441ce-7f73-4664-a51f-067601786e1d]]"
+						isInbound
 					/>
 				) : (
 					answers.map((answer) => <RenderAnswer {...answer} />)

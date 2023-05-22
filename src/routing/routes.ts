@@ -73,6 +73,10 @@ export const profileStack: ProfileStackRoutes[] = [
 		Component: Views.UserProgress,
 	},
 	{
+		id: "Settings",
+		Component: Views.Settings,
+	},
+	{
 		id: "Google",
 		Component: Views.GoogleSearchView,
 	},
