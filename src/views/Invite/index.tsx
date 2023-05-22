@@ -15,6 +15,7 @@ import { StoreState } from "../../reducers";
 import styles from "./styles";
 import * as Services from "../../services";
 import * as Actions from "../../actions";
+import * as GlobalConfig from "../../config";
 import moment from "moment";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -170,12 +171,11 @@ export default function index() {
 					]}
 					labels={chartData.answersPerDay.map((item, i) => {
 						if (i === 0)
-							return moment(item.date).format("DD MM");
+							return moment(item.date).format(GlobalConfig.MOMENT_LANG_DATE_FORMAT);
 						else if (i === chartData.answersPerDay.length - 1)
 							return "í dag      ";
 						return "";
 					})}
-					// labels={["23.03", "", "", "", "", "", "", "I dag           "]}
 					height={220}
 				/>
 			</ScrollView>

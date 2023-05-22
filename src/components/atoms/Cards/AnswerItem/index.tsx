@@ -13,6 +13,7 @@ import "moment/locale/is";
 import { useNavigation } from "@react-navigation/native";
 import { StoreState } from "../../../../reducers";
 import * as Actions from "../../../../actions";
+import * as GlobalConfig from "../../../../config";
 
 const QuestionAnswerCard = (question: Interface.IProps) => {
 	const {
@@ -27,7 +28,7 @@ const QuestionAnswerCard = (question: Interface.IProps) => {
 	const navigation = useNavigation();
 	const dispatch = useDispatch();
 
-	moment.locale("is");
+	moment.locale(GlobalConfig.MOMENT_LANG_CODE);
 
 	const DEFAULT_SENDER: User = {
 		username: "",
