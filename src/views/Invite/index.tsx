@@ -150,7 +150,7 @@ export default function index() {
 					[[translation:feda1bfa-88a7-45bc-bd13-993a95e36c02]]
 				</Atoms.Text.Heading>
 				<Atoms.Text.Para>
-					Hér sérðu fjölda spurninga (í þúsundum) sem samfélagið hefur safnað fyrir íslenska máltækni.
+					[[translation:d434778e-3e21-433b-ab1a-d0ae184d59a5]]
 				</Atoms.Text.Para>
 				<Atoms.Charts.LineChart
 					datasets={[
