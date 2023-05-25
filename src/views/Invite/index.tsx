@@ -66,11 +66,11 @@ export default function index() {
 				message:
 					"[[translation:3aa3fb90-1f9c-4408-9004-b7d2c2624de1]]",
 				url: url,
-				title: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]",
+				title: "[[translation:c71ca2d5-22ec-4d4d-85f8-799d2860c62f]]",
 			},
 			{
 				// Android only:
-				dialogTitle: "[[translation:ba0e0ff2-a9e9-460a-81bb-59fc8faecccc]]",
+				dialogTitle: "[[translation:c71ca2d5-22ec-4d4d-85f8-799d2860c62f]]",
 			}
 		);
 
